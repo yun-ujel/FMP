@@ -1,19 +1,23 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class Jump : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(CollisionCheck))]
+public class Jump : Capability
 {
-    [Header("References")]
+    //[Header("References")]
     [SerializeField] private InputController inputController = null;
     private Rigidbody2D body;
-    private CheckGround ground;
+    private CollisionCheck ground;
 
     [Header("Jump Values")]
     [SerializeField, Range(0f, 30f)] private float jumpHeight = 0f;
-    [SerializeField, Range(0f, 2f)] private float jumpBuffer = 0.2f;
-    private float jumpForce;
     private float jumpHeightOnLastCalculation;
-    private float jumpBufferCounter;
+    private float jumpForce;
+
+    [SerializeField, Range(0f, 2f)] private float jumpBuffer = 0.2f;
+    private float jumpBufferLeft;
+
+    [SerializeField, Range(0f, 2f)] private float coyoteTime = 0.2f;
+    private float coyoteTimeLeft;
 
     [Header("Gravity Multipliers")]
     [SerializeField, Range(0f, 20f)] private float downwardGravityMultiplier = 2f;
@@ -27,7 +31,7 @@ public class Jump : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        ground = GetComponent<CheckGround>();
+        ground = GetComponent<CollisionCheck>();
 
         defaultGravityScale = body.gravityScale;
 
@@ -38,11 +42,21 @@ public class Jump : MonoBehaviour
     {
         if (inputController.GetJumpPressed())
         {
-            jumpBufferCounter = jumpBuffer;
+            jumpBufferLeft = jumpBuffer;
         }
         else
         {
-            jumpBufferCounter -= Time.deltaTime;
+            jumpBufferLeft -= Time.deltaTime;
+        }
+
+
+        if (ground.Ground)
+        {
+            coyoteTimeLeft = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeLeft -= Time.deltaTime;
         }
     }
 
@@ -55,10 +69,11 @@ public class Jump : MonoBehaviour
         }
         velocity = body.velocity;
 
-        if (jumpBufferCounter > 0f && ground.isOnGround)
+        if (jumpBufferLeft > 0f && coyoteTimeLeft > 0f)
         {
             DoJump();
-            jumpBufferCounter = 0f;
+            jumpBufferLeft = 0f;
+            coyoteTimeLeft = 0f;
         }
 
         if (body.velocity.y > 0f)
@@ -86,7 +101,7 @@ public class Jump : MonoBehaviour
 
     private void DoJump()
     {
-        velocity.y += jumpForce;
+        velocity.y = jumpForce;
         isRising = true;
     }
 

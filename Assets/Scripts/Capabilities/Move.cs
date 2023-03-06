@@ -1,17 +1,21 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class Move : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(CollisionCheck))]
+public class Move : Capability
 {
-    [Header("References")]
+    //[Header("References")]
     [SerializeField] private InputController inputController = null;
     private Rigidbody2D body;
-    private CheckGround ground;
+    private CollisionCheck ground;
 
     [Header("Speed Values")]
     [SerializeField, Range(0f, 100f)] private float maxSpeed;
+
+    [Header("Ground")]
     [SerializeField, Range(0f, 100f)] private float maxGroundAcceleration;
     [SerializeField, Range(0f, 100f)] private float maxGroundDeceleration;
+
+    [Header("Air")]
     [SerializeField, Range(0f, 100f)] private float maxAirAcceleration;
     [SerializeField, Range(0f, 100f)] private float maxAirDeceleration;
 
@@ -25,7 +29,7 @@ public class Move : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        ground = GetComponent<CheckGround>();
+        ground = GetComponent<CollisionCheck>();
     }
 
     private void Update()
@@ -38,7 +42,7 @@ public class Move : MonoBehaviour
     {
         velocity = body.velocity;
 
-        acceleration = ground.isOnGround
+        acceleration = ground.Ground
             ? GetIsDecelerating() ? maxGroundDeceleration : maxGroundAcceleration // If On Ground:
             : GetIsDecelerating() ? maxAirDeceleration : maxAirAcceleration; // If In Air:
 

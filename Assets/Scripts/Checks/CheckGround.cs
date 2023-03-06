@@ -9,9 +9,11 @@ using UnityEngine;
 // Or gaps within the floor's colliders
 
 [RequireComponent(typeof(Collider2D))]
-public class CheckGround : MonoBehaviour
+public class CheckGround : CollisionCheck
 {
-    public bool isOnGround { get; private set; }
+    [SerializeField, Range(0f, 1f)] private float minGroundNormalY = 0.9f;
+    // The minimum normal (Y) value for a surface to be classified as ground
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         EvaluateCollision(collision);
@@ -24,15 +26,14 @@ public class CheckGround : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isOnGround = false;
+        Ground = false;
     }
 
     private void EvaluateCollision(Collision2D collision)
     {
         for (int i = 0; i < collision.contactCount; i++)
         {
-            Vector2 normal = collision.GetContact(i).normal;
-            isOnGround |= normal.y >= 0.9f;
+            Ground |= collision.GetContact(i).normal.y >= minGroundNormalY;
         }
     }
 }

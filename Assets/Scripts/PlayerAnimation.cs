@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
 
     [Header("References (optional)")]
     [SerializeField] private Rigidbody2D playerRigidbody;
-    [SerializeField] private CheckGround playerGroundCheck;
+    [SerializeField] private CollisionCheck playerCollisionCheck;
     [SerializeField] private Move playerMovement;
     [SerializeField] private Animator animator;
 
@@ -20,7 +20,7 @@ public class PlayerAnimation : MonoBehaviour
     private void Start()
     {
         if (playerRigidbody == null) playerRigidbody = playerGameObject.GetComponent<Rigidbody2D>();
-        if (playerGroundCheck == null) playerGroundCheck = playerGameObject.GetComponent<CheckGround>();
+        if (playerCollisionCheck == null) playerCollisionCheck = playerGameObject.GetComponent<CollisionCheck>();
         if (playerMovement == null) playerMovement = playerGameObject.GetComponent<Move>();
 
         if (animator == null) animator = GetComponent<Animator>();
@@ -28,7 +28,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Update()
     {
-        if (playerGroundCheck.isOnGround)
+        if (playerCollisionCheck.Ground)
         {
             animationSpeed = Remap(Mathf.Abs(playerRigidbody.velocity.x), 0f, Mathf.Abs(playerMovement.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
 

@@ -16,4 +16,9 @@ public class PlayerController : InputController
     {
         return Input.GetAxisRaw("Horizontal");
     }
+
+    public override bool GetAttackPressed()
+    {
+        return Input.GetButtonDown("Fire1");
+    }
 }
