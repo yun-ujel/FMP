@@ -17,6 +17,9 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private bool rollAtMaxSpeed;
     private float animationSpeed;
 
+    [Header("Juice")]
+    [SerializeField] private CustomVFX cameraVFX;
+
     private void Start()
     {
         if (playerRigidbody == null) playerRigidbody = playerGameObject.GetComponent<Rigidbody2D>();
@@ -61,6 +64,11 @@ public class PlayerAnimation : MonoBehaviour
         else if (playerRigidbody.velocity.x < 0f)
         {
             transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            cameraVFX.TriggerShock(transform.position);
         }
     }
 

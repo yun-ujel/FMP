@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class Capability : MonoBehaviour
 {
+    protected bool IsActive { get; set; }
     public virtual Capability[] GetOtherCapabilities()
     {
         List<Capability> capabilities = new List<Capability>();
@@ -17,7 +18,8 @@ public abstract class Capability : MonoBehaviour
         var otherCapabilities = GetOtherCapabilities();
         for (int i = 0; i < otherCapabilities.Length; i++)
         {
-            otherCapabilities[i].enabled = false;
+            otherCapabilities[i].IsActive = false;
+            otherCapabilities[i].Disable();
         }
     }
     public virtual void EnableOtherCapabilities()
@@ -26,6 +28,12 @@ public abstract class Capability : MonoBehaviour
         for (int i = 0; i < otherCapabilities.Length; i++)
         {
             otherCapabilities[i].enabled = true;
+            otherCapabilities[i].IsActive = true;
         }
+    }
+
+    public virtual void Disable()
+    {
+        enabled = false;
     }
 }

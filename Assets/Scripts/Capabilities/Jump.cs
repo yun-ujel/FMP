@@ -67,36 +67,40 @@ public class Jump : Capability
             Debug.Log("Jump Height Value Changed. Recalculating Jump Force...");
             CalculateJumpForce();
         }
-        velocity = body.velocity;
+        
+        if (IsActive)
+        {
+            velocity = body.velocity;
 
-        if (jumpBufferLeft > 0f && coyoteTimeLeft > 0f)
-        {
-            DoJump();
-            jumpBufferLeft = 0f;
-            coyoteTimeLeft = 0f;
-        }
+            if (jumpBufferLeft > 0f && coyoteTimeLeft > 0f)
+            {
+                DoJump();
+                jumpBufferLeft = 0f;
+                coyoteTimeLeft = 0f;
+            }
 
-        if (body.velocity.y > 0f)
-        {
-            body.gravityScale = defaultGravityScale * upwardGravityMultiplier;
-        }
-        else if (body.velocity.y < 0f)
-        {
-            body.gravityScale = defaultGravityScale * downwardGravityMultiplier;
-            isRising = false;
-        }
-        else if (body.velocity.y == 0f)
-        {
-            body.gravityScale = defaultGravityScale;
-        }
+            if (body.velocity.y > 0f)
+            {
+                body.gravityScale = defaultGravityScale * upwardGravityMultiplier;
+            }
+            else if (body.velocity.y < 0f)
+            {
+                body.gravityScale = defaultGravityScale * downwardGravityMultiplier;
+                isRising = false;
+            }
+            else if (body.velocity.y == 0f)
+            {
+                body.gravityScale = defaultGravityScale;
+            }
 
-        if (isRising && !inputController.GetJumpHeld())
-        {
-            velocity.y *= jumpReleaseMultiplier;
-            isRising = false;
-        }
+            if (isRising && !inputController.GetJumpHeld())
+            {
+                velocity.y *= jumpReleaseMultiplier;
+                isRising = false;
+            }
 
-        body.velocity = velocity;
+            body.velocity = velocity;
+        }
     }
 
     private void DoJump()
@@ -109,5 +113,12 @@ public class Jump : Capability
     {    
         jumpForce = Mathf.Max(Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight), 0f);
         jumpHeightOnLastCalculation = jumpHeight;
+    }
+
+
+    // This Capability overrides the Disable() method so that it can run certain code while dormant, such as jumpBuffer and coyoteTime
+    public override void Disable()
+    {
+        IsActive = false;
     }
 }
