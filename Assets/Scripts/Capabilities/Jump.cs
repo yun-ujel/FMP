@@ -45,7 +45,7 @@ public class Jump : Capability
         }
 
 
-        if (ground.Ground)
+        if (ground.Ground && !IsJumpingThisFrame)
         {
             coyoteTimeLeft = coyoteTime;
         }

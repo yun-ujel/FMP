@@ -8,9 +8,9 @@ public abstract class CollisionCheck : MonoBehaviour
 
     public virtual bool Wall { get; protected set; }
 
-    public virtual void Update()
+    public virtual bool AnyCollision()
     {
-
+        return Ground || Slope || Wall;
     }
 
     public virtual void SetFalse()

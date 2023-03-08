@@ -1,9 +1,10 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(CollisionCheck))]
 public class GravityMultiplier : MonoBehaviour
 {
     private Rigidbody2D body;
+    private CollisionCheck collision;
 
     [SerializeField, Range(0f, 20f)] private float downwardGravityMultiplier = 5f;
     [SerializeField, Range(0f, 20f)] private float upwardGravityMultiplier = 3f;
@@ -12,6 +13,7 @@ public class GravityMultiplier : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        collision = GetComponent<CollisionCheck>();
 
         defaultGravityScale = body.gravityScale;
     }

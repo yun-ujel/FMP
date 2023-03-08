@@ -1,36 +1,43 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(CollisionCheck))]
 public class Dash : Capability
 {
     [SerializeField] private InputController inputController;
+    private Vector2 dashDirection;
+    private bool desiredDash;
+
     [SerializeField] private GravityMultiplier gravityMultiplier;
     private Rigidbody2D body;
-    private bool desiredDash;
+    private CollisionCheck collision;
+
     public bool IsDashingThisFrame { get; private set; }
 
     [Header("Values")]
-    [SerializeField] private float dashSpeed = 10f;
-
-    private Vector2 dashDirection;
+    [SerializeField, Range(0f, 20f)] private float dashSpeed = 10f;
+    [SerializeField, Range(0f, 10f)] private float dashDrag = 0f;
+    private float defaultDrag;
 
     [Space]
-    [SerializeField] private float dashCooldown = 0.35f;
-    private float dashCooldownCounter;
-    // Counts downwards
 
-    [SerializeField] private float dashImmobility = 0.15f;
-    private float dashImmobilityCounter;
-    private bool hasDashImmobility;
+    private float timeSinceLastDash;
+    [SerializeField] private float timeSpentImmobile = 0.15f;// Time spent being unable to move/alter trajectory while dashing, counts downwards
+    private bool isImmobile;
+    private float timeSpentNoGravity = 0.2f;
 
-    // Time spent being unable to move/alter trajectory while dashing, counts downwards
+    [Space]
+
+    [SerializeField, Range(0f, 5f)] private int numberOfDashes = 1;
+    private int dashesSpent = 0;
+    [SerializeField, Range(0f, 1f)] private float dashCooldown = 0.4f;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        dashCooldown += dashImmobility;
+        collision = GetComponent<CollisionCheck>();
 
         dashDirection = new Vector2(1f, 0f);
+        defaultDrag = body.drag;
     }
 
     private void Update()
@@ -42,43 +49,45 @@ public class Dash : Capability
             desiredDash = true;
         }
 
-        if (dashImmobilityCounter > 0f && hasDashImmobility)
+        if (isImmobile && timeSinceLastDash >= timeSpentImmobile)
         {
-            DisableOtherCapabilities();
-            gravityMultiplier.enabled = false;
-            dashImmobilityCounter -= Time.deltaTime;
+            DisableImmobility();
         }
-        else if (hasDashImmobility)
+        if (collision.AnyCollision())
         {
-            Debug.Log("Dash Immobility Disabled");
+            dashesSpent = 0;
+            DisableImmobility();
+        }
+
+
+        if (!gravityMultiplier.enabled && timeSinceLastDash >= timeSpentNoGravity)
+        {
             gravityMultiplier.enabled = true;
-            hasDashImmobility = false;
-            EnableOtherCapabilities();
+            body.drag = defaultDrag;
         }
+
+        timeSinceLastDash += Time.deltaTime;
     }
 
     private void FixedUpdate()
     {
         IsDashingThisFrame = false;
-        if (desiredDash && dashCooldownCounter < 0f)
+
+        if (desiredDash && dashesSpent > numberOfDashes && timeSinceLastDash > dashCooldown)
         {
             DoDash();
-        }
-        else
-        {
-            dashCooldownCounter -= Time.deltaTime;
         }
     }
 
     private void DoDash()
     {
-        Debug.Log("Triggered Dash");
-        dashCooldownCounter = dashCooldown;
+        timeSinceLastDash = 0f;
 
-        dashImmobilityCounter = dashImmobility;
-        hasDashImmobility = true;
+        EnableImmobility();
 
         body.velocity = dashDirection * dashSpeed;
+
+        dashesSpent += 1;
 
         desiredDash = false;
         IsDashingThisFrame = true;
@@ -95,5 +104,22 @@ public class Dash : Capability
         {
             dashDirection.Normalize();
         }
+    }
+
+    private void DisableImmobility()
+    {
+        isImmobile = false;
+        EnableOtherCapabilities();
+    }
+
+    private void EnableImmobility()
+    {
+        isImmobile = true;
+
+        gravityMultiplier.enabled = false;
+        body.gravityScale = 0f;
+        body.drag = dashDrag;
+
+        DisableOtherCapabilities();
     }
 }
