@@ -19,6 +19,11 @@ public class PlayerController : InputController
 
     public override bool GetAttackPressed()
     {
-        return Input.GetButtonDown("Fire1");
+        return Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.J);
+    }
+
+    public override float GetVerticalInput()
+    {
+        return Input.GetAxisRaw("Vertical");
     }
 }

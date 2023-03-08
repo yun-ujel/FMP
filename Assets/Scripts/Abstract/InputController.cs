@@ -8,5 +8,7 @@ public abstract class InputController : ScriptableObject
 
     public abstract float GetHorizontalInput();
 
+    public abstract float GetVerticalInput();
+
     public abstract bool GetAttackPressed();
 }

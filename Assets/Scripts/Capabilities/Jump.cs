@@ -10,6 +10,7 @@ public class Jump : Capability
 
     [Header("Jump Values")]
     [SerializeField, Range(0f, 30f)] private float jumpHeight = 0f;
+    public bool IsJumpingThisFrame { get; private set; }
     private float jumpHeightOnLastCalculation;
     private float jumpForce;
 
@@ -62,35 +63,25 @@ public class Jump : Capability
 
     private void FixedUpdate()
     {
+        IsJumpingThisFrame = false;
+
         if (jumpHeightOnLastCalculation != jumpHeight)
         {
             Debug.Log("Jump Height Value Changed. Recalculating Jump Force...");
             CalculateJumpForce();
         }
-        
+
         if (IsActive)
         {
             velocity = body.velocity;
+
+            CalculateGravity();
 
             if (jumpBufferLeft > 0f && coyoteTimeLeft > 0f)
             {
                 DoJump();
                 jumpBufferLeft = 0f;
                 coyoteTimeLeft = 0f;
-            }
-
-            if (body.velocity.y > 0f)
-            {
-                body.gravityScale = defaultGravityScale * upwardGravityMultiplier;
-            }
-            else if (body.velocity.y < 0f)
-            {
-                body.gravityScale = defaultGravityScale * downwardGravityMultiplier;
-                isRising = false;
-            }
-            else if (body.velocity.y == 0f)
-            {
-                body.gravityScale = defaultGravityScale;
             }
 
             if (isRising && !inputController.GetJumpHeld())
@@ -107,6 +98,7 @@ public class Jump : Capability
     {
         velocity.y = jumpForce;
         isRising = true;
+        IsJumpingThisFrame = true;
     }
 
     private void CalculateJumpForce()
@@ -115,10 +107,28 @@ public class Jump : Capability
         jumpHeightOnLastCalculation = jumpHeight;
     }
 
+    private void CalculateGravity()
+    {
+        if (body.velocity.y > 0f)
+        {
+            body.gravityScale = defaultGravityScale * upwardGravityMultiplier;
+        }
+        else if (body.velocity.y < 0f)
+        {
+            body.gravityScale = defaultGravityScale * downwardGravityMultiplier;
+            isRising = false;
+        }
+        else if (body.velocity.y == 0f)
+        {
+            body.gravityScale = defaultGravityScale;
+        }
+    }
+
 
     // This Capability overrides the Disable() method so that it can run certain code while dormant, such as jumpBuffer and coyoteTime
     public override void Disable()
     {
         IsActive = false;
+        isRising = false;
     }
 }

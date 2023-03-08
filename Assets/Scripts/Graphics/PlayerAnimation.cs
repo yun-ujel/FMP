@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -8,13 +9,20 @@ public class PlayerAnimation : MonoBehaviour
     [Header("References (optional)")]
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private CollisionCheck playerCollisionCheck;
-    [SerializeField] private Move playerMovement;
+
+    [Space]
+
     [SerializeField] private Animator animator;
+
+    private List<Capability> capabilities;
+    private Move move;
+    private Dash dash;
+    private float timeSinceLastDash;
 
     [Header("Speed Values")]
     [SerializeField, Range(0f, 10f)] private float minAnimationSpeed = 1f;
     [SerializeField, Range(0f, 10f)] private float maxAnimationSpeed = 3f;
-    [SerializeField] private bool rollAtMaxSpeed;
+    [SerializeField] private bool rollAtMaxMoveSpeed;
     private float animationSpeed;
 
     [Header("Juice")]
@@ -22,28 +30,31 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Start()
     {
-        if (playerRigidbody == null) playerRigidbody = playerGameObject.GetComponent<Rigidbody2D>();
-        if (playerCollisionCheck == null) playerCollisionCheck = playerGameObject.GetComponent<CollisionCheck>();
-        if (playerMovement == null) playerMovement = playerGameObject.GetComponent<Move>();
+        if (playerRigidbody == null) 
+            playerRigidbody = playerGameObject.GetComponent<Rigidbody2D>();
+        if (playerCollisionCheck == null) 
+            playerCollisionCheck = playerGameObject.GetComponent<CollisionCheck>();
 
-        if (animator == null) animator = GetComponent<Animator>();
+        if (animator == null) 
+            animator = GetComponent<Animator>();
+
+
+        capabilities = new List<Capability>();
+        capabilities.AddRange(playerGameObject.GetComponents<Capability>());
+
+        move = (Move)GetCapability(typeof(Move));
+        dash = (Dash)GetCapability(typeof(Dash));
     }
 
     private void Update()
     {
+        FlipTowardsMovement();
+
         if (playerCollisionCheck.Ground)
         {
-            animationSpeed = Remap(Mathf.Abs(playerRigidbody.velocity.x), 0f, Mathf.Abs(playerMovement.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
-
-            if (animationSpeed == maxAnimationSpeed && rollAtMaxSpeed)
+            if (move != null)
             {
-                animator.speed = 1f;
-                animator.Play("Roll");
-            }
-            else if (Mathf.Abs(playerRigidbody.velocity.x) > 0f)
-            {
-                animator.speed = Mathf.Min(animationSpeed, maxAnimationSpeed);
-                animator.Play("Walk");
+                DoMoveAnimation();
             }
             else
             {
@@ -57,6 +68,24 @@ public class PlayerAnimation : MonoBehaviour
             animator.Play("Roll");
         }
 
+        if (dash != null)
+        {
+            if (dash.IsDashingThisFrame)
+            {
+                cameraVFX.TriggerShock(transform.position);
+                timeSinceLastDash = 0f;
+            }
+
+            if (timeSinceLastDash < 0.15f)
+            {
+                timeSinceLastDash += Time.deltaTime;
+                
+            }
+        }
+    }
+
+    private void FlipTowardsMovement()
+    {
         if (playerRigidbody.velocity.x > 0f)
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -65,15 +94,44 @@ public class PlayerAnimation : MonoBehaviour
         {
             transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            cameraVFX.TriggerShock(transform.position);
-        }
     }
 
     private float Remap(float input, float inputMin, float inputMax, float outputMin, float outputMax)
     {
         return (input - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin;
+    }
+
+    private Capability GetCapability(System.Type type)
+    {
+        for (int i = 0; i < capabilities.Count; i++)
+        {
+            if (capabilities[i].GetType() == type)
+            {
+                return capabilities[i];
+            }
+        }
+
+        return null;
+    }
+
+    private void DoMoveAnimation()
+    {
+        animationSpeed = Remap(Mathf.Abs(playerRigidbody.velocity.x), 0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
+
+        if (animationSpeed == maxAnimationSpeed && rollAtMaxMoveSpeed)
+        {
+            animator.speed = 1f;
+            animator.Play("Roll");
+        }
+        else if (Mathf.Abs(playerRigidbody.velocity.x) > 0f)
+        {
+            animator.speed = Mathf.Min(animationSpeed, maxAnimationSpeed);
+            animator.Play("Walk");
+        }
+        else
+        {
+            animator.speed = 1f;
+            animator.Play("Idle");
+        }
     }
 }

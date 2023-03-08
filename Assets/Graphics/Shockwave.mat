@@ -40,10 +40,10 @@ Material:
     - Vector1_ba16dc3f991f44dca3e8f99763e8cc23: 0.5
     - Vector1_e5a02e772a234ab7b5005c26e80e07aa: -1
     - _Magnitude: 0
-    - _Radius: 0.09959139
-    - _Size: 0.05
+    - _Radius: 0
+    - _Size: 0
     - _Speed: 2
     m_Colors:
     - Vector2_21d4cf391e844318b5d0e308ac5be326: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _FocalPoint: {r: 0.5866068, g: 0.30075, b: 10, a: 0}
+    - _FocalPoint: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

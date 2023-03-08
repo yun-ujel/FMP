@@ -241,9 +241,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 111010478}
+  - component: {fileID: 111010485}
   - component: {fileID: 111010480}
-  - component: {fileID: 111010481}
   - component: {fileID: 111010484}
+  - component: {fileID: 111010481}
   - component: {fileID: 111010477}
   - component: {fileID: 111010479}
   - component: {fileID: 111010482}
@@ -402,6 +403,22 @@ MonoBehaviour:
   downwardGravityMultiplier: 5
   upwardGravityMultiplier: 3
   jumpReleaseMultiplier: 0.6
+--- !u!114 &111010485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111010476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb07647f5a91a04fa302a5320109ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputController: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
+  dashSpeed: 18
+  dashCooldown: 0.35
+  dashImmobility: 0.15
 --- !u!1 &339723026
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,10 +680,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shockwaveMaterial: {fileID: 2100000, guid: 169c6340ad12ff041b55fb31a7b4ed17, type: 2}
-  maxMagnitude: -1
+  maxMagnitude: -0.1
   maxSize: 0.05
-  speed: 2
-  maxRadius: 0.2
+  duration: 0.3
+  maxRadius: 0.1
   magnitudeDecreaseOverTime:
     serializedVersion: 2
     m_Curve:
@@ -715,10 +732,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1360483550}
+  - component: {fileID: 1360483554}
   - component: {fileID: 1360483552}
   - component: {fileID: 1360483551}
   - component: {fileID: 1360483553}
-  - component: {fileID: 1360483554}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -923,11 +940,10 @@ MonoBehaviour:
   playerGameObject: {fileID: 111010476}
   playerRigidbody: {fileID: 111010479}
   playerCollisionCheck: {fileID: 111010477}
-  playerMovement: {fileID: 111010480}
   animator: {fileID: 1360483551}
   minAnimationSpeed: 0.8
   maxAnimationSpeed: 1.6
-  rollAtMaxSpeed: 0
+  rollAtMaxMoveSpeed: 0
   cameraVFX: {fileID: 519420034}
 --- !u!1 &1795427648
 GameObject:
