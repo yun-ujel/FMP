@@ -41,7 +41,7 @@ Material:
     - Vector1_e5a02e772a234ab7b5005c26e80e07aa: -1
     - _Magnitude: 0
     - _Radius: 0
-    - _Size: 0
+    - _Size: 0.05
     - _Speed: 2
     m_Colors:
     - Vector2_21d4cf391e844318b5d0e308ac5be326: {r: 0.5, g: 0.5, b: 0, a: 0}

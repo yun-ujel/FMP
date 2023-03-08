@@ -76,4 +76,14 @@ public class CustomVFX : MonoBehaviour
         shockwaveMaterial.SetFloat("_Radius", defaultRadius);
         shockwaveMaterial.SetVector("_FocalPoint", defaultFocalPoint);
     }
+
+    private void Reset()
+    {
+        SetShockDefaults();
+    }
+
+    private void OnDisable()
+    {
+        SetShockDefaults();
+    }
 }

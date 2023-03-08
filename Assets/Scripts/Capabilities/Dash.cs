@@ -4,15 +4,17 @@ using UnityEngine;
 public class Dash : Capability
 {
     [SerializeField] private InputController inputController;
+    [SerializeField] private GravityMultiplier gravityMultiplier;
     private Rigidbody2D body;
     private bool desiredDash;
     public bool IsDashingThisFrame { get; private set; }
 
-    [Header("Speed Values")]
+    [Header("Values")]
     [SerializeField] private float dashSpeed = 10f;
+
     private Vector2 dashDirection;
 
-    [Header("Time Values")]
+    [Space]
     [SerializeField] private float dashCooldown = 0.35f;
     private float dashCooldownCounter;
     // Counts downwards
@@ -43,11 +45,13 @@ public class Dash : Capability
         if (dashImmobilityCounter > 0f && hasDashImmobility)
         {
             DisableOtherCapabilities();
+            gravityMultiplier.enabled = false;
             dashImmobilityCounter -= Time.deltaTime;
         }
         else if (hasDashImmobility)
         {
             Debug.Log("Dash Immobility Disabled");
+            gravityMultiplier.enabled = true;
             hasDashImmobility = false;
             EnableOtherCapabilities();
         }
@@ -75,8 +79,6 @@ public class Dash : Capability
         hasDashImmobility = true;
 
         body.velocity = dashDirection * dashSpeed;
-
-        body.gravityScale = 0f;
 
         desiredDash = false;
         IsDashingThisFrame = true;
