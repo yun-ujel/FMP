@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CustomVFX : MonoBehaviour
 {
@@ -7,7 +8,8 @@ public class CustomVFX : MonoBehaviour
     [Header("Shockwave")]
     // References
     [SerializeField] private Material shockwaveMaterial;
-    
+    [SerializeField] private Blit blit;
+
     [Space]
 
     // Max Values
@@ -23,20 +25,13 @@ public class CustomVFX : MonoBehaviour
     [SerializeField] private AnimationCurve sizeDecreaseOverTime;
     private float shockTimer;
 
-    // Defaults
-    private float defaultMagnitude;
-    private float defaultSize;
-    private float defaultRadius;
-    private Vector2 defaultFocalPoint;
-
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        blit.SetActive(true);
 
-        defaultMagnitude = shockwaveMaterial.GetFloat("_Magnitude");
-        defaultSize = shockwaveMaterial.GetFloat("_Size");
-        defaultRadius = shockwaveMaterial.GetFloat("_Radius");
-        defaultFocalPoint = shockwaveMaterial.GetVector("_FocalPoint");
+        shockwaveMaterial = new Material(shockwaveMaterial);
+        blit.settings.blitMaterial = shockwaveMaterial;
     }
     private void Update()
     {
@@ -47,7 +42,7 @@ public class CustomVFX : MonoBehaviour
         }
         else
         {
-            SetShockDefaults();
+            SetShockValues(0f, 0f);
         }
     }
 
@@ -69,21 +64,8 @@ public class CustomVFX : MonoBehaviour
         shockwaveMaterial.SetFloat("_Magnitude", magnitude);
     }
 
-    private void SetShockDefaults()
-    {
-        shockwaveMaterial.SetFloat("_Magnitude", defaultMagnitude);
-        shockwaveMaterial.SetFloat("_Size", defaultSize);
-        shockwaveMaterial.SetFloat("_Radius", defaultRadius);
-        shockwaveMaterial.SetVector("_FocalPoint", defaultFocalPoint);
-    }
-
-    private void Reset()
-    {
-        SetShockDefaults();
-    }
-
     private void OnDisable()
     {
-        SetShockDefaults();
+        blit.SetActive(false);
     }
 }

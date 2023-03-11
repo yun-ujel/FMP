@@ -6,7 +6,7 @@ public class Jump : Capability
     //[Header("References")]
     [SerializeField] private InputController inputController = null;
     private Rigidbody2D body;
-    private CollisionCheck ground;
+    private CollisionCheck collidingWith;
 
     [Header("Jump Values")]
     [SerializeField, Range(0f, 30f)] private float jumpHeight = 0f;
@@ -28,7 +28,7 @@ public class Jump : Capability
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        ground = GetComponent<CollisionCheck>();
+        collidingWith = GetComponent<CollisionCheck>();
 
         CalculateJumpForce();
     }
@@ -45,7 +45,7 @@ public class Jump : Capability
         }
 
 
-        if (ground.Ground && !IsJumpingThisFrame)
+        if (collidingWith.Ground && !IsJumpingThisFrame)
         {
             coyoteTimeLeft = coyoteTime;
         }

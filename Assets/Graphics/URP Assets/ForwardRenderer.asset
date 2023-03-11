@@ -55,10 +55,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9136b27580b685342a4377797955655d, type: 3}
   m_Name: Shockwave
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     Event: 500
-    blitMaterial: {fileID: 2100000, guid: 169c6340ad12ff041b55fb31a7b4ed17, type: 2}
+    blitMaterial: {fileID: 0}
     blitMaterialPassIndex: 0
     destination: 0
     textureId: _BlitPassTexture

@@ -9,12 +9,12 @@ public class Dash : Capability
 
     [SerializeField] private GravityMultiplier gravityMultiplier;
     private Rigidbody2D body;
-    private CollisionCheck collision;
+    private CollisionCheck collidingWith;
 
     public bool IsDashingThisFrame { get; private set; }
 
     [Header("Values")]
-    [SerializeField, Range(0f, 20f)] private float dashSpeed = 10f;
+    [SerializeField, Range(0f, 50f)] private float dashSpeed = 10f;
     [SerializeField, Range(0f, 10f)] private float dashDrag = 0f;
     private float defaultDrag;
 
@@ -34,7 +34,7 @@ public class Dash : Capability
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        collision = GetComponent<CollisionCheck>();
+        collidingWith = GetComponent<CollisionCheck>();
 
         dashDirection = new Vector2(1f, 0f);
         defaultDrag = body.drag;
@@ -53,7 +53,7 @@ public class Dash : Capability
         {
             DisableImmobility();
         }
-        if (collision.AnyCollision())
+        if (collidingWith.AnyCollision())
         {
             dashesSpent = 0;
             DisableImmobility();
@@ -62,8 +62,7 @@ public class Dash : Capability
 
         if (!gravityMultiplier.enabled && timeSinceLastDash >= timeSpentNoGravity)
         {
-            gravityMultiplier.enabled = true;
-            body.drag = defaultDrag;
+            EnableGravity();
         }
 
         timeSinceLastDash += Time.deltaTime;
@@ -73,9 +72,13 @@ public class Dash : Capability
     {
         IsDashingThisFrame = false;
 
-        if (desiredDash && dashesSpent > numberOfDashes && timeSinceLastDash > dashCooldown)
+        if (desiredDash && dashesSpent < numberOfDashes && timeSinceLastDash > dashCooldown)
         {
             DoDash();
+        }
+        else
+        {
+            desiredDash = false;
         }
     }
 
@@ -121,5 +124,18 @@ public class Dash : Capability
         body.drag = dashDrag;
 
         DisableOtherCapabilities();
+    }
+
+    void EnableGravity()
+    {
+        gravityMultiplier.enabled = true;
+        body.drag = defaultDrag;
+    }
+
+    public override void Disable()
+    {
+        EnableGravity();
+        DisableImmobility();
+        base.Disable();
     }
 }

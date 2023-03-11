@@ -6,7 +6,7 @@ public class Move : Capability
     //[Header("References")]
     [SerializeField] private InputController inputController = null;
     private Rigidbody2D body;
-    private CollisionCheck ground;
+    private CollisionCheck collidingWith;
 
     [Header("Speed Values")]
     [SerializeField, Range(0f, 100f)] private float maxSpeed;
@@ -29,7 +29,7 @@ public class Move : Capability
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        ground = GetComponent<CollisionCheck>();
+        collidingWith = GetComponent<CollisionCheck>();
     }
 
     private void Update()
@@ -42,9 +42,7 @@ public class Move : Capability
     {
         velocity = body.velocity;
 
-        acceleration = ground.Ground
-            ? GetIsDecelerating() ? maxGroundDeceleration : maxGroundAcceleration // If On Ground:
-            : GetIsDecelerating() ? maxAirDeceleration : maxAirAcceleration; // If In Air:
+        acceleration = GetAcceleration();
 
         maxSpeedChange = acceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, DesiredVelocity.x, maxSpeedChange);
@@ -52,18 +50,17 @@ public class Move : Capability
         body.velocity = velocity;
     }
 
-    private bool GetIsDecelerating()
+    private float GetAcceleration()
     {
         if ((direction.x < 0f && velocity.x > 0f) || (direction.x > 0f && velocity.x < 0f))
         {
-            // If Direction and Velocity are on opposite sides of 0 (e.g. direction = positive, velocity = negative)
-            return true;
+            return collidingWith.Ground ? maxGroundDeceleration : maxAirDeceleration;
         }
         else if (direction.x == 0f)
         {
-            return true;
+            return collidingWith.Ground ? maxGroundDeceleration : maxAirDeceleration;
         }
 
-        return false;
+        return collidingWith.Ground ? maxGroundAcceleration : maxAirAcceleration;
     }
 }
