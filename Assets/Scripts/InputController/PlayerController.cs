@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerController", menuName = "InputController/PlayerController")]
+[CreateAssetMenu(fileName = "PlayerController", menuName = "Scriptable Object/Input Controller/Player Controller")]
 public class PlayerController : InputController
 {
     public override bool GetJumpPressed()
@@ -12,7 +12,7 @@ public class PlayerController : InputController
     {
         return Input.GetButton("Jump");
     }
-        public override float GetHorizontalInput()
+    public override float GetHorizontalInput()
     {
         return Input.GetAxisRaw("Horizontal");
     }

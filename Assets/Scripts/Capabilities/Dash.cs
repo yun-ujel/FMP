@@ -1,29 +1,30 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CollisionCheck))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Dash : Capability
 {
-    [SerializeField] private InputController inputController;
     private Vector2 dashDirection;
     private bool desiredDash;
 
-    [SerializeField] private GravityMultiplier gravityMultiplier;
+    [Header("References")]
     private Rigidbody2D body;
-    private CollisionCheck collidingWith;
+    private GravityMultiplier gravityMultiplier;
+
+    [SerializeField] private GroundCheck groundCheck;
 
     public bool IsDashingThisFrame { get; private set; }
 
     [Header("Values")]
-    [SerializeField, Range(0f, 50f)] private float dashSpeed = 10f;
-    [SerializeField, Range(0f, 10f)] private float dashDrag = 0f;
+    [SerializeField, Range(0f, 50f)] private float dashSpeed = 32f;
+    [SerializeField, Range(0f, 10f)] private float dashDrag = 8f;
     private float defaultDrag;
 
     [Space]
 
-    private float timeSinceLastDash;
     [SerializeField] private float timeSpentImmobile = 0.15f;// Time spent being unable to move/alter trajectory while dashing, counts downwards
     private bool isImmobile;
     private float timeSpentNoGravity = 0.2f;
+    private float timeSinceLastDash;
 
     [Space]
 
@@ -34,7 +35,7 @@ public class Dash : Capability
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        collidingWith = GetComponent<CollisionCheck>();
+        TryGetComponent(out gravityMultiplier);
 
         dashDirection = new Vector2(1f, 0f);
         defaultDrag = body.drag;
@@ -49,14 +50,14 @@ public class Dash : Capability
             desiredDash = true;
         }
 
-        if (isImmobile && timeSinceLastDash >= timeSpentImmobile)
+        if (isImmobile && (timeSinceLastDash >= timeSpentImmobile || groundCheck.AnyCollision))
         {
             DisableImmobility();
         }
-        if (collidingWith.AnyCollision())
+
+        if (groundCheck.OnGround)
         {
             dashesSpent = 0;
-            DisableImmobility();
         }
 
 
@@ -132,10 +133,10 @@ public class Dash : Capability
         body.drag = defaultDrag;
     }
 
-    public override void Disable()
+    public override void DisableCapability()
     {
         EnableGravity();
         DisableImmobility();
-        base.Disable();
+        base.DisableCapability();
     }
 }

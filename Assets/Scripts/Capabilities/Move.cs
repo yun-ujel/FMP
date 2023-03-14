@@ -1,23 +1,22 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CollisionCheck))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Move : Capability
 {
     //[Header("References")]
-    [SerializeField] private InputController inputController = null;
     private Rigidbody2D body;
-    private CollisionCheck collidingWith;
+    [SerializeField] private GroundCheck groundCheck;
 
     [Header("Speed Values")]
-    [SerializeField, Range(0f, 100f)] private float maxSpeed;
+    [SerializeField, Range(0f, 100f)] private float maxSpeed = 5f;
 
     [Header("Ground")]
-    [SerializeField, Range(0f, 100f)] private float maxGroundAcceleration;
-    [SerializeField, Range(0f, 100f)] private float maxGroundDeceleration;
+    [SerializeField, Range(0f, 100f)] private float maxGroundAcceleration = 40f;
+    [SerializeField, Range(0f, 100f)] private float maxGroundDeceleration = 80f;
 
     [Header("Air")]
-    [SerializeField, Range(0f, 100f)] private float maxAirAcceleration;
-    [SerializeField, Range(0f, 100f)] private float maxAirDeceleration;
+    [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 60f;
+    [SerializeField, Range(0f, 100f)] private float maxAirDeceleration = 80f;
 
     private Vector2 direction;
     public Vector2 DesiredVelocity { get; private set; }
@@ -29,7 +28,7 @@ public class Move : Capability
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        collidingWith = GetComponent<CollisionCheck>();
+        IsActive = true;
     }
 
     private void Update()
@@ -54,13 +53,13 @@ public class Move : Capability
     {
         if ((direction.x < 0f && velocity.x > 0f) || (direction.x > 0f && velocity.x < 0f))
         {
-            return collidingWith.Ground ? maxGroundDeceleration : maxAirDeceleration;
+            return groundCheck.OnGround ? maxGroundDeceleration : maxAirDeceleration;
         }
         else if (direction.x == 0f)
         {
-            return collidingWith.Ground ? maxGroundDeceleration : maxAirDeceleration;
+            return groundCheck.OnGround ? maxGroundDeceleration : maxAirDeceleration;
         }
 
-        return collidingWith.Ground ? maxGroundAcceleration : maxAirAcceleration;
+        return groundCheck.OnGround ? maxGroundAcceleration : maxAirAcceleration;
     }
 }

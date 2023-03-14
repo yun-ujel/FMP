@@ -1,21 +1,25 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CollisionCheck))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Jump : Capability
 {
-    //[Header("References")]
-    [SerializeField] private InputController inputController = null;
+    [Header("References")]
     private Rigidbody2D body;
-    private CollisionCheck collidingWith;
+    [SerializeField] private GroundCheck groundCheck;
 
-    [Header("Jump Values")]
-    [SerializeField, Range(0f, 30f)] private float jumpHeight = 0f;
-    [SerializeField, Range(0f, 1f)] private float jumpReleaseMultiplier = 0.5f;
     public bool IsJumpingThisFrame { get; private set; }
 
+    private Vector2 velocity;
+
+    [Header("Height Values")]
+    [SerializeField, Range(0f, 30f)] private float jumpHeight = 7f;
     private float jumpHeightOnLastCalculation;
     private float jumpForce;
+
+    [SerializeField, Range(0f, 1f)] private float jumpReleaseMultiplier = 0.6f;
     private bool isRising;
+
+    [Header("Leniency")]
 
     [SerializeField, Range(0f, 2f)] private float jumpBuffer = 0.2f;
     private float jumpBufferLeft;
@@ -23,12 +27,15 @@ public class Jump : Capability
     [SerializeField, Range(0f, 2f)] private float coyoteTime = 0.2f;
     private float coyoteTimeLeft;
 
-    private Vector2 velocity;
+    [Space]
+
+    [SerializeField, Range(0, 10)] private int numberOfMidairJumps = 1;
+    private int jumpsSpent = 0;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        collidingWith = GetComponent<CollisionCheck>();
+        IsActive = true;
 
         CalculateJumpForce();
     }
@@ -45,9 +52,10 @@ public class Jump : Capability
         }
 
 
-        if (collidingWith.Ground && !IsJumpingThisFrame)
+        if (groundCheck.OnGround && !IsJumpingThisFrame)
         {
             coyoteTimeLeft = coyoteTime;
+            jumpsSpent = 0;
         }
         else
         {
@@ -69,7 +77,7 @@ public class Jump : Capability
         {
             velocity = body.velocity;
 
-            if (jumpBufferLeft > 0f && coyoteTimeLeft > 0f)
+            if (jumpBufferLeft > 0f && (coyoteTimeLeft > 0f || jumpsSpent < numberOfMidairJumps))
             {
                 DoJump();
                 jumpBufferLeft = 0f;
@@ -92,20 +100,21 @@ public class Jump : Capability
     }
 
     private void DoJump()
-    {
+    {        
         velocity.y = jumpForce;
         isRising = true;
         IsJumpingThisFrame = true;
+        jumpsSpent += 1;
     }
 
     private void CalculateJumpForce()
-    {    
+    {
         jumpForce = Mathf.Max(Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight), 0f);
         jumpHeightOnLastCalculation = jumpHeight;
     }
 
     // This Capability overrides the Disable() method so that it can run certain code while dormant, such as jumpBuffer and coyoteTime
-    public override void Disable()
+    public override void DisableCapability()
     {
         IsActive = false;
         isRising = false;

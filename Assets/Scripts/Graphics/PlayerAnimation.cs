@@ -8,7 +8,7 @@ public class PlayerAnimation : MonoBehaviour
 
     [Header("References (optional)")]
     [SerializeField] private Rigidbody2D playerRigidbody;
-    [SerializeField] private CollisionCheck playerCollisionCheck;
+    [SerializeField] private GroundCheck playerGroundCheck;
 
     [Space]
 
@@ -32,12 +32,12 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (playerRigidbody == null) 
             playerRigidbody = playerGameObject.GetComponent<Rigidbody2D>();
-        if (playerCollisionCheck == null) 
-            playerCollisionCheck = playerGameObject.GetComponent<CollisionCheck>();
 
         if (animator == null) 
             animator = GetComponent<Animator>();
 
+        if (playerGroundCheck == null)
+            playerGroundCheck = playerGameObject.GetComponent<GroundCheck>();
 
         capabilities = new List<Capability>();
         capabilities.AddRange(playerGameObject.GetComponents<Capability>());
@@ -50,7 +50,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         FlipTowardsMovement();
 
-        if (playerCollisionCheck.Ground)
+        if (playerGroundCheck.OnGround)
         {
             if (move != null)
             {
