@@ -16,17 +16,12 @@ public class PlayerAnimation : MonoBehaviour
 
     private List<Capability> capabilities;
     private Move move;
-    private Dash dash;
-    private float timeSinceLastDash;
 
     [Header("Speed Values")]
     [SerializeField, Range(0f, 10f)] private float minAnimationSpeed = 1f;
     [SerializeField, Range(0f, 10f)] private float maxAnimationSpeed = 3f;
     [SerializeField] private bool rollAtMaxMoveSpeed;
     private float animationSpeed;
-
-    [Header("Juice")]
-    [SerializeField] private CustomVFX cameraVFX;
 
     private void Start()
     {
@@ -43,7 +38,6 @@ public class PlayerAnimation : MonoBehaviour
         capabilities.AddRange(playerGameObject.GetComponents<Capability>());
 
         move = (Move)GetCapability(typeof(Move));
-        dash = (Dash)GetCapability(typeof(Dash));
     }
 
     private void Update()
@@ -66,21 +60,6 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator.speed = 0.5f;
             animator.Play("Roll");
-        }
-
-        if (dash != null)
-        {
-            if (dash.IsDashingThisFrame)
-            {
-                cameraVFX.TriggerShock(transform.position);
-                timeSinceLastDash = 0f;
-            }
-
-            if (timeSinceLastDash < 0.15f)
-            {
-                timeSinceLastDash += Time.deltaTime;
-                
-            }
         }
     }
 

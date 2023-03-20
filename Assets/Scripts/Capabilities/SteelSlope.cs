@@ -11,7 +11,9 @@ public class SteelSlope : Capability
 
     private bool isSliding = false;
     private float slideFacing;
+
     private Vector2 moveDirection;
+
 
     [Header("References")]
     [SerializeField] private Capability[] abilitiesDuringSlide;
@@ -24,7 +26,7 @@ public class SteelSlope : Capability
 
     [SerializeField, Range(1f, 100f)] private float slideAccelerationMultiplier = 30f;
 
-    private float slideAcceleration;
+    [SerializeField] private float slideAcceleration;
     private float slideSpeed = 6f;
     private void Awake()
     {

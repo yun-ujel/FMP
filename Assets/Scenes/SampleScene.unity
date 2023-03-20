@@ -234,9 +234,10 @@ MonoBehaviour:
   wallCheck: {fileID: 11400000, guid: 81f321f258429a44ba8b09a69eefa8f4, type: 2}
   abilitiesDuringSlide:
   - {fileID: 111010484}
-  minSlideSpeed: 6
-  maxSlideSpeed: 16
+  minSlideSpeed: 4
+  maxSlideSpeed: 12
   slideAccelerationMultiplier: 30
+  slideAcceleration: 0
 --- !u!61 &111010482
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -352,7 +353,6 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
-  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -478,63 +478,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &519420034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fe660ae326811d4f9814a0beeea8def, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shockwaveMaterial: {fileID: 2100000, guid: 169c6340ad12ff041b55fb31a7b4ed17, type: 2}
-  blit: {fileID: 666547612872143516, guid: 8fab3d89e8fc0ab4dbc72063abf692d7, type: 2}
-  maxMagnitude: -0.1
-  maxSize: 0.05
-  duration: 0.3
-  maxRadius: 0.1
-  magnitudeDecreaseOverTime:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  sizeDecreaseOverTime:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &931164210
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +808,6 @@ MonoBehaviour:
   minAnimationSpeed: 0.8
   maxAnimationSpeed: 1.6
   rollAtMaxMoveSpeed: 0
-  cameraVFX: {fileID: 519420034}
 --- !u!1 &2052351138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,7 +1020,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100427796}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -14, y: -5, z: 0}
+  m_LocalPosition: {x: -11.5, y: -5, z: 0}
   m_LocalScale: {x: 20, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
