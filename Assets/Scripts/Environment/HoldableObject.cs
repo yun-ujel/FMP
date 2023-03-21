@@ -1,9 +1,18 @@
 using UnityEngine;
 
+// --- SETUP ---
+// Use "Holdable" Tag for all GameObjects with HoldableObject attached
+
+// Create 2 GameObjects, one with this script, a Rigidbody2D and Collider2D
+// Set the layer of this object to "Player" (7)
+
+// The other GameObject should be a child of this, with a Collider2D set as a Trigger
+// Set the layer of this object to anything other than "Player" (7)
+
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class HoldableObject : MonoBehaviour
 {
-    public bool isBeingThrown { get; private set; }
+    public bool IsBeingThrown { get; private set; }
 
     [Header("Physics")]
     private Rigidbody2D body;
@@ -51,7 +60,7 @@ public class HoldableObject : MonoBehaviour
             body.gravityScale = defaultGravityScale;
             body.velocity = throwForce;
 
-            isBeingThrown = true;
+            IsBeingThrown = true;
             throwPending = false;
         }
     }
@@ -106,7 +115,7 @@ public class HoldableObject : MonoBehaviour
     {
         if (collision.gameObject.layer == 6) // Layer 6 is Ground
         {
-            isBeingThrown = false;
+            IsBeingThrown = false;
         }
     }
 }
