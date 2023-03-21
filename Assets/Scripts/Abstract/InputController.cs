@@ -11,4 +11,6 @@ public abstract class InputController : ScriptableObject
     public abstract float GetVerticalInput();
 
     public abstract bool GetAttackPressed();
+
+    public abstract bool GetAttackHeld();
 }

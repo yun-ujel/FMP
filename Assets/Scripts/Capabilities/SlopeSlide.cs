@@ -1,17 +1,22 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class SlopeSlide : Capability
 {
     [SerializeField] private SlopeCheck slopeCheck;
     private bool isSliding;
+    private Move move;
+
+    private void Awake()
+    {
+        _ = TryGetComponent(out move);
+    }
 
     private void Update()
     {
         if (slopeCheck.OnSlope && !isSliding)
         {
-            Debug.Log("Begin Slide, Slope Direction: " + slopeCheck.SlopeFacing);
-            BeginSlide();
+            //Debug.Log("Begin Slide, Slope Direction: " + slopeCheck.SlopeFacing);
+            InitiateSlide();
         }
     }
 
@@ -19,18 +24,23 @@ public class SlopeSlide : Capability
     {
         if (isSliding && !slopeCheck.OnSlope)
         {
-            Debug.Log("End Slide, Slope Direction: " + slopeCheck.SlopeFacing);
-            EndSlide();
+            //Debug.Log("End Slide, Slope Direction: " + slopeCheck.SlopeFacing);
+            FinishSlide();
         }
     }
 
-    private void BeginSlide()
+    private void InitiateSlide()
     {
         isSliding = true;
+        if (move != null)
+        {
+            move.Facing = slopeCheck.SlopeFacing;
+        }
+
         DisableOtherCapabilities();
     }
 
-    private void EndSlide()
+    private void FinishSlide()
     {
         isSliding = false;
         EnableOtherCapabilities();

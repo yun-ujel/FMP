@@ -19,6 +19,8 @@ public class Move : Capability
     [SerializeField, Range(0f, 100f)] private float maxAirDeceleration = 80f;
 
     private Vector2 direction;
+    public float Facing { get; set; } = 1f;
+
     public Vector2 DesiredVelocity { get; private set; }
     private Vector2 velocity;
 
@@ -34,6 +36,8 @@ public class Move : Capability
     private void Update()
     {
         direction.x = inputController.GetHorizontalInput();
+        Facing = Mathf.Abs(direction.x) > 0f ? direction.x : Facing;
+
         DesiredVelocity = new Vector2(direction.x, 0f) * maxSpeed;
     }
 

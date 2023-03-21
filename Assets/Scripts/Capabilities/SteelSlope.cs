@@ -17,6 +17,7 @@ public class SteelSlope : Capability
 
     [Header("References")]
     [SerializeField] private Capability[] abilitiesDuringSlide;
+    private Move move;
 
     [Header("Speed Values")]
     [SerializeField, Range(0f, 40f)] private float minSlideSpeed = 6f;
@@ -31,6 +32,7 @@ public class SteelSlope : Capability
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        _ = TryGetComponent(out move);
     }
 
     private void Update()
@@ -56,10 +58,14 @@ public class SteelSlope : Capability
     }
     private void InitiateSlide()
     {
-        Debug.Log("Initiated Slide");
+        //Debug.Log("Initiated Slide");
 
         isSliding = true;
         slideFacing = slopeCheck.SlopeFacing;
+        if (move != null)
+        {
+            move.Facing = slideFacing;
+        }
 
         slideSpeed = Mathf.Clamp(Mathf.Abs(body.velocity.y), minSlideSpeed, maxSlideSpeed);
         CalculateMoveDirection();
@@ -75,7 +81,7 @@ public class SteelSlope : Capability
 
     private void FinishSlide()
     {
-        Debug.Log("Ended Slide");
+        //Debug.Log("Ended Slide");
         isSliding = false;
 
         EnableOtherCapabilities();
@@ -83,7 +89,7 @@ public class SteelSlope : Capability
 
     private void CalculateMoveDirection()
     {
-        Debug.Log("Recalculating Move Direction");
+        //Debug.Log("Recalculating Move Direction");
         moveDirection = slopeCheck.GetSlopeDirection() * slideFacing;
 
         if (moveDirection.y <= 0f)

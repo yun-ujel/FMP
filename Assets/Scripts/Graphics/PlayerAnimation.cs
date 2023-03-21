@@ -65,14 +65,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void FlipTowardsMovement()
     {
-        if (playerRigidbody.velocity.x > 0f)
-        {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        else if (playerRigidbody.velocity.x < 0f)
-        {
-            transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
+        transform.localScale = new Vector3(move.Facing * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
     private float Remap(float input, float inputMin, float inputMax, float outputMin, float outputMax)

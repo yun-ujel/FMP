@@ -26,4 +26,9 @@ public class PlayerController : InputController
     {
         return Input.GetAxisRaw("Vertical");
     }
+
+    public override bool GetAttackHeld()
+    {
+        return Input.GetButton("Fire1") || Input.GetKey(KeyCode.J);
+    }
 }
