@@ -6,6 +6,9 @@ public class SlopeSlide : Capability
     private bool isSliding;
     private Move move;
 
+    [Header("References")]
+    [SerializeField] private Capability[] abilitiesDuringSlide;
+
     private void Awake()
     {
         _ = TryGetComponent(out move);
@@ -37,7 +40,7 @@ public class SlopeSlide : Capability
             move.Facing = slopeCheck.SlopeFacing;
         }
 
-        DisableOtherCapabilities();
+        DisableCapabilitiesWithException(abilitiesDuringSlide);
     }
 
     private void FinishSlide()

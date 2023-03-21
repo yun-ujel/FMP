@@ -8,6 +8,7 @@ public class Jump : Capability
     [SerializeField] private GroundCheck groundCheck;
 
     public bool IsJumpingThisFrame { get; private set; }
+    public bool CanJump { get; set; } = true;
 
     private Vector2 velocity;
 
@@ -20,7 +21,6 @@ public class Jump : Capability
     private bool isRising;
 
     [Header("Leniency")]
-
     [SerializeField, Range(0f, 2f)] private float jumpBuffer = 0.2f;
     private float jumpBufferLeft;
 
@@ -79,9 +79,12 @@ public class Jump : Capability
 
             if (jumpBufferLeft > 0f && (coyoteTimeLeft > 0f || jumpsSpent < numberOfMidairJumps))
             {
-                DoJump();
-                jumpBufferLeft = 0f;
-                coyoteTimeLeft = 0f;
+                if (CanJump)
+                {
+                    DoJump();
+                    jumpBufferLeft = 0f;
+                    coyoteTimeLeft = 0f;
+                }
             }
 
             if (body.velocity.y < 0f)

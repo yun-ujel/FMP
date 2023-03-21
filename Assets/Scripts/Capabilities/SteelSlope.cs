@@ -70,13 +70,7 @@ public class SteelSlope : Capability
         slideSpeed = Mathf.Clamp(Mathf.Abs(body.velocity.y), minSlideSpeed, maxSlideSpeed);
         CalculateMoveDirection();
 
-        DisableOtherCapabilities();
-
-        for (int i = 0; i < abilitiesDuringSlide.Length; i++)
-        {
-            abilitiesDuringSlide[i].enabled = true;
-            abilitiesDuringSlide[i].EnableCapability();
-        }
+        DisableCapabilitiesWithException(abilitiesDuringSlide);
     }
 
     private void FinishSlide()
