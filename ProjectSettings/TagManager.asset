@@ -12,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
-  - Player
-  - 
+  - Ground (Mind)
+  - Player (Mind)
+  - Object (Mind)
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Mind
+    uniqueID: 879800995
     locked: 0
