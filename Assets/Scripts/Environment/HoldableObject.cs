@@ -67,6 +67,8 @@ public class HoldableObject : MonoBehaviour
 
     public void Grab(Vector3 holdPosition, float animationLength)
     {
+        IsBeingThrown = false;
+
         // Set Physics
         body.gravityScale = 0f;
         body.velocity = Vector2.zero;
@@ -109,13 +111,5 @@ public class HoldableObject : MonoBehaviour
         body.freezeRotation = false;
         body.gravityScale = defaultGravityScale;
         body.velocity = Vector2.zero;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == 6) // Layer 6 is Ground
-        {
-            IsBeingThrown = false;
-        }
     }
 }
