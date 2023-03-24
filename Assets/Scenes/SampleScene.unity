@@ -1866,6 +1866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1610903571}
+  - component: {fileID: 1610903573}
   - component: {fileID: 1610903572}
   m_Layer: 0
   m_Name: Sprite Mask
@@ -1882,8 +1883,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610903570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.666665, y: 0, z: 10}
-  m_LocalScale: {x: 13.33333, y: 15, z: 1}
+  m_LocalPosition: {x: -6.6666665, y: 0, z: 10}
+  m_LocalScale: {x: 13.333335, y: 15, z: 1}
   m_Children: []
   m_Father: {fileID: 1713178815}
   m_RootOrder: 0
@@ -1938,6 +1939,20 @@ SpriteMask:
   m_BackSortingOrder: -10
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1610903573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610903570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc324882dc407a41b46fddd685102dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenScale: {x: 0.5, y: 1}
+  anchoredPosition: {x: -1, y: 0}
 --- !u!1 &1667737520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,6 +2045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1682637651}
   - component: {fileID: 1682637652}
+  - component: {fileID: 1682637653}
   m_Layer: 0
   m_Name: Mind vcam1
   m_TagString: Untagged
@@ -2087,6 +2103,18 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 254005515}
+--- !u!114 &1682637653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682637650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1707464710
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,8 +2161,12 @@ MonoBehaviour:
   rooms:
   - trigger: {fileID: 1429993833}
     virtualCam: {fileID: 1821236313}
+    IsEntered: 0
+    IsFocused: 0
   - trigger: {fileID: 360287969}
     virtualCam: {fileID: 1682637650}
+    IsEntered: 0
+    IsFocused: 0
 --- !u!1 &1713178814
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 24
-  m_RefResolutionX: 320
+  m_RefResolutionX: 640
   m_RefResolutionY: 360
   m_UpscaleRT: 1
   m_PixelSnapping: 0
@@ -2394,6 +2426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1821236315}
   - component: {fileID: 1821236314}
+  - component: {fileID: 1821236316}
   m_Layer: 0
   m_Name: Mind vcam0
   m_TagString: Untagged
@@ -2451,6 +2484,18 @@ Transform:
   m_Father: {fileID: 1429993830}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1821236316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821236313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1901718048
 GameObject:
   m_ObjectHideFlags: 0
