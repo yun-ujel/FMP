@@ -17,7 +17,18 @@ public class RoomTrigger : MonoBehaviour
         {
             if (roomService != null)
             {
+                roomService.OnRoomEnter(roomIndex);
+            }
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (roomService != null)
+            {
+                roomService.OnRoomExit(roomIndex);
             }
         }
     }

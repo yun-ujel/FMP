@@ -36,7 +36,10 @@ public class Move : Capability
     private void Update()
     {
         direction.x = inputController.GetHorizontalInput();
-        Facing = Mathf.Abs(direction.x) > 0f ? direction.x : Facing;
+        if (Mathf.Abs(direction.x) > 0f)
+        {
+            Facing = direction.x > 0 ? 1f : -1f;
+        }
 
         DesiredVelocity = new Vector2(direction.x, 0f) * maxSpeed;
     }
