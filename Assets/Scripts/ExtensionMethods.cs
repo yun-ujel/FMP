@@ -12,12 +12,14 @@ public static class ExtensionMethods
         Vector2 scale = GetWorldSize(Camera.main);
         transform.localScale = scale * screenScale;
 
-        //screenScale = new Vector2(1 - screenScale.x, 1 - screenScale.y);
+        Vector3 worldPosition = new Vector3
+        (
+            ((scale.x * anchors.x) + transform.localScale.x) * 0.5f,
+            ((scale.y * anchors.y) + transform.localScale.y) * 0.5f,
+            transform.localPosition.z
+        );
 
-        //Vector3 worldPosition = scale * anchors * screenScale;
-        //worldPosition.z = transform.localPosition.z;
-
-        //transform.localPosition = worldPosition;
+        transform.localPosition = worldPosition;
     }
 
     public static void LocalReset2D(this Transform transform)
@@ -35,6 +37,8 @@ public static class ExtensionMethods
 
         float screenToWorldHeight = 2 * camera.orthographicSize;
         float screenToWorldWidth = screenToWorldHeight * camera.aspect;
+
+        Debug.Log("Calculated World Size: " + new Vector2(screenToWorldWidth, screenToWorldHeight));
 
         return new Vector2(screenToWorldWidth, screenToWorldHeight);
     }

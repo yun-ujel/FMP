@@ -25,5 +25,7 @@ public class ScaleToScreen : MonoBehaviour
     private void Rescale()
     {
         transform.ScaleToScreen(screenScale, anchoredPosition);
+        screenScaleOnLastCalculation = screenScale;
+        anchoredPosOnLastCalculation = anchoredPosition;
     }
 }
