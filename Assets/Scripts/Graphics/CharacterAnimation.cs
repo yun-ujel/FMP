@@ -18,7 +18,6 @@ public class CharacterAnimation : MonoBehaviour
     public Vector2 Velocity => body.velocity;
     public bool AnyCollision => relay.AnyCollision;
 
-    [SerializeField] private float speed;
     void Start()
     {
         relay = character.GetComponent<CollisionRelay>();
@@ -49,7 +48,6 @@ public class CharacterAnimation : MonoBehaviour
             {
                 //Debug.Log("Started playing animation \"" + animations[i].name + "\" at speed " + animations[i].GetAnimationSpeed());
 
-                speed = animations[i].GetAnimationSpeed();
                 animator.speed = Mathf.Min(animations[i].GetAnimationSpeed(), 10f);
                 animator.Play(animations[i].name);
                 break;

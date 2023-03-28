@@ -2027,7 +2027,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: -9
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.32276165, g: 0.31149876, b: 0.3773585, a: 1}
+  m_Color: {r: 0.048279736, g: 0, b: 0.2735849, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2542,8 +2542,8 @@ GameObject:
   - component: {fileID: 1917462316}
   - component: {fileID: 1917462315}
   - component: {fileID: 1917462314}
-  - component: {fileID: 1917462313}
   - component: {fileID: 1917462312}
+  - component: {fileID: 1917462313}
   - component: {fileID: 1917462311}
   - component: {fileID: 1917462310}
   - component: {fileID: 1917462309}
@@ -2586,8 +2586,8 @@ EdgeCollider2D:
   m_Offset: {x: -0.02, y: -0.5}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.4, y: 0}
-  - {x: 0.4, y: 0}
+  - {x: -0.25, y: 0}
+  - {x: 0.25, y: 0}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -2605,7 +2605,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: 0.01}
+  m_Offset: {x: -0.02, y: -0.09}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2616,7 +2616,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.98}
+  m_Size: {x: 0.5, y: 0.78}
   m_EdgeRadius: 0
 --- !u!50 &1917462310
 Rigidbody2D:
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   inputController: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
   groundCheck: {fileID: 11400000, guid: 6ba408ab511b8d44fa79f9c949437d36, type: 2}
   maxSpeed: 5
-  maxGroundAcceleration: 40
+  maxGroundAcceleration: 32
   maxGroundDeceleration: 80
   maxAirAcceleration: 60
   maxAirDeceleration: 80
@@ -2927,7 +2927,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -1344928094693962466, guid: cb405f7e6f407f541a8189c9458fb434, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.41960785, g: 0.4509804, b: 0.6862745, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2973,9 +2973,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 630d5b7c5d77ae44a99f50164148bc38, type: 2}
   - {fileID: 11400000, guid: f1a6ac8d60a39b941afaf2aa8bd54ef8, type: 2}
   - {fileID: 11400000, guid: 198b191ab1d4f6a4788a88012d381a19, type: 2}
+  - {fileID: 11400000, guid: ba73b46fe7c6b6347b435d40f17dacd3, type: 2}
   - {fileID: 11400000, guid: dd0b152d6914fba4cb703fe0b0553533, type: 2}
   - {fileID: 11400000, guid: f159e9a45feb5714a84dce8ec9766035, type: 2}
-  speed: 0
 --- !u!1001 &1438903316152711142
 PrefabInstance:
   m_ObjectHideFlags: 0

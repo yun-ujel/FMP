@@ -8,7 +8,9 @@ public class GrabObject : Capability
     private List<GameObject> objectsToHoldList = new List<GameObject>();
 
     private GameObject[] objectsToHold;
-    private bool isHolding;
+    public bool IsHolding { get; private set; }
+
+    public bool InGrabAnimation => grabAnimationCounter > 0f;
 
     private Move move;
     private Rigidbody2D body;
@@ -67,7 +69,7 @@ public class GrabObject : Capability
 
     private void Update()
     {
-        if (inputController.GetAttackHeld() && !isHolding)
+        if (inputController.GetAttackHeld() && !IsHolding)
         {
             // GRABBING
 
@@ -79,7 +81,7 @@ public class GrabObject : Capability
                 body.drag = dragWhileGrabbing;
                 grabAnimationCounter = grabAnimationLength;
 
-                isHolding = true;
+                IsHolding = true;
 
                 SetJump(false);
             }
@@ -88,13 +90,13 @@ public class GrabObject : Capability
                 objectBeingHeld = null;
             }
         }
-        else if (inputController.GetAttackHeld() && isHolding)
+        else if (inputController.GetAttackHeld() && IsHolding)
         {
             // HOLDING
 
             objectBeingHeld.Hold(transform.position + holdOffset);
         }
-        else if (isHolding)
+        else if (IsHolding)
         {
             // THROWING
 
@@ -108,13 +110,14 @@ public class GrabObject : Capability
                     * throwForceMultiplier.y
                 )
             );
-            isHolding = false;
+            IsHolding = false;
 
             objectsToHoldList.Remove(objectBeingHeld.gameObject);
 
             objectBeingHeld = null;
         }
 
+        // Grab Animation
         if (grabAnimationCounter <= 0f && grabAnimationCounter > -10f)
         {
             body.drag = defaultDrag;
@@ -163,10 +166,10 @@ public class GrabObject : Capability
 
     public override void DisableCapability()
     {
-        if (isHolding)
+        if (IsHolding)
         {
             objectBeingHeld.Drop();
-            isHolding = false;
+            IsHolding = false;
         }
         body.drag = defaultDrag;
 
