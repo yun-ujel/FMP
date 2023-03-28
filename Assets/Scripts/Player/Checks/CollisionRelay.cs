@@ -5,6 +5,23 @@ public class CollisionRelay : MonoBehaviour
     private Collision2D collision;
     [SerializeField] private CollisionCheck[] collisionChecks;
 
+    public bool AnyCollision
+    {
+        get
+        {
+            for (int i = 0; i < collisionChecks.Length; i++)
+            {
+                if (!collisionChecks[i].AnyCollision)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public CollisionCheck[] CollisionChecks => collisionChecks;
+
     private void Start()
     {
         for (int i = 0; i < collisionChecks.Length; i++)

@@ -68,11 +68,6 @@ public class PetedAnimation : MonoBehaviour
         transform.localScale = new Vector3(move.Facing * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
-    private float Remap(float input, float inputMin, float inputMax, float outputMin, float outputMax)
-    {
-        return (input - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin;
-    }
-
     private Capability GetCapability(System.Type type)
     {
         for (int i = 0; i < capabilities.Count; i++)
@@ -88,7 +83,7 @@ public class PetedAnimation : MonoBehaviour
 
     private void DoMoveAnimation()
     {
-        animationSpeed = Remap(Mathf.Abs(playerRigidbody.velocity.x), 0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
+        animationSpeed = Mathf.Abs(playerRigidbody.velocity.x).Remap(0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
 
         if (animationSpeed == maxAnimationSpeed && rollAtMaxMoveSpeed)
         {

@@ -42,4 +42,9 @@ public static class ExtensionMethods
 
         return new Vector2(screenToWorldWidth, screenToWorldHeight);
     }
+
+    public static float Remap(this float input, float inputMin, float inputMax, float outputMin, float outputMax)
+    {
+        return (input - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin;
+    }
 }
