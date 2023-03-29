@@ -36,8 +36,8 @@ public abstract class InputController : ScriptableObject
 //    LeftStickX      = X-Axis
 //    LeftStickY      = Y-Axis (Inverted?)
 //    RightStickX     = 3rd Axis
-//    RightStickY     = 4th Axis (Inverted?)
-//    L2              = 5th Axis (-1.0f to 1.0f range, unpressed is -1.0f)
-//    R2              = 6th Axis (-1.0f to 1.0f range, unpressed is -1.0f)
+//    RightStickY     = 6th Axis (Inverted?)
+//    L2              = 4th Axis (-1.0f to 1.0f range, unpressed is -1.0f)
+//    R2              = 5th Axis (-1.0f to 1.0f range, unpressed is -1.0f)
 //    DPadX           = 7th Axis
 //    DPadY           = 8th Axis (Inverted?)
