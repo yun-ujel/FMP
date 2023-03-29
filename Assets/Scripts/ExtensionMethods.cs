@@ -38,7 +38,7 @@ public static class ExtensionMethods
         float screenToWorldHeight = 2 * camera.orthographicSize;
         float screenToWorldWidth = screenToWorldHeight * camera.aspect;
 
-        Debug.Log("Calculated World Size: " + new Vector2(screenToWorldWidth, screenToWorldHeight));
+        //Debug.Log("Calculated World Size: " + new Vector2(screenToWorldWidth, screenToWorldHeight));
 
         return new Vector2(screenToWorldWidth, screenToWorldHeight);
     }

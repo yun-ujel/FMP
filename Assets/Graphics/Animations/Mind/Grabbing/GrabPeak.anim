@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mind-MidairPeak
+  m_Name: GrabPeak
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -2169777052141450388, guid: d3d258f1881864448b72368d77571130, type: 3}
+      value: {fileID: 1407424863038753535, guid: 599b555251ca1054bb6c58a2f1dbcbe6, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,7 +40,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -2169777052141450388, guid: d3d258f1881864448b72368d77571130, type: 3}
+    - {fileID: 1407424863038753535, guid: 599b555251ca1054bb6c58a2f1dbcbe6, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

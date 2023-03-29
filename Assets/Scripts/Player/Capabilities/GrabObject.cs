@@ -11,6 +11,7 @@ public class GrabObject : Capability
     public bool IsHolding { get; private set; }
 
     public bool InGrabAnimation => grabAnimationCounter > 0f;
+    public float GrabAnimationLength => grabAnimationLength;
 
     private Move move;
     private Rigidbody2D body;

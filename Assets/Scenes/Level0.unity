@@ -2149,7 +2149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
-  holdOffset: {x: 0, y: 1, z: 0}
+  holdOffset: {x: 0, y: 0.8, z: 0}
   grabAnimationLength: 0.16
   dragWhileGrabbing: 0
   disableJumpDuringGrab: 0
@@ -2444,11 +2444,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 1917462306}
   animations:
+  - {fileID: 11400000, guid: 4df1acf3d17a4f24e96e2ac46afd7ee4, type: 2}
+  - {fileID: 11400000, guid: cdfa67184223dba4a9080e74bd67bc41, type: 2}
+  - {fileID: 11400000, guid: 05b120052b157fd4a884ab92d6f61bf0, type: 2}
+  - {fileID: 11400000, guid: a9335327e2fec4742b367c2e02c9d6e4, type: 2}
+  - {fileID: 11400000, guid: 1db14e470ccda634eb3e611e25153a1c, type: 2}
   - {fileID: 11400000, guid: 630d5b7c5d77ae44a99f50164148bc38, type: 2}
   - {fileID: 11400000, guid: f1a6ac8d60a39b941afaf2aa8bd54ef8, type: 2}
   - {fileID: 11400000, guid: 198b191ab1d4f6a4788a88012d381a19, type: 2}
   - {fileID: 11400000, guid: ba73b46fe7c6b6347b435d40f17dacd3, type: 2}
   - {fileID: 11400000, guid: dd0b152d6914fba4cb703fe0b0553533, type: 2}
+  - {fileID: 11400000, guid: 398c1cd82832c814597787b475408c42, type: 2}
   - {fileID: 11400000, guid: f159e9a45feb5714a84dce8ec9766035, type: 2}
 --- !u!1 &919817399458762120
 GameObject:
