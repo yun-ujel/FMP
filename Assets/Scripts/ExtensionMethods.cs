@@ -47,4 +47,19 @@ public static class ExtensionMethods
     {
         return (input - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin;
     }
+
+    public static void DrawBox(this Vector2 position, float radius)
+    {
+        // Left
+        Debug.DrawLine(position + new Vector2(-radius, -radius), position + new Vector2(-radius, radius));
+
+        // Top
+        Debug.DrawLine(position + new Vector2(-radius, radius), position + new Vector2(radius, radius));
+
+        // Right
+        Debug.DrawLine(position + new Vector2(radius, radius), position + new Vector2(radius, -radius));
+
+        // Bottom
+        Debug.DrawLine(position + new Vector2(radius, -radius), position + new Vector2(-radius, -radius));
+    }
 }

@@ -1,14 +1,15 @@
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class ScaleToScreen : MonoBehaviour
 {
     // This script is intended for direct child objects of a Camera (e.g. Sprite Mask)
 
-    [SerializeField, Range(0f, 1f)] private float screenScaleX;
-    [SerializeField, Range(0f, 1f)] private float screenScaleY;
+    [SerializeField, Range(0f, 1f)] private float screenScaleX = 1f;
+    [SerializeField, Range(0f, 1f)] private float screenScaleY = 1f;
     private Vector2 screenScale = new Vector2(0.5f, 1f);
 
-    [SerializeField] private Vector2 anchoredPosition = new Vector2(-1f, 0f);
+    [SerializeField] private Vector2 anchoredPosition = new Vector2(-1f, -1f);
     private Vector2 screenScaleOnLastCalculation;
     private Vector2 anchoredPosOnLastCalculation;
 

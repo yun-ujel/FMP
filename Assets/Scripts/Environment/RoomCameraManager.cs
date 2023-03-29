@@ -9,18 +9,24 @@ public class Room
     public bool IsFocused;
 }
 
-public class RoomService : MonoBehaviour
+public class RoomCameraManager : MonoBehaviour
 {
     [SerializeField] private Room[] rooms;
     private bool hasFocusedRoomOnThisUpdate;
 
+    private int currentRoomIndex;
+
+    private Rigidbody2D playerRigidbody;
+
     private void Start()
     {
+        playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+
         for (int i = 0; i < rooms.Length; i++)
         {
             if (rooms[i].trigger != null && rooms[i].virtualCam != null)
             {
-                rooms[i].trigger.SetRoomService(this, i);
+                rooms[i].trigger.SetRoomCameraManager(this, i);
                 rooms[i].virtualCam.SetActive(false);
 
                 continue;
@@ -80,8 +86,22 @@ public class RoomService : MonoBehaviour
                 rooms[i].virtualCam.SetActive(true);
                 rooms[i].IsFocused = true;
 
+                currentRoomIndex = i;
                 hasFocusedRoomOnThisUpdate = true;
             }
         }
+
+        if (!hasFocusedRoomOnThisUpdate)
+        {
+            ResetRoom(currentRoomIndex);
+        }
+    }
+
+    private void ResetRoom(int index)
+    {
+        rooms[index].trigger.RoomReset();
+
+        playerRigidbody.velocity = Vector2.zero;
+        playerRigidbody.transform.position = rooms[currentRoomIndex].trigger.StartPosition;
     }
 }
