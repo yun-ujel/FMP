@@ -69,6 +69,8 @@ public class SteelSlope : Capability
             abilitiesDuringSlide[i].enabled = true;
             abilitiesDuringSlide[i].EnableCapability();
         }
+
+        body.velocity = new Vector2(0f, -minSlideSpeed);
     }
 
     private void FinishSlide()

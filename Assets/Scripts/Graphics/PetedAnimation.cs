@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+public class PetedAnimation : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject playerGameObject;
