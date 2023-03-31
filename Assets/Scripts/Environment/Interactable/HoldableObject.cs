@@ -9,6 +9,11 @@ using UnityEngine;
 // The other GameObject should be a child of this, with a Collider2D set as a Trigger
 // Set the layer of this object to anything other than "Player" (7)
 
+// -------------
+
+// This way, the object with the "Player" layer will collide with the ground, but not the player.
+// The child will be a valid trigger for the player, meaning that they can detect it and grab it.
+
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class HoldableObject : MonoBehaviour
 {

@@ -62,4 +62,25 @@ public static class ExtensionMethods
         // Bottom
         Debug.DrawLine(position + new Vector2(radius, -radius), position + new Vector2(-radius, -radius));
     }
+    public static void DrawBox(this Vector2 position, float radius, Color boxColor)
+    {
+        Debug.DrawLine(position + new Vector2(-radius, -radius), position + new Vector2(-radius, radius), boxColor);
+        Debug.DrawLine(position + new Vector2(-radius, radius), position + new Vector2(radius, radius), boxColor);
+        Debug.DrawLine(position + new Vector2(radius, radius), position + new Vector2(radius, -radius), boxColor);
+        Debug.DrawLine(position + new Vector2(radius, -radius), position + new Vector2(-radius, -radius), boxColor);
+    }
+    public static void DrawBox(this Vector3 position, float radius)
+    {
+        Debug.DrawLine(position + new Vector3(-radius, -radius), position + new Vector3(-radius, radius));
+        Debug.DrawLine(position + new Vector3(-radius, radius), position + new Vector3(radius, radius));
+        Debug.DrawLine(position + new Vector3(radius, radius), position + new Vector3(radius, -radius));
+        Debug.DrawLine(position + new Vector3(radius, -radius), position + new Vector3(-radius, -radius));
+    }
+    public static void DrawBox(this Vector3 position, float radius, Color boxColor)
+    {
+        Debug.DrawLine(position + new Vector3(-radius, -radius), position + new Vector3(-radius, radius), boxColor);
+        Debug.DrawLine(position + new Vector3(-radius, radius), position + new Vector3(radius, radius), boxColor);
+        Debug.DrawLine(position + new Vector3(radius, radius), position + new Vector3(radius, -radius), boxColor);
+        Debug.DrawLine(position + new Vector3(radius, -radius), position + new Vector3(-radius, -radius), boxColor);
+    }
 }

@@ -12,6 +12,8 @@ public class Room
 public class RoomCameraManager : MonoBehaviour
 {
     [SerializeField] private Room[] rooms;
+    [SerializeField] private int focusedRoomOnStart;
+
     private bool hasFocusedRoomOnThisUpdate;
 
     private int currentRoomIndex;
@@ -34,7 +36,8 @@ public class RoomCameraManager : MonoBehaviour
             Debug.LogError("Room " + i + " Is missing a component!");
         }
 
-        rooms[0].virtualCam.SetActive(true);
+        SetRoomFocus(focusedRoomOnStart, true);
+        RespawnPlayerInRoom(focusedRoomOnStart);
     }
 
     public void OnRoomEnter(int index)
@@ -52,6 +55,11 @@ public class RoomCameraManager : MonoBehaviour
         if (!IsInFocusedRoom())
         {
             FocusNewRoom();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            RespawnPlayerInRoom(currentRoomIndex);
         }
     }
 
@@ -78,30 +86,41 @@ public class RoomCameraManager : MonoBehaviour
         {
             if (!rooms[i].IsEntered) // De-Focus un-entered rooms
             {
-                rooms[i].virtualCam.SetActive(false);
-                rooms[i].IsFocused = false;
+                SetRoomFocus(i, false);
             }
             else if (!hasFocusedRoomOnThisUpdate) // Focus a Room
             {
-                rooms[i].virtualCam.SetActive(true);
-                rooms[i].IsFocused = true;
-
-                currentRoomIndex = i;
-                hasFocusedRoomOnThisUpdate = true;
+                SetRoomFocus(i, true);
             }
         }
 
         if (!hasFocusedRoomOnThisUpdate)
         {
-            ResetRoom(currentRoomIndex);
+            RespawnPlayerInRoom(currentRoomIndex);
         }
     }
 
-    private void ResetRoom(int index)
+    private void SetRoomFocus(int i, bool focus)
+    {
+        if (focus)
+        {
+            rooms[i].virtualCam.SetActive(true);
+            rooms[i].IsFocused = true;
+
+            currentRoomIndex = i;
+            hasFocusedRoomOnThisUpdate = true;
+        }
+        else
+        {
+            rooms[i].virtualCam.SetActive(false);
+            rooms[i].IsFocused = false;
+        }
+    }
+
+    private void RespawnPlayerInRoom(int index)
     {
         rooms[index].trigger.RoomReset();
 
         playerRigidbody.velocity = Vector2.zero;
         playerRigidbody.transform.position = rooms[currentRoomIndex].trigger.StartPosition;
-    }
-}
+    }}

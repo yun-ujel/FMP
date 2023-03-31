@@ -7,7 +7,7 @@ public class Checkpoint
 
     public Vector3 startingPosition = Vector3.zero;
     public Vector3 startingEulers = Vector3.zero;
-    public Vector3 startingScale = Vector3.zero;
+    public Vector3 startingScale = Vector3.one;
 
     public void Reset()
     {
@@ -21,7 +21,13 @@ public class RoomTrigger : MonoBehaviour
     private RoomCameraManager roomCameraManager;
     private int roomIndex;
 
+    [Header("Checkpoints")]
+
     [SerializeField] private Vector2 playerStartPosition;
+
+    [Space]
+
+    [SerializeField] private Color checkpointPreviewColour = Color.red;
     [SerializeField] private Checkpoint[] checkpoints;
     public void RoomReset()
     {
@@ -36,6 +42,11 @@ public class RoomTrigger : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         playerStartPosition.DrawBox(0.5f);
+
+        for (int i = 0; i < checkpoints.Length; i++)
+        {
+            checkpoints[i].startingPosition.DrawBox(0.25f, checkpointPreviewColour);
+        }
     }
 
     public void SetRoomCameraManager(RoomCameraManager roomCameraManager, int roomIndex)
