@@ -11,10 +11,13 @@ public class SteelSlope : Capability
 
     private bool isSliding = false;
     private float slideFacing;
+
     private Vector2 moveDirection;
+
 
     [Header("References")]
     [SerializeField] private Capability[] abilitiesDuringSlide;
+    private Move move;
 
     [Header("Speed Values")]
     [SerializeField, Range(0f, 40f)] private float minSlideSpeed = 6f;
@@ -24,11 +27,12 @@ public class SteelSlope : Capability
 
     [SerializeField, Range(1f, 100f)] private float slideAccelerationMultiplier = 30f;
 
-    private float slideAcceleration;
+    [SerializeField] private float slideAcceleration;
     private float slideSpeed = 6f;
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        _ = TryGetComponent(out move);
     }
 
     private void Update()
@@ -54,28 +58,24 @@ public class SteelSlope : Capability
     }
     private void InitiateSlide()
     {
-        Debug.Log("Initiated Slide");
+        //Debug.Log("Initiated Slide");
 
         isSliding = true;
         slideFacing = slopeCheck.SlopeFacing;
+        if (move != null)
+        {
+            move.Facing = slideFacing;
+        }
 
         slideSpeed = Mathf.Clamp(Mathf.Abs(body.velocity.y), minSlideSpeed, maxSlideSpeed);
         CalculateMoveDirection();
 
-        DisableOtherCapabilities();
-
-        for (int i = 0; i < abilitiesDuringSlide.Length; i++)
-        {
-            abilitiesDuringSlide[i].enabled = true;
-            abilitiesDuringSlide[i].EnableCapability();
-        }
-
-        body.velocity = new Vector2(0f, -minSlideSpeed);
+        DisableOtherCapabilitiesExcept(abilitiesDuringSlide);
     }
 
     private void FinishSlide()
     {
-        Debug.Log("Ended Slide");
+        //Debug.Log("Ended Slide");
         isSliding = false;
 
         EnableOtherCapabilities();
@@ -83,7 +83,7 @@ public class SteelSlope : Capability
 
     private void CalculateMoveDirection()
     {
-        Debug.Log("Recalculating Move Direction");
+        //Debug.Log("Recalculating Move Direction");
         moveDirection = slopeCheck.GetSlopeDirection() * slideFacing;
 
         if (moveDirection.y <= 0f)
