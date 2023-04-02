@@ -9,6 +9,8 @@ public class Jump : Capability
 
     public bool IsJumpingThisFrame { get; private set; }
 
+    public float TimeSinceLastJump { get; private set; }
+
     private Vector2 velocity;
 
     [Header("Height Values")]
@@ -61,6 +63,8 @@ public class Jump : Capability
         {
             coyoteTimeLeft -= Time.deltaTime;
         }
+
+        TimeSinceLastJump += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -105,6 +109,8 @@ public class Jump : Capability
         isRising = true;
         IsJumpingThisFrame = true;
         jumpsSpent += 1;
+
+        TimeSinceLastJump = 0f;
     }
 
     private void CalculateJumpForce()

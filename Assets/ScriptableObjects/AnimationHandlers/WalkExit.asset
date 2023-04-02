@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WalkExit
   m_EditorClassIdentifier: 
   potentialLastAnimations:
+  - WalkExit
   - Walk
-  - JumpWalkTransition
   minAnimationSpeed: 1
   maxAnimationSpeed: 1
   xVelocityIsAbove: 0

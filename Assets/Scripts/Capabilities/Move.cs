@@ -24,6 +24,8 @@ public class Move : Capability
     public Vector2 DesiredVelocity { get; private set; }
     private Vector2 velocity;
 
+    public Vector2 Direction => direction;
+
     private float maxSpeedChange;
     private float acceleration;
 
@@ -51,7 +53,7 @@ public class Move : Capability
 
         acceleration = GetAcceleration();
 
-        maxSpeedChange = acceleration * Time.deltaTime;
+        maxSpeedChange = acceleration * Time.fixedDeltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, DesiredVelocity.x, maxSpeedChange);
 
         body.velocity = velocity;

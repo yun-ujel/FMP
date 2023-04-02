@@ -51,7 +51,7 @@ public class SteelSlope : Capability
     {
         if (isSliding)
         {
-            slideSpeed = Mathf.MoveTowards(slideSpeed, maxSlideSpeed, slideAcceleration * Time.deltaTime);
+            slideSpeed = Mathf.MoveTowards(slideSpeed, maxSlideSpeed, slideAcceleration * Time.fixedDeltaTime);
 
             body.velocity = new Vector2(moveDirection.x * slideSpeed, body.velocity.y);
         }

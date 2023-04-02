@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: WalkEntry
   m_EditorClassIdentifier: 
   potentialLastAnimations:
+  - WalkEntry
   - Idle
   minAnimationSpeed: 1
   maxAnimationSpeed: 1
   xVelocityIsAbove: 0
+  xVelocityIsBelow: Infinity

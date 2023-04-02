@@ -14,9 +14,11 @@ public class CharacterAnimation : MonoBehaviour
     [SerializeField] private AnimationHandler[] animations;
     private Animator animator;
 
+    [SerializeField] private float velocityY;
     public Vector2 Velocity => body.velocity;
     public bool AnyCollision => relay.AnyCollision;
     public string LastAnimationPlayed { get; private set; }
+
     void Start()
     {
         relay = character.GetComponent<CollisionRelay>();
@@ -39,6 +41,7 @@ public class CharacterAnimation : MonoBehaviour
 
     void Update()
     {
+        velocityY = body.velocity.y;
         FlipTowardsMovement();
 
         for (int i = 0; i < animations.Length; i++)

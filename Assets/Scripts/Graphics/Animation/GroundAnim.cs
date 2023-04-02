@@ -24,12 +24,17 @@ public class GroundAnim : AnimationHandler
 
     public override bool IsAnimationValid()
     {
-        return (groundCheck.OnGround && move.enabled && Mathf.Abs(cAnim.Velocity.x) > 0f
-            && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove && Mathf.Abs(cAnim.Velocity.x) < xVelocityIsBelow) && base.IsAnimationValid();
+        return
+
+            groundCheck.OnGround && move.enabled
+            && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove && Mathf.Abs(cAnim.Velocity.x) < xVelocityIsBelow
+
+        && base.IsAnimationValid();
     }
 
     public override float GetAnimationSpeed()
     {
         return Mathf.Abs(cAnim.Velocity.x).Remap(0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
+        // Remap player velocity (with a maximum of their desired velocity) to be between the animation speed values
     }
 }

@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cd9d5f5646383419a816e9bbc29b78, type: 3}
-  m_Name: Walk
+  m_Script: {fileID: 11500000, guid: 6052c0ac9ca1c78458962b1c2e1f89f5, type: 3}
+  m_Name: JumpEntry
   m_EditorClassIdentifier: 
-  potentialLastAnimations:
-  - Walk
-  - WalkEntry
-  - WalkExit
-  - JumpWalkTransition
-  minAnimationSpeed: 1
-  maxAnimationSpeed: 1
-  xVelocityIsAbove: 4
-  xVelocityIsBelow: Infinity
+  potentialLastAnimations: []
+  duration: 0.1
