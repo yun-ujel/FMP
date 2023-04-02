@@ -28,11 +28,12 @@ public class Jump : Capability
 
     [SerializeField, Range(0f, 2f)] private float coyoteTime = 0.2f;
     private float coyoteTimeLeft;
+    private bool hasCoyoteTime;
 
     [Space]
 
-    [SerializeField, Range(0, 10)] private int numberOfMidairJumps = 1;
-    private int jumpsSpent = 0;
+    [SerializeField, Range(0, 10)] private int numberOfJumps = 1;
+    public int JumpsSpent { get; private set; } = 0;
 
     private void Awake()
     {
@@ -53,16 +54,23 @@ public class Jump : Capability
             jumpBufferLeft -= Time.deltaTime;
         }
 
-
         if (groundCheck.OnGround && !IsJumpingThisFrame)
         {
             coyoteTimeLeft = coyoteTime;
-            jumpsSpent = 0;
+            hasCoyoteTime = true;
+            JumpsSpent = 0;
         }
-        else
+        else if (coyoteTimeLeft > 0f)
         {
             coyoteTimeLeft -= Time.deltaTime;
         }
+        else if (hasCoyoteTime)
+        {
+            hasCoyoteTime = false;
+            JumpsSpent += 1;
+        }
+
+        
 
         TimeSinceLastJump += Time.deltaTime;
     }
@@ -81,11 +89,9 @@ public class Jump : Capability
         {
             velocity = body.velocity;
 
-            if (jumpBufferLeft > 0f && (coyoteTimeLeft > 0f || jumpsSpent < numberOfMidairJumps))
+            if (jumpBufferLeft > 0f && (coyoteTimeLeft > 0f || JumpsSpent < numberOfJumps))
             {
                 DoJump();
-                jumpBufferLeft = 0f;
-                coyoteTimeLeft = 0f;
             }
 
             if (body.velocity.y < 0f)
@@ -103,14 +109,18 @@ public class Jump : Capability
         }
     }
 
-    private void DoJump()
+    public void DoJump()
     {        
         velocity.y = jumpForce;
         isRising = true;
         IsJumpingThisFrame = true;
-        jumpsSpent += 1;
+        JumpsSpent += 1;
 
         TimeSinceLastJump = 0f;
+
+        jumpBufferLeft = 0f;
+        coyoteTimeLeft = 0f;
+        hasCoyoteTime = false;
     }
 
     private void CalculateJumpForce()
