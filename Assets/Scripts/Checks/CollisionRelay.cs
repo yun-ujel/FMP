@@ -1,7 +1,6 @@
 using UnityEngine;
 public class CollisionRelay : MonoBehaviour
 {
-    private Collision2D collision;
     [SerializeField] private CollisionCheck[] collisionChecks;
 
     public bool AnyCollision

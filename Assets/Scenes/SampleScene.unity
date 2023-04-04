@@ -788,7 +788,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 8195530060044397621}
   animations:
+  - {fileID: 11400000, guid: c054b8b57e848ff4fb8526cb54cfa6af, type: 2}
+  - {fileID: 11400000, guid: d6e2ea11ee160b54d9bfa0a3ba3016a3, type: 2}
   - {fileID: 11400000, guid: 60270ebdc27deef4b95fb6cff2b35ca8, type: 2}
+  - {fileID: 11400000, guid: e9682cc1ec91c1e4ca8fc68008c2a249, type: 2}
   - {fileID: 11400000, guid: 8e3f60ee49de5c4439e2e773bfdb9bbf, type: 2}
   - {fileID: 11400000, guid: 5105088ae17991d4db34962a6badfbbc, type: 2}
   - {fileID: 11400000, guid: aa844aeab713ec64ab7b22cd803b6c44, type: 2}
@@ -798,8 +801,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b27dc5a7afb50d942912a441362b8f8f, type: 2}
   - {fileID: 11400000, guid: 35c21c7d32c9e88418746117709872dc, type: 2}
   - {fileID: 11400000, guid: 9ffd7e5ab376a7f46b0e326464f66faf, type: 2}
+  - {fileID: 11400000, guid: e960d34aec7df654ab80f584d947204b, type: 2}
   - {fileID: 11400000, guid: 39b5a06ab85b0ac49aaa35889d1d9200, type: 2}
-  velocityY: 0
 --- !u!95 &8195530058609318470
 Animator:
   serializedVersion: 3
@@ -959,7 +962,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.04}
+  m_Offset: {x: 0, y: 0.06}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -990,7 +993,7 @@ MonoBehaviour:
   jumpReleaseMultiplier: 0.7
   jumpBuffer: 0.2
   coyoteTime: 0.12
-  numberOfJumps: 1
+  numberOfJumps: 2
 --- !u!114 &8195530060044397615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,6 +1033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8195530060044397623}
+  - component: {fileID: 8195530060044397624}
   - component: {fileID: 8195530060044397615}
   - component: {fileID: 8195530060044397620}
   - component: {fileID: 8195530060044397608}
@@ -1081,6 +1085,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8195530060044397624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195530060044397621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7beee25e4c6452746ba04d56fa4e6fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 11400000, guid: 6ba408ab511b8d44fa79f9c949437d36, type: 2}
 --- !u!1001 &8890667232727202688
 PrefabInstance:
   m_ObjectHideFlags: 0

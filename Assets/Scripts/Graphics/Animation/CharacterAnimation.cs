@@ -5,6 +5,7 @@ public class CharacterAnimation : MonoBehaviour
     [Header("Character References")]
     [SerializeField] private GameObject character;
     private List<Capability> capabilities;
+    private AdditionalCharacterInfo characterInfo;
     private CollisionRelay relay;
     private Rigidbody2D body;
 
@@ -12,21 +13,25 @@ public class CharacterAnimation : MonoBehaviour
 
     [Header("Animation References")]
     [SerializeField] private AnimationHandler[] animations;
-    private Animator animator;
 
-    [SerializeField] private float velocityY;
+    private Animator animator;
     public Vector2 Velocity => body.velocity;
-    public bool AnyCollision => relay.AnyCollision;
     public string LastAnimationPlayed { get; private set; }
 
     void Start()
     {
         relay = character.GetComponent<CollisionRelay>();
-
         body = character.GetComponent<Rigidbody2D>();
 
-        capabilities = new List<Capability>();
-        capabilities.AddRange(character.GetComponents<Capability>());
+        if (!character.TryGetComponent(out characterInfo))
+        {
+            capabilities = new List<Capability>();
+            capabilities.AddRange(character.GetComponents<Capability>());
+        }
+        else
+        {
+            capabilities = characterInfo.Capabilities;
+        }
 
         animator = GetComponent<Animator>();
 
@@ -41,7 +46,6 @@ public class CharacterAnimation : MonoBehaviour
 
     void Update()
     {
-        velocityY = body.velocity.y;
         FlipTowardsMovement();
 
         for (int i = 0; i < animations.Length; i++)
@@ -53,6 +57,7 @@ public class CharacterAnimation : MonoBehaviour
                 animator.Play(animations[i].name);
 
                 LastAnimationPlayed = animations[i].name;
+                //Debug.Log("Playing animation at index: " + i);
 
                 break;
             }
@@ -88,5 +93,10 @@ public class CharacterAnimation : MonoBehaviour
         }
 
         return null;
+    }
+
+    public AdditionalCharacterInfo GetAdditionalCharacterInfo()
+    {
+        return characterInfo;
     }
 }
