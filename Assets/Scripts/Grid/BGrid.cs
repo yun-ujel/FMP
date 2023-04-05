@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class BGrid
+public class BGrid<TGridObject>
 {
+    public event System.EventHandler<OnGridValueChangedEventArgs> OnGridValueChanged;
+    public class OnGridValueChangedEventArgs : System.EventArgs { public int x; public int y; }
+
     private Vector3 originPosition;
 
     private int width;
     private int height;
     private float cellSize;
 
-    private int[,] gridArray;
+    private TGridObject[,] gridArray;
 
     private TextMesh[,] debugTextArray;
 
-    public BGrid(int width, int height, float cellSize, Vector3 originPosition)
+    public BGrid(int width, int height, float cellSize, Vector3 originPosition, System.Func<TGridObject> createGridObject)
     {
         this.originPosition = originPosition;
 
@@ -20,35 +23,59 @@ public class BGrid
         this.height = height;
         this.cellSize = cellSize;
 
-        gridArray = new int[width, height];
+        gridArray = new TGridObject[width, height];
         debugTextArray = new TextMesh[width, height];
 
-        for (int x = 0; x < gridArray.GetLength(0); x++)
+        for (int x = 0; x < gridArray.Length; x++)
         {
-            for (int y = 0; y < gridArray.GetLength(1); y++)
+            for (int y = 0; y < gridArray.Length; y++)
             {
-                debugTextArray[x, y] = ExtensionMethods.CreateWorldText
-                (
-                    gridArray[x, y].ToString(), 
-                    null,
-                    GridToWorldPosition(x, y) + (new Vector3(cellSize, cellSize) * 0.5f),
-                    12, 
-                    Color.white, 
-                    TextAnchor.MiddleCenter
-                );
-
-                Debug.DrawLine(GridToWorldPosition(x, y), GridToWorldPosition(x, y + 1), Color.white, 100f);
-                Debug.DrawLine(GridToWorldPosition(x, y), GridToWorldPosition(x + 1, y), Color.white, 100f);
+                gridArray[x, y] = createGridObject();
             }
         }
-        Debug.DrawLine(GridToWorldPosition(0, height), GridToWorldPosition(width, height), Color.white, 100f);
-        Debug.DrawLine(GridToWorldPosition(width, 0), GridToWorldPosition(width, height), Color.white, 100f);
+
+        bool showDebug = true;
+        if (showDebug)
+        {
+            for (int x = 0; x < gridArray.GetLength(0); x++)
+            {
+                for (int y = 0; y < gridArray.GetLength(1); y++)
+                {
+                    debugTextArray[x, y] = ExtensionMethods.CreateWorldText
+                    (
+                        gridArray[x, y]?.ToString(),
+                        null,
+                        GridToWorldPosition(x, y) + (new Vector3(cellSize, cellSize) * 0.5f),
+                        12,
+                        Color.white,
+                        TextAnchor.MiddleCenter
+                    );
+
+                    Debug.DrawLine(GridToWorldPosition(x, y), GridToWorldPosition(x, y + 1), Color.white, 100f);
+                    Debug.DrawLine(GridToWorldPosition(x, y), GridToWorldPosition(x + 1, y), Color.white, 100f);
+                }
+            }
+            Debug.DrawLine(GridToWorldPosition(0, height), GridToWorldPosition(width, height), Color.white, 100f);
+            Debug.DrawLine(GridToWorldPosition(width, 0), GridToWorldPosition(width, height), Color.white, 100f);
+
+            OnGridValueChanged += (object sender, OnGridValueChangedEventArgs eventArgs) =>
+            {
+                debugTextArray[eventArgs.x, eventArgs.y].text = gridArray[eventArgs.x, eventArgs.y]?.ToString();
+            };
+        }
     }
+
+
+    public void TriggerGridObjectChanged(int x, int y)
+    {
+        OnGridValueChanged?.Invoke(this, new OnGridValueChangedEventArgs { x = x, y = y });
+    }
+
+
     private Vector3 GridToWorldPosition(int x, int y)
     {
         return (new Vector3(x, y) * cellSize) + originPosition;
     }
-
     private void WorldToGridPosition(Vector3 worldPosition, out int x, out int y)
     {
         x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
@@ -56,39 +83,38 @@ public class BGrid
     }
 
 
-    public void SetValue(int x, int y, int value)
+    public void SetGridObject(int x, int y, TGridObject value)
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
             gridArray[x, y] = value;
             debugTextArray[x, y].text = gridArray[x, y].ToString();
-        }
-        else
-        {
-            //Debug.LogError("Ignored: value of " + value + " set at: (" + x + ", " + y + ") was outside of grid.");
-        }
-    }
 
-    public void SetValue(Vector3 worldPosition, int value)
+            OnGridValueChanged?.Invoke(this, new OnGridValueChangedEventArgs { x = x, y = y });
+        }
+        //else { Debug.LogError("Ignored: value of " + value + " set at: (" + x + ", " + y + ") was outside of grid."); }
+        
+    }
+    public void SetGridObject(Vector3 worldPosition, TGridObject value)
     {
         int x, y;
         WorldToGridPosition(worldPosition, out x, out y);
-        SetValue(x, y, value);
+        SetGridObject(x, y, value);
     }
 
-    public int GetValue(int x, int y)
+
+    public TGridObject GetGridObject(int x, int y)
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
             return gridArray[x, y];
         }
-        return 0;
+        return default;
     }
-
-    public int GetValue(Vector3 worldPosition)
+    public TGridObject GetGridObject(Vector3 worldPosition)
     {
         int x, y;
         WorldToGridPosition(worldPosition, out x, out y);
-        return GetValue(x, y);
+        return GetGridObject(x, y);
     }
 }
