@@ -5,7 +5,10 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
 {
     private Mesh mesh;
     private BGrid<PixelArtDrawingSystem.GridPixel> grid;
-    private bool updateMesh;
+
+    private Vector3[] verts;
+    private Vector2[] uvs;
+    private int[] tris;
 
     [SerializeField] private int paletteSize;
 
@@ -25,21 +28,12 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
 
     private void BGrid_OnGridValueChanged(object sender, BGrid<PixelArtDrawingSystem.GridPixel>.OnGridValueChangedEventArgs args)
     {
-        updateMesh = true;
-    }
-
-    private void LateUpdate()
-    {
-        if (updateMesh)
-        {
-            updateMesh = false;
-            UpdateGridVisual();
-        }
+        UpdateUVsOfQuad(args.x, args.y);
     }
 
     private void UpdateGridVisual()
     {
-        ExtensionMethods.CreateEmptyMeshArrays(grid.GetWidth() * grid.GetHeight(), out Vector3[] verts, out Vector2[] uvs, out int[] tris);
+        ExtensionMethods.CreateEmptyMeshArrays(grid.GetWidth() * grid.GetHeight(), out verts, out uvs, out tris);
 
         // Initialize Grid
         for (int x = 0; x < grid.GetWidth(); x++)
@@ -60,5 +54,18 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
         mesh.vertices = verts;
         mesh.uv = uvs;
         mesh.triangles = tris;
+    }
+
+    private void UpdateUVsOfQuad(int x, int y)
+    {
+        int index = ((x * grid.GetHeight()) + y) * 4;
+        Vector2 colorIndexasUV = grid.GetGridObject(x, y).GetColorIndexAsUV(paletteSize - 1);
+
+        for (int i = 0; i < 4; i++)
+        {
+            uvs[index + i] = colorIndexasUV;
+        }
+
+        mesh.uv = uvs;
     }
 }

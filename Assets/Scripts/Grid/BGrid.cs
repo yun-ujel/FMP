@@ -38,7 +38,7 @@ public class BGrid<TGridObject>
             }
         }
 
-        bool showDebug = true;
+        bool showDebug = false;
         if (showDebug)
         {
             for (int x = 0; x < gridArray.GetLength(0); x++)

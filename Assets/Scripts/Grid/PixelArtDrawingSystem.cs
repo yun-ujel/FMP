@@ -2,26 +2,99 @@ using UnityEngine;
 
 public class PixelArtDrawingSystem : MonoBehaviour
 {
-    [SerializeField] private PixelArtDrawingSystemVisual pixelArtDrawingSystemVisual;
-    private BGrid<GridPixel> grid;
+    [SerializeField] private PixelArtDrawingSystemVisual[] pixelArtDrawingSystemVisuals = new PixelArtDrawingSystemVisual[4];
+    private BGrid<GridPixel>[] grids = new BGrid<GridPixel>[4];
 
+    private Vector2Int gridSize = new Vector2Int(80, 180);
+    private float pixelsPerUnitMultiplier = 12f;
+
+
+    // Mesh Indices use Int16, meaning that you can't have more than 65,535 vertexes in a mesh.
+    // To bypass this, we're using 4 different grids with separate meshes, evenly spaced to cover the full screen.
+    // Each Pixel on a grid equates to 6 pixels on a 1920x1080 screen.
     private void Awake()
     {
-        grid = new BGrid<GridPixel>(8, 18, (10f/12f), new Vector3((-13f), -7.5f), (BGrid<GridPixel> grid, int x, int y) => new GridPixel(grid, x, y));
+        for (int i = 0; i < pixelArtDrawingSystemVisuals.Length; i++)
+        {
+            grids[i] = new BGrid<GridPixel>
+            (
+                gridSize.x, gridSize.y,
+                1f / pixelsPerUnitMultiplier,
+                new Vector3
+                (
+                    (i * (20f / 3f)) - (40f / 3f),
+                    -7.5f
+                ),
+                (BGrid<GridPixel> grid, int x, int y) => new GridPixel(grid, x, y)
+            );
+        }
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            grid.GetGridObject(mousePosition).SetColourIndex(2);
+            ApplyColourToPixel(2, mousePosition);
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            ApplyColourToPixel(1, mousePosition);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ApplyColourToScreen(0);
         }
     }
 
     private void Start()
     {
-        pixelArtDrawingSystemVisual.SetGrid(grid);
+        for (int i = 0; i < pixelArtDrawingSystemVisuals.Length; i++)
+        {
+            pixelArtDrawingSystemVisuals[i].SetGrid(grids[i]);
+        }
+    }
+
+    private void ApplyColourToPixel(int colourIndex, Vector3 colourPosition)
+    {
+        float gridSizeX = 1f / pixelsPerUnitMultiplier * gridSize.x;
+
+        if     (colourPosition.x < -1 * gridSizeX)
+        {
+            grids[0].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+        }
+        else if (colourPosition.x < 0 * gridSizeX)
+        {
+            grids[1].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+        }
+        else if (colourPosition.x < 1 * gridSizeX)
+        {
+            grids[2].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+        }
+        else if (colourPosition.x < 2 * gridSizeX)
+        {
+            grids[3].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+        }
+    }
+
+    private void ApplyColourToScreen(int colourIndex)
+    {
+        for (int i = 0; i < grids.Length; i++)
+        {
+            for (int x = 0; x < grids[i].GetWidth(); x++)
+            {
+                for (int y = 0; y < grids[i].GetHeight(); y++)
+                {
+                    GridPixel pixel = grids[i].GetGridObject(x, y);
+                    if (pixel.ColourIndex != colourIndex)
+                    {
+                        pixel.SetColourIndex(colourIndex);
+                    }
+                }
+            }
+        }
     }
 
     public class GridPixel
@@ -33,12 +106,11 @@ public class PixelArtDrawingSystem : MonoBehaviour
         private int x;
         private int y;
 
-        // The Colour of this pixel/object, represented as an index on a palette
-        private int colourIndex = 1;
+        public int ColourIndex { get; private set; }
 
         public void SetColourIndex(int index)
         {
-            colourIndex = index;
+            ColourIndex = index;
             grid.TriggerGridValueChanged(x, y);
         }
 
@@ -46,7 +118,7 @@ public class PixelArtDrawingSystem : MonoBehaviour
         {
             return new Vector2
                 (
-                    (float)colourIndex / paletteSize,
+                    (float)ColourIndex / paletteSize,
                     0
                 );
         }
@@ -60,7 +132,7 @@ public class PixelArtDrawingSystem : MonoBehaviour
 
         public override string ToString()
         {
-            return colourIndex.ToString();
+            return ColourIndex.ToString();
         }
     }
 }
