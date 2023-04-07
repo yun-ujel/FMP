@@ -136,4 +136,24 @@ public static class ExtensionMethods
         triangles[startingTriIndex + 4] = startingVertIndex + 3;
         triangles[startingTriIndex + 5] = startingVertIndex + 2;
     }
+
+    public static void DrawBox(Vector2 position, float radius, Color color)
+    {
+        // Left
+        Debug.DrawLine(position + new Vector2(-radius, -radius), position + new Vector2(-radius, radius), color);
+
+        // Top
+        Debug.DrawLine(position + new Vector2(-radius, radius), position + new Vector2(radius, radius), color);
+
+        // Right
+        Debug.DrawLine(position + new Vector2(radius, radius), position + new Vector2(radius, -radius), color);
+
+        // Bottom
+        Debug.DrawLine(position + new Vector2(radius, -radius), position + new Vector2(-radius, -radius), color);
+    }
+
+    public static void DrawBox(Vector2 position, float radius)
+    {
+        DrawBox(position, radius, Color.white);
+    }
 }

@@ -45,7 +45,7 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
                 Vector3 quadSize = new Vector3(1, 1) * grid.GetCellSize();
 
                 PixelArtDrawingSystem.GridPixel gridPixel = grid.GetGridObject(x, y);
-                Vector2 uv = gridPixel.GetColorIndexAsUV(paletteSize - 1);
+                Vector2 uv = gridPixel.GetColourIndexAsUV(paletteSize - 1);
 
                 ExtensionMethods.AddArraysToMeshAsQuad(verts, uvs, tris, index, grid.GridToWorldPosition(x, y) + quadSize * .5f, quadSize, uv, uv);
             }
@@ -59,7 +59,7 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
     private void UpdateUVsOfQuad(int x, int y)
     {
         int index = ((x * grid.GetHeight()) + y) * 4;
-        Vector2 colorIndexasUV = grid.GetGridObject(x, y).GetColorIndexAsUV(paletteSize - 1);
+        Vector2 colorIndexasUV = grid.GetGridObject(x, y).GetColourIndexAsUV(paletteSize - 1);
 
         for (int i = 0; i < 4; i++)
         {

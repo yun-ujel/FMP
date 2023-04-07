@@ -34,13 +34,15 @@ public class PixelArtDrawingSystem : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            ApplyColourToPixel(2, mousePosition);
+            ApplyColourToPixel(2, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
         else if (Input.GetMouseButton(1))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            ApplyColourToPixel(1, mousePosition);
+            ApplyColourToCircle(1, Camera.main.ScreenToWorldPoint(Input.mousePosition), 8);
+        }
+        else if (Input.GetMouseButton(2))
+        {
+            ApplyColourToCircle(2, Camera.main.ScreenToWorldPoint(Input.mousePosition), 8);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -57,29 +59,48 @@ public class PixelArtDrawingSystem : MonoBehaviour
         }
     }
 
-    private void ApplyColourToPixel(int colourIndex, Vector3 colourPosition)
+    public void ApplyColourToPixel(int colourIndex, Vector3 colourPosition)
     {
         float gridSizeX = 1f / pixelsPerUnitMultiplier * gridSize.x;
 
         if     (colourPosition.x < -1 * gridSizeX)
         {
-            grids[0].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+            grids[0].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
         }
         else if (colourPosition.x < 0 * gridSizeX)
         {
-            grids[1].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+            grids[1].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
         }
         else if (colourPosition.x < 1 * gridSizeX)
         {
-            grids[2].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+            grids[2].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
         }
         else if (colourPosition.x < 2 * gridSizeX)
         {
-            grids[3].GetGridObject(colourPosition).SetColourIndex(colourIndex);
+            grids[3].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
         }
     }
 
-    private void ApplyColourToScreen(int colourIndex)
+    public void ApplyColourToCircle(int colourIndex, Vector3 colourPosition, int radius)
+    {
+        float worldPixelSize = 1f / pixelsPerUnitMultiplier;
+        for (int x = -radius; x <= radius; x++)
+        {
+            for (int y = -radius; y <= radius; y++)
+            {
+                if (new Vector2(x, y).magnitude < radius)
+                {
+                    ApplyColourToPixel(colourIndex, colourPosition + new Vector3
+                    (
+                        x * worldPixelSize,
+                        y * worldPixelSize
+                    ));
+                }
+            }
+        }
+    }
+
+    public void ApplyColourToScreen(int colourIndex)
     {
         for (int i = 0; i < grids.Length; i++)
         {
@@ -114,7 +135,7 @@ public class PixelArtDrawingSystem : MonoBehaviour
             grid.TriggerGridValueChanged(x, y);
         }
 
-        public Vector2 GetColorIndexAsUV(int paletteSize)
+        public Vector2 GetColourIndexAsUV(int paletteSize)
         {
             return new Vector2
                 (
