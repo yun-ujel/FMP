@@ -1,10 +1,10 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
-public class PixelArtDrawingSystemVisual : MonoBehaviour
+public class DrawingSystemVisual : MonoBehaviour
 {
     private Mesh mesh;
-    private BGrid<PixelArtDrawingSystem.GridPixel> grid;
+    private BGrid<DrawingSystem.GridPixel> grid;
 
     private Vector3[] verts;
     private Vector2[] uvs;
@@ -18,7 +18,7 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
     }
 
-    public void SetGrid(BGrid<PixelArtDrawingSystem.GridPixel> grid)
+    public void SetGrid(BGrid<DrawingSystem.GridPixel> grid)
     {
         this.grid = grid;
         UpdateGridVisual();
@@ -26,7 +26,7 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
         grid.OnGridValueChanged += BGrid_OnGridValueChanged;
     }
 
-    private void BGrid_OnGridValueChanged(object sender, BGrid<PixelArtDrawingSystem.GridPixel>.OnGridValueChangedEventArgs args)
+    private void BGrid_OnGridValueChanged(object sender, BGrid<DrawingSystem.GridPixel>.OnGridValueChangedEventArgs args)
     {
         UpdateUVsOfQuad(args.x, args.y);
     }
@@ -44,7 +44,7 @@ public class PixelArtDrawingSystemVisual : MonoBehaviour
 
                 Vector3 quadSize = new Vector3(1, 1) * grid.GetCellSize();
 
-                PixelArtDrawingSystem.GridPixel gridPixel = grid.GetGridObject(x, y);
+                DrawingSystem.GridPixel gridPixel = grid.GetGridObject(x, y);
                 Vector2 uv = gridPixel.GetColourIndexAsUV(paletteSize - 1);
 
                 ExtensionMethods.AddArraysToMeshAsQuad(verts, uvs, tris, index, grid.GridToWorldPosition(x, y) + quadSize * .5f, quadSize, uv, uv);

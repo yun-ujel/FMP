@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PixelArtSystemEmitter : MonoBehaviour
+public class DrawingSystemBrush : MonoBehaviour
 {
-    [SerializeField] private PixelArtDrawingSystem drawingSystem;
+    [SerializeField] private DrawingSystem drawingSystem;
     [Header("Position")]
     [SerializeField] private Vector3 offset;
     [SerializeField] private Vector3 offsetEuler;

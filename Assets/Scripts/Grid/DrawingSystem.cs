@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PixelArtDrawingSystem : MonoBehaviour
+public class DrawingSystem : MonoBehaviour
 {
-    [SerializeField] private PixelArtDrawingSystemVisual[] pixelArtDrawingSystemVisuals = new PixelArtDrawingSystemVisual[4];
+    [SerializeField] private DrawingSystemVisual[] pixelArtDrawingSystemVisuals = new DrawingSystemVisual[4];
     private BGrid<GridPixel>[] grids = new BGrid<GridPixel>[4];
 
     private Vector2Int gridSize = new Vector2Int(80, 180);
@@ -63,22 +63,30 @@ public class PixelArtDrawingSystem : MonoBehaviour
     {
         float gridSizeX = 1f / pixelsPerUnitMultiplier * gridSize.x;
 
-        if     (colourPosition.x < -1 * gridSizeX)
+        GridPixel pixel = GetPixelAtPosition(colourPosition);
+        if (pixel != null && pixel.ColourIndex != colourIndex) pixel.SetColourIndex(colourIndex);
+    }
+
+    private GridPixel GetPixelAtPosition(Vector3 position)
+    {
+        float gridSizeX = 1f / pixelsPerUnitMultiplier * gridSize.x;
+        if (position.x < -1f * gridSizeX)
         {
-            grids[0].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
+            return grids[0].GetGridObject(position);
         }
-        else if (colourPosition.x < 0 * gridSizeX)
+        else if (position.x < 0f)
         {
-            grids[1].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
+            return grids[1].GetGridObject(position);
         }
-        else if (colourPosition.x < 1 * gridSizeX)
+        else if (position.x < gridSizeX)
         {
-            grids[2].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
+            return grids[2].GetGridObject(position);
         }
-        else if (colourPosition.x < 2 * gridSizeX)
+        else if (position.x < 2 * gridSizeX)
         {
-            grids[3].GetGridObject(colourPosition)?.SetColourIndex(colourIndex);
+            return grids[3].GetGridObject(position);
         }
+        return null;
     }
 
     public void ApplyColourToCircle(int colourIndex, Vector3 colourPosition, int radius)
