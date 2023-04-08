@@ -20,6 +20,7 @@ public class Jump : Capability
 
     [SerializeField, Range(0f, 1f)] private float jumpReleaseMultiplier = 0.6f;
     private bool isRising;
+    [SerializeField] private bool doubleJumpIsVariable;
 
     [Header("Leniency")]
 
@@ -99,7 +100,7 @@ public class Jump : Capability
                 isRising = false;
             }
 
-            if (isRising && !inputController.GetJumpHeld())
+            if (isRising && !inputController.GetJumpHeld() && (doubleJumpIsVariable || JumpsSpent <= 1) && !IsJumpingThisFrame)
             {
                 velocity.y *= jumpReleaseMultiplier;
                 isRising = false;

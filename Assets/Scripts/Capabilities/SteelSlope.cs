@@ -9,10 +9,11 @@ public class SteelSlope : Capability
     [SerializeField] private WallCheck wallCheck;
     private Rigidbody2D body;
 
-    private bool isSliding = false;
+    public bool IsSliding { get; private set; } = false;
     private float slideFacing;
 
     private Vector2 moveDirection;
+    public Vector2 MoveDirection => moveDirection;
 
 
     [Header("References")]
@@ -37,19 +38,19 @@ public class SteelSlope : Capability
 
     private void Update()
     {
-        if (slopeCheck.OnSlope && !isSliding)
+        if (slopeCheck.OnSlope && !IsSliding)
         {
             InitiateSlide();
         }
 
-        if (wallCheck.Wall && isSliding)
+        if (wallCheck.Wall && IsSliding)
         {
             FinishSlide();
         }
     }
     private void FixedUpdate()
     {
-        if (isSliding)
+        if (IsSliding)
         {
             slideSpeed = Mathf.MoveTowards(slideSpeed, maxSlideSpeed, slideAcceleration * Time.fixedDeltaTime);
 
@@ -60,7 +61,7 @@ public class SteelSlope : Capability
     {
         //Debug.Log("Initiated Slide");
 
-        isSliding = true;
+        IsSliding = true;
         slideFacing = slopeCheck.SlopeFacing;
         if (move != null)
         {
@@ -76,7 +77,7 @@ public class SteelSlope : Capability
     private void FinishSlide()
     {
         //Debug.Log("Ended Slide");
-        isSliding = false;
+        IsSliding = false;
 
         EnableOtherCapabilities();
     }
@@ -94,7 +95,7 @@ public class SteelSlope : Capability
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isSliding)
+        if (IsSliding)
         {
             CalculateMoveDirection();
         }

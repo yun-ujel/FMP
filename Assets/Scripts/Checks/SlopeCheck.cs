@@ -10,7 +10,7 @@ public class SlopeCheck : CollisionCheck
     public float SlopeFacing { get; private set; } = 0f;
     // The Direction the slope is facing. Between -1f, 0f and 1f
 
-    private Vector2 slopeNormal;
+    public Vector2 SlopeNormal { get; private set; }
     // The normal of the first contact that is sloped.
     // May be worth changing the calculation to a raycast,
     // so that circle/capsule colliders won't see sharp corners as slopes due to their own curved edges
@@ -47,19 +47,20 @@ public class SlopeCheck : CollisionCheck
             OnSlope = evaluateContact.normal.y < maxSlopeNormalY && evaluateContact.normal.y >= minSlopeNormalY;
             if (OnSlope)
             {
-                slopeNormal = evaluateContact.normal;
-                SlopeFacing = slopeNormal.x > 0f ? 1f : -1f;
+                SlopeNormal = evaluateContact.normal;
+                SlopeFacing = SlopeNormal.x > 0f ? 1f : -1f;
                 break;
             }
         }
     }
 
+    // Direction will always be facing right
     public Vector2 GetSlopeDirection()
     {
         return !OnSlope ? // If On Slope
-            new Vector2(1f, 0f)
+            new Vector2(1f, 0f) // Return this
             : // Else
-            (Vector2)(Vector3.ProjectOnPlane(Vector3.down, slopeNormal).normalized * SlopeFacing);
+            (Vector2)(Vector3.ProjectOnPlane(Vector3.down, SlopeNormal).normalized * SlopeFacing); // Return this
     }
 
     public override void Initialize()

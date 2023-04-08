@@ -18,6 +18,6 @@ public class MidairAnim : AnimationHandler
 
     public override bool IsAnimationValid()
     {
-        return (cAnim.Velocity.y < yVelocityIsBelow && cAnim.Velocity.y > yVelocityIsAbove && !groundCheck.OnGround) && base.IsAnimationValid();
+        return cAnim.Velocity.y < yVelocityIsBelow && cAnim.Velocity.y > yVelocityIsAbove && !groundCheck.OnGround && base.IsAnimationValid();
     }
 }
