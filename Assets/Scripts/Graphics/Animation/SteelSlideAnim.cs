@@ -12,6 +12,7 @@ public class SteelSlideAnim : AnimationHandler
     [Space]
 
     [SerializeField] private float xVelocityIsAbove = Mathf.NegativeInfinity;
+    [SerializeField] private float xVelocityIsBelow = Mathf.Infinity;
 
     [Space]
 
@@ -31,6 +32,7 @@ public class SteelSlideAnim : AnimationHandler
         return steelSlope.IsSliding 
             && Vector2.Angle(slopeCheck.GetSlopeDirection(), Vector2.up * -slopeCheck.SlopeFacing) <= maxSlopeAngle
             && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove
+            && Mathf.Abs(cAnim.Velocity.x) <= xVelocityIsBelow
             && cAnim.Velocity.y < yVelocityIsBelow && cAnim.Velocity.y > yVelocityIsAbove
             && base.IsAnimationValid();
     }

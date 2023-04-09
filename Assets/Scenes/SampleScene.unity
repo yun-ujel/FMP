@@ -2916,7 +2916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 8195530060044397621}
   animations:
-  - {fileID: 11400000, guid: 646b23de851831d419041fc55e21b535, type: 2}
+  - {fileID: 11400000, guid: 595d6671db286894a825e8b9e27320b1, type: 2}
   - {fileID: 11400000, guid: 508311041d915e94aa44db692ed1f823, type: 2}
   - {fileID: 11400000, guid: f3d9c67322ddad743930fb9a59b2ef63, type: 2}
   - {fileID: 11400000, guid: 60038e79b14741d48ba6534d88150d8d, type: 2}
@@ -2938,6 +2938,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9ffd7e5ab376a7f46b0e326464f66faf, type: 2}
   - {fileID: 11400000, guid: e960d34aec7df654ab80f584d947204b, type: 2}
   - {fileID: 11400000, guid: 39b5a06ab85b0ac49aaa35889d1d9200, type: 2}
+  - {fileID: 11400000, guid: 661b51eafa4df0542988e474b8061a8a, type: 2}
 --- !u!95 &8195530058609318470
 Animator:
   serializedVersion: 3

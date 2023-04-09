@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153fe5d526eab224fbff3d52395d6e91, type: 3}
   m_Name: Slide
   m_EditorClassIdentifier: 
+  localPositionOverride: {x: 0, y: 0, z: 0}
   potentialLastAnimations: []
   maxSlopeAngle: 120
   xVelocityIsAbove: 0
+  xVelocityIsBelow: Infinity
   yVelocityIsBelow: 0.1
   yVelocityIsAbove: -0.1

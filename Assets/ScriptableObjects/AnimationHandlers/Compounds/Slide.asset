@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153fe5d526eab224fbff3d52395d6e91, type: 3}
-  m_Name: SlideDownSteep
+  m_Script: {fileID: 11500000, guid: c52e7be8cebbb34498ac010ffbae1f87, type: 3}
+  m_Name: Slide
   m_EditorClassIdentifier: 
-  localPositionOverride: {x: 0, y: -0.44, z: 0}
+  localPositionOverride: {x: 0, y: 0, z: 0}
   potentialLastAnimations: []
-  maxSlopeAngle: 32
-  xVelocityIsAbove: 0
-  yVelocityIsBelow: 0
-  yVelocityIsAbove: -Infinity
+  animationHandlers:
+  - {fileID: 11400000, guid: d6e2ea11ee160b54d9bfa0a3ba3016a3, type: 2}
+  - {fileID: 11400000, guid: 595d6671db286894a825e8b9e27320b1, type: 2}

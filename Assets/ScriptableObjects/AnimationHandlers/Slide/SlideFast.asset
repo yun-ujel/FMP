@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153fe5d526eab224fbff3d52395d6e91, type: 3}
   m_Name: SlideFast
   m_EditorClassIdentifier: 
-  potentialLastAnimations: []
+  localPositionOverride: {x: 0, y: 0, z: 0}
+  potentialLastAnimations:
+  - SlideFast
+  - Slide
   maxSlopeAngle: 120
   xVelocityIsAbove: 5
+  xVelocityIsBelow: Infinity
   yVelocityIsBelow: 0.1
   yVelocityIsAbove: -0.1
