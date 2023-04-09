@@ -3,6 +3,8 @@ public abstract class AnimationHandler : ScriptableObject
 {
     protected CharacterAnimation cAnim;
 
+    [SerializeField] protected Vector3 localPositionOverride = Vector3.zero;
+
     [SerializeField] protected string[] potentialLastAnimations;
 
     public virtual void SetCharacterAnimator(CharacterAnimation characterAnimation)
@@ -34,5 +36,10 @@ public abstract class AnimationHandler : ScriptableObject
     public virtual float GetAnimationSpeed()
     {
         return 1f;
+    }
+
+    public virtual Vector3 GetLocalPositionOverride()
+    {
+        return localPositionOverride;
     }
 }

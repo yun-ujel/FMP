@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153fe5d526eab224fbff3d52395d6e91, type: 3}
+  m_Name: SlideFast
+  m_EditorClassIdentifier: 
+  potentialLastAnimations: []
+  maxSlopeAngle: 120
+  xVelocityIsAbove: 5
+  yVelocityIsBelow: 0.1
+  yVelocityIsAbove: -0.1

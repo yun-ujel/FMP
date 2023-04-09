@@ -53,11 +53,8 @@ public class CharacterAnimation : MonoBehaviour
             if (animations[i].IsAnimationValid())
             {
                 //Debug.Log("Started playing animation \"" + animations[i].name + "\" at speed " + animations[i].GetAnimationSpeed());
-                animator.speed = Mathf.Min(animations[i].GetAnimationSpeed(), 10f);
-                animator.Play(animations[i].name);
 
-                LastAnimationPlayed = animations[i].name;
-                //Debug.Log("Playing animation at index: " + i);
+                PlayAnimation(animations[i]);
 
                 break;
             }
@@ -93,6 +90,15 @@ public class CharacterAnimation : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void PlayAnimation(AnimationHandler animation)
+    {
+        animator.speed = Mathf.Min(animation.GetAnimationSpeed(), 10f);
+        transform.localPosition = animation.GetLocalPositionOverride();
+        animator.Play(animation.name);
+
+        LastAnimationPlayed = animation.name;
     }
 
     public AdditionalCharacterInfo GetAdditionalCharacterInfo()
