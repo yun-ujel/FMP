@@ -3,7 +3,15 @@ public abstract class AnimationHandler : ScriptableObject
 {
     protected CharacterAnimation cAnim;
 
+    [Space]
+
+    [SerializeField] protected float exitTime;
+    public virtual float ExitTime => exitTime;
+
     [SerializeField] protected Vector3 localPositionOverride = Vector3.zero;
+
+    [Space]
+    [Space]
 
     [SerializeField] protected string[] potentialLastAnimations;
 

@@ -137,23 +137,28 @@ public static class ExtensionMethods
         triangles[startingTriIndex + 5] = startingVertIndex + 2;
     }
 
-    public static void DrawBox(Vector2 position, float radius, Color color)
+    public static void DrawBox(Vector2 position, float radius, Color color, float duration)
     {
         // Left
-        Debug.DrawLine(position + new Vector2(-radius, -radius), position + new Vector2(-radius, radius), color);
+        Debug.DrawLine(position + new Vector2(-radius, -radius), position + new Vector2(-radius, radius), color, duration);
 
         // Top
-        Debug.DrawLine(position + new Vector2(-radius, radius), position + new Vector2(radius, radius), color);
+        Debug.DrawLine(position + new Vector2(-radius, radius), position + new Vector2(radius, radius), color, duration);
 
         // Right
-        Debug.DrawLine(position + new Vector2(radius, radius), position + new Vector2(radius, -radius), color);
+        Debug.DrawLine(position + new Vector2(radius, radius), position + new Vector2(radius, -radius), color, duration);
 
         // Bottom
-        Debug.DrawLine(position + new Vector2(radius, -radius), position + new Vector2(-radius, -radius), color);
+        Debug.DrawLine(position + new Vector2(radius, -radius), position + new Vector2(-radius, -radius), color, duration);
     }
 
     public static void DrawBox(Vector2 position, float radius)
     {
-        DrawBox(position, radius, Color.white);
+        DrawBox(position, radius, Color.white, 0.01f);
+    }
+
+    public static void DrawBox(Vector2 position, float radius, Color color)
+    {
+        DrawBox(position, radius, color, 0.01f);
     }
 }

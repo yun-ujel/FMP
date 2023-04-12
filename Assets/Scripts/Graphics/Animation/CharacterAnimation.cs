@@ -18,7 +18,13 @@ public class CharacterAnimation : MonoBehaviour
     public Vector2 Velocity => body.velocity;
     public string LastAnimationPlayed { get; private set; }
 
-    void Start()
+    private bool isExitingAnimation;
+    private float queuedExitTime;
+
+    private Vector3 targetLocalPosition;
+    private float timeSinceLastAnimationStarted;
+
+    private void Start()
     {
         relay = character.GetComponent<CollisionRelay>();
         body = character.GetComponent<Rigidbody2D>();
@@ -44,21 +50,34 @@ public class CharacterAnimation : MonoBehaviour
     }
 
 
-    void Update()
+    private void Update()
     {
-        FlipTowardsMovement();
+        FlipTowardsMovement();        
 
-        for (int i = 0; i < animations.Length; i++)
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetLocalPosition, timeSinceLastAnimationStarted);
+
+        if (!isExitingAnimation)
         {
-            if (animations[i].IsAnimationValid())
+            for (int i = 0; i < animations.Length; i++)
             {
-                //Debug.Log("Started playing animation \"" + animations[i].name + "\" at speed " + animations[i].GetAnimationSpeed());
-
-                PlayAnimation(animations[i]);
-
-                break;
+                if (animations[i].IsAnimationValid())
+                {
+                    //Debug.Log("Started playing animation \"" + animations[i].name + "\" at speed " + animations[i].GetAnimationSpeed());
+                    PlayAnimation(animations[i]);
+                    break;
+                }
             }
         }
+        else if (queuedExitTime > 0f)
+        {
+            queuedExitTime -= Time.deltaTime;
+        }
+        else
+        {
+            isExitingAnimation = false;
+        }
+
+        timeSinceLastAnimationStarted += Time.deltaTime;
     }
 
     private void FlipTowardsMovement()
@@ -94,15 +113,33 @@ public class CharacterAnimation : MonoBehaviour
 
     private void PlayAnimation(AnimationHandler animation)
     {
-        animator.speed = Mathf.Min(animation.GetAnimationSpeed(), 10f);
-        transform.localPosition = animation.GetLocalPositionOverride();
-        animator.Play(animation.name);
+        if (LastAnimationPlayed != animation.name && queuedExitTime > 0f)
+        {
+            isExitingAnimation = true;
+        }
+        else
+        {
+            SetTargetLocalPosition(animation.GetLocalPositionOverride());
+            animator.speed = Mathf.Min(animation.GetAnimationSpeed(), 10f);
 
-        LastAnimationPlayed = animation.name;
+            animator.Play(animation.name);
+            LastAnimationPlayed = animation.name;
+            queuedExitTime = animation.ExitTime;
+        }
     }
 
     public AdditionalCharacterInfo GetAdditionalCharacterInfo()
     {
         return characterInfo;
+    }
+
+    private void SetTargetLocalPosition(Vector3 set)
+    {
+        if (targetLocalPosition != set)
+        {
+            timeSinceLastAnimationStarted = 0f;
+        }
+
+        targetLocalPosition = set;
     }
 }

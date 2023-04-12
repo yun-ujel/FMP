@@ -2939,6 +2939,30 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e960d34aec7df654ab80f584d947204b, type: 2}
   - {fileID: 11400000, guid: 39b5a06ab85b0ac49aaa35889d1d9200, type: 2}
   - {fileID: 11400000, guid: 661b51eafa4df0542988e474b8061a8a, type: 2}
+  localPositionSmoothing:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &8195530058609318470
 Animator:
   serializedVersion: 3
