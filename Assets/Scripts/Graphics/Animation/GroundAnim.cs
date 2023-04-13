@@ -34,7 +34,7 @@ public class GroundAnim : AnimationHandler
 
     public override float GetAnimationSpeed()
     {
-        return Mathf.Abs(cAnim.Velocity.x).Remap(0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
+        return Mathf.Abs(cAnim.Velocity.x).Remap(0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed) * base.GetAnimationSpeed();
         // Remap player velocity (with a maximum of their desired velocity) to be between the animation speed values
     }
 }

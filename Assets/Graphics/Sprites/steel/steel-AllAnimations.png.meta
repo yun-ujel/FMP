@@ -85,7 +85,7 @@ TextureImporter:
     second: steel-JumpWalkTransition_0
   - first:
       213: 8092183975001437641
-    second: steel-AllAnimations_27
+    second: steel-SlideTransition0_0
   - first:
       213: -4453660724370441106
     second: steel-JumpIdleTransition_0
@@ -134,6 +134,18 @@ TextureImporter:
   - first:
       213: 6807995737480096150
     second: steel-Roll_7
+  - first:
+      213: -5417242036594210810
+    second: steel-SlideTransition1_0
+  - first:
+      213: -6500298834932862259
+    second: steel-SlideTransition2_0
+  - first:
+      213: 5055575973708313906
+    second: steel-SlideTransition2_1
+  - first:
+      213: -7710489423070742483
+    second: steel-SlideTransition3_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -835,8 +847,8 @@ TextureImporter:
       name: steel-SlideFast_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 40
+        x: 224
+        y: 200
         width: 32
         height: 40
       alignment: 0
@@ -856,8 +868,8 @@ TextureImporter:
       name: steel-SlideUpShallow_0
       rect:
         serializedVersion: 2
-        x: 64
-        y: 40
+        x: 320
+        y: 200
         width: 32
         height: 40
       alignment: 0
@@ -877,8 +889,8 @@ TextureImporter:
       name: steel-SlideUp_0
       rect:
         serializedVersion: 2
-        x: 96
-        y: 40
+        x: 352
+        y: 200
         width: 32
         height: 40
       alignment: 0
@@ -899,7 +911,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 40
+        y: 200
         width: 32
         height: 40
       alignment: 0
@@ -919,8 +931,8 @@ TextureImporter:
       name: steel-SlideDown_0
       rect:
         serializedVersion: 2
-        x: 160
-        y: 40
+        x: 64
+        y: 200
         width: 32
         height: 40
       alignment: 0
@@ -940,8 +952,8 @@ TextureImporter:
       name: steel-SlideDownSteep_0
       rect:
         serializedVersion: 2
-        x: 192
-        y: 40
+        x: 0
+        y: 200
         width: 32
         height: 40
       alignment: 0
@@ -1121,6 +1133,111 @@ TextureImporter:
       bones: []
       spriteID: 699efdc8d0cda7e50800000000000000
       internalID: 6807995737480096150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-SlideTransition0_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 240
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c5b11773763d4070800000000000000
+      internalID: 8092183975001437641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-SlideTransition1_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 240
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6080d7ac11712d4b0800000000000000
+      internalID: -5417242036594210810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-SlideTransition2_0
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 240
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc2f0f156ac4ac5a0800000000000000
+      internalID: -6500298834932862259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-SlideTransition2_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 240
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23532efff83092640800000000000000
+      internalID: 5055575973708313906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-SlideTransition3_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 240
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d28367db8b6def490800000000000000
+      internalID: -7710489423070742483
       vertices: []
       indices: 
       edges: []

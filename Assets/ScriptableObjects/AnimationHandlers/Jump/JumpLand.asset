@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a555612f23d2448b13fd23407a7761, type: 3}
   m_Name: JumpLand
   m_EditorClassIdentifier: 
+  exitTime: 0.08
+  localPositionOverride: {x: 0, y: 0, z: 0}
   potentialLastAnimations: []
-  duration: 0.12
+  excludedLastAnimations: []
+  duration: 0.06

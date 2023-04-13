@@ -61,9 +61,9 @@ public class CharacterAnimation : MonoBehaviour
             for (int i = 0; i < animations.Length; i++)
             {
                 if (animations[i].IsAnimationValid())
-                {
-                    //Debug.Log("Started playing animation \"" + animations[i].name + "\" at speed " + animations[i].GetAnimationSpeed());
+                {                    
                     PlayAnimation(animations[i]);
+                    //if (!isExitingAnimation) { Debug.Log("Started playing animation \"" + animations[i].name + "\" at speed " + animations[i].GetAnimationSpeed()); }
                     break;
                 }
             }

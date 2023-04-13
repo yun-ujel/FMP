@@ -17,8 +17,8 @@ MonoBehaviour:
   potentialLastAnimations:
   - WalkEntry
   - Idle
-  - JumpLand
+  excludedLastAnimations: []
   minAnimationSpeed: 1
   maxAnimationSpeed: 1
-  xVelocityIsAbove: 0.0001
+  xVelocityIsAbove: 0
   xVelocityIsBelow: Infinity

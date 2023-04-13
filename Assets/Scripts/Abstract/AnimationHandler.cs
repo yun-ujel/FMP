@@ -15,6 +15,10 @@ public abstract class AnimationHandler : ScriptableObject
 
     [SerializeField] protected string[] potentialLastAnimations;
 
+    [Space]
+
+    [SerializeField] protected string[] excludedLastAnimations;
+
     public virtual void SetCharacterAnimator(CharacterAnimation characterAnimation)
     {
         cAnim = characterAnimation;
@@ -22,10 +26,10 @@ public abstract class AnimationHandler : ScriptableObject
 
     public virtual bool IsAnimationValid()
     {
-        return LastAnimationIsMatching();
+        return LastAnimationIsIncluded() && LastAnimationIsNotExcluded();
     }
 
-    public virtual bool LastAnimationIsMatching()
+    public virtual bool LastAnimationIsIncluded()
     {
         if (potentialLastAnimations == null || potentialLastAnimations.Length < 1)
         {
@@ -39,6 +43,24 @@ public abstract class AnimationHandler : ScriptableObject
             }
         }
         return false;
+    }
+
+    public virtual bool LastAnimationIsNotExcluded()
+    {
+        if (excludedLastAnimations == null || excludedLastAnimations.Length < 1)
+        {
+            return true;
+        }
+
+        for (int i = 0; i < excludedLastAnimations.Length; i++)
+        {
+            if (excludedLastAnimations[i] == cAnim.LastAnimationPlayed)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public virtual float GetAnimationSpeed()

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a555612f23d2448b13fd23407a7761, type: 3}
   m_Name: JumpIdleTransition
   m_EditorClassIdentifier: 
+  exitTime: 0.06
+  localPositionOverride: {x: 0, y: 0, z: 0}
   potentialLastAnimations:
   - JumpIdleTransition
   - JumpLand
+  excludedLastAnimations: []
   duration: 0.2

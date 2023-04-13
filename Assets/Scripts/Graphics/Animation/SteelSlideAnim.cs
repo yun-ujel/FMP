@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Slide", menuName = "Scriptable Object/Animation Handler/Slope")]
+[CreateAssetMenu(fileName = "Slide", menuName = "Scriptable Object/Animation Handler/Slide")]
 public class SteelSlideAnim : AnimationHandler
 {
     private SteelSlope steelSlope;
@@ -8,11 +8,14 @@ public class SteelSlideAnim : AnimationHandler
 
     [Header("Requirements")]
     [SerializeField, Range(0, 180)] private float maxSlopeAngle;
-    
-    [Space]
+    [SerializeField] private LastSlope lastSlopeRequirement;
 
-    [SerializeField] private float xVelocityIsAbove = Mathf.NegativeInfinity;
-    [SerializeField] private float xVelocityIsBelow = Mathf.Infinity;
+    public enum LastSlope
+    {
+        steeper,
+        shallower,
+        none
+    }
 
     [Space]
 
@@ -29,11 +32,30 @@ public class SteelSlideAnim : AnimationHandler
 
     public override bool IsAnimationValid()
     {
-        return steelSlope.IsSliding 
-            && Vector2.Angle(slopeCheck.GetSlopeDirection(), Vector2.up * -slopeCheck.SlopeFacing) <= maxSlopeAngle
-            && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove
-            && Mathf.Abs(cAnim.Velocity.x) <= xVelocityIsBelow
+        return steelSlope.IsSliding
+            && slopeCheck.AnyCollision
+            && GetSlopeAngle() <= maxSlopeAngle
             && cAnim.Velocity.y < yVelocityIsBelow && cAnim.Velocity.y > yVelocityIsAbove
             && base.IsAnimationValid();
+    }
+
+    private bool IsSlopeChangeValid()
+    {
+        // Uses SteelSlope.LastMoveAngle and SteelSlope.CurrentMoveAngle to check whether the last slope the player was on was steeper
+        // If it is, it will return true depending on what preference the AnimationHandler has set
+        // For example, if lastSlopeWasSteeper was unchecked, it will return the inverse, essentially checking whether the last slope was shallower instead.
+
+        // If the player was last in midair, the last slope would be considered steeper. This is set in SteelSlope rather than this script.
+
+        bool slopeWasSteeper = steelSlope.LastMoveAngle < steelSlope.CurrentMoveAngle;
+
+        return (lastSlopeRequirement == LastSlope.steeper && slopeWasSteeper)
+            || (lastSlopeRequirement == LastSlope.shallower && !slopeWasSteeper)
+            || (lastSlopeRequirement == LastSlope.none);
+    }
+
+    private float GetSlopeAngle()
+    {
+        return steelSlope.CurrentMoveAngle;
     }
 }

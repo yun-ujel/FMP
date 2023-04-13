@@ -15,6 +15,9 @@ public class SteelSlope : Capability
     private Vector2 moveDirection;
     public Vector2 MoveDirection => moveDirection;
 
+    public float LastMoveAngle { get; private set; }
+    public float CurrentMoveAngle { get; private set; }
+
 
     [Header("References")]
     [SerializeField] private Capability[] abilitiesDuringSlide;
@@ -28,8 +31,9 @@ public class SteelSlope : Capability
 
     [SerializeField, Range(1f, 100f)] private float slideAccelerationMultiplier = 30f;
 
-    [SerializeField] private float slideAcceleration;
+    private float slideAcceleration;
     private float slideSpeed = 6f;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -38,9 +42,17 @@ public class SteelSlope : Capability
 
     private void Update()
     {
+        Debug.DrawRay(transform.position, MoveDirection * -slopeCheck.SlopeFacing, Color.red);
+        Debug.DrawRay(transform.position, Vector2.up, Color.cyan);
+
         if (slopeCheck.OnSlope && !IsSliding)
         {
             InitiateSlide();
+        }
+
+        if (IsSliding && !slopeCheck.AnyCollision)
+        {
+            LastMoveAngle = -90f;
         }
 
         if (wallCheck.Wall && IsSliding)
@@ -55,12 +67,10 @@ public class SteelSlope : Capability
             slideSpeed = Mathf.MoveTowards(slideSpeed, maxSlideSpeed, slideAcceleration * Time.fixedDeltaTime);
 
             body.velocity = new Vector2(moveDirection.x * slideSpeed, body.velocity.y);
-        }
+        }        
     }
     private void InitiateSlide()
     {
-        //Debug.Log("Initiated Slide");
-
         IsSliding = true;
         slideFacing = slopeCheck.SlopeFacing;
         if (move != null)
@@ -69,35 +79,39 @@ public class SteelSlope : Capability
         }
 
         slideSpeed = Mathf.Clamp(Mathf.Abs(body.velocity.y), minSlideSpeed, maxSlideSpeed);
-        CalculateMoveDirection();
+        RecalculateMoveDirection();
 
         DisableOtherCapabilitiesExcept(abilitiesDuringSlide);
     }
 
     private void FinishSlide()
     {
-        //Debug.Log("Ended Slide");
         IsSliding = false;
 
         EnableOtherCapabilities();
     }
 
-    private void CalculateMoveDirection()
+    private void RecalculateMoveDirection()
     {
-        //Debug.Log("Recalculating Move Direction");
+        LastMoveAngle = CurrentMoveAngle;
+
         moveDirection = slopeCheck.GetSlopeDirection() * slideFacing;
 
         if (moveDirection.y <= 0f)
         {
             slideAcceleration = Mathf.Abs(moveDirection.y) * slideAccelerationMultiplier;
         }
+
+        CurrentMoveAngle = Vector2.Angle(moveDirection / slideFacing, Vector2.up * -slopeCheck.SlopeFacing);
+
+        Debug.Log(CurrentMoveAngle);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsSliding)
         {
-            CalculateMoveDirection();
+            RecalculateMoveDirection();
         }
     }
 }

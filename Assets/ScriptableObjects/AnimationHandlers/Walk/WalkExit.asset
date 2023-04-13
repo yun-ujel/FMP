@@ -17,6 +17,7 @@ MonoBehaviour:
   potentialLastAnimations:
   - WalkExit
   - Walk
+  excludedLastAnimations: []
   minAnimationSpeed: 1
   maxAnimationSpeed: 1
   xVelocityIsAbove: 0
