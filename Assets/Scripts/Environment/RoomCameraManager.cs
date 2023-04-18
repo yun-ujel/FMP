@@ -1,10 +1,12 @@
 using UnityEngine;
+using Cinemachine;
 
 [System.Serializable]
 public class Room 
 {
     public RoomTrigger trigger;
-    public GameObject virtualCam;
+    public CinemachineVirtualCamera virtualCam;
+
     public bool IsEntered;
     public bool IsFocused;
 }
@@ -16,9 +18,13 @@ public class RoomCameraManager : MonoBehaviour
 
     private bool hasFocusedRoomOnThisUpdate;
 
-    private int currentRoomIndex;
+    public Room[] Rooms => rooms;
+    public int CurrentRoomIndex { get; private set; }
 
     private Rigidbody2D playerRigidbody;
+
+    [Space]
+    [SerializeField] private CinemachineBrain cinemachineBrain;
 
     private void Start()
     {
@@ -29,27 +35,15 @@ public class RoomCameraManager : MonoBehaviour
             if (rooms[i].trigger != null && rooms[i].virtualCam != null)
             {
                 rooms[i].trigger.SetRoomCameraManager(this, i);
-                rooms[i].virtualCam.SetActive(false);
+                rooms[i].virtualCam.gameObject.SetActive(false);
 
                 continue;
             }
             Debug.LogError("Room " + i + " Is missing a component!");
         }
 
-        SetRoomFocus(focusedRoomOnStart, true);
-        RespawnPlayerInRoom(focusedRoomOnStart);
+        LoadRoom(focusedRoomOnStart);
     }
-
-    public void OnRoomEnter(int index)
-    {
-        rooms[index].IsEntered = true;
-    }
-
-    public void OnRoomExit(int index)
-    {
-        rooms[index].IsEntered = false;
-    }
-
     private void Update()
     {
         if (!IsInFocusedRoom())
@@ -59,9 +53,20 @@ public class RoomCameraManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Home))
         {
-            RespawnPlayerInRoom(currentRoomIndex);
+            RespawnPlayerInRoom(CurrentRoomIndex);
         }
     }
+
+    public void OnRoomEnter(int index)
+    {
+        rooms[index].IsEntered = true;
+    }
+    public void OnRoomExit(int index)
+    {
+        rooms[index].IsEntered = false;
+    }
+
+    
 
     private bool IsInFocusedRoom()
     {
@@ -94,25 +99,27 @@ public class RoomCameraManager : MonoBehaviour
             }
         }
 
+        // Player death / out of bounds reset
         if (!hasFocusedRoomOnThisUpdate)
         {
-            RespawnPlayerInRoom(currentRoomIndex);
+            RespawnPlayerInRoom(CurrentRoomIndex);
         }
     }
-
     private void SetRoomFocus(int i, bool focus)
     {
         if (focus)
         {
-            rooms[i].virtualCam.SetActive(true);
+            rooms[i].virtualCam.gameObject.SetActive(true);
             rooms[i].IsFocused = true;
 
-            currentRoomIndex = i;
+            CurrentRoomIndex = i;
             hasFocusedRoomOnThisUpdate = true;
+
+            ShakeCamera.Instance.StopTime(cinemachineBrain.m_DefaultBlend.BlendTime);
         }
         else
         {
-            rooms[i].virtualCam.SetActive(false);
+            rooms[i].virtualCam.gameObject.SetActive(false);
             rooms[i].IsFocused = false;
         }
     }
@@ -122,5 +129,22 @@ public class RoomCameraManager : MonoBehaviour
         rooms[index].trigger.RoomReset();
 
         playerRigidbody.velocity = Vector2.zero;
-        playerRigidbody.transform.position = rooms[currentRoomIndex].trigger.StartPosition;
-    }}
+        playerRigidbody.transform.position = rooms[CurrentRoomIndex].trigger.StartPosition;
+    }
+
+    public void LoadRoom(int index)
+    {
+        for (int i = 0; i < rooms.Length; i++)
+        {
+            if (index != i)
+            {
+                SetRoomFocus(i, false);
+            }
+            else
+            {
+                SetRoomFocus(i, true);
+            }
+        }
+        RespawnPlayerInRoom(index);
+    }
+}

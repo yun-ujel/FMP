@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413213991}
   - component: {fileID: 413213992}
+  - component: {fileID: 413213993}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -166,6 +167,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &413213993
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413213990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 582721652}
   - component: {fileID: 582721654}
+  - component: {fileID: 582721653}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -336,6 +355,23 @@ Transform:
   m_Father: {fileID: 1821236315}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &582721653
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582721651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &582721654
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1482,6 +1518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1707464711}
+  - component: {fileID: 1707464713}
   - component: {fileID: 1707464712}
   m_Layer: 0
   m_Name: Room Manager
@@ -1518,14 +1555,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rooms:
   - trigger: {fileID: 1429993833}
-    virtualCam: {fileID: 1821236313}
+    virtualCam: {fileID: 1821236314}
     IsEntered: 0
     IsFocused: 0
   - trigger: {fileID: 1244193362}
-    virtualCam: {fileID: 1605508389}
+    virtualCam: {fileID: 1605508392}
     IsEntered: 0
     IsFocused: 0
   focusedRoomOnStart: 1
+  cinemachineBrain: {fileID: 1713178817}
+--- !u!114 &1707464713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707464710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6696f53398b787f4dbb5516817cb87e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1713178814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,13 +1660,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
+  m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 0.5
+    m_Time: 0.8
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
