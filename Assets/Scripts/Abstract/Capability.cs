@@ -63,4 +63,6 @@ public abstract class Capability : MonoBehaviour
     {
         IsActive = true;
     }
+
+    public virtual void TriggerMainEffect() { }
 }

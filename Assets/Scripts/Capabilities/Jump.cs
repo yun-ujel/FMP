@@ -36,12 +36,19 @@ public class Jump : Capability
     [SerializeField, Range(0, 10)] private int numberOfJumps = 1;
     public int JumpsSpent { get; private set; } = 0;
 
+    private bool jumpQueued;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         IsActive = true;
 
         CalculateJumpForce();
+    }
+
+    public override void TriggerMainEffect()
+    {
+        jumpQueued = true;
     }
 
     private void Update()
@@ -90,7 +97,7 @@ public class Jump : Capability
         {
             velocity = body.velocity;
 
-            if (jumpBufferLeft > 0f && (coyoteTimeLeft > 0f || JumpsSpent < numberOfJumps))
+            if (jumpQueued || (jumpBufferLeft > 0f && (coyoteTimeLeft > 0f || JumpsSpent < numberOfJumps)))
             {
                 DoJump();
             }
@@ -111,7 +118,7 @@ public class Jump : Capability
     }
 
     public void DoJump()
-    {        
+    {
         velocity.y = jumpForce;
         isRising = true;
         IsJumpingThisFrame = true;
@@ -122,6 +129,7 @@ public class Jump : Capability
         jumpBufferLeft = 0f;
         coyoteTimeLeft = 0f;
         hasCoyoteTime = false;
+        jumpQueued = false;
     }
 
     private void CalculateJumpForce()

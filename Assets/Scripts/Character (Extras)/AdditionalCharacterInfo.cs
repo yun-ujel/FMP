@@ -5,10 +5,16 @@ public class AdditionalCharacterInfo : MonoBehaviour
 {
     public List<Capability> Capabilities { get; private set; }
 
+    [Header("Base References")]
 
     [SerializeField] private GroundCheck ground;
     public float TimeSinceLastLanding { get; private set; }
     private bool wasMidairOnPreviousFrame;
+
+    
+    [Header("On Can Collected")]    
+
+    [SerializeField] private Capability[] capabilitiesToTrigger;
 
     private void Awake()
     {
@@ -32,15 +38,33 @@ public class AdditionalCharacterInfo : MonoBehaviour
 
     private void Update()
     {
+        CheckPlayerLanding();
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TriggerCapabilityEffects();
+        }
+    }
+
+    private void CheckPlayerLanding()
+    {
         TimeSinceLastLanding += Time.deltaTime;
 
         if (wasMidairOnPreviousFrame && ground.OnGround)
         {
-            //Debug.Log("Landed");
+            // Landing
             TimeSinceLastLanding = 0f;
             wasMidairOnPreviousFrame = false;
         }
 
         wasMidairOnPreviousFrame = !ground.OnGround;
+    }
+
+    private void TriggerCapabilityEffects()
+    {
+        for (int i = 0; i < capabilitiesToTrigger.Length; i++)
+        {
+            capabilitiesToTrigger[i].TriggerMainEffect();
+        }
     }
 }

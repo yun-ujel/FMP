@@ -9,6 +9,13 @@ public class GravityMultiplier : MonoBehaviour
     [SerializeField, Range(0f, 20f)] private float upwardGravityMultiplier = 3f;
     private float defaultGravityScale;
 
+    private enum GravityState
+    {
+        upward,
+        downward,
+        none
+    }
+
     // Because of how Gravity values are set on the Rigidbody, 
     // the GravityMultiplier must be disabled if any other script wants to alter gravity values
 

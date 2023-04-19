@@ -31,7 +31,7 @@ public class SteelSlope : Capability
 
     [SerializeField, Range(1f, 100f)] private float slideAccelerationMultiplier = 30f;
 
-    private float slideAcceleration;
+    [SerializeField]private float slideAcceleration;
     private float slideSpeed = 6f;
 
     private void Awake()
@@ -109,7 +109,7 @@ public class SteelSlope : Capability
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (IsSliding)
+        if (IsSliding && slopeCheck.AnyCollision)
         {
             RecalculateMoveDirection();
         }

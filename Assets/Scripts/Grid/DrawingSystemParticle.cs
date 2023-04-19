@@ -3,80 +3,108 @@ using UnityEngine;
 public class DrawingSystemParticle : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private ParticleSystem particleSystemRef;
     [SerializeField] private DrawingSystem drawingSystem;
 
-    private ParticleSystem.Particle[] particles;
+    [SerializeField] private ParticleDrawer[] drawers;
 
-    [Space]
+    [System.Serializable]
+    private class ParticleDrawer
+    {
+        [SerializeField] private ParticleSystem particleSystem;
+        private ParticleSystem.Particle[] particles;
+        public int ColourIndex => colourIndex;
+        [SerializeField] private int colourIndex;
 
-    [SerializeField, Range(0f, 1f)] private float timeBetweenDraws;
-    private float timeSinceLastDraw;
+        [Space]
+        [SerializeField] private bool drawLinesToParticles;
+        public bool DrawLines => drawLinesToParticles;
 
-    [SerializeField, Range(0f, 1f)] private float drawChance;
+        [SerializeField] private int lineStrength;
+        public int LineStrength => lineStrength;
 
-    [Space]
+        [Space]
+        [SerializeField, Range(0.01f, 1f)] private float timeBetweenDraws;
+        private float timeSinceLastDraw;
 
-    [SerializeField] private int colourIndex;
+        [SerializeField, Range(0f, 1f)] private float drawChance;
 
+        public bool WillDrawThisFrame()
+        {           
+            timeSinceLastDraw += Time.deltaTime;
 
-    private float timeSinceSystemStarted;
+            if (particleSystem.isPlaying)
+            {
+                if (timeSinceLastDraw <= timeBetweenDraws)
+                {
+                    return false;
+                }
+                else if (Random.Range(0f, 1f) < drawChance)
+                {
+                    timeSinceLastDraw = 0f;
+                    return true;
+                }
+                else
+                {
+                    timeSinceLastDraw = 0f;
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public ParticleSystem.Particle[] GetParticles()
+        {
+            if (particles == null) particles = new ParticleSystem.Particle[particleSystem.main.maxParticles];
+
+            particleSystem.GetParticles(particles);
+            return particles;
+        }
+    }
     private void Start()
     {
-        if (particleSystemRef == null) particleSystemRef = GetComponent<ParticleSystem>();
-        if (particles == null) particles = new ParticleSystem.Particle[particleSystemRef.main.maxParticles];
-    }
 
-    private void FixedUpdate()
-    {
-        
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        for (int i = 0; i < drawers.Length; i++)
         {
-            particleSystemRef.Play();
-            particleSystemRef.Emit(50);
-
-            timeSinceSystemStarted = 0f;
-        }
-        else if (timeSinceSystemStarted > particleSystemRef.main.startLifetimeMultiplier)
-        {
-            particleSystemRef.Stop();
-        }
-
-        timeSinceSystemStarted += Time.deltaTime;
-
-        UpdateDrawings();
-    }
-
-    private void DrawOverParticles()
-    {        
-        particleSystemRef.GetParticles(particles);
-
-        if (particles.Length > 1)
-        {
-            for (int i = 0; i < particles.Length; i++)
+            if (drawers[i].WillDrawThisFrame())
             {
-                drawingSystem.ApplyColourToPixel(colourIndex, particles[i].position);
+                if (!drawers[i].DrawLines)
+                {
+                    Draw(drawers[i].GetParticles(), drawers[i].ColourIndex);
+                }
+                else
+                {
+                    DrawLinesToParticles(drawers[i].GetParticles(), drawers[i].ColourIndex, drawers[i].LineStrength, null);
+                }
             }
         }
     }
 
-    private void UpdateDrawings()
+    private void Draw(ParticleSystem.Particle[] particles, int colourIndex)
     {
-        if (particleSystemRef.isPlaying)
+        for (int i = 0; i < particles.Length; i++)
         {
-            if (Random.Range(0f, 1f) < drawChance)
-            {
-                timeSinceLastDraw += Time.deltaTime;
-            }
+            drawingSystem.ApplyColourToPixel(colourIndex, particles[i].position);
+        }
+    }
 
-            if (timeSinceLastDraw > timeBetweenDraws)
+    private void DrawLinesToParticles(ParticleSystem.Particle[] particles, int colourIndex, int lineStrength, Vector3? startPosition)
+    {
+        for (int i = 0; i < particles.Length; i++)
+        {
+            Vector3 start = startPosition == null ? transform.position : (Vector3)startPosition;
+
+            Debug.DrawLine(start, particles[i].position, Color.red, 0.1f);
+
+            for (int t = 0; t < lineStrength; t++)
             {
-                DrawOverParticles();
-                timeSinceLastDraw = 0f;
+                drawingSystem.ApplyColourToPixel(colourIndex, Vector3.Lerp(start, particles[i].position, (float)t / lineStrength));
             }
         }
     }
