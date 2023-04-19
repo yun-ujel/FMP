@@ -2000,7 +2000,6 @@ GameObject:
   - component: {fileID: 1917462316}
   - component: {fileID: 1917462315}
   - component: {fileID: 1917462317}
-  - component: {fileID: 1917462314}
   - component: {fileID: 1917462312}
   - component: {fileID: 1917462313}
   - component: {fileID: 1917462311}
@@ -2153,22 +2152,6 @@ MonoBehaviour:
   abilitiesDuringSlide:
   - {fileID: 1917462313}
   - {fileID: 1917462311}
---- !u!114 &1917462314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917462306}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f7d80df94e4e648a82a951eb03bd9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputController: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
-  throwForce: 10
-  throwDelay: 0.2
-  throwRecoil: 10
 --- !u!114 &1917462315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2208,11 +2191,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1917462306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c14c746e01a90943806fe235dd64769, type: 3}
+  m_Script: {fileID: 11500000, guid: 42f7d80df94e4e648a82a951eb03bd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
-  throwForce: 20
+  throwForce: 10
   throwDelay: 0.2
   throwRecoil: 10
 --- !u!1 &2052351138
