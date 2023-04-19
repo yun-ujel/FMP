@@ -1,52 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Move), typeof(Rigidbody2D))]
 public class GrabObject : Capability
 {
-    private HoldableObject objectBeingHeld;
-    private List<GameObject> objectsToHoldList = new List<GameObject>();
-
-    private GameObject[] objectsToHold;
-    public bool IsHolding { get; private set; }
-
-    public bool InGrabAnimation => grabAnimationCounter > 0f;
-    public float GrabAnimationLength => grabAnimationLength;
-
-    private Move move;
     private Rigidbody2D body;
+    private HoldableObject objectBeingHeld;
 
     [Header("Grabbing")]
-    [SerializeField] private Vector3 holdOffset = new Vector3(0f, 1f, 0f);
-    [SerializeField, Range(0f, 1f)] private float grabAnimationLength = 0.18f;
-    private float grabAnimationCounter;
+    private List<GameObject> objectsToHoldList = new List<GameObject>();
+    private GameObject[] objectsToHold;
+    private bool isGrabbing;
 
-    [Space]
-
-    [SerializeField, Range(0f, 50f)] private float dragWhileGrabbing = 24f;
-    private float defaultDrag;
-    [SerializeField] private bool disableJumpDuringGrab;
-    private Jump jump;
+    [Header("Holding")]
+    private Vector3 lastHoldOffset = new Vector3(0f, 1f, 0f);
+    public bool IsHolding { get; private set; }
 
     [Header("Throwing")]
-    [SerializeField] private Vector2 minThrowForce = new Vector2(0f, 4f);
-    [SerializeField] private Vector2 maxThrowForce = new Vector2(6f, 8f);
+    [SerializeField] private float throwForce = 10f;
+    [SerializeField] private float throwDelay = 0.2f;
+    private float throwDelayCounter;
+    private bool isThrowing;
 
     [Space]
 
-    [SerializeField] private Vector2 throwForceMultiplier = new Vector2(1.8f, 1.4f);
+    [SerializeField] private float throwRecoil = 10f;
 
     private void Awake()
     {
-        move = GetComponent<Move>();
-        
         body = GetComponent<Rigidbody2D>();
-        defaultDrag = body.drag;
-
-        if (disableJumpDuringGrab)
-        {
-            _ = TryGetComponent(out jump);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,66 +51,77 @@ public class GrabObject : Capability
 
     private void Update()
     {
-        if (inputController.GetAttackHeld() && !IsHolding)
+        if (!inputController.GetAttackHeld()) { isGrabbing = false; }
+
+        if (inputController.GetAttackPressed() && !IsHolding)
         {
-            // GRABBING
-
-            if (GetObjectToHold() != null)
+            GetObjectToHold()?.transform.parent.TryGetComponent(out objectBeingHeld);
+            if (objectBeingHeld != null)
             {
-                objectBeingHeld = GetObjectToHold().GetComponentInParent<HoldableObject>();
-                objectBeingHeld.Grab(transform.position + holdOffset, grabAnimationLength);
+                objectBeingHeld.Grab(transform.position + GetHoldOffset());
 
-                body.drag = dragWhileGrabbing;
-                grabAnimationCounter = grabAnimationLength;
-
+                isGrabbing = true;
                 IsHolding = true;
+            }
+        }
 
-                SetJump(false);
+        if (IsHolding)
+        {
+            objectBeingHeld.Hold(transform.position + GetHoldOffset());
+
+            if (!isGrabbing)
+            {
+                if (inputController.GetAttackPressed())
+                {
+                    throwDelayCounter = throwDelay;
+                    isThrowing = true;
+                }
+                else
+                {
+                    throwDelayCounter -= Time.deltaTime;
+                }
+
+                if (throwDelayCounter > 0f || inputController.GetAttackHeld())
+                {
+                    body.constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+                else if (isThrowing)
+                {
+                    body.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    body.velocity = GetHoldOffset() * -throwRecoil;
+
+                    objectBeingHeld.QueueThrow(GetHoldOffset() * throwForce);
+                    IsHolding = false;
+
+                    isThrowing = false;
+
+                    objectsToHoldList.Remove(objectBeingHeld.gameObject);
+                    objectBeingHeld = null;
+                }
+            }
+        }
+    }
+
+    private Vector3 GetHoldOffset()
+    {
+        Vector3 holdOffset = new Vector3(inputController.GetHorizontalInput(), inputController.GetVerticalInput());
+
+        if (holdOffset.sqrMagnitude > 0f)
+        {
+            if (Mathf.Abs(holdOffset.x) <= 0f)
+            {
+                lastHoldOffset = new Vector3(0f, holdOffset.y, 0f);
+                return lastHoldOffset;
             }
             else
             {
-                objectBeingHeld = null;
+                lastHoldOffset = new Vector3(holdOffset.x, 0f, 0f);
+                return lastHoldOffset;
             }
-        }
-        else if (inputController.GetAttackHeld() && IsHolding)
-        {
-            // HOLDING
-
-            objectBeingHeld.Hold(transform.position + holdOffset);
-        }
-        else if (IsHolding)
-        {
-            // THROWING
-
-            objectBeingHeld.Throw
-            (
-                new Vector2
-                (
-                    Mathf.Clamp(Mathf.Abs(body.velocity.x) + minThrowForce.x, minThrowForce.x, maxThrowForce.x) * move.Facing
-                    * throwForceMultiplier.x,
-                    Mathf.Clamp(body.velocity.y + minThrowForce.y, minThrowForce.y, maxThrowForce.y)
-                    * throwForceMultiplier.y
-                )
-            );
-            IsHolding = false;
-
-            objectsToHoldList.Remove(objectBeingHeld.gameObject);
-
-            objectBeingHeld = null;
-        }
-
-        // Grab Animation
-        if (grabAnimationCounter <= 0f && grabAnimationCounter > -10f)
-        {
-            body.drag = defaultDrag;
-
-            SetJump(true);
-
-            grabAnimationCounter = -10f;
         }
         else
         {
-            grabAnimationCounter -= Time.deltaTime;
+            return lastHoldOffset;
         }
     }
 
@@ -165,23 +157,4 @@ public class GrabObject : Capability
         return testObjectToHold;
     }
 
-    public override void DisableCapability()
-    {
-        if (IsHolding)
-        {
-            objectBeingHeld.Drop();
-            IsHolding = false;
-        }
-        body.drag = defaultDrag;
-
-        SetJump(true);
-
-        base.DisableCapability();
-    }
-
-    private void SetJump(bool jumpSetting)
-    {
-        if (jump != null && disableJumpDuringGrab)
-            jump.CanJump = jumpSetting;
-    }
 }

@@ -7,7 +7,7 @@ public class Target : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Holdable"))
         {
-            if (collision.gameObject.GetComponentInParent<HoldableObject>().IsBeingThrown)
+            if (collision.gameObject.GetComponentInParent<DefaultThrowObject>().IsBeingHeld)
             {
                 Destroy(gameObject);
             }
