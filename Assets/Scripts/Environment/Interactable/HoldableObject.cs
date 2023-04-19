@@ -15,106 +15,90 @@ using UnityEngine;
 // The child will be a valid trigger for the player, meaning that they can detect it and grab it.
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-public class HoldableObject : MonoBehaviour
+public abstract class HoldableObject : MonoBehaviour
 {
-    public bool IsBeingThrown { get; private set; }
+    public virtual bool IsBeingHeld { get; protected set; }
 
     [Header("Physics")]
-    private Rigidbody2D body;
-    private float defaultGravityScale;
-
-    [Header("Grab Animation")]
-    private Vector3 targetPosition;
-    private Vector3 initialGrabPosition;
-    private Vector3 distanceToTarget;
-
-    private float grabAnimationLength;
-    private float grabAnimationCounter;
+    protected Rigidbody2D body;
+    protected float startingGravityScale;
 
     [Header("Throw")]
-    private Vector3 throwForce;
-    private bool throwPending;
+    protected Vector3 throwForce;
+    protected bool throwPending;
 
-    private void Awake()
+    [Header("Animation")]
+    protected Vector3 targetPosition;
+    protected Vector3 velocity;
+    protected float smoothTime = 0.02f;
+
+    public virtual void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        defaultGravityScale = body.gravityScale;
+        startingGravityScale = body.gravityScale;
     }
 
     private void Update()
     {
-        if (grabAnimationLength > 0f)
+        if (IsBeingHeld)
         {
-            distanceToTarget = targetPosition - initialGrabPosition;
-            if (grabAnimationCounter < grabAnimationLength)
-            {
-                grabAnimationCounter += Time.deltaTime;
-
-                transform.position = initialGrabPosition + (distanceToTarget * (grabAnimationCounter / grabAnimationLength));
-            }
-            else
-            {
-                distanceToTarget = Vector3.zero;
-                transform.position = targetPosition;
-                grabAnimationLength = 0f;
-            }
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         }
-        else if (throwPending)
-        {
-            body.freezeRotation = false;
-            body.gravityScale = defaultGravityScale;
-            body.velocity = throwForce;
 
-            IsBeingThrown = true;
-            throwPending = false;
-        }
+        if (throwPending) { Throw(); throwPending = false; }
     }
 
-    public void Grab(Vector3 holdPosition, float animationLength)
+    public virtual void Grab(Vector3 holdPosition)
     {
-        IsBeingThrown = false;
+        SetStateToHeld();
 
-        // Set Physics
-        body.gravityScale = 0f;
-        body.velocity = Vector2.zero;
-
-        // Set Rotation
-        body.transform.rotation = Quaternion.identity;
-        body.freezeRotation = true;
-
-        // Set Grab Animation Parameters
-        grabAnimationLength = animationLength; // Time
-        grabAnimationCounter = 0f;
-
-        initialGrabPosition = transform.position; // Position
         targetPosition = holdPosition;
-
-        Debug.Log("Grabbed Object: " + name);
     }
 
-    public void Throw(Vector2 throwForce)
+    public virtual void QueueThrow(Vector2 throwForce)
     {
         throwPending = true;
         this.throwForce = throwForce;
     }
 
-    public void Hold(Vector3 holdPosition)
+    public virtual void Throw()
     {
-        targetPosition = holdPosition;
-        if (grabAnimationLength <= 0f)
-        {
-            transform.position = targetPosition;
-        }
+        transform.position = targetPosition;
+
+        SetStateToThrown();
+
+        body.velocity = throwForce;        
     }
 
-    public void Drop()
+    public virtual void Hold(Vector3 holdPosition)
     {
-        grabAnimationLength = 0f;
+        targetPosition = holdPosition;
+    }
 
+    public virtual void Drop()
+    {
+        SetStateToThrown();
+    }
+
+    public virtual void SetStateToHeld()
+    {
+        IsBeingHeld = true;
+
+        body.gravityScale = 0f;
+        body.transform.rotation = Quaternion.identity;
+
+        body.freezeRotation = true;
+        if (TryGetComponent(out GravityMultiplier gravity)) { gravity.enabled = false; }
+    }
+
+    public virtual void SetStateToThrown()
+    {
+        IsBeingHeld = false;
         throwPending = false;
 
         body.freezeRotation = false;
-        body.gravityScale = defaultGravityScale;
-        body.velocity = Vector2.zero;
+        body.gravityScale = startingGravityScale;
+
+        if (TryGetComponent(out GravityMultiplier gravity)) { gravity.enabled = true; }
     }
 }
