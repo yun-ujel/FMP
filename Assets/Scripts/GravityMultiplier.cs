@@ -9,6 +9,10 @@ public class GravityMultiplier : MonoBehaviour
     [SerializeField, Range(0f, 20f)] private float upwardGravityMultiplier = 3f;
     private float defaultGravityScale;
 
+    [Space]
+
+    [SerializeField] private float maxFallSpeed;
+
     private enum GravityState
     {
         upward,
@@ -29,6 +33,11 @@ public class GravityMultiplier : MonoBehaviour
     private void FixedUpdate()
     {
         CalculateGravity();
+
+        if (body.velocity.y < -maxFallSpeed)
+        {
+            body.velocity = new Vector2(body.velocity.x, -maxFallSpeed);
+        }
     }
 
     private void CalculateGravity()

@@ -91,12 +91,13 @@ public class DrawingSystem : MonoBehaviour
 
     public void ApplyColourToCircle(int colourIndex, Vector3 colourPosition, int radius)
     {
+        int sqrRadius = radius * radius;
         float worldPixelSize = 1f / pixelsPerUnitMultiplier;
-        for (int x = -radius; x <= radius; x++)
+        for (int x = -sqrRadius; x <= sqrRadius; x++)
         {
-            for (int y = -radius; y <= radius; y++)
+            for (int y = -sqrRadius; y <= sqrRadius; y++)
             {
-                if (new Vector2(x, y).magnitude < radius)
+                if (new Vector2(x, y).sqrMagnitude < sqrRadius)
                 {
                     ApplyColourToPixel(colourIndex, colourPosition + new Vector3
                     (
