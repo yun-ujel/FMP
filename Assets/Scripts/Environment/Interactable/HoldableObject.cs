@@ -11,8 +11,8 @@ using UnityEngine;
 
 // -------------
 
-// This way, the object with the "Player" layer will collide with the ground, but not the player.
-// The child will be a valid trigger for the player, meaning that they can detect it and grab it.
+// This way, the object with the "Player" layer (and this script) will collide with the ground, but not the player.
+// The child will be a valid trigger for the player, meaning that they can detect it, and grab this object by referencing its parent.
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public abstract class HoldableObject : MonoBehaviour
@@ -38,7 +38,7 @@ public abstract class HoldableObject : MonoBehaviour
         startingGravityScale = body.gravityScale;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if (IsBeingHeld)
         {

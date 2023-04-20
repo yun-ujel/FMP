@@ -13,6 +13,8 @@ public abstract class InputController : ScriptableObject
     public abstract bool GetAttackPressed();
 
     public abstract bool GetAttackHeld();
+
+    public abstract Vector2 GetInputAxes();
 }
 
 

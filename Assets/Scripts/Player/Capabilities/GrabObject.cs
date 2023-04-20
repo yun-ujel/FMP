@@ -104,25 +104,14 @@ public class GrabObject : Capability
 
     private Vector3 GetHoldOffset()
     {
-        Vector3 holdOffset = new Vector3(inputController.GetHorizontalInput(), inputController.GetVerticalInput());
+        Vector3 holdOffset = inputController.GetInputAxes();
 
         if (holdOffset.sqrMagnitude > 0f)
         {
-            if (Mathf.Abs(holdOffset.x) <= 0f)
-            {
-                lastHoldOffset = new Vector3(0f, holdOffset.y, 0f);
-                return lastHoldOffset;
-            }
-            else
-            {
-                lastHoldOffset = new Vector3(holdOffset.x, 0f, 0f);
-                return lastHoldOffset;
-            }
+            lastHoldOffset = holdOffset;
         }
-        else
-        {
-            return lastHoldOffset;
-        }
+
+        return lastHoldOffset;
     }
 
 
