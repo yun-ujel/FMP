@@ -16,6 +16,8 @@ public class AdditionalCharacterInfo : MonoBehaviour
 
     [SerializeField] private Capability[] capabilitiesToTrigger;
 
+    [SerializeField] private List<CharacterTrigger> disabledTriggers = new List<CharacterTrigger>();
+
     private void Awake()
     {
         Capabilities = new List<Capability>();
@@ -55,16 +57,31 @@ public class AdditionalCharacterInfo : MonoBehaviour
             // Landing
             TimeSinceLastLanding = 0f;
             wasMidairOnPreviousFrame = false;
+
+            for (int i = 0; i < disabledTriggers.Count; i++)
+            {
+                disabledTriggers[i].gameObject.SetActive(true);
+            }
+            disabledTriggers.Clear();
         }
 
         wasMidairOnPreviousFrame = !ground.OnGround;
     }
 
-    private void TriggerCapabilityEffects()
+    public void TriggerCapabilityEffects()
     {
         for (int i = 0; i < capabilitiesToTrigger.Length; i++)
         {
             capabilitiesToTrigger[i].TriggerMainEffect();
         }
+    }
+
+    public void UseCharacterTrigger(CharacterTrigger trigger)
+    {
+        TriggerCapabilityEffects();
+
+        disabledTriggers.Add(trigger);
+
+        trigger.gameObject.SetActive(false);
     }
 }

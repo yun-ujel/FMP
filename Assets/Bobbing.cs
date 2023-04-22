@@ -6,6 +6,14 @@ public class Bobbing : MonoBehaviour
     [SerializeField] private float speed = 3f;
     private float counter;
 
+    private Collider2D trigger;
+    private bool usingCollider;
+
+    private void Start()
+    {
+        usingCollider = TryGetComponent(out trigger);
+    }
+
 
     private float offset;
     private void Update()
@@ -16,6 +24,8 @@ public class Bobbing : MonoBehaviour
         offset = Mathf.Sin(counter * speed) * magnitude;
 
         AddToYPosition(offset);
+
+        if (usingCollider) { trigger.offset = new Vector2(0f, -offset); }
     }
 
     private void AddToYPosition(float add)

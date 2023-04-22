@@ -13,7 +13,9 @@ public class DrawingSystemParticle : MonoBehaviour
         [SerializeField] private ParticleSystem particleSystem;
         private ParticleSystem.Particle[] particles;
         public int ColourIndex => colourIndex;
+        public int SecondaryColourIndex => secondaryColourIndex;
         [SerializeField] private int colourIndex;
+        [SerializeField] private int secondaryColourIndex;
 
         [Space]
         [SerializeField] private bool drawLinesToParticles;
@@ -29,7 +31,7 @@ public class DrawingSystemParticle : MonoBehaviour
         [SerializeField, Range(0f, 1f)] private float drawChance;
 
         public bool WillDrawThisFrame()
-        {           
+        {
             timeSinceLastDraw += Time.deltaTime;
 
             if (particleSystem.isPlaying)
@@ -62,6 +64,16 @@ public class DrawingSystemParticle : MonoBehaviour
             particleSystem.GetParticles(particles);
             return particles;
         }
+
+        private ParticleSystem.ShapeModule shape;
+
+        public Vector3 GetPosition()
+        {
+            shape = particleSystem.shape;
+            shape.position = particleSystem.transform.position;
+
+            return particleSystem.transform.position;
+        }
     }
     private void Start()
     {
@@ -76,11 +88,11 @@ public class DrawingSystemParticle : MonoBehaviour
             {
                 if (!drawers[i].DrawLines)
                 {
-                    Draw(drawers[i].GetParticles(), drawers[i].ColourIndex);
+                    Draw(drawers[i].GetParticles(), Random.Range(drawers[i].ColourIndex, drawers[i].SecondaryColourIndex));
                 }
                 else
                 {
-                    DrawLinesToParticles(drawers[i].GetParticles(), drawers[i].ColourIndex, drawers[i].LineStrength, null);
+                    DrawLinesToParticles(drawers[i].GetParticles(), drawers[i].ColourIndex, drawers[i].SecondaryColourIndex, drawers[i].LineStrength, drawers[i].GetPosition());
                 }
             }
         }
@@ -94,7 +106,7 @@ public class DrawingSystemParticle : MonoBehaviour
         }
     }
 
-    private void DrawLinesToParticles(ParticleSystem.Particle[] particles, int colourIndex, int lineStrength, Vector3? startPosition)
+    private void DrawLinesToParticles(ParticleSystem.Particle[] particles, int colourIndex1, int colourIndex2, int lineStrength, Vector3? startPosition)
     {
         for (int i = 0; i < particles.Length; i++)
         {
@@ -104,7 +116,7 @@ public class DrawingSystemParticle : MonoBehaviour
 
             for (int t = 0; t < lineStrength; t++)
             {
-                drawingSystem.ApplyColourToPixel(colourIndex, Vector3.Lerp(start, particles[i].position, (float)t / lineStrength));
+                drawingSystem.ApplyColourToPixel(Random.Range(colourIndex1, colourIndex2), Vector3.Lerp(start, particles[i].position, (float)t / lineStrength));
             }
         }
     }

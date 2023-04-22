@@ -12,6 +12,8 @@ public class DrawingSystemBrush : MonoBehaviour
     [SerializeField, Range(0, 10)] private int emissionRolls;
     private int successfulEmissionsThisFrame;
 
+    public bool CanEmit { get; set; }
+
     [Header("Particle")]
     [SerializeField] private int minPixelRadius = 1;
     [SerializeField] private int maxPixelRadius = 1;
@@ -28,22 +30,25 @@ public class DrawingSystemBrush : MonoBehaviour
     private void Update()
     {
         successfulEmissionsThisFrame = 0;
-        for (int i = 0; i < emissionRolls; i++)
+        if (CanEmit)
         {
-            if (Random.Range(0f, 1f) <= emissionChance)
+            for (int i = 0; i < emissionRolls; i++)
             {
-                successfulEmissionsThisFrame += 1;
-                if (randomCircleRadius > 0f)
+                if (Random.Range(0f, 1f) <= emissionChance)
                 {
-                    Emit(GetPosition() + (new Vector3(Random.insideUnitCircle.x, Random.insideUnitCircle.y) * randomCircleRadius));
-                }
-                else if (successfulEmissionsThisFrame < 2)
-                {
-                    Emit(GetPosition());
-                }
-                else
-                {
-                    break;
+                    successfulEmissionsThisFrame += 1;
+                    if (randomCircleRadius > 0f)
+                    {
+                        Emit(GetPosition() + (new Vector3(Random.insideUnitCircle.x, Random.insideUnitCircle.y) * randomCircleRadius));
+                    }
+                    else if (successfulEmissionsThisFrame < 2)
+                    {
+                        Emit(GetPosition());
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
         }
