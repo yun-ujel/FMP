@@ -40,7 +40,7 @@ public class SlopeSlide : Capability
             move.Facing = slopeCheck.SlopeFacing;
         }
 
-        DisableCapabilitiesWithException(abilitiesDuringSlide);
+        DisableOtherCapabilitiesExcept(abilitiesDuringSlide);
     }
 
     private void FinishSlide()
