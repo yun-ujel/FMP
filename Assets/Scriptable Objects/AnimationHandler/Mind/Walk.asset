@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3bf908f65be434db5c0919d2a93c99, type: 3}
   m_Name: Walk
   m_EditorClassIdentifier: 
+  exitTime: 0
+  localPositionOverride: {x: 0, y: 0, z: 0}
+  potentialLastAnimations: []
+  excludedLastAnimations: []
   minAnimationSpeed: 1
   maxAnimationSpeed: 1
-  xVelocityIsAbove: 0
+  xVelocityIsAbove: 0.01

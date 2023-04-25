@@ -31,9 +31,9 @@ public class GroundWalkAnim : AnimationHandler
 
     public override bool IsAnimationValid()
     {
-        return base.IsAnimationValid() 
+        return base.IsAnimationValid()
             && groundCheck.OnGround
-            && move.enabled 
+            && move.enabled
             && Mathf.Abs(cAnim.Velocity.x) > 0f
             && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove;
     }

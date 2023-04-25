@@ -19,7 +19,6 @@ public class GrabAnim : AnimationHandler
 
     public override bool IsAnimationValid()
     {
-        return base.IsAnimationValid() 
-            && grab.IsHolding;
+        return base.IsAnimationValid() && grab.IsHolding;
     }
 }

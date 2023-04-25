@@ -19,17 +19,18 @@ public abstract class AnimationHandler : ScriptableObject
 
     [SerializeField] protected string[] excludedLastAnimations;
 
-    protected bool isAnimationValidOverride;
+    protected bool isAnimationValidOverride = true;
 
 
     public virtual void SetCharacterAnimator(CharacterAnimation characterAnimation)
     {
+        isAnimationValidOverride = true;
         cAnim = characterAnimation;
     }
 
     public virtual bool IsAnimationValid()
     {
-        return LastAnimationIsIncluded() && LastAnimationIsNotExcluded();
+        return LastAnimationIsIncluded() && LastAnimationIsNotExcluded() && isAnimationValidOverride;
     }
 
     public virtual bool LastAnimationIsIncluded()

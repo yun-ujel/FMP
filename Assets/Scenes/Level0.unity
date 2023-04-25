@@ -1118,7 +1118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610903570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 26.666666, y: 15, z: 10}
   m_LocalScale: {x: 26.666666, y: 15, z: 0}
   m_Children: []
   m_Father: {fileID: 1713178815}
@@ -1187,7 +1187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenScaleX: 1
+  mirrorXScale: 0
   screenScaleY: 1
+  mirrorYScale: 0
   anchoredPosition: {x: -1, y: -1}
 --- !u!1 &1667737520
 GameObject:
@@ -1759,6 +1761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1917462307}
+  - component: {fileID: 1917462314}
   - component: {fileID: 1917462316}
   - component: {fileID: 1917462315}
   - component: {fileID: 1917462317}
@@ -1914,6 +1917,21 @@ MonoBehaviour:
   abilitiesDuringSlide:
   - {fileID: 1917462313}
   - {fileID: 1917462311}
+--- !u!114 &1917462314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917462306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55880f26936bb444ea711688d2a9c22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 11400000, guid: 6ba408ab511b8d44fa79f9c949437d36, type: 2}
+  move: {fileID: 1917462312}
+  capabilitiesToTrigger: []
 --- !u!114 &1917462315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2187,12 +2205,12 @@ MonoBehaviour:
   character: {fileID: 1917462306}
   animations:
   - {fileID: 11400000, guid: 630d5b7c5d77ae44a99f50164148bc38, type: 2}
-  - {fileID: 11400000, guid: f1a6ac8d60a39b941afaf2aa8bd54ef8, type: 2}
   - {fileID: 11400000, guid: 198b191ab1d4f6a4788a88012d381a19, type: 2}
+  - {fileID: 11400000, guid: f1a6ac8d60a39b941afaf2aa8bd54ef8, type: 2}
   - {fileID: 11400000, guid: ba73b46fe7c6b6347b435d40f17dacd3, type: 2}
   - {fileID: 11400000, guid: dd0b152d6914fba4cb703fe0b0553533, type: 2}
-  - {fileID: 11400000, guid: 398c1cd82832c814597787b475408c42, type: 2}
   - {fileID: 11400000, guid: f159e9a45feb5714a84dce8ec9766035, type: 2}
+  smoothTime: 0.2
 --- !u!61 &5791551576075092465
 BoxCollider2D:
   m_ObjectHideFlags: 0

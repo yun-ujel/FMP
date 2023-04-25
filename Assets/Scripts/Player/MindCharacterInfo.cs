@@ -1,26 +1,22 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AdditionalCharacterInfo : MonoBehaviour
+public class MindCharacterInfo : CharacterInfo
 {
-    public List<Capability> Capabilities { get; private set; }
-
     [Header("Base References")]
 
     [SerializeField] private GroundCheck ground;
+    [SerializeField] private Move move;
+
     public float TimeSinceLastLanding { get; private set; }
     private bool wasMidairOnPreviousFrame;
 
-    
-    [Header("On Capabilities To Trigger")]    
-
+    [Header("Capabilities To Trigger")]
     [SerializeField] private Capability[] capabilitiesToTrigger;
 
 
-    private void Awake()
+    public override void Awake()
     {
-        Capabilities = new List<Capability>();
-        Capabilities.AddRange(GetComponents<Capability>());
+        base.Awake();
 
         if (ground == null)
         {
@@ -35,16 +31,23 @@ public class AdditionalCharacterInfo : MonoBehaviour
             }
         }
 
+        if (move == null)
+        {
+            for (int i = 0; i < Capabilities.Length; i++)
+            {
+                if (Capabilities[i].GetType() == typeof(Move))
+                {
+                    move = (Move)Capabilities[i];
+                    break;
+                }
+            }
+        }
     }
 
     private void Update()
     {
         CheckPlayerLanding();
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TriggerCapabilityEffects();
-        }
+        Facing = move.Facing;
     }
 
     private void CheckPlayerLanding()
@@ -59,13 +62,5 @@ public class AdditionalCharacterInfo : MonoBehaviour
         }
 
         wasMidairOnPreviousFrame = !ground.OnGround;
-    }
-
-    public void TriggerCapabilityEffects()
-    {
-        for (int i = 0; i < capabilitiesToTrigger.Length; i++)
-        {
-            capabilitiesToTrigger[i].TriggerMainEffect();
-        }
     }
 }
