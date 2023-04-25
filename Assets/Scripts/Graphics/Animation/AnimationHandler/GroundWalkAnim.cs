@@ -11,39 +11,43 @@ public class GroundWalkAnim : AnimationHandler
 
     [Header("Requirements")]
     [SerializeField, Range(0f, 10f)] private float xVelocityIsAbove = 0f;
-    
-    [Space]
-    
-    [SerializeField] private bool isHoldingObject = false;
-    private GrabObject grab;
 
     public override void SetCharacterAnimator(CharacterAnimation characterAnimation)
     {
         base.SetCharacterAnimator(characterAnimation);
 
-        move = (Move)cAnim.GetCapability(typeof(Move));
-        groundCheck = (GroundCheck)cAnim.GetCheck(typeof(GroundCheck));
-
-        if (isHoldingObject)
+        if (cAnim.TryGetCheck(out CollisionCheck check, typeof(GroundCheck)) && cAnim.TryGetCapability(out Capability cap, typeof(Move)))
         {
-            grab = (GrabObject)cAnim.GetCapability(typeof(GrabObject));
+            isAnimationValidOverride = true;
+
+            move = (Move)cap;
+            groundCheck = (GroundCheck)check;
+        }
+        else
+        {
+            isAnimationValidOverride = false;
         }
     }
 
     public override bool IsAnimationValid()
     {
-        if (!isHoldingObject)
-        {
-            return groundCheck.OnGround && move.enabled && Mathf.Abs(cAnim.Velocity.x) > 0f
-                && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove;
-        }
-        // Else
-        return groundCheck.OnGround && move.enabled && Mathf.Abs(cAnim.Velocity.x) > 0f
-            && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove && grab.IsHolding;
+        return base.IsAnimationValid() 
+            && groundCheck.OnGround
+            && move.enabled 
+            && Mathf.Abs(cAnim.Velocity.x) > 0f
+            && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove;
     }
 
     public override float GetAnimationSpeed()
     {
-        return Mathf.Abs(cAnim.Velocity.x).Remap(0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed);
+        if (isAnimationValidOverride)
+        {
+            return Mathf.Abs(cAnim.Velocity.x).Remap(0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed) 
+                * base.GetAnimationSpeed();
+        }
+        else
+        {
+            return base.GetAnimationSpeed();
+        }
     }
 }

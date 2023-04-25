@@ -8,33 +8,24 @@ public class MidairAnim : AnimationHandler
     [SerializeField] private float yVelocityIsAbove = float.NegativeInfinity;
     private GroundCheck groundCheck;
 
-    [Space]
-
-    [SerializeField] private bool isHoldingObject = false;
-    private GrabObject grab;
-
-
-
 
     public override void SetCharacterAnimator(CharacterAnimation characterAnimation)
     {
         base.SetCharacterAnimator(characterAnimation);
 
-        groundCheck = (GroundCheck)cAnim.GetCheck(typeof(GroundCheck));
+        isAnimationValidOverride = cAnim.TryGetCheck(out CollisionCheck check, typeof(GroundCheck));
 
-        if (isHoldingObject)
+        if (isAnimationValidOverride)
         {
-            grab = (GrabObject)cAnim.GetCapability(typeof(GrabObject));
+            groundCheck = (GroundCheck)check;
         }
     }
 
     public override bool IsAnimationValid()
     {
-        if (!isHoldingObject)
-        {
-            return cAnim.Velocity.y < yVelocityIsBelow && cAnim.Velocity.y > yVelocityIsAbove && !groundCheck.OnGround;
-        }
-        // Else
-        return cAnim.Velocity.y < yVelocityIsBelow && cAnim.Velocity.y > yVelocityIsAbove && !groundCheck.OnGround && grab.IsHolding;
+        return base.IsAnimationValid() 
+            && cAnim.Velocity.y < yVelocityIsBelow 
+            && cAnim.Velocity.y > yVelocityIsAbove 
+            && !groundCheck.OnGround;
     }
 }

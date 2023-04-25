@@ -9,11 +9,17 @@ public class GrabAnim : AnimationHandler
     {
         base.SetCharacterAnimator(characterAnimation);
 
-        grab = (GrabObject)cAnim.GetCapability(typeof(GrabObject));
+        isAnimationValidOverride = cAnim.TryGetCapability(out Capability cap, typeof(GrabObject));
+
+        if (isAnimationValidOverride)
+        {
+            grab = (GrabObject)cap;
+        }
     }
 
     public override bool IsAnimationValid()
     {
-        return grab.IsHolding;
+        return base.IsAnimationValid() 
+            && grab.IsHolding;
     }
 }

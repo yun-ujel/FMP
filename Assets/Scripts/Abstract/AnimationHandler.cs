@@ -19,6 +19,9 @@ public abstract class AnimationHandler : ScriptableObject
 
     [SerializeField] protected string[] excludedLastAnimations;
 
+    protected bool isAnimationValidOverride;
+
+
     public virtual void SetCharacterAnimator(CharacterAnimation characterAnimation)
     {
         cAnim = characterAnimation;

@@ -111,6 +111,36 @@ public class CharacterAnimation : MonoBehaviour
         return null;
     }
 
+    public bool TryGetCheck(out CollisionCheck check, System.Type type)
+    {
+        for (int i = 0; i < relay.CollisionChecks.Length; i++)
+        {
+            if (relay.CollisionChecks[i].GetType() == type)
+            {
+                check = relay.CollisionChecks[i];
+                return true;
+            }
+        }
+
+        check = null;
+        return false;
+    }
+
+    public bool TryGetCapability(out Capability capability, System.Type type)
+    {
+        for (int i = 0; i < capabilities.Count; i++)
+        {
+            if (capabilities[i].GetType() == type)
+            {
+                capability = capabilities[i];
+                return true;
+            }
+        }
+
+        capability = null;
+        return false;
+    }
+
     private void PlayAnimation(AnimationHandler animation)
     {
         if (LastAnimationPlayed != animation.name && queuedExitTime > 0f)
