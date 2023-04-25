@@ -67,7 +67,7 @@ public abstract class CharacterAnimation : MonoBehaviour
     {
         transform.localScale = new Vector3
         (
-            characterInfo.Facing * Mathf.Abs(transform.localScale.x), 
+            characterInfo.Facing * Mathf.Abs(transform.localScale.x),
             transform.localScale.y, 
             transform.localScale.z
         );

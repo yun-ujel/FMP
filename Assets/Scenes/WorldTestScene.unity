@@ -1266,7 +1266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1147080136}
-  - component: {fileID: 1147080137}
+  - component: {fileID: 1147080139}
   - component: {fileID: 1147080138}
   - component: {fileID: 1147080135}
   m_Layer: 0
@@ -1341,46 +1341,6 @@ Transform:
   m_Father: {fileID: 1864057609}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1147080137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147080134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90428a9b006724e4faa2a190770af86a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 1864057608}
-  animator: {fileID: 0}
-  animations:
-  - name: FwdRight
-    xVelocityIsAbove: 0
-    xVelocityIsBelow: 0.8
-    yVelocityIsBelow: 0
-    yVelocityIsAbove: -Infinity
-  - name: Fwd
-    xVelocityIsAbove: -Infinity
-    xVelocityIsBelow: Infinity
-    yVelocityIsBelow: 0
-    yVelocityIsAbove: -Infinity
-  - name: BackRight
-    xVelocityIsAbove: 0
-    xVelocityIsBelow: 0.8
-    yVelocityIsBelow: Infinity
-    yVelocityIsAbove: 0
-  - name: Right
-    xVelocityIsAbove: 0
-    xVelocityIsBelow: Infinity
-    yVelocityIsBelow: 0.1
-    yVelocityIsAbove: -0.1
-  - name: Back
-    xVelocityIsAbove: -Infinity
-    xVelocityIsBelow: Infinity
-    yVelocityIsBelow: Infinity
-    yVelocityIsAbove: 0
 --- !u!95 &1147080138
 Animator:
   serializedVersion: 3
@@ -1400,6 +1360,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1147080139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147080134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc282c92bbe5d24b897385e59f0a27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 1864057608}
+  animations:
+  - {fileID: 11400000, guid: dddb9a233928efe4dbf59ed1b318abe9, type: 2}
+  - {fileID: 11400000, guid: 20c3a375b17ab1241a1e9770c97e2743, type: 2}
+  - {fileID: 11400000, guid: b1e38085c62374944bdd2bea8caf2d66, type: 2}
+  - {fileID: 11400000, guid: 663fe968365be0d4a8bb8ea90b226d4d, type: 2}
+  - {fileID: 11400000, guid: 39edd1fca53fd364bb00380a6c578c7c, type: 2}
+  - {fileID: 11400000, guid: 518c4bedda1d1174fa8ede8adffad789, type: 2}
+  - {fileID: 11400000, guid: 75b39f5c2b0ad9146876b9425b55649c, type: 2}
+  - {fileID: 11400000, guid: e510b4e1cf4e3b743841a1d82a7c855c, type: 2}
+  - {fileID: 11400000, guid: 20cb15c5e75dac546954a51b6ab86d6f, type: 2}
+  - {fileID: 11400000, guid: 746df226cda5ef24aad773ca83b73687, type: 2}
+  smoothTime: 0
 --- !u!1 &1147578172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,6 +1911,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1864057609}
+  - component: {fileID: 1864057613}
   - component: {fileID: 1864057612}
   - component: {fileID: 1864057611}
   - component: {fileID: 1864057610}
@@ -2017,6 +2003,19 @@ MonoBehaviour:
   maxSpeed: 2.5
   verticalSpeedMultiplier: 0.6
   acceleration: 20
+--- !u!114 &1864057613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864057608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c8d219424c48149ace4fa8ce37369f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {fileID: 1864057612}
 --- !u!1 &1926715806
 GameObject:
   m_ObjectHideFlags: 0

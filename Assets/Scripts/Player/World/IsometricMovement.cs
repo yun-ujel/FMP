@@ -1,16 +1,15 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class IsometricMovement : MonoBehaviour
+public class IsometricMovement : Capability
 {
-    [SerializeField] private InputController inputController;
     private Rigidbody2D body;
-
 
     [Header("Speed Values")]
     public float maxSpeed;
     [SerializeField] private float verticalSpeedMultiplier = 0.6f;
     private Vector2 direction;
+    public Vector2 Direction => direction;
 
     private Vector2 velocity;
     [Space]
@@ -33,4 +32,5 @@ public class IsometricMovement : MonoBehaviour
 
         body.velocity = velocity;
     }
+
 }
