@@ -21,6 +21,11 @@ public class ScaleToScreen : MonoBehaviour
     private Vector2 screenScaleOnLastCalculation;
     private Vector2 anchoredPosOnLastCalculation;
 
+    private void Awake()
+    {
+        Rescale();
+    }
+
     private void Update()
     {
         screenScale = new Vector2(screenScaleX, screenScaleY);
