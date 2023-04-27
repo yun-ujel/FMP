@@ -9,7 +9,7 @@ public class PlayerHairPosition : MonoBehaviour
     [SerializeField] private float boxSize = 0.416666666667f;
     [SerializeField] private Color color = Color.green;
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         ExtensionMethods.DrawBox(GetPosition(), boxSize / 2, color);
     }

@@ -16,11 +16,11 @@ public class Bobbing : MonoBehaviour
 
 
     private float offset;
-    private void Update()
+    private void FixedUpdate()
     {
         AddToYPosition(-offset);
 
-        counter += Time.deltaTime;
+        counter += Time.fixedDeltaTime;
         offset = Mathf.Sin(counter * speed) * magnitude;
 
         AddToYPosition(offset);

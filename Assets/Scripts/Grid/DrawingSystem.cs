@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DrawingSystem : MonoBehaviour
 {
+    public static DrawingSystem Instance { get; private set; }
+
     [SerializeField] private DrawingSystemVisual[] pixelArtDrawingSystemVisuals = new DrawingSystemVisual[4];
     private BGrid<GridPixel>[] grids = new BGrid<GridPixel>[4];
 
@@ -14,6 +16,15 @@ public class DrawingSystem : MonoBehaviour
     // Each Pixel on a grid equates to 6 pixels on a 1920x1080 screen.
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         for (int i = 0; i < pixelArtDrawingSystemVisuals.Length; i++)
         {
             grids[i] = new BGrid<GridPixel>
@@ -27,6 +38,14 @@ public class DrawingSystem : MonoBehaviour
                 ),
                 (BGrid<GridPixel> grid, int x, int y) => new GridPixel(grid, x, y)
             );
+        }
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < pixelArtDrawingSystemVisuals.Length; i++)
+        {
+            pixelArtDrawingSystemVisuals[i].SetGrid(grids[i]);
         }
     }
 
@@ -48,14 +67,6 @@ public class DrawingSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             ApplyColourToScreen(0);
-        }
-    }
-
-    private void Start()
-    {
-        for (int i = 0; i < pixelArtDrawingSystemVisuals.Length; i++)
-        {
-            pixelArtDrawingSystemVisuals[i].SetGrid(grids[i]);
         }
     }
 

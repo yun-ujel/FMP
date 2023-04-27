@@ -103,8 +103,6 @@ public class SteelSlope : Capability
         }
 
         CurrentMoveAngle = Vector2.Angle(moveDirection / slideFacing, Vector2.up * -slopeCheck.SlopeFacing);
-
-        Debug.Log(CurrentMoveAngle);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

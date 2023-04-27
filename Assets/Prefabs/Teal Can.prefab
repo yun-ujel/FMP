@@ -4889,6 +4889,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6042597933645344572}
+  - component: {fileID: 7536499195232499145}
   - component: {fileID: 6042597933645344573}
   - component: {fileID: 6042597933645344574}
   - component: {fileID: 6042597933645344571}
@@ -4915,6 +4916,27 @@ Transform:
   m_Father: {fileID: 6042597934405381179}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7536499195232499145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042597933645344575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6851fb2cc946d4db2c870298bb6e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawingSystem: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  offsetEuler: {x: 0, y: 0, z: 0}
+  emissionChance: 0.2
+  emissionsPerSecond: 12
+  minPixelRadius: 1
+  maxPixelRadius: 1
+  colourIndex: 3
+  randomCircleRadius: 0.6
 --- !u!212 &6042597933645344573
 SpriteRenderer:
   m_ObjectHideFlags: 0

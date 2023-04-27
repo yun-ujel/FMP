@@ -7,6 +7,9 @@ public class DrawingSystemParticle : MonoBehaviour
 
     [SerializeField] private ParticleDrawer[] drawers;
 
+    private int colourIndex;
+    private bool coinFlip;
+
     [System.Serializable]
     private class ParticleDrawer
     {
@@ -59,7 +62,7 @@ public class DrawingSystemParticle : MonoBehaviour
 
         public ParticleSystem.Particle[] GetParticles()
         {
-            if (particles == null) particles = new ParticleSystem.Particle[particleSystem.main.maxParticles];
+            if (particles == null) { particles = new ParticleSystem.Particle[particleSystem.main.maxParticles]; }
 
             particleSystem.GetParticles(particles);
             return particles;
@@ -77,7 +80,7 @@ public class DrawingSystemParticle : MonoBehaviour
     }
     private void Start()
     {
-
+        if (drawingSystem == null) { drawingSystem = DrawingSystem.Instance; }        
     }
 
     private void Update()
@@ -88,7 +91,7 @@ public class DrawingSystemParticle : MonoBehaviour
             {
                 if (!drawers[i].DrawLines)
                 {
-                    Draw(drawers[i].GetParticles(), Random.Range(drawers[i].ColourIndex, drawers[i].SecondaryColourIndex));
+                    Draw(drawers[i].GetParticles(), drawers[i].ColourIndex, drawers[i].SecondaryColourIndex);
                 }
                 else
                 {
@@ -98,25 +101,29 @@ public class DrawingSystemParticle : MonoBehaviour
         }
     }
 
-    private void Draw(ParticleSystem.Particle[] particles, int colourIndex)
+    private void Draw(ParticleSystem.Particle[] particles, int colourIndex1, int colourIndex2)
     {
         for (int i = 0; i < particles.Length; i++)
         {
+            coinFlip = Random.Range(0, 2) == 1;
+
+            colourIndex = coinFlip ? colourIndex1 : colourIndex2;
             drawingSystem.ApplyColourToPixel(colourIndex, particles[i].position);
         }
     }
 
-    private void DrawLinesToParticles(ParticleSystem.Particle[] particles, int colourIndex1, int colourIndex2, int lineStrength, Vector3? startPosition)
+    private void DrawLinesToParticles(ParticleSystem.Particle[] particles, int colourIndex1, int colourIndex2, int lineStrength, Vector3 startPosition)
     {
         for (int i = 0; i < particles.Length; i++)
         {
-            Vector3 start = startPosition == null ? transform.position : (Vector3)startPosition;
-
-            Debug.DrawLine(start, particles[i].position, Color.red, 0.1f);
+            Debug.DrawLine(startPosition, particles[i].position, Color.red, 0.1f);
 
             for (int t = 0; t < lineStrength; t++)
             {
-                drawingSystem.ApplyColourToPixel(Random.Range(colourIndex1, colourIndex2), Vector3.Lerp(start, particles[i].position, (float)t / lineStrength));
+                coinFlip = Random.Range(0, 2) == 1;
+
+                colourIndex = coinFlip ? colourIndex1 : colourIndex2;
+                drawingSystem.ApplyColourToPixel(colourIndex, Vector3.Lerp(startPosition, particles[i].position, (float)t / lineStrength));
             }
         }
     }

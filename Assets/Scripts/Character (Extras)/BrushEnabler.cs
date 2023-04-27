@@ -7,6 +7,6 @@ public class BrushEnabler : MonoBehaviour
 
     private void Update()
     {
-        brush.CanEmit = referenceBody.velocity.sqrMagnitude > 0f;
+        brush.enabled = referenceBody.velocity.sqrMagnitude > 0f;
     }
 }
