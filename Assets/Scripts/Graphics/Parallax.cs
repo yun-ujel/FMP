@@ -10,22 +10,66 @@ public class Parallax : MonoBehaviour
     
     [SerializeField] private Renderer rend;
     [SerializeField] private Transform[] gridVisualTransforms;
+    private DrawingSystem drawingSystem;
 
     [Space]
 
-    [SerializeField, Range(0f, 1f)] private float offsetX;
+    private Vector2 offset;
+    private Vector2 moveDir;
+
+    private float timeSinceScrollStarted;
+    private bool isScrolling;
 
     private void Awake()
     {
         if (rend == null) { rend = GetComponent<Renderer>(); }
+        drawingSystem = DrawingSystem.Instance;
     }
 
     private void Update()
     {
-        rend.material.mainTextureOffset = Vector2.right * offsetX;
-        for (int i = 0; i < gridVisualTransforms.Length; i++)
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            gridVisualTransforms[i].localPosition = Vector3.left * (screenSizeInUnits.x * offsetX);
+            ScrollInDirection(Vector2.up);
         }
+
+        if (isScrolling)
+        {
+            if (timeSinceScrollStarted <= 1f)
+            {
+                offset = Vector2.Lerp(offset, moveDir, timeSinceScrollStarted);
+
+                rend.material.mainTextureOffset = offset;
+                for (int i = 0; i < gridVisualTransforms.Length; i++)
+                {
+                    gridVisualTransforms[i].localPosition = screenSizeInUnits * -offset;
+                }
+            }
+            else
+            {
+                drawingSystem.ApplyColourToScreen(0);
+                for (int i = 0; i < gridVisualTransforms.Length; i++)
+                {
+                    gridVisualTransforms[i].localPosition = Vector3.zero;
+                }
+                moveDir = Vector2.zero;
+                offset = Vector2.zero;
+                isScrolling = false;
+            }
+
+            timeSinceScrollStarted += Time.deltaTime * 0.5f;
+        }
+    }
+
+    public void ScrollInDirection(Vector2 direction)
+    {
+        moveDir = direction;
+        timeSinceScrollStarted = 0f;
+        isScrolling = true;
+    }
+
+    public void ScrollInDirection(float x = 0f, float y = 1f)
+    {
+        ScrollInDirection(new Vector2(x, y));
     }
 }

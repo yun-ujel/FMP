@@ -18,9 +18,7 @@ MonoBehaviour:
   - Walk
   - WalkEntry
   - WalkExit
-  - JumpWalkTransition
+  - JumpToWalk
   excludedLastAnimations: []
-  minAnimationSpeed: 1
-  maxAnimationSpeed: 1
   xVelocityIsAbove: 3
   xVelocityIsBelow: Infinity

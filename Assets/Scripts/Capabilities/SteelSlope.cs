@@ -112,4 +112,9 @@ public class SteelSlope : Capability
             RecalculateMoveDirection();
         }
     }
+
+    private void ResetPlayer()
+    {
+        FinishSlide();
+    }
 }

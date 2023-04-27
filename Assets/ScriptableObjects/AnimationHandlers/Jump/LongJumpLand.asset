@@ -16,4 +16,4 @@ MonoBehaviour:
   localPositionOverride: {x: 0, y: 0, z: 0}
   potentialLastAnimations: []
   excludedLastAnimations: []
-  duration: 0.6
+  duration: 0.51

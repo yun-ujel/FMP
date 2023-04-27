@@ -13,6 +13,8 @@ public class DrawingSystemParticle : MonoBehaviour
     [System.Serializable]
     private class ParticleDrawer
     {
+        public bool Enabled => particleSystem.gameObject.activeInHierarchy;
+
         [SerializeField] private ParticleSystem particleSystem;
         private ParticleSystem.Particle[] particles;
         public int ColourIndex => colourIndex;
@@ -87,7 +89,7 @@ public class DrawingSystemParticle : MonoBehaviour
     {
         for (int i = 0; i < drawers.Length; i++)
         {
-            if (drawers[i].WillDrawThisFrame())
+            if (drawers[i].Enabled && drawers[i].WillDrawThisFrame())
             {
                 if (!drawers[i].DrawLines)
                 {
@@ -114,7 +116,7 @@ public class DrawingSystemParticle : MonoBehaviour
 
     private void DrawLinesToParticles(ParticleSystem.Particle[] particles, int colourIndex1, int colourIndex2, int lineStrength, Vector3 startPosition)
     {
-        for (int i = 0; i < particles.Length; i++)
+        for (int i = 1; i < particles.Length; i++)
         {
             Debug.DrawLine(startPosition, particles[i].position, Color.red, 0.1f);
 

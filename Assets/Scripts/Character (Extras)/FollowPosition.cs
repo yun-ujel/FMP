@@ -19,19 +19,26 @@ public class FollowPosition : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (refTransform.position != positionOnLastUpdate)
+        if (Vector2.SqrMagnitude(transform.position - refTransform.position) > 36f)
         {
-            facing = refTransform.position - transform.position;
-            currentSmoothTime = smoothTime;
+            transform.position = refTransform.position;
         }
         else
         {
-            facing = Vector3.up;
-            currentSmoothTime = stationarySmoothTime;
-        }
-        transform.position = Vector3.SmoothDamp(transform.position, refTransform.position + (facing * -distanceFromTarget), ref velocity, currentSmoothTime, Mathf.Infinity, Time.fixedDeltaTime);
-        positionOnLastUpdate = refTransform.position;
+            if (refTransform.position != positionOnLastUpdate)
+            {
+                facing = refTransform.position - transform.position;
+                currentSmoothTime = smoothTime;
+            }
+            else
+            {
+                facing = Vector3.up;
+                currentSmoothTime = stationarySmoothTime;
+            }
+            transform.position = Vector3.SmoothDamp(transform.position, refTransform.position + (facing * -distanceFromTarget), ref velocity, currentSmoothTime, Mathf.Infinity, Time.fixedDeltaTime);
+            positionOnLastUpdate = refTransform.position;
 
-        if (rotateToFaceTarget) { transform.right = facing; }
+            if (rotateToFaceTarget) { transform.right = facing; }
+        }
     }
 }
