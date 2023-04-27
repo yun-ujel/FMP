@@ -61,28 +61,28 @@ TextureImporter:
     second: steel-JumpEntry_0
   - first:
       213: -7060927606343431539
-    second: steel-JumpRise_0
+    second: steel-JumpEntry_1
   - first:
       213: -3896559142082139120
-    second: steel-JumpPeakRise_0
+    second: steel-JumpEntry_2
   - first:
       213: 8075673935785955771
-    second: steel-JumpPeakPeak_0
+    second: steel-JumpRiseB_0
   - first:
       213: -3319441785043140198
-    second: steel-JumpPeakFall_0
+    second: steel-JumpRise_0
   - first:
       213: 1209726718626380275
-    second: steel-JumpFall_0
+    second: steel-JumpRiseF_0
   - first:
       213: 5629739676996296684
-    second: steel-JumpLand_0
+    second: steel-JumpPeak_0
   - first:
       213: -7323952174600104236
-    second: steel-JumpLand_1
+    second: steel-JumpFall_0
   - first:
       213: 3779692256945523907
-    second: steel-JumpWalkTransition_0
+    second: steel-JumpFall_1
   - first:
       213: 8092183975001437641
     second: steel-SlideTransition0_0
@@ -91,7 +91,7 @@ TextureImporter:
     second: steel-JumpIdleTransition_0
   - first:
       213: 9114681718682116653
-    second: steel-SlideSlow_0
+    second: steel-JumpLand_0
   - first:
       213: -6599333882307779397
     second: steel-SlideFast_0
@@ -146,6 +146,30 @@ TextureImporter:
   - first:
       213: -7710489423070742483
     second: steel-SlideTransition3_1
+  - first:
+      213: 3460831024031804963
+    second: steel-JumpToIdle_0
+  - first:
+      213: -4764486490348490480
+    second: steel-JumpToIdle_1
+  - first:
+      213: -7199229885267451591
+    second: steel-JumpToWalk_0
+  - first:
+      213: -9104493501987184592
+    second: steel-JumpToWalk_1
+  - first:
+      213: 6545295345456230440
+    second: steel-JumpToWalk_2
+  - first:
+      213: 603299026052516365
+    second: steel-JumpToWalk_3
+  - first:
+      213: 2761972908319372831
+    second: steel-JumpToWalk_4
+  - first:
+      213: 1235404843756089811
+    second: steel-JumpToWalk_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -634,7 +658,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpRise_0
+      name: steel-JumpEntry_1
       rect:
         serializedVersion: 2
         x: 32
@@ -655,7 +679,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpPeakRise_0
+      name: steel-JumpEntry_2
       rect:
         serializedVersion: 2
         x: 64
@@ -676,7 +700,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpPeakPeak_0
+      name: steel-JumpRiseB_0
       rect:
         serializedVersion: 2
         x: 96
@@ -697,7 +721,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpPeakFall_0
+      name: steel-JumpRise_0
       rect:
         serializedVersion: 2
         x: 128
@@ -718,7 +742,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpFall_0
+      name: steel-JumpRiseF_0
       rect:
         serializedVersion: 2
         x: 160
@@ -739,7 +763,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpLand_0
+      name: steel-JumpPeak_0
       rect:
         serializedVersion: 2
         x: 192
@@ -760,7 +784,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpLand_1
+      name: steel-JumpFall_0
       rect:
         serializedVersion: 2
         x: 224
@@ -781,7 +805,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpWalkTransition_0
+      name: steel-JumpFall_1
       rect:
         serializedVersion: 2
         x: 256
@@ -802,28 +826,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: steel-JumpIdleTransition_0
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 80
-        width: 32
-        height: 40
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6c7acdea2b6132c0800000000000000
-      internalID: -4453660724370441106
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: steel-SlideSlow_0
+      name: steel-JumpLand_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1238,6 +1241,174 @@ TextureImporter:
       bones: []
       spriteID: d28367db8b6def490800000000000000
       internalID: -7710489423070742483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToIdle_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32e2117ea77570030800000000000000
+      internalID: 3460831024031804963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToIdle_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01171a5c7c421edb0800000000000000
+      internalID: -4764486490348490480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToWalk_0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 931e1400092371c90800000000000000
+      internalID: -7199229885267451591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToWalk_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 030a33ac56756a180800000000000000
+      internalID: -9104493501987184592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToWalk_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 820bfef207f85da50800000000000000
+      internalID: 6545295345456230440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToWalk_3
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0a033d84495f5800800000000000000
+      internalID: 603299026052516365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToWalk_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f16f0aff9bf745620800000000000000
+      internalID: 2761972908319372831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: steel-JumpToWalk_5
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 40
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d1f0e1f82a052110800000000000000
+      internalID: 1235404843756089811
       vertices: []
       indices: 
       edges: []
