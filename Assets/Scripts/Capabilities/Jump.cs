@@ -8,8 +8,8 @@ public class Jump : Capability
     [SerializeField] private GroundCheck groundCheck;
 
     public bool IsJumpingThisFrame { get; private set; }
-
     public float TimeSinceLastJump { get; private set; }
+    public Vector2 JumpStartPosition { get; private set; }
 
     private Vector2 velocity;
 
@@ -124,6 +124,7 @@ public class Jump : Capability
         IsJumpingThisFrame = true;
         JumpsSpent += 1;
 
+        JumpStartPosition = body.position;
         TimeSinceLastJump = 0f;
 
         jumpBufferLeft = 0f;

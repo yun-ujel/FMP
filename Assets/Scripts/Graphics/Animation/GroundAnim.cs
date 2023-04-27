@@ -6,10 +6,6 @@ public class GroundAnim : AnimationHandler
     private Move move;
     private GroundCheck groundCheck;
 
-    [Header("Speed Values")]
-    [SerializeField, Range(0f, 10f)] private float minAnimationSpeed = 0.8f;
-    [SerializeField, Range(0f, 10f)] private float maxAnimationSpeed = 1.6f;
-
     [Header("Active When:")]
     [SerializeField, Range(0f, 10f)] private float xVelocityIsAbove = Mathf.NegativeInfinity;
     [SerializeField, Range(0f, 10f)] private float xVelocityIsBelow = Mathf.Infinity;
@@ -34,7 +30,6 @@ public class GroundAnim : AnimationHandler
 
     public override float GetAnimationSpeed()
     {
-        return Mathf.Abs(cAnim.Velocity.x).Remap(0f, Mathf.Abs(move.DesiredVelocity.x), minAnimationSpeed, maxAnimationSpeed) * base.GetAnimationSpeed();
-        // Remap player velocity (with a maximum of their desired velocity) to be between the animation speed values
+        return base.GetAnimationSpeed();
     }
 }

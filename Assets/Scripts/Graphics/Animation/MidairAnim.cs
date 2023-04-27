@@ -7,6 +7,11 @@ public class MidairAnim : AnimationHandler
     [SerializeField] private float yVelocityIsBelow = float.PositiveInfinity;
     [SerializeField] private float yVelocityIsAbove = float.NegativeInfinity;
 
+    [Space]
+
+    [SerializeField] private float xVelocityIsBelow = float.PositiveInfinity;
+    [SerializeField] private float xVelocityIsAbove = float.NegativeInfinity;
+
     private GroundCheck groundCheck;
 
     public override void SetCharacterAnimator(CharacterAnimation characterAnimation)
@@ -18,6 +23,11 @@ public class MidairAnim : AnimationHandler
 
     public override bool IsAnimationValid()
     {
-        return cAnim.Velocity.y < yVelocityIsBelow && cAnim.Velocity.y > yVelocityIsAbove && !groundCheck.OnGround && base.IsAnimationValid();
+        return cAnim.Velocity.y < yVelocityIsBelow
+            && cAnim.Velocity.y > yVelocityIsAbove
+            && !groundCheck.OnGround
+            && Mathf.Abs(cAnim.Velocity.x) < xVelocityIsBelow
+            && Mathf.Abs(cAnim.Velocity.x) > xVelocityIsAbove
+            && base.IsAnimationValid();
     }
 }

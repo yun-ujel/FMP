@@ -9,15 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cd9d5f5646383419a816e9bbc29b78, type: 3}
-  m_Name: WalkExit
+  m_Script: {fileID: 11500000, guid: 19a555612f23d2448b13fd23407a7761, type: 3}
+  m_Name: LongJumpLand
   m_EditorClassIdentifier: 
   exitTime: 0
   localPositionOverride: {x: 0, y: 0, z: 0}
-  potentialLastAnimations:
-  - Walk
+  potentialLastAnimations: []
   excludedLastAnimations: []
-  minAnimationSpeed: 1
-  maxAnimationSpeed: 1
-  xVelocityIsAbove: 0
-  xVelocityIsBelow: 4
+  duration: 0.6

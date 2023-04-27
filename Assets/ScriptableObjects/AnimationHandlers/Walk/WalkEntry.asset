@@ -18,7 +18,5 @@ MonoBehaviour:
   - WalkEntry
   - Idle
   excludedLastAnimations: []
-  minAnimationSpeed: 1
-  maxAnimationSpeed: 1
-  xVelocityIsAbove: 0
+  xVelocityIsAbove: 0.01
   xVelocityIsBelow: Infinity
