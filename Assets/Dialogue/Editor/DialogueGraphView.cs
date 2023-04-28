@@ -113,8 +113,8 @@ public class DialogueGraphView : GraphView
         choicePort.contentContainer.Remove(excessLabel);
 
         int portCount = dialogueNode.outputContainer.Query("connector").ToList().Count;
-        string choicePortName = string.IsNullOrEmpty(overriddenPortName) 
-            ? $"Choice {portCount + 1}" 
+        string choicePortName = string.IsNullOrEmpty(overriddenPortName)
+            ? $"Choice {portCount + 1}"
             : overriddenPortName;
 
         TextField textField = new TextField

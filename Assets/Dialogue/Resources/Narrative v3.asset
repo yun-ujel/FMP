@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7063c9dfc253e0949a7a184ab0d9510b, type: 3}
-  m_Name: New Narrative
+  m_Name: Narrative v3
   m_EditorClassIdentifier: 
   NodeLinks:
+  - BaseNodeGUID: 167a34e2-63f0-443f-99f0-d0bed7cf29cd
+    PortName: Hey Peter
+    TargetNodeGUID: 2faada20-77c8-4f94-9b66-60388c5e6897
   - BaseNodeGUID: 8700e7a3-604a-4dc4-a198-b4d321f123b8
     PortName: Next
-    TargetNodeGUID: 167a34e2-63f0-443f-99f0-d0bed7cf29cd
+    TargetNodeGUID: 2faada20-77c8-4f94-9b66-60388c5e6897
   DialogueNodeData:
   - GUID: 167a34e2-63f0-443f-99f0-d0bed7cf29cd
-    DialogueText: Dialogue Node
-    Position: {x: 257, y: 179}
+    DialogueText: Joe
+    Position: {x: 236, y: 80}
+  - GUID: 2faada20-77c8-4f94-9b66-60388c5e6897
+    DialogueText: Peter
+    Position: {x: 476, y: 179}

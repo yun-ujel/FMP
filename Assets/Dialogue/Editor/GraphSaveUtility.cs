@@ -27,7 +27,7 @@ public class GraphSaveUtility
 
         DialogueContainer dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
 
-        Edge[] connectedPorts = Edges.Where(x => x.input.node != null).ToArray();
+        Edge[] connectedPorts = Edges.Where(edge => edge.input.node != null).ToArray();
         for (int i = 0; i < connectedPorts.Length; i++)
         {
             DialogueNode ouputNode = connectedPorts[i].output.node as DialogueNode;
@@ -77,14 +77,14 @@ public class GraphSaveUtility
     private void ClearGraph()
     {
         // Set entry points GUID back from the save. Discard existing GUID.
-        Nodes.Find(x => x.IsEntryPoint).GUID = cachedDialogueContainer.NodeLinks[0].BaseNodeGUID;
+        Nodes.Find(dialogueNode => dialogueNode.IsEntryPoint).GUID = cachedDialogueContainer.NodeLinks[0].BaseNodeGUID;
 
         foreach (DialogueNode node in Nodes)
         {
             if (node.IsEntryPoint) { continue; }
 
             // Remove edges connected to this node
-            Edges.Where(x => x.input.node == node).ToList()
+            Edges.Where(edge => edge.input.node == node).ToList()
                 .ForEach(edge => _targetGraphView.RemoveElement(edge));
 
             // Remove the node
@@ -100,8 +100,8 @@ public class GraphSaveUtility
             tempNode.GUID = nodeData.GUID;
             _targetGraphView.AddElement(tempNode);
 
-            List<NodeLinkData> nodePorts = cachedDialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == nodeData.GUID).ToList();
-            nodePorts.ForEach(x => _targetGraphView.AddChoicePort(tempNode, x.PortName));
+            List<NodeLinkData> nodeLinks = cachedDialogueContainer.NodeLinks.Where(nodeLink => nodeLink.BaseNodeGUID == nodeData.GUID).ToList();
+            nodeLinks.ForEach(nodeLink => _targetGraphView.AddChoicePort(tempNode, nodeLink.PortName));
         }
     }
 
@@ -109,15 +109,15 @@ public class GraphSaveUtility
     {
         for (int i = 0; i < Nodes.Count; i++)
         {
-            List<NodeLinkData> connections = cachedDialogueContainer.NodeLinks.Where(x => x.BaseNodeGUID == Nodes[i].GUID).ToList();
-            for (int j = 0; j < connections.Count; j++)
+            List<NodeLinkData> nodeLinks = cachedDialogueContainer.NodeLinks.Where(nodeLink => nodeLink.BaseNodeGUID == Nodes[i].GUID).ToList();
+            for (int j = 0; j < nodeLinks.Count; j++)
             {
-                DialogueNode targetNode = Nodes.First(x => x.GUID == connections[j].TargetNodeGUID);
+                DialogueNode targetNode = Nodes.First(node => node.GUID == nodeLinks[j].TargetNodeGUID);
                 LinkNodes(Nodes[i].outputContainer[j].Q<Port>(), (Port)targetNode.inputContainer[0]);
 
                 targetNode.SetPosition(new Rect
                 (
-                    cachedDialogueContainer.DialogueNodeData.First(x => x.GUID == connections[j].TargetNodeGUID).Position,
+                    cachedDialogueContainer.DialogueNodeData.First(node => node.GUID == nodeLinks[j].TargetNodeGUID).Position,
                     _targetGraphView.defaultNodeSize
                 ));
             }
