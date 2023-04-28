@@ -30,12 +30,12 @@ public class GraphSaveUtility
         Edge[] connectedPorts = Edges.Where(edge => edge.input.node != null).ToArray();
         for (int i = 0; i < connectedPorts.Length; i++)
         {
-            DialogueNode ouputNode = connectedPorts[i].output.node as DialogueNode;
+            DialogueNode outputNode = connectedPorts[i].output.node as DialogueNode;
             DialogueNode inputNode = connectedPorts[i].input.node as DialogueNode;
 
             dialogueContainer.NodeLinks.Add(new NodeLinkData
             {
-                BaseNodeGUID = ouputNode.GUID,
+                BaseNodeGUID = outputNode.GUID,
                 PortName = connectedPorts[i].output.portName,
                 TargetNodeGUID = inputNode.GUID
             });

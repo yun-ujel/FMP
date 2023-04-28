@@ -66,33 +66,61 @@ public class DialogueGraph : EditorWindow
 
     private void LogNodeNames()
     {
-        int count = 0;
+        DialogueNode[] allNodes = graphView.nodes.ToList().Cast<DialogueNode>().ToArray();
 
-        List<DialogueNode> nodesList = graphView.nodes.ToList().Cast<DialogueNode>().ToList();
-        for (int i = 0; i < nodesList.Count; i++)
+        for (int i = 0; i < allNodes.Length; i++)
         {
-            Debug.Log($"ALL NODES {i}: {nodesList[i].DialogueText}, {nodesList[i].GUID}");
+            Debug.Log($"ALL NODES {i}: {allNodes[i].DialogueText}, {allNodes[i].GUID}");
         }
 
-        foreach (DialogueNode node in graphView.selection)
+        DialogueNode[] selectedNodes = graphView.selection.OfType<DialogueNode>().ToArray();
+
+        for (int count = 0; count < selectedNodes.Length; count++)
         {
             int currentNodeIndex = 1984;
-            for (int i = 0; i < nodesList.Count; i++)
+            for (int i = 0; i < allNodes.Length; i++)
             {
-                if (nodesList[i].GUID == node.GUID)
+                if (allNodes[i].GUID == selectedNodes[count].GUID)
                 {
                     currentNodeIndex = i;
                     break;
                 }
             }
-            Debug.Log($"SELECTED NODE {count}: {node.DialogueText}, {node.GUID}, is node #{currentNodeIndex}");
-            Debug.Log($"SELECTED NODE {count} has {node.outputContainer.childCount} Outputs.");
-            for (int i = 0; i < node.outputContainer.childCount; i++)
-            {
-                Debug.Log(node.outputContainer[i].Q<Port>().portName);
-            }
+            Debug.Log($"SELECTED NODE {count}: {selectedNodes[count].DialogueText}, {selectedNodes[count].GUID}, is node #{currentNodeIndex}, is Entry Point: {selectedNodes[count].IsEntryPoint}");
 
-            count++;
+            for (int i = 0; i < selectedNodes[count].outputContainer.childCount; i++)
+            {
+                Debug.Log($"SELECTED NODE {count}, OUTPUT {i}: {selectedNodes[count].outputContainer[i].Q<Port>().portName}");
+            }
+        }
+
+        Edge[] allEdges = graphView.edges.ToList().Cast<Edge>().ToArray();
+        Edge[] selectedEdges = graphView.selection.OfType<Edge>().ToArray();
+
+        for (int i = 0; i < allEdges.Length; i++)
+        {
+            DialogueNode inputNode = allEdges[i].input.node as DialogueNode;
+            DialogueNode outputNode = allEdges[i].output.node as DialogueNode;
+
+            Debug.Log($"ALL EDGES {i}: OUTPUT {outputNode.DialogueText} {outputNode.GUID}, INPUT {inputNode.DialogueText} {inputNode.GUID}");
+        }
+
+        for (int count = 0; count < selectedEdges.Length; count++)
+        {
+            DialogueNode inputNode = selectedEdges[count].input.node as DialogueNode;
+            DialogueNode outputNode = selectedEdges[count].output.node as DialogueNode;
+
+            int currentEdgeIndex = 1984;
+
+            for (int i = 0; i < allEdges.Length; i++)
+            {
+                if (allEdges[i].Equals(selectedEdges[count]))
+                {
+                    currentEdgeIndex = i;
+                    break;
+                }
+            }            
+            Debug.Log($"SELECTED EDGE {count}: OUTPUT {outputNode.DialogueText} {outputNode.GUID}, INPUT {inputNode.DialogueText} {inputNode.GUID}, is Edge {currentEdgeIndex}");
         }
     }
 
