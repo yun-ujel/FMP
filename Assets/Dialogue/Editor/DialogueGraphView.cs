@@ -45,12 +45,14 @@ public class DialogueGraphView : GraphView
         return compatiblePorts;
     }
 
-    private DialogueNode GenerateEntryPointNode()
+    public DialogueNode GenerateEntryPointNode(string GUIDOverride = "")
     {
+        if (GUIDOverride == string.Empty || GUIDOverride == null) { GUIDOverride = System.Guid.NewGuid().ToString(); }
+
         DialogueNode startNode = new DialogueNode
         {
             title = "Start",
-            GUID = System.Guid.NewGuid().ToString(),
+            GUID = GUIDOverride,
             DialogueText = "Entry Point",
             IsEntryPoint = true
         };

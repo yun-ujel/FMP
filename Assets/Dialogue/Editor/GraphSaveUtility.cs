@@ -26,6 +26,7 @@ public class GraphSaveUtility
         if (!Edges.Any()) { return; } // If there are no connections, return
 
         DialogueContainer dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+        dialogueContainer.EntryNodeGUID = Nodes.Find(node => node.IsEntryPoint).GUID;
 
         Edge[] connectedPorts = Edges.Where(edge => edge.input.node != null).ToArray();
         for (int i = 0; i < connectedPorts.Length; i++)
@@ -76,8 +77,17 @@ public class GraphSaveUtility
 
     private void ClearGraph()
     {
-        // Set entry points GUID back from the save. Discard existing GUID.
-        Nodes.Find(dialogueNode => dialogueNode.IsEntryPoint).GUID = cachedDialogueContainer.NodeLinks[0].BaseNodeGUID;
+        // Set entry points GUID back from the save.
+        DialogueNode entryPoint = Nodes.Find(dialogueNode => dialogueNode.IsEntryPoint);
+
+        if (entryPoint != null)
+        {
+            entryPoint.GUID = cachedDialogueContainer.EntryNodeGUID;
+        }
+        else
+        {
+            _targetGraphView.AddElement(_targetGraphView.GenerateEntryPointNode(cachedDialogueContainer.EntryNodeGUID));
+        }
 
         foreach (DialogueNode node in Nodes)
         {

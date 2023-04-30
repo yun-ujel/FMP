@@ -1,5 +1,3 @@
-using UnityEngine;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 
 public class DialogueNode : Node
