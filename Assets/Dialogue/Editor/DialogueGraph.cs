@@ -22,6 +22,32 @@ public class DialogueGraph : EditorWindow
     {
         ConstructGraphView();
         GenerateToolbar();
+        GenerateBlackboard();
+    }
+
+    private void GenerateBlackboard()
+    {
+        Blackboard blackboardInstance = new Blackboard(graphView);
+        blackboardInstance.Add(new BlackboardSection { title = "Exposed Properties" });
+        blackboardInstance.addItemRequested = blackboard => { graphView.AddPropertyToBlackboard(new ExposedProperty()); };
+        blackboardInstance.editTextRequested = (blackboard, blackboardField, newValue) =>
+        {
+            string oldPropertyName = ((BlackboardField)blackboardField).text;
+            if (graphView.exposedProperties.Any(exposedProperty => exposedProperty.Name == newValue))
+            {
+                EditorUtility.DisplayDialog("Error", "Property name already exists. Please choose a different name.", "OK");
+                return;
+            }
+
+            int propertyIndex = graphView.exposedProperties.FindIndex(property => property.Name == oldPropertyName);
+            graphView.exposedProperties[propertyIndex].Name = newValue;
+            ((BlackboardField)blackboardField).text = newValue;
+        };
+
+        blackboardInstance.SetPosition(new Rect(10, 30, 200, 300));
+
+        graphView.Add(blackboardInstance);
+        graphView.blackboard = blackboardInstance;
     }
 
     private void ConstructGraphView()

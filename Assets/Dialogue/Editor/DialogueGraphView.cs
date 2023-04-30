@@ -9,6 +9,9 @@ public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150f, 200f);
 
+    public Blackboard blackboard;
+    public List<ExposedProperty> exposedProperties = new List<ExposedProperty>();
+
     private NodeSearchWindow searchWindow;
 
     public DialogueGraphView(EditorWindow editorWindow)
@@ -56,7 +59,7 @@ public class DialogueGraphView : GraphView
         return compatiblePorts;
     }
 
-    public DialogueNode GenerateEntryPointNode(string GUIDOverride = "", float xPos = 100, float yPos = 200)
+    public DialogueNode GenerateEntryPointNode(string GUIDOverride = "", float xPos = 300, float yPos = 200)
     {
         if (GUIDOverride == string.Empty || GUIDOverride == null) { GUIDOverride = System.Guid.NewGuid().ToString(); }
 
@@ -173,5 +176,49 @@ public class DialogueGraphView : GraphView
         node.outputContainer.Remove(socket);
         node.RefreshPorts();
         node.RefreshExpandedState();
+    }
+
+    public void AddPropertyToBlackboard(ExposedProperty property)
+    {
+        string localPropertyName = property.Name;
+        while (exposedProperties.Any(exposedProperty => exposedProperty.Name == localPropertyName))
+        {
+            localPropertyName = $"{localPropertyName}(1)";
+        }
+
+
+        ExposedProperty propertyInstance = new ExposedProperty
+        {
+            Name = localPropertyName,
+            Value = property.Value
+        };
+
+        exposedProperties.Add(propertyInstance);
+
+        VisualElement container = new VisualElement();
+        BlackboardField blackboardField = new BlackboardField { text = propertyInstance.Name, typeText = "string" };
+        container.Add(blackboardField);
+
+        TextField propertyValueTextField = new TextField("Value:")
+        {
+            value = propertyInstance.Value
+        };
+        propertyValueTextField.RegisterValueChangedCallback(evt =>
+        {
+            int changingPropertyIndex = exposedProperties.FindIndex(exposedProperty => exposedProperty.Name == propertyInstance.Name);
+            exposedProperties[changingPropertyIndex].Value = evt.newValue;
+        });
+
+        BlackboardRow blackboardValueRow = new BlackboardRow(blackboardField, propertyValueTextField);
+        container.Add(blackboardValueRow);
+
+
+        blackboard.Add(container);
+    }
+
+    public void ClearBlackboardAndExposedProperties()
+    {
+        exposedProperties.Clear();
+        blackboard.Clear();
     }
 }

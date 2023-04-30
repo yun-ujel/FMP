@@ -23,9 +23,39 @@ public class GraphSaveUtility
 
     public void SaveGraph(string fileName)
     {
-        if (!Edges.Any()) { return; } // If there are no connections, return
-
         DialogueContainer dialogueContainer = ScriptableObject.CreateInstance<DialogueContainer>();
+
+        if (!SaveNodes(dialogueContainer)) { return; }
+        SaveExposedProperties(dialogueContainer);
+
+        if (!AssetDatabase.IsValidFolder("Assets/Dialogue/Resources"))
+        {
+            AssetDatabase.CreateFolder("Assets/Dialogue", "Resources");
+        }
+
+        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Dialogue/Resources/{fileName}.asset");
+        AssetDatabase.SaveAssets();
+    }
+
+    public void LoadGraph(string fileName)
+    {
+        cachedDialogueContainer = Resources.Load<DialogueContainer>(fileName);
+        if (cachedDialogueContainer == null)
+        {
+            EditorUtility.DisplayDialog("File Not Found", "Target dialogue graph file does not exist", "OK");
+            return;
+        }
+
+        ClearGraph();
+        CreateDialogueNodes();
+        ConnectNodes();
+        CreateExposedProperties();
+    }
+
+    private bool SaveNodes(DialogueContainer dialogueContainer)
+    {
+        if (!Edges.Any()) { return false; } // If there are no connections, return
+
         dialogueContainer.EntryNodeGUID = Nodes.Find(node => node.IsEntryPoint).GUID;
 
         Edge[] connectedPorts = Edges.Where(edge => edge.input.node != null).ToArray();
@@ -52,27 +82,12 @@ public class GraphSaveUtility
             });
         }
 
-        if (!AssetDatabase.IsValidFolder("Assets/Dialogue/Resources"))
-        {
-            AssetDatabase.CreateFolder("Assets/Dialogue", "Resources");
-        }
-
-        AssetDatabase.CreateAsset(dialogueContainer, $"Assets/Dialogue/Resources/{fileName}.asset");
-        AssetDatabase.SaveAssets();
+        return true;
     }
 
-    public void LoadGraph(string fileName)
+    private void SaveExposedProperties(DialogueContainer dialogueContainer)
     {
-        cachedDialogueContainer = Resources.Load<DialogueContainer>(fileName);
-        if (cachedDialogueContainer == null)
-        {
-            EditorUtility.DisplayDialog("File Not Found", "Target dialogue graph file does not exist", "OK");
-            return;
-        }
-
-        ClearGraph();
-        CreateDialogueNodes();
-        ConnectNodes();
+        dialogueContainer.ExposedProperties.AddRange(_targetGraphView.exposedProperties);
     }
 
     private void ClearGraph()
@@ -157,5 +172,17 @@ public class GraphSaveUtility
         tempEdge.output.Connect(tempEdge);
 
         _targetGraphView.Add(tempEdge);
+    }
+
+    private void CreateExposedProperties()
+    {
+        // Clear existing properties
+        _targetGraphView.Clear();
+
+        // Add Properties to Blackboard
+        foreach (ExposedProperty property in cachedDialogueContainer.ExposedProperties)
+        {
+            _targetGraphView.AddPropertyToBlackboard(property);
+        }
     }
 }
