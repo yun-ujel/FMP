@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class DialogueGraphView : GraphView
 {
@@ -16,6 +17,7 @@ public class DialogueGraphView : GraphView
 
     public DialogueGraphView(EditorWindow editorWindow)
     {
+        AddGridBackground();
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
         this.AddManipulator(new ContentDragger());
@@ -24,6 +26,19 @@ public class DialogueGraphView : GraphView
 
         AddElement(GenerateEntryPointNode());
         AddSearchWindow(editorWindow);
+    }
+
+    private void AddGridBackground()
+    {
+        // Create Grid Background
+        GridBackground gridBackground = new GridBackground();
+        gridBackground.StretchToParentSize();
+
+        Insert(0, gridBackground);
+
+        // Add Stylesheet
+        StyleSheet styleSheet = (StyleSheet)EditorGUIUtility.Load("Dialogue System/DialogueGraphViewStyles.uss");
+        styleSheets.Add(styleSheet);
     }
 
     private void AddSearchWindow(EditorWindow editorWindow)
