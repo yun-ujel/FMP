@@ -4,9 +4,8 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Linq;
-using System.Collections.Generic;
 
-public class DialogueGraph : EditorWindow
+public class DialogueGraphWindow : EditorWindow
 {
     private DialogueGraphView graphView;
     private string fileName = "New Narrative";
@@ -14,7 +13,7 @@ public class DialogueGraph : EditorWindow
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()
     {
-        DialogueGraph window = GetWindow<DialogueGraph>();
+        DialogueGraphWindow window = GetWindow<DialogueGraphWindow>();
         window.titleContent = new GUIContent("Dialogue Graph");
     }
 
