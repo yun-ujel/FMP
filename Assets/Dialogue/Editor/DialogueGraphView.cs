@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +9,9 @@ public class DialogueGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150f, 200f);
 
-    public DialogueGraphView()
+    private NodeSearchWindow searchWindow;
+
+    public DialogueGraphView(EditorWindow editorWindow)
     {
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
@@ -18,6 +20,15 @@ public class DialogueGraphView : GraphView
         this.AddManipulator(new RectangleSelector());
 
         AddElement(GenerateEntryPointNode());
+        AddSearchWindow(editorWindow);
+    }
+
+    private void AddSearchWindow(EditorWindow editorWindow)
+    {
+        searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
+        searchWindow.Init(this, editorWindow);
+
+        nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
     }
 
     private Port GeneratePort(DialogueNode node, Direction portDirection, Port.Capacity capacity = Port.Capacity.Single)
@@ -45,7 +56,7 @@ public class DialogueGraphView : GraphView
         return compatiblePorts;
     }
 
-    public DialogueNode GenerateEntryPointNode(string GUIDOverride = "")
+    public DialogueNode GenerateEntryPointNode(string GUIDOverride = "", float xPos = 100, float yPos = 200)
     {
         if (GUIDOverride == string.Empty || GUIDOverride == null) { GUIDOverride = System.Guid.NewGuid().ToString(); }
 
@@ -61,19 +72,21 @@ public class DialogueGraphView : GraphView
         outputPort.portName = "Next";
         startNode.outputContainer.Add(outputPort);
 
+        startNode.capabilities &= ~Capabilities.Deletable;
+
         startNode.RefreshExpandedState();
         startNode.RefreshPorts();
 
-        startNode.SetPosition(new Rect(100, 200, 100, 150));
+        startNode.SetPosition(new Rect(xPos, yPos, 100, 150));
         return startNode;
     }
 
-    public void CreateNode(string nodeName)
+    public void AddDialogueNode(string nodeName, Vector2 position)
     {
-        AddElement(CreateDialogueNode(nodeName));
+        AddElement(CreateDialogueNode(nodeName, position));
     }
 
-    public DialogueNode CreateDialogueNode(string nodeName)
+    public DialogueNode CreateDialogueNode(string nodeName, Vector2 position)
     {
         DialogueNode dialogueNode = new DialogueNode
         {
@@ -102,7 +115,11 @@ public class DialogueGraphView : GraphView
         dialogueNode.RefreshExpandedState();
         dialogueNode.RefreshPorts();
 
-        dialogueNode.SetPosition(new Rect(Vector2.zero, defaultNodeSize));
+        dialogueNode.SetPosition(new Rect
+        (
+            position, 
+            defaultNodeSize
+        ));
 
         return dialogueNode;
     }

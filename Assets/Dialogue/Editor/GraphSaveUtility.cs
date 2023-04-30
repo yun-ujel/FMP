@@ -83,10 +83,20 @@ public class GraphSaveUtility
         if (entryPoint != null)
         {
             entryPoint.GUID = cachedDialogueContainer.EntryNodeGUID;
+            entryPoint.SetPosition(new Rect
+            (
+                cachedDialogueContainer.EntryNodePosition,
+                new Vector2(100, 150)
+            ));
         }
         else
         {
-            _targetGraphView.AddElement(_targetGraphView.GenerateEntryPointNode(cachedDialogueContainer.EntryNodeGUID));
+            _targetGraphView.AddElement(_targetGraphView.GenerateEntryPointNode
+            (
+                cachedDialogueContainer.EntryNodeGUID,
+                cachedDialogueContainer.EntryNodePosition.x,
+                cachedDialogueContainer.EntryNodePosition.y
+            ));
         }
 
         foreach (DialogueNode node in Nodes)
@@ -106,7 +116,7 @@ public class GraphSaveUtility
     {
         foreach (DialogueNodeData nodeData in cachedDialogueContainer.DialogueNodeData)
         {
-            DialogueNode tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText);
+            DialogueNode tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero);
             tempNode.GUID = nodeData.GUID;
             _targetGraphView.AddElement(tempNode);
 
