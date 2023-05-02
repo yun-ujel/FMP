@@ -3,11 +3,14 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DS.Windows
 {
     using Elements;
     using Enumerations;
+
     public class DSGraphView : GraphView
     {
         public DSGraphView()
@@ -16,6 +19,34 @@ namespace DS.Windows
             AddGridBackground();
 
             AddStyles();
+        }
+
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        {
+            List<Port> compatiblePorts = new List<Port>();
+
+            ports.ForEach(port =>
+            {
+                if (startPort == port)
+                {
+                    return;
+                }
+
+                if (startPort.node == port.node)
+                {
+                    // This check makes the previous one obsolete, but I kept the previous one just to be sure
+                    return;
+                }
+
+                if (startPort.direction == port.direction)
+                {
+                    return;
+                }
+
+                compatiblePorts.Add(port);
+            });
+
+            return compatiblePorts;
         }
 
         private DSNode CreateNode(DSDialogueType dialogueType, Vector2 position)
