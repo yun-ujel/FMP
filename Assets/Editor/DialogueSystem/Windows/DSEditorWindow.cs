@@ -18,6 +18,7 @@ namespace DS.Windows
             AddGraphView();
         }
 
+        #region Elements Addition
         private void AddGraphView()
         {
             DSGraphView graphView = new DSGraphView();
@@ -26,5 +27,6 @@ namespace DS.Windows
 
             rootVisualElement.Add(graphView);
         }
+        #endregion
     }
 }

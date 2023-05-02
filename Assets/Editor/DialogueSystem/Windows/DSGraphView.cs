@@ -20,6 +20,7 @@ namespace DS.Windows
             AddStyles();
         }
 
+        #region Overrided Methods
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
             List<Port> compatiblePorts = new List<Port>();
@@ -47,19 +48,9 @@ namespace DS.Windows
 
             return compatiblePorts;
         }
+        #endregion
 
-        private DSNode CreateNode(DSDialogueType dialogueType, Vector2 position)
-        {
-            Type nodeType = Type.GetType($"DS.Elements.DS{dialogueType}Node");
-            
-            DSNode node = (DSNode)Activator.CreateInstance(nodeType);
-
-            node.Initialize(position);
-            node.Draw();
-
-            return node;
-        }
-
+        #region Manipulators
         private void AddManipulators()
         {
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -84,6 +75,18 @@ namespace DS.Windows
             return contextualMenuManipulator;
         }
 
+        private IManipulator CreateNodeContextualMenu(DSDialogueType dialogueType, string actionTitle)
+        {
+            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator
+            (
+                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode(dialogueType, actionEvent.eventInfo.localMousePosition)))
+            );
+
+            return contextualMenuManipulator;
+        }
+        #endregion
+
+        #region Elements Creation
         private GraphElement CreateGroup(string title, Vector2 localMousePosition)
         {
             Group group = new Group()
@@ -96,16 +99,20 @@ namespace DS.Windows
             return group;
         }
 
-        private IManipulator CreateNodeContextualMenu(DSDialogueType dialogueType, string actionTitle)
+        private DSNode CreateNode(DSDialogueType dialogueType, Vector2 position)
         {
-            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator
-            (
-                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode(dialogueType, actionEvent.eventInfo.localMousePosition)))
-            );
+            Type nodeType = Type.GetType($"DS.Elements.DS{dialogueType}Node");
 
-            return contextualMenuManipulator;
+            DSNode node = (DSNode)Activator.CreateInstance(nodeType);
+
+            node.Initialize(position);
+            node.Draw();
+
+            return node;
         }
+        #endregion
 
+        #region Elements Addition
         private void AddGridBackground()
         {
             GridBackground gridBackground = new GridBackground();
@@ -123,6 +130,6 @@ namespace DS.Windows
             styleSheets.Add(graphViewStyleSheet);
             styleSheets.Add(nodeStyleSheet);
         }
+        #endregion
     }
-
 }
