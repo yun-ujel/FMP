@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
-using DS.Enumerations;
+using UnityEngine;
 
 namespace DS.Elements
 {
+    using Enumerations;
     public class DSNode : Node
     {
         public string DialogueName { get; set; }
@@ -12,14 +13,16 @@ namespace DS.Elements
         public string Text { get; set; }
         public DSDialogueType DialogueType { get; set; }
 
-        public void Initialize()
+        public virtual void Initialize(Vector2 position)
         {
             DialogueName = "DialogueName";
             Choices = new List<string>();
             Text = "Dialogue Text";
+
+            SetPosition(new Rect(position, Vector2.zero));
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             /* TITLE CONTAINER */
             TextField dialogueNameTextField = new TextField()
@@ -54,8 +57,6 @@ namespace DS.Elements
             customDataContainer.Add(textFoldout);
 
             extensionContainer.Add(customDataContainer);
-
-            RefreshExpandedState();
         }
     }
 }
