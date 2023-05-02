@@ -1,6 +1,6 @@
 using UnityEditor.Experimental.GraphView;
 
-public class DialogueNode : Node
+public class DSNode : Node
 {
     public string GUID;
 

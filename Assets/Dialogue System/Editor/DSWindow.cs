@@ -5,15 +5,15 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Linq;
 
-public class DialogueGraphWindow : EditorWindow
+public class DSWindow : EditorWindow
 {
-    private DialogueGraphView graphView;
+    private DSGraphView graphView;
     private string fileName = "New Narrative";
 
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()
     {
-        DialogueGraphWindow window = GetWindow<DialogueGraphWindow>();
+        DSWindow window = GetWindow<DSWindow>();
         window.titleContent = new GUIContent("Dialogue Graph");
     }
 
@@ -51,7 +51,7 @@ public class DialogueGraphWindow : EditorWindow
 
     private void ConstructGraphView()
     {
-        graphView = new DialogueGraphView(this)
+        graphView = new DSGraphView(this)
         {
             name = "Dialogue Graph"
 
@@ -84,14 +84,14 @@ public class DialogueGraphWindow : EditorWindow
 
     private void LogNodeNames()
     {
-        DialogueNode[] allNodes = graphView.nodes.ToList().Cast<DialogueNode>().ToArray();
+        DSNode[] allNodes = graphView.nodes.ToList().Cast<DSNode>().ToArray();
 
         for (int i = 0; i < allNodes.Length; i++)
         {
             Debug.Log($"ALL NODES {i}: {allNodes[i].DialogueText}, {allNodes[i].GUID}");
         }
 
-        DialogueNode[] selectedNodes = graphView.selection.OfType<DialogueNode>().ToArray();
+        DSNode[] selectedNodes = graphView.selection.OfType<DSNode>().ToArray();
 
         for (int count = 0; count < selectedNodes.Length; count++)
         {
@@ -117,16 +117,16 @@ public class DialogueGraphWindow : EditorWindow
 
         for (int i = 0; i < allEdges.Length; i++)
         {
-            DialogueNode inputNode = allEdges[i].input.node as DialogueNode;
-            DialogueNode outputNode = allEdges[i].output.node as DialogueNode;
+            DSNode inputNode = allEdges[i].input.node as DSNode;
+            DSNode outputNode = allEdges[i].output.node as DSNode;
 
             Debug.Log($"ALL EDGES {i}: OUTPUT {outputNode.DialogueText} {outputNode.GUID}, INPUT {inputNode.DialogueText} {inputNode.GUID}");
         }
 
         for (int count = 0; count < selectedEdges.Length; count++)
         {
-            DialogueNode inputNode = selectedEdges[count].input.node as DialogueNode;
-            DialogueNode outputNode = selectedEdges[count].output.node as DialogueNode;
+            DSNode inputNode = selectedEdges[count].input.node as DSNode;
+            DSNode outputNode = selectedEdges[count].output.node as DSNode;
 
             int currentEdgeIndex = 1984;
 
@@ -149,7 +149,7 @@ public class DialogueGraphWindow : EditorWindow
             EditorUtility.DisplayDialog("Invalid file name", "Please enter a valid file name", "OK");
         }
 
-        GraphSaveUtility saveUtility = GraphSaveUtility.GetInstance(graphView);
+        DSSaveUtility saveUtility = DSSaveUtility.GetInstance(graphView);
         if (isSaving)
         {
             saveUtility.SaveGraph(fileName);

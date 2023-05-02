@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
+public class DSSearchWindow : ScriptableObject, ISearchWindowProvider
 {
-    private DialogueGraphView graphView;
+    private DSGraphView graphView;
     private EditorWindow window;
 
     private Texture2D indentationIcon;
 
-    public void Init(DialogueGraphView graphView, EditorWindow window)
+    public void Init(DSGraphView graphView, EditorWindow window)
     {
         this.graphView = graphView;
         this.window = window;
@@ -29,7 +29,7 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
             new SearchTreeGroupEntry(new GUIContent("Dialogue"), 1),
             new SearchTreeEntry(new GUIContent("Dialogue Node", indentationIcon))
             {
-                userData = new DialogueNode(),
+                userData = new DSNode(),
                 level = 2
             }
         };
@@ -44,7 +44,7 @@ public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
 
         switch (SearchTreeEntry.userData)
         {
-            case DialogueNode dialogueNode:
+            case DSNode dialogueNode:
                 graphView.AddDialogueNode("Dialogue Node", localMousePosition);
                 return true;
             default:

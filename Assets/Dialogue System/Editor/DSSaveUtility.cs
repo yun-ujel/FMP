@@ -5,17 +5,17 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using System.Linq;
 
-public class GraphSaveUtility
+public class DSSaveUtility
 {
-    private DialogueGraphView _targetGraphView;
+    private DSGraphView _targetGraphView;
     private DialogueContainer cachedDialogueContainer;
 
     private List<Edge> Edges => _targetGraphView.edges.ToList();
-    private List<DialogueNode> Nodes => _targetGraphView.nodes.ToList().Cast<DialogueNode>().ToList();
+    private List<DSNode> Nodes => _targetGraphView.nodes.ToList().Cast<DSNode>().ToList();
 
-    public static GraphSaveUtility GetInstance(DialogueGraphView targetGraphView)
+    public static DSSaveUtility GetInstance(DSGraphView targetGraphView)
     {
-        return new GraphSaveUtility
+        return new DSSaveUtility
         {
             _targetGraphView = targetGraphView
         };
@@ -61,8 +61,8 @@ public class GraphSaveUtility
         Edge[] connectedPorts = Edges.Where(edge => edge.input.node != null).ToArray();
         for (int i = 0; i < connectedPorts.Length; i++)
         {
-            DialogueNode outputNode = connectedPorts[i].output.node as DialogueNode;
-            DialogueNode inputNode = connectedPorts[i].input.node as DialogueNode;
+            DSNode outputNode = connectedPorts[i].output.node as DSNode;
+            DSNode inputNode = connectedPorts[i].input.node as DSNode;
 
             dialogueContainer.NodeLinks.Add(new NodeLinkData
             {
@@ -72,7 +72,7 @@ public class GraphSaveUtility
             });
         }
 
-        foreach (DialogueNode dialogueNode in Nodes.Where(node => !node.IsEntryPoint))
+        foreach (DSNode dialogueNode in Nodes.Where(node => !node.IsEntryPoint))
         {
             dialogueContainer.DialogueNodeData.Add(new DialogueNodeData
             {
@@ -93,7 +93,7 @@ public class GraphSaveUtility
     private void ClearGraph()
     {
         // Set entry points GUID back from the save.
-        DialogueNode entryPoint = Nodes.Find(dialogueNode => dialogueNode.IsEntryPoint);
+        DSNode entryPoint = Nodes.Find(dialogueNode => dialogueNode.IsEntryPoint);
 
         if (entryPoint != null)
         {
@@ -114,7 +114,7 @@ public class GraphSaveUtility
             ));
         }
 
-        foreach (DialogueNode node in Nodes)
+        foreach (DSNode node in Nodes)
         {
             if (node.IsEntryPoint) { continue; }
 
@@ -131,7 +131,7 @@ public class GraphSaveUtility
     {
         foreach (DialogueNodeData nodeData in cachedDialogueContainer.DialogueNodeData)
         {
-            DialogueNode tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero);
+            DSNode tempNode = _targetGraphView.CreateDialogueNode(nodeData.DialogueText, Vector2.zero);
             tempNode.GUID = nodeData.GUID;
             _targetGraphView.AddElement(tempNode);
 
@@ -147,7 +147,7 @@ public class GraphSaveUtility
             List<NodeLinkData> nodeLinks = cachedDialogueContainer.NodeLinks.Where(nodeLink => nodeLink.BaseNodeGUID == Nodes[i].GUID).ToList();
             for (int j = 0; j < nodeLinks.Count; j++)
             {
-                DialogueNode targetNode = Nodes.First(node => node.GUID == nodeLinks[j].TargetNodeGUID);
+                DSNode targetNode = Nodes.First(node => node.GUID == nodeLinks[j].TargetNodeGUID);
                 LinkNodes(Nodes[i].outputContainer[j].Q<Port>(), (Port)targetNode.inputContainer[0]);
 
                 targetNode.SetPosition(new Rect

@@ -4,18 +4,17 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
-public class DialogueGraphView : GraphView
+public class DSGraphView : GraphView
 {
     public readonly Vector2 defaultNodeSize = new Vector2(150f, 200f);
 
     public Blackboard blackboard;
     public List<ExposedProperty> exposedProperties = new List<ExposedProperty>();
 
-    private NodeSearchWindow searchWindow;
+    private DSSearchWindow searchWindow;
 
-    public DialogueGraphView(EditorWindow editorWindow)
+    public DSGraphView(EditorWindow editorWindow)
     {
         AddGridBackground();
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -43,13 +42,13 @@ public class DialogueGraphView : GraphView
 
     private void AddSearchWindow(EditorWindow editorWindow)
     {
-        searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
+        searchWindow = ScriptableObject.CreateInstance<DSSearchWindow>();
         searchWindow.Init(this, editorWindow);
 
         nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
     }
 
-    private Port GeneratePort(DialogueNode node, Direction portDirection, Port.Capacity capacity = Port.Capacity.Single)
+    private Port GeneratePort(DSNode node, Direction portDirection, Port.Capacity capacity = Port.Capacity.Single)
     {
         return node.InstantiatePort
         (
@@ -74,11 +73,11 @@ public class DialogueGraphView : GraphView
         return compatiblePorts;
     }
 
-    public DialogueNode GenerateEntryPointNode(string GUIDOverride = "", float xPos = 300, float yPos = 200)
+    public DSNode GenerateEntryPointNode(string GUIDOverride = "", float xPos = 300, float yPos = 200)
     {
         if (GUIDOverride == string.Empty || GUIDOverride == null) { GUIDOverride = System.Guid.NewGuid().ToString(); }
 
-        DialogueNode startNode = new DialogueNode
+        DSNode startNode = new DSNode
         {
             title = "Start",
             GUID = GUIDOverride,
@@ -104,9 +103,9 @@ public class DialogueGraphView : GraphView
         AddElement(CreateDialogueNode(nodeName, position));
     }
 
-    public DialogueNode CreateDialogueNode(string nodeName, Vector2 position)
+    public DSNode CreateDialogueNode(string nodeName, Vector2 position)
     {
-        DialogueNode dialogueNode = new DialogueNode
+        DSNode dialogueNode = new DSNode
         {
             title = nodeName,
             GUID = System.Guid.NewGuid().ToString(),
@@ -142,7 +141,7 @@ public class DialogueGraphView : GraphView
         return dialogueNode;
     }
 
-    public void AddChoicePort(DialogueNode dialogueNode, string overriddenPortName = "")
+    public void AddChoicePort(DSNode dialogueNode, string overriddenPortName = "")
     {
         Port choicePort = GeneratePort(dialogueNode, Direction.Output);
 
