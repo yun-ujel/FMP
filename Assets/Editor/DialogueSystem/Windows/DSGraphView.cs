@@ -4,7 +4,6 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DS.Windows
 {
@@ -71,6 +70,30 @@ namespace DS.Windows
 
             this.AddManipulator(CreateNodeContextualMenu(DSDialogueType.SingleChoice, "Add Node (Single Choice)"));
             this.AddManipulator(CreateNodeContextualMenu(DSDialogueType.MultipleChoice, "Add Node (Multiple Choice)"));
+
+            this.AddManipulator(CreateGroupContextualMenu());
+        }
+
+        private IManipulator CreateGroupContextualMenu()
+        {
+            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator
+            (
+                menuEvent => menuEvent.menu.AppendAction("Add Group", actionEvent => AddElement(CreateGroup("DialogueGroup", actionEvent.eventInfo.localMousePosition)))
+            );
+
+            return contextualMenuManipulator;
+        }
+
+        private GraphElement CreateGroup(string title, Vector2 localMousePosition)
+        {
+            Group group = new Group()
+            {
+                title = title
+            };
+
+            group.SetPosition(new Rect(localMousePosition, Vector2.zero));
+
+            return group;
         }
 
         private IManipulator CreateNodeContextualMenu(DSDialogueType dialogueType, string actionTitle)
