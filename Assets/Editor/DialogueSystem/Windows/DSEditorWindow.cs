@@ -10,6 +10,7 @@ namespace DS.Windows
     public class DSEditorWindow : EditorWindow
     {
         private readonly string defaultFileName = "NewDialogue";
+        private TextField fileNameTextField;
 
         private Button saveButton;
 
@@ -30,7 +31,10 @@ namespace DS.Windows
         {
             Toolbar toolbar = new Toolbar();
 
-            TextField fileNameTextField = DSElementUtility.CreateTextField(defaultFileName, null, "File Name:");
+            fileNameTextField = DSElementUtility.CreateTextField(defaultFileName, callback =>
+            {
+                fileNameTextField.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+            }, "File Name:");
 
             saveButton = DSElementUtility.CreateButton("Save");
 

@@ -48,11 +48,15 @@ namespace DS.Elements
             /* TITLE CONTAINER */
             TextField dialogueNameTextField = DSElementUtility.CreateTextField(DialogueName, callback => 
             {
+                TextField target = (TextField) callback.target;
+
+                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
                 if (Group == null)
                 {
                     graphView.RemoveUngroupedNode(this);
 
-                    DialogueName = callback.newValue;
+                    DialogueName = target.value;
 
                     graphView.AddUngroupedNode(this);
                     
@@ -63,7 +67,7 @@ namespace DS.Elements
 
                 graphView.RemoveGroupedNode(this, Group);
 
-                DialogueName = callback.newValue;
+                DialogueName = target.value;
 
                 graphView.AddGroupedNode(this, currentGroup);
             });

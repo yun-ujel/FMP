@@ -284,9 +284,11 @@ namespace DS.Windows
             {
                 DSGroup dSGroup = (DSGroup)group;
 
+                dSGroup.title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
+
                 RemoveGroup(dSGroup);
 
-                dSGroup.previousTitle = newTitle;
+                dSGroup.previousTitle = dSGroup.title;
 
                 AddGroup(dSGroup);
             };
@@ -296,7 +298,7 @@ namespace DS.Windows
         #region Repeated Elements
         public void AddUngroupedNode(DSNode node)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             if (!ungroupedNodes.ContainsKey(nodeName))
             {
@@ -326,7 +328,7 @@ namespace DS.Windows
 
         public void RemoveUngroupedNode(DSNode node)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             List<DSNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
 
@@ -349,7 +351,7 @@ namespace DS.Windows
 
         private void AddGroup(DSGroup group)
         {
-            string groupName = group.title;
+            string groupName = group.title.ToLower();
 
             if (!groups.ContainsKey(groupName))
             {
@@ -379,7 +381,7 @@ namespace DS.Windows
 
         private void RemoveGroup(DSGroup group)
         {
-            string previousGroupName = group.previousTitle;
+            string previousGroupName = group.previousTitle.ToLower();
 
             List<DSGroup> groupsList = groups[previousGroupName].Groups;
 
@@ -400,7 +402,7 @@ namespace DS.Windows
 
         public void AddGroupedNode(DSNode node, DSGroup group)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             node.Group = group;
 
@@ -437,7 +439,7 @@ namespace DS.Windows
 
         public void RemoveGroupedNode(DSNode node, Group group)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             node.Group = null;
 
