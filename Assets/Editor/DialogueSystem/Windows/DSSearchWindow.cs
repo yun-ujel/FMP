@@ -72,8 +72,6 @@ namespace DS.Windows
                     {
                         DSGroup group = graphview.CreateGroup("DialogueGroup", graphview.GetLocalMousePosition(context.screenMousePosition, true));
 
-                        graphview.AddElement(group);
-
                         return true;
                     }
 
