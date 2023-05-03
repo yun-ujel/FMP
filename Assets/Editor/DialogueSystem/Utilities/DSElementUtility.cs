@@ -7,11 +7,12 @@ namespace DS.Utilities
     using Elements;
     public static class DSElementUtility
     {
-        public static TextField CreateTextField(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static TextField CreateTextField(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null, string label = null)
         {
             TextField textField = new TextField()
             {
-                value = value
+                value = value,
+                label = label
             };
 
             if (onValueChanged != null)
@@ -22,9 +23,9 @@ namespace DS.Utilities
             return textField;
         }
 
-        public static TextField CreateTextArea(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static TextField CreateTextArea(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null, string label = null)
         {
-            TextField textArea = CreateTextField(value, onValueChanged);
+            TextField textArea = CreateTextField(value, onValueChanged, label);
 
             textArea.multiline = true;
 
