@@ -10,6 +10,7 @@ namespace DS.Elements
     using Windows;
     public class DSNode : Node
     {
+        public string GUID { get; set; }
         public string DialogueName { get; set; }
         public List<string> Choices { get; set; }
         public string Text { get; set; }
@@ -21,6 +22,7 @@ namespace DS.Elements
 
         public virtual void Initialize(DSGraphView dsGraphView, Vector2 position)
         {
+            GUID = System.Guid.NewGuid().ToString();
             DialogueName = "DialogueName";
             Choices = new List<string>();
             Text = "Dialogue Text";

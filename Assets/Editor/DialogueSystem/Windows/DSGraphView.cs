@@ -288,7 +288,7 @@ namespace DS.Windows
 
                 RemoveGroup(dSGroup);
 
-                dSGroup.previousTitle = dSGroup.title;
+                dSGroup.PreviousTitle = dSGroup.title;
 
                 AddGroup(dSGroup);
             };
@@ -381,7 +381,7 @@ namespace DS.Windows
 
         private void RemoveGroup(DSGroup group)
         {
-            string previousGroupName = group.previousTitle.ToLower();
+            string previousGroupName = group.PreviousTitle.ToLower();
 
             List<DSGroup> groupsList = groups[previousGroupName].Groups;
 
