@@ -8,23 +8,24 @@ namespace DS.Elements
     using Enumerations;
     using Utilities;
     using Windows;
+    using Data.Save;
     public class DSNode : Node
     {
         public string GUID { get; set; }
         public string DialogueName { get; set; }
-        public List<string> Choices { get; set; }
+        public List<DSChoiceSaveData> Choices { get; set; }
         public string Text { get; set; }
         public DSDialogueType DialogueType { get; set; }
         public DSGroup Group { get; set; }
 
-        private DSGraphView graphView;
+        protected DSGraphView graphView;
         private readonly Color defaultBackgroundColor = new Color(29f / 255f, 29f / 255f, 30f / 255f);
 
         public virtual void Initialize(DSGraphView dsGraphView, Vector2 position)
         {
             GUID = System.Guid.NewGuid().ToString();
             DialogueName = "DialogueName";
-            Choices = new List<string>();
+            Choices = new List<DSChoiceSaveData>();
             Text = "Dialogue Text";
 
             graphView = dsGraphView;

@@ -11,6 +11,7 @@ namespace DS.Windows
     using Enumerations;
     using Utilities;
     using Data.Error;
+    using Data.Save;
 
     public class DSGraphView : GraphView
     {
@@ -62,6 +63,7 @@ namespace DS.Windows
             OnGroupElementsAdded();
             OnGroupElementsRemoved();
             OnGroupRenamed();
+            OnGraphViewChanged();
 
             AddStyles();
         }
@@ -291,6 +293,43 @@ namespace DS.Windows
                 dSGroup.PreviousTitle = dSGroup.title;
 
                 AddGroup(dSGroup);
+            };
+        }
+
+        private void OnGraphViewChanged()
+        {
+            graphViewChanged = (changes) =>
+            {
+                if (changes.edgesToCreate != null)
+                {
+                    foreach(Edge edge in changes.edgesToCreate)
+                    {
+                        DSNode nextNode = (DSNode)edge.input.node;
+
+                        DSChoiceSaveData choiceData = (DSChoiceSaveData)edge.output.userData;
+
+                        choiceData.TargetGUID = nextNode.GUID;
+                    }
+                }
+
+                if (changes.elementsToRemove != null)
+                {
+                    foreach (GraphElement element in changes.elementsToRemove)
+                    {
+                        if (element.GetType() != typeof(Edge))
+                        {
+                            continue;
+                        }
+
+                        Edge edge = (Edge)element;
+
+                        DSChoiceSaveData choiceData = (DSChoiceSaveData)edge.output.userData;
+
+                        choiceData.TargetGUID = "";
+                    }
+                }
+
+                return changes;
             };
         }
         #endregion
