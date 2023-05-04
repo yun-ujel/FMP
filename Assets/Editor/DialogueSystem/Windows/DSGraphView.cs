@@ -561,8 +561,7 @@ namespace DS.Windows
         }
         #endregion
 
-        #region Utilities
-
+        #region Utility Methods
         public Vector2 GetLocalMousePosition(Vector2 mousePosition, bool isSearchWindow = false)
         {
             Vector2 worldMousePosition = mousePosition;
@@ -577,6 +576,16 @@ namespace DS.Windows
             return localMousePosition;
         }
 
+        public void ClearGraph()
+        {
+            graphElements.ForEach(graphElement => RemoveElement(graphElement));
+
+            groups.Clear();
+            groupedNodes.Clear();
+            ungroupedNodes.Clear();
+
+            NameErrorsCount = 0;
+        }
         #endregion
     }
 }

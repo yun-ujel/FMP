@@ -13,7 +13,7 @@ namespace DS.Windows
 
         private DSGraphView graphView;
 
-        private TextField fileNameTextField;
+        private static TextField fileNameTextField;
         private Button saveButton;
 
         [MenuItem("Window/Dialogue System/Dialogue Graph Window")]
@@ -40,8 +40,14 @@ namespace DS.Windows
 
             saveButton = DSElementUtility.CreateButton("Save", () => Save());
 
+            Button clearButton = DSElementUtility.CreateButton("Clear", () => Clear());
+            Button resetButton = DSElementUtility.CreateButton("Reset", () => ResetGraph());
+
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);
+
+            toolbar.Add(clearButton);
+            toolbar.Add(resetButton);
 
             rootVisualElement.Add(toolbar);
         }
@@ -68,9 +74,26 @@ namespace DS.Windows
             DSSaveUtility.Initialize(graphView, fileNameTextField.value);
             DSSaveUtility.Save();
         }
+
+        private void Clear()
+        {
+            graphView.ClearGraph();
+        }
+
+        private void ResetGraph()
+        {
+            Clear();
+
+            UpdateFilename(defaultFileName);
+        }
         #endregion
 
         #region Utility Methods
+        public static void UpdateFilename(string newFileName)
+        {
+            fileNameTextField.value = newFileName;
+        }
+
         public void SetSaving(bool setting)
         {
             saveButton.SetEnabled(setting);
