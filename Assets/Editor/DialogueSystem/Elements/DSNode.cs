@@ -23,10 +23,10 @@ namespace DS.Elements
         protected DSGraphView graphView;
         private readonly Color defaultBackgroundColor = new Color(29f / 255f, 29f / 255f, 30f / 255f);
 
-        public virtual void Initialize(DSGraphView dsGraphView, Vector2 position)
+        public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 position)
         {
             GUID = System.Guid.NewGuid().ToString();
-            DialogueName = "DialogueName";
+            DialogueName = nodeName;
             Choices = new List<DSChoiceSaveData>();
             Text = "Dialogue Text";
 
