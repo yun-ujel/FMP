@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEngine;
+using System.Linq;
 
 namespace DS.Elements
 {
@@ -9,6 +10,7 @@ namespace DS.Elements
     using Utilities;
     using Windows;
     using Data.Save;
+
     public class DSNode : Node
     {
         public string GUID { get; set; }
@@ -96,7 +98,10 @@ namespace DS.Elements
 
             Foldout textFoldout = DSElementUtility.CreateFoldout("Dialogue Text");
 
-            TextField textTextField = DSElementUtility.CreateTextArea(Text);
+            TextField textTextField = DSElementUtility.CreateTextArea(Text, callback =>
+            {
+                Text = callback.newValue;
+            });
 
             textTextField.AddClasses
             (
@@ -128,6 +133,13 @@ namespace DS.Elements
                 }
                 graphView.DeleteElements(port.connections);
             }
+        }
+
+        public bool IsStartingNode()
+        {
+            Port inputPort = (Port)inputContainer.Children().First();
+
+            return !inputPort.connected;
         }
 
         public void SetErrorStyle(Color color)
