@@ -23,19 +23,19 @@ namespace DS.Windows
         private SerializableDictionary<string, DSGroupErrorData> groups;
         private SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>> groupedNodes;
 
-        private int repeatedNamesCount;
+        private int nameErrorsCount;
 
-        public int RepeatedNamesCount
+        public int NameErrorsCount
         {
             get
             {
-                return repeatedNamesCount;
+                return nameErrorsCount;
             }
 
             set
             {
-                repeatedNamesCount = value;
-                if (repeatedNamesCount <= 0)
+                nameErrorsCount = value;
+                if (nameErrorsCount <= 0)
                 {
                     editorWindow.SetSaving(true);
                 }
@@ -204,6 +204,10 @@ namespace DS.Windows
 
                 foreach(DSGroup group in groupsToDelete)
                 {
+                    if (string.IsNullOrEmpty(group.title))
+                    {
+                        --NameErrorsCount;
+                    }
                     List<DSNode> groupNodes = new List<DSNode>();
 
                     foreach(GraphElement groupElement in group.containedElements)
@@ -227,6 +231,11 @@ namespace DS.Windows
 
                 foreach(DSNode node in nodesToDelete)
                 {
+                    if (string.IsNullOrEmpty(node.DialogueName))
+                    {
+                        --NameErrorsCount;
+                    }                    
+
                     if (node.Group != null)
                     {
                         node.Group.RemoveElement(node);
@@ -287,6 +296,18 @@ namespace DS.Windows
                 DSGroup dSGroup = (DSGroup)group;
 
                 dSGroup.title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                if (string.IsNullOrEmpty(dSGroup.title))
+                {
+                    if (!string.IsNullOrEmpty(dSGroup.PreviousTitle))
+                    {
+                        ++NameErrorsCount;
+                    }
+                }
+                else if (string.IsNullOrEmpty(dSGroup.title))
+                {
+                    --NameErrorsCount;
+                }
 
                 RemoveGroup(dSGroup);
 
@@ -360,7 +381,7 @@ namespace DS.Windows
 
             if (ungroupedNodesList.Count == 2)
             {
-                ++RepeatedNamesCount;
+                ++NameErrorsCount;
                 ungroupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
@@ -376,7 +397,7 @@ namespace DS.Windows
 
             if (ungroupedNodesList.Count == 1)
             {
-                --RepeatedNamesCount;
+                --NameErrorsCount;
                 ungroupedNodesList[0].ResetStyle();
 
                 return;
@@ -413,7 +434,7 @@ namespace DS.Windows
 
             if (groupsList.Count == 2)
             {
-                ++RepeatedNamesCount;
+                ++NameErrorsCount;
                 groupsList[0].SetErrorStyle(errorColor);
             }
         }
@@ -430,7 +451,7 @@ namespace DS.Windows
 
             if (groupsList.Count == 1)
             {
-                --RepeatedNamesCount;
+                --NameErrorsCount;
                 groupsList[0].ResetStyle();
             }
             if (groupsList.Count == 0)
@@ -471,7 +492,7 @@ namespace DS.Windows
 
             if (groupedNodesList.Count == 2)
             {
-                ++RepeatedNamesCount;
+                ++NameErrorsCount;
                 groupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
@@ -490,7 +511,7 @@ namespace DS.Windows
 
             if (groupedNodesList.Count == 1)
             {
-                --RepeatedNamesCount;
+                --NameErrorsCount;
                 groupedNodesList[0].ResetStyle();
 
                 return;

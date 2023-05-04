@@ -57,6 +57,18 @@ namespace DS.Elements
 
                 target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
 
+                if (string.IsNullOrEmpty(target.value))
+                {
+                    if (!string.IsNullOrEmpty(DialogueName))
+                    {
+                        ++graphView.NameErrorsCount;
+                    }
+                }
+                else if (string.IsNullOrEmpty(DialogueName))
+                {
+                    --graphView.NameErrorsCount;
+                }
+
                 if (Group == null)
                 {
                     graphView.RemoveUngroupedNode(this);
