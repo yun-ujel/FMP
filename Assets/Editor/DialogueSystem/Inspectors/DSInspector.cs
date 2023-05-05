@@ -160,15 +160,15 @@ namespace DS.Inspectors
             UpdateIndexOnNamesListUpdate
             (
                 dialogueNames,
-                selectedDialogueGroupIndexProperty,
-                selectedDialogueGroupIndexProperty.intValue,
+                selectedDialogueIndexProperty,
+                selectedDialogueIndexProperty.intValue,
                 isOldDialogueNull,
                 isOldDialogueNull ? "" : oldDialogue.DialogueName
             );
 
             selectedDialogueIndexProperty.intValue = DSInspectorUtility.DrawPopup("Dialogue", selectedDialogueIndexProperty.intValue, dialogueNames.ToArray());
 
-            string selectedDialogueName = dialogueNames[selectedDialogueGroupIndexProperty.intValue];
+            string selectedDialogueName = dialogueNames[selectedDialogueIndexProperty.intValue];
             DSDialogueSO selectedDialogue = DSSaveUtility.LoadAsset<DSDialogueSO>(dialogueFolderPath, selectedDialogueName);
 
             dialogueProperty.objectReferenceValue = selectedDialogue;
