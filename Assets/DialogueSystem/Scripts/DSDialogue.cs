@@ -8,7 +8,7 @@ namespace DS
         /* Dialogue Scriptable Objects */
         [SerializeField, HideInInspector] protected DSDialogueContainerSO dialogueContainer;
         [SerializeField, HideInInspector] protected DSDialogueGroupSO dialogueGroup;
-        [SerializeField, HideInInspector] protected DSDialogueSO dialogue;
+        [SerializeField, HideInInspector] protected DSDialogueSO startDialogue;
 
         /* Filters */
         [SerializeField, HideInInspector] protected bool groupedDialogues;
