@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DS
@@ -8,16 +6,16 @@ namespace DS
     public class DSDialogue : MonoBehaviour
     {
         /* Dialogue Scriptable Objects */
-        [SerializeField] private DSDialogueContainerSO dialogueContainer;
-        [SerializeField] private DSDialogueGroupSO dialogueGroup;
-        [SerializeField] private DSDialogueSO dialogue;
+        [SerializeField, HideInInspector] protected DSDialogueContainerSO dialogueContainer;
+        [SerializeField, HideInInspector] protected DSDialogueGroupSO dialogueGroup;
+        [SerializeField, HideInInspector] protected DSDialogueSO dialogue;
 
         /* Filters */
-        [SerializeField] private bool groupedDialogues;
-        [SerializeField] private bool startingDialoguesOnly;
+        [SerializeField, HideInInspector] protected bool groupedDialogues;
+        [SerializeField, HideInInspector] protected bool startingDialoguesOnly;
 
         /* Indexes */
-        [SerializeField] private int selectedDialogueGroupIndex;
-        [SerializeField] private int selectedDialogueIndex;
+        [SerializeField, HideInInspector] protected int selectedDialogueGroupIndex;
+        [SerializeField, HideInInspector] protected int selectedDialogueIndex;
     }
 }

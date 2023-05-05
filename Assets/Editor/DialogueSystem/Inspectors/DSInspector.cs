@@ -8,11 +8,9 @@ namespace DS.Inspectors
     using Data.Save;
     using ScriptableObjects;
 
-    [CustomEditor(typeof(DSDialogue))]
+    [CustomEditor(typeof(DSDialogue), true)]
     public class DSInspector : Editor
     {
-        private Object hereToStopSystemNamespace;
-
         /* Dialogue Scriptable Objects */
         private SerializedProperty dialogueContainerProperty;
         private SerializedProperty dialogueGroupProperty;
@@ -50,6 +48,7 @@ namespace DS.Inspectors
             if (dialogueContainer == null)
             {
                 StopDrawing("Select a Dialogue Container to see the rest of the Inspector");
+
                 return;
             }
 
@@ -92,12 +91,15 @@ namespace DS.Inspectors
             if (dialogueNames.Count == 0)
             {
                 StopDrawing(dialogueInfoMessage);
+
                 return;
             }
 
             DrawDialogueArea(dialogueNames, dialogueFolderPath);
 
             serializedObject.ApplyModifiedProperties();
+
+            base.OnInspectorGUI();
         }
 
         #region Draw Methods
@@ -183,6 +185,13 @@ namespace DS.Inspectors
             EditorGUILayout.Space(4);
 
             EditorGUILayout.HelpBox("Please select a Dialogue for this component to run properly at runtime", MessageType.Warning);
+
+            EditorGUILayout.Space(6);
+            if (target.GetType() == typeof(DSDialogueDisplay))
+            {
+                DSInspectorUtility.DrawHeader("Display");
+                base.OnInspectorGUI();
+            }            
 
             serializedObject.ApplyModifiedProperties();
         }
