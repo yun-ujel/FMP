@@ -21,5 +21,13 @@ namespace DS.ScriptableObjects
             DialogueType = dialogueType;
             IsStartingDialogue = isStartingDialogue;
         }
+
+        public DSDialogueSO GetChoice(int index, out string choiceName)
+        {
+            DSDialogueChoiceData selectedChoice = Choices[index];
+
+            choiceName = selectedChoice.Text;
+            return selectedChoice.NextDialogue;
+        }
     }
 }

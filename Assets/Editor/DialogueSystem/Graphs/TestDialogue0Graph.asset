@@ -19,7 +19,7 @@ MonoBehaviour:
     <Position>k__BackingField: {x: 201, y: -1}
   - <GUID>k__BackingField: d49f6b9f-d209-417e-9762-d2899dfedc5e
     <Name>k__BackingField: Phone
-    <Position>k__BackingField: {x: 3031, y: 331.00012}
+    <Position>k__BackingField: {x: 3031, y: 331}
   <Nodes>k__BackingField:
   - <GUID>k__BackingField: b77f6e3b-8b2f-436f-ade6-bce9030652e0
     <Name>k__BackingField: Entry

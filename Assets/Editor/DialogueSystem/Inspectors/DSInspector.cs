@@ -28,7 +28,7 @@ namespace DS.Inspectors
         {
             dialogueContainerProperty = serializedObject.FindProperty("dialogueContainer");
             dialogueGroupProperty = serializedObject.FindProperty("dialogueGroup");
-            dialogueProperty = serializedObject.FindProperty("dialogue");
+            dialogueProperty = serializedObject.FindProperty("startDialogue");
 
             groupedDialoguesProperty = serializedObject.FindProperty("groupedDialogues");
             startingDialogueOnlyProperty = serializedObject.FindProperty("startingDialoguesOnly");
@@ -99,7 +99,7 @@ namespace DS.Inspectors
 
             serializedObject.ApplyModifiedProperties();
 
-            base.OnInspectorGUI();
+            DrawBaseInspector();
         }
 
         #region Draw Methods
@@ -186,14 +186,19 @@ namespace DS.Inspectors
 
             EditorGUILayout.HelpBox("Please select a Dialogue for this component to run properly at runtime", MessageType.Warning);
 
-            EditorGUILayout.Space(6);
+            serializedObject.ApplyModifiedProperties();
+
+            DrawBaseInspector();
+        }
+
+        private void DrawBaseInspector()
+        {
             if (target.GetType() == typeof(DSDialogueDisplay))
             {
+                EditorGUILayout.Space(6);
                 DSInspectorUtility.DrawHeader("Display");
                 base.OnInspectorGUI();
-            }            
-
-            serializedObject.ApplyModifiedProperties();
+            }
         }
         #endregion
 

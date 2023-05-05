@@ -59,5 +59,20 @@ namespace DS.ScriptableObjects
             }
             return ungroupedDialogueNodeNames;
         }
+
+        public string GetNodeGroupName(DSDialogueSO dialogue)
+        {
+            foreach (KeyValuePair<DSDialogueGroupSO, List<DSDialogueSO>> dialogueGroup in DialogueGroups)
+            {
+                foreach(DSDialogueSO checkDialogue in dialogueGroup.Value)
+                {
+                    if (checkDialogue == dialogue)
+                    {
+                        return dialogueGroup.Key.GroupName;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
