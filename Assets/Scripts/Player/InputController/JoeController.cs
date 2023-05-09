@@ -1,133 +1,137 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Joe
+namespace PlayerInput
 {
-    public bool isAxis;
-    public string name;
-}
-
-[CreateAssetMenu(fileName = "JoeController", menuName = "Scriptable Object/Input Controller/Joe Controller")]
-public class JoeController : InputController
-{
-    // Requires InputManager-JoeVersion
-
-    [Header("Axes")]
-    [SerializeField] private Joe[] xAxisBindings;
-    [SerializeField] private Joe[] yAxisBindings;
-
-    [Header("Jump")]
-    [SerializeField] private Joe[] jumpBindings;
-
-    [Header("Attack")]
-    [SerializeField] private Joe[] attackBindings;
-
-
-    public override bool GetAttackHeld()
+    [System.Serializable]
+    public class Joe
     {
-        for (int i = 0; i < attackBindings.Length; i++)
+        public bool isAxis;
+        public string name;
+    }
+
+    [CreateAssetMenu(fileName = "JoeController", menuName = "Scriptable Object/Input Controller/Joe Controller")]
+    public class JoeController : InputController
+    {
+        // Requires InputManager-JoeVersion
+
+        [Header("Axes")]
+        [SerializeField] private Joe[] xAxisBindings;
+        [SerializeField] private Joe[] yAxisBindings;
+
+        [Header("Jump")]
+        [SerializeField] private Joe[] jumpBindings;
+
+        [Header("Attack")]
+        [SerializeField] private Joe[] attackBindings;
+
+
+        public override bool GetAttackHeld()
         {
-            if (attackBindings[i].isAxis)
+            for (int i = 0; i < attackBindings.Length; i++)
             {
-                if (Input.GetAxisRaw(attackBindings[i].name) >= 1f)
+                if (attackBindings[i].isAxis)
                 {
-                    return true;
+                    if (Input.GetAxisRaw(attackBindings[i].name) >= 1f)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (Input.GetButton(attackBindings[i].name))
+                    {
+                        return true;
+                    }
                 }
             }
-            else
-            {
-                if (Input.GetButton(attackBindings[i].name))
-                {
-                    return true;
-                }
-            }
+
+            return false;
         }
 
-        return false;
-    }
-
-    public override bool GetAttackPressed()
-    {
-        for (int i = 0; i < attackBindings.Length; i++)
+        public override bool GetAttackPressed()
         {
-            if (attackBindings[i].isAxis)
+            for (int i = 0; i < attackBindings.Length; i++)
             {
-                if (Input.GetAxisRaw(attackBindings[i].name) >= 1f)
+                if (attackBindings[i].isAxis)
                 {
-                    return true;
+                    if (Input.GetAxisRaw(attackBindings[i].name) >= 1f)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (Input.GetButtonDown(attackBindings[i].name))
+                    {
+                        return true;
+                    }
                 }
             }
-            else
-            {
-                if (Input.GetButtonDown(attackBindings[i].name))
-                {
-                    return true;
-                }
-            }
+
+            return false;
         }
 
-        return false;
-    }
-
-    public override float GetHorizontalInput()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool GetJumpHeld()
-    {
-        for (int i = 0; i < jumpBindings.Length; i++)
+        public override float GetHorizontalInput()
         {
-            if (jumpBindings[i].isAxis)
-            {
-                if (Input.GetAxisRaw(jumpBindings[i].name) >= 1f)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (Input.GetButton(jumpBindings[i].name))
-                {
-                    return true;
-                }
-            }
+            throw new System.NotImplementedException();
         }
 
-        return false;
-    }
-
-    public override bool GetJumpPressed()
-    {
-        for (int i = 0; i < jumpBindings.Length; i++)
+        public override bool GetJumpHeld()
         {
-            if (jumpBindings[i].isAxis)
+            for (int i = 0; i < jumpBindings.Length; i++)
             {
-                if (Input.GetAxisRaw(jumpBindings[i].name) >= 1f)
+                if (jumpBindings[i].isAxis)
                 {
-                    return true;
+                    if (Input.GetAxisRaw(jumpBindings[i].name) >= 1f)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (Input.GetButton(jumpBindings[i].name))
+                    {
+                        return true;
+                    }
                 }
             }
-            else
-            {
-                if (Input.GetButtonDown(jumpBindings[i].name))
-                {
-                    return true;
-                }
-            }
+
+            return false;
         }
 
-        return false;
+        public override bool GetJumpPressed()
+        {
+            for (int i = 0; i < jumpBindings.Length; i++)
+            {
+                if (jumpBindings[i].isAxis)
+                {
+                    if (Input.GetAxisRaw(jumpBindings[i].name) >= 1f)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (Input.GetButtonDown(jumpBindings[i].name))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public override float GetVerticalInput()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override Vector2 GetInputAxes()
+        {
+            Vector2 squared = new Vector2(GetHorizontalInput(), GetVerticalInput());
+            return squared.normalized;
+        }
     }
 
-    public override float GetVerticalInput()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override Vector2 GetInputAxes()
-    {
-        Vector2 squared = new Vector2(GetHorizontalInput(), GetVerticalInput());
-        return squared.normalized;
-    }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class InputController : ScriptableObject
 {
+    [field: SerializeField] public bool Enabled { get; set; } = true;
+
     public abstract bool GetJumpHeld();
 
     public abstract bool GetJumpPressed();

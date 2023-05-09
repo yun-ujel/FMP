@@ -23,7 +23,11 @@ namespace DS
         {
             if (input.GetAttackPressed() || input.GetJumpPressed())
             {
-                UpdateDialogue(currentDialogue.GetChoice(optionsNav.CurrentSelected, out _));
+                DSDialogueSO dialogue = currentDialogue.GetChoice(optionsNav.CurrentSelected, out _);
+                if (dialogue != null)
+                {
+                    UpdateDialogue(dialogue);
+                }
             }
         }
         private void UpdateDialogue(DSDialogueSO dialogue)

@@ -10,5 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfdaadfad08ac064d994a20ef9411b10, type: 3}
-  m_Name: PlayerController - Player
+  m_Name: MindController
   m_EditorClassIdentifier: 
+  <Enabled>k__BackingField: 1
