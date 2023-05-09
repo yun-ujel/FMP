@@ -1,12 +1,18 @@
 using UnityEngine;
 using TMPro;
 using UI.Options;
+using UnityEngine.UI;
 
 namespace DS
 {
     using ScriptableObjects;
     public class DSDialogueDisplay : DSDialogue
     {
+        [Header("Display Portrait")]
+        [SerializeField] private RawImage portrait;
+        [SerializeField] private Image portraitBox;
+        private Color defaultPortraitBoxColour;
+
         [Header("Display Text")]
         [SerializeField] private TextMeshProUGUI uGUI;
         private DSDialogueSO currentDialogue;
@@ -15,9 +21,12 @@ namespace DS
         [SerializeField] private InputController input;
         [SerializeField] private OptionsNavigation optionsNav;
 
+        [Header("Box")]
+        [SerializeField] private Animator boxAnimator;
+
         private void Start()
         {
-            UpdateDialogue(startDialogue);
+            UpdateDialogue(startDialogue);            
         }
         private void Update()
         {
@@ -35,6 +44,18 @@ namespace DS
             currentDialogue = dialogue;
             uGUI.text = currentDialogue.Text;
 
+            if (dialogue.Texture == null)
+            {
+                portrait.color = Color.clear;
+                portraitBox.enabled = false;
+            }
+            else
+            {
+                portraitBox.enabled = true;
+                portrait.color = Color.white;
+                portrait.texture = dialogue.Texture;
+            }
+
             if (dialogue.DialogueType == Enumerations.DSDialogueType.SingleChoice)
             {
                 optionsNav.CreateOptions();
@@ -43,6 +64,11 @@ namespace DS
             {
                 optionsNav.CreateOptions(currentDialogue.GetChoicesAsStringArray());
             }
+        }
+
+        public void SetOptions(bool setting)
+        {
+            boxAnimator.SetBool("IsOpen", setting);
         }
     }
 }

@@ -5,8 +5,11 @@ namespace PlayerInput
     public class InputManager : MonoBehaviour
     {
         [SerializeField] private InputController mindController;
-        [SerializeField] private InputController uIController;
         [SerializeField] private InputController worldController;
+
+        [Header("UI")]
+        [SerializeField] private InputController uIController;
+        [SerializeField] private DS.DSDialogueDisplay dialogueDisplay;
 
         private void Awake()
         {
@@ -18,6 +21,7 @@ namespace PlayerInput
             mindController.Enabled = false;
             uIController.Enabled = false;
             worldController.Enabled = false;
+            dialogueDisplay.SetOptions(false);
         }
 
         private void Update()
@@ -35,6 +39,7 @@ namespace PlayerInput
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 DisableAllControllers();
+                dialogueDisplay.SetOptions(true);
                 uIController.Enabled = true;
             }
         }

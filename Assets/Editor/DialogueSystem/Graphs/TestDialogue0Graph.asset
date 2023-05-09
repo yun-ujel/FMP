@@ -16,11 +16,21 @@ MonoBehaviour:
   <Groups>k__BackingField:
   - <GUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <Name>k__BackingField: Milkshake
-    <Position>k__BackingField: {x: 201, y: -1}
+    <Position>k__BackingField: {x: 52, y: -1}
   - <GUID>k__BackingField: d49f6b9f-d209-417e-9762-d2899dfedc5e
     <Name>k__BackingField: Phone
     <Position>k__BackingField: {x: 3031, y: 331}
   <Nodes>k__BackingField:
+  - <GUID>k__BackingField: f5772e34-ba3b-4df0-a46d-6b4e7fcc07ba
+    <Name>k__BackingField: PhoneRing
+    <Text>k__BackingField: '*PHONE RINGING*'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: d49f6b9f-d209-417e-9762-d2899dfedc5e
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 3056, y: 390}
   - <GUID>k__BackingField: b77f6e3b-8b2f-436f-ade6-bce9030652e0
     <Name>k__BackingField: Entry
     <Text>k__BackingField: ...
@@ -29,7 +39,18 @@ MonoBehaviour:
       <TargetGUID>k__BackingField: fb079aec-5e55-421c-bc56-c34a2fc8d8de
     <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 226, y: 155}
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 77, y: 165}
+  - <GUID>k__BackingField: fb079aec-5e55-421c-bc56-c34a2fc8d8de
+    <Name>k__BackingField: MilkshakeLine0
+    <Text>k__BackingField: It's too early for this.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 9fd8139b-f540-42c3-bad5-9422f460e569
+    <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 436, y: 165}
   - <GUID>k__BackingField: 9fd8139b-f540-42c3-bad5-9422f460e569
     <Name>k__BackingField: MilkshakeLine1
     <Text>k__BackingField: Oh right. That phone call...
@@ -42,25 +63,8 @@ MonoBehaviour:
       <TargetGUID>k__BackingField: 16106aea-61be-4493-a16d-b795e4e85bef
     <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <DialogueType>k__BackingField: 1
-    <Position>k__BackingField: {x: 848, y: 155}
-  - <GUID>k__BackingField: fb079aec-5e55-421c-bc56-c34a2fc8d8de
-    <Name>k__BackingField: MilkshakeLine0
-    <Text>k__BackingField: It's too early for this.
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 9fd8139b-f540-42c3-bad5-9422f460e569
-    <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 532, y: 155}
-  - <GUID>k__BackingField: f5772e34-ba3b-4df0-a46d-6b4e7fcc07ba
-    <Name>k__BackingField: PhoneRing
-    <Text>k__BackingField: '*PHONE RINGING*'
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 
-    <GroupGUID>k__BackingField: d49f6b9f-d209-417e-9762-d2899dfedc5e
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 3056, y: 390}
+    <Texture>k__BackingField: {fileID: 2800000, guid: fd9866b72e753264080fe76d3e5fdd06, type: 3}
+    <Position>k__BackingField: {x: 789, y: 165}
   - <GUID>k__BackingField: 3843e516-470b-48a5-9b11-dca0947399b4
     <Name>k__BackingField: MilkshakeLine2
     <Text>k__BackingField: Hmmm...
@@ -69,7 +73,18 @@ MonoBehaviour:
       <TargetGUID>k__BackingField: 27ba8eba-47fc-46ea-92d9-4ff4b07e3682
     <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
     <Position>k__BackingField: {x: 1323, y: 58}
+  - <GUID>k__BackingField: 16106aea-61be-4493-a16d-b795e4e85bef
+    <Name>k__BackingField: MilkshakeLine2v1
+    <Text>k__BackingField: '*sigh*'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: aa310a64-db39-4e5e-9ae8-f82eee0f7c57
+    <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 1693, y: 325}
   - <GUID>k__BackingField: 27ba8eba-47fc-46ea-92d9-4ff4b07e3682
     <Name>k__BackingField: MilkshakeLine3
     <Text>k__BackingField: Maybe if I just... ignore it, I won't have to deal with
@@ -79,7 +94,8 @@ MonoBehaviour:
       <TargetGUID>k__BackingField: d5d5dab5-9623-46b1-b720-73764e699c5a
     <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 1632, y: 58}
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 1680, y: 59}
   - <GUID>k__BackingField: d5d5dab5-9623-46b1-b720-73764e699c5a
     <Name>k__BackingField: MilkshakeLine4
     <Text>k__BackingField: "I mean, that doctor has hundreds of cases they need to
@@ -89,16 +105,8 @@ MonoBehaviour:
       <TargetGUID>k__BackingField: f5772e34-ba3b-4df0-a46d-6b4e7fcc07ba
     <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 2308, y: 58}
-  - <GUID>k__BackingField: 16106aea-61be-4493-a16d-b795e4e85bef
-    <Name>k__BackingField: MilkshakeLine2v1
-    <Text>k__BackingField: '*sigh*'
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: aa310a64-db39-4e5e-9ae8-f82eee0f7c57
-    <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 1693, y: 325}
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 2356, y: 59}
   - <GUID>k__BackingField: aa310a64-db39-4e5e-9ae8-f82eee0f7c57
     <Name>k__BackingField: MilkshakeLine3v1
     <Text>k__BackingField: Yeah...
@@ -107,23 +115,24 @@ MonoBehaviour:
       <TargetGUID>k__BackingField: f5772e34-ba3b-4df0-a46d-6b4e7fcc07ba
     <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 2002, y: 325}
+    <Texture>k__BackingField: {fileID: 2800000, guid: fd9866b72e753264080fe76d3e5fdd06, type: 3}
+    <Position>k__BackingField: {x: 2191, y: 325}
   <OldGroupNames>k__BackingField:
   - Milkshake
   - Phone
   <OldUngroupedNodeNames>k__BackingField: []
   <OldGroupedNodeNames>k__BackingField:
     list:
-    - Key: Milkshake
-      Value:
-      - Entry
-      - MilkshakeLine1
-      - MilkshakeLine0
-      - MilkshakeLine2
-      - MilkshakeLine3
-      - MilkshakeLine4
-      - MilkshakeLine2v1
-      - MilkshakeLine3v1
     - Key: Phone
       Value:
       - PhoneRing
+    - Key: Milkshake
+      Value:
+      - Entry
+      - MilkshakeLine0
+      - MilkshakeLine1
+      - MilkshakeLine2
+      - MilkshakeLine2v1
+      - MilkshakeLine3
+      - MilkshakeLine4
+      - MilkshakeLine3v1

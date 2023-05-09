@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e145471024d6745a2f518e25a1f741, type: 3}
   m_Name: MilkshakeLine3v1
   m_EditorClassIdentifier: 
+  <Texture>k__BackingField: {fileID: 2800000, guid: fd9866b72e753264080fe76d3e5fdd06, type: 3}
   <DialogueName>k__BackingField: MilkshakeLine3v1
   <Text>k__BackingField: Yeah...
   <Choices>k__BackingField:

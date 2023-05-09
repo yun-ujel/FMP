@@ -27,7 +27,7 @@ namespace UI.Options
 
         private void Start()
         {
-            CreateOptions("Joe", "Quagmire", "Cleveland", "Peter");
+            
         }
 
         private void Update()
