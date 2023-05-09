@@ -1,29 +1,43 @@
 using UnityEngine;
 using TMPro;
+using UI.Options;
 
 namespace DS
 {
     using ScriptableObjects;
     public class DSDialogueDisplay : DSDialogue
     {
+        [Header("Display Text")]
         [SerializeField] private TextMeshProUGUI uGUI;
         private DSDialogueSO currentDialogue;
 
+        [Header("Options")]
+        [SerializeField] private InputController input;
+        [SerializeField] private OptionsNavigation optionsNav;
+
         private void Start()
         {
-            currentDialogue = startDialogue;
+            UpdateDialogue(startDialogue);
         }
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (input.GetAttackPressed() || input.GetJumpPressed())
             {
-                currentDialogue = currentDialogue.GetChoice(0, out _);
-                Debug.Log(currentDialogue.Text);
+                UpdateDialogue(currentDialogue.GetChoice(optionsNav.CurrentSelected, out _));
             }
+        }
+        private void UpdateDialogue(DSDialogueSO dialogue)
+        {
+            currentDialogue = dialogue;
+            uGUI.text = currentDialogue.Text;
 
-            if (Input.GetMouseButtonDown(1))
+            if (dialogue.DialogueType == Enumerations.DSDialogueType.SingleChoice)
             {
-                Debug.Log(dialogueContainer.GetNodeGroupName(currentDialogue));
+                optionsNav.CreateOptions();
+            }
+            else
+            {
+                optionsNav.CreateOptions(currentDialogue.GetChoicesAsStringArray());
             }
         }
     }

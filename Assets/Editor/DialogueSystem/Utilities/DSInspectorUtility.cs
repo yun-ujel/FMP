@@ -14,9 +14,10 @@ namespace DS.Utilities
             EditorGUI.EndDisabledGroup();
         }
 
-        public static void DrawHeader(string label)
+        public static void DrawHeader(string label, GUIStyle style = null)
         {
-            EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
+            if (style == null) { style = EditorStyles.boldLabel; }
+            EditorGUILayout.LabelField(label, style);
         }
 
         public static void DrawPropertyField(this SerializedProperty serializedProperty)

@@ -29,5 +29,16 @@ namespace DS.ScriptableObjects
             choiceName = selectedChoice.Text;
             return selectedChoice.NextDialogue;
         }
+
+        public string[] GetChoicesAsStringArray()
+        {
+            string[] choices = new string[Choices.Count];
+            for (int i = 0; i < choices.Length; i++)
+            {
+                choices[i] = Choices[i].Text;
+            }
+
+            return choices;
+        }
     }
 }
