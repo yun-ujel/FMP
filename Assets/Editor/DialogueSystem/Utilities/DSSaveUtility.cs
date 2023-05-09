@@ -161,6 +161,7 @@ namespace DS.Utilities
                 Text = node.Text,
                 GroupGUID = node.Group?.GUID,
                 DialogueType = node.DialogueType,
+                Texture = node.Texture,
                 Position = node.GetPosition().position
             };
 
@@ -184,6 +185,7 @@ namespace DS.Utilities
             }
             dialogue.Initialize
             (
+                node.Texture,
                 node.DialogueName,
                 node.Text,
                 ConvertNodeChoicesToDialogueChoices(node.Choices),
@@ -322,6 +324,7 @@ namespace DS.Utilities
                 node.GUID = nodeData.GUID;
                 node.Choices = choicesClone;
                 node.Text = nodeData.Text;
+                node.Texture = nodeData.Texture;
 
                 node.Draw();
 

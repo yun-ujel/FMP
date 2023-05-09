@@ -14,6 +14,7 @@ namespace DS.Data.Save
         [field: SerializeField] public List<DSChoiceSaveData> Choices { get; set; }
         [field: SerializeField] public string GroupGUID { get; set; }
         [field: SerializeField] public DSDialogueType DialogueType { get; set; }
+        [field: SerializeField] public Texture2D Texture { get; set; }
         [field: SerializeField] public Vector2 Position { get; set; }
     }
 }

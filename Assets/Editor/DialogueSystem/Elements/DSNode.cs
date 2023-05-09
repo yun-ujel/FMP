@@ -3,6 +3,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEngine;
 using System.Linq;
+using UnityEditor.UIElements;
 
 namespace DS.Elements
 {
@@ -19,6 +20,7 @@ namespace DS.Elements
         public string Text { get; set; }
         public DSDialogueType DialogueType { get; set; }
         public DSGroup Group { get; set; }
+        public Texture2D Texture { get; set; }
 
         protected DSGraphView graphView;
         private readonly Color defaultBackgroundColor = new Color(29f / 255f, 29f / 255f, 30f / 255f);
@@ -51,9 +53,9 @@ namespace DS.Elements
         public virtual void Draw()
         {
             /* TITLE CONTAINER */
-            TextField dialogueNameTextField = DSElementUtility.CreateTextField(DialogueName, callback => 
+            TextField dialogueNameTextField = DSElementUtility.CreateTextField(DialogueName, callback =>
             {
-                TextField target = (TextField) callback.target;
+                TextField target = (TextField)callback.target;
 
                 target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
 
@@ -76,7 +78,7 @@ namespace DS.Elements
                     DialogueName = target.value;
 
                     graphView.AddUngroupedNode(this);
-                    
+
                     return;
                 }
 
@@ -108,13 +110,16 @@ namespace DS.Elements
 
             customDataContainer.AddToClassList("ds-node__custom-data-container");
 
-            Foldout textFoldout = DSElementUtility.CreateFoldout("Dialogue Text");
+            ObjectField textureField = DSElementUtility.CreateTextureField(Texture);
+            textureField.RegisterValueChangedCallback(changed => Texture = (Texture2D)changed.newValue);
 
+            customDataContainer.Add(textureField);
+
+            Foldout textFoldout = DSElementUtility.CreateFoldout("Dialogue Text");
             TextField textTextField = DSElementUtility.CreateTextArea(Text, callback =>
             {
                 Text = callback.newValue;
             });
-
             textTextField.AddClasses
             (
                 "ds-node__textfield",

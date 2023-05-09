@@ -1,12 +1,26 @@
 using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using UnityEngine;
+using UnityEditor.UIElements;
 
 namespace DS.Utilities
 {
     using Elements;
     public static class DSElementUtility
     {
+        public static ObjectField CreateTextureField(Texture2D texture, string label = "Texture")
+        {
+            ObjectField textureField = new ObjectField
+            {
+                value = texture,
+                objectType = typeof(Texture2D),
+                label = label,
+            };
+
+            return textureField;
+        }
+
         public static TextField CreateTextField(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null, string label = null)
         {
             TextField textField = new TextField()
