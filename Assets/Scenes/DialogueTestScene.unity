@@ -1345,6 +1345,7 @@ GameObject:
   - component: {fileID: 445004812}
   - component: {fileID: 445004813}
   - component: {fileID: 445004814}
+  - component: {fileID: 445004815}
   m_Layer: 5
   m_Name: DialogueUI-Right
   m_TagString: Untagged
@@ -1398,6 +1399,25 @@ MonoBehaviour:
   optionPrefab: {fileID: 4376998373735351932, guid: e71abf37f90e6a24baa33950610cd76f, type: 3}
   optionsParent: {fileID: 1751741687}
   options: []
+--- !u!95 &445004815
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445004811}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 78458672695bc284b979650c389b3475, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &461325544
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,7 +3651,7 @@ GameObject:
   - component: {fileID: 1225917690}
   - component: {fileID: 1225917689}
   m_Layer: 5
-  m_Name: 'Portrait '
+  m_Name: Portrait Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4197,9 +4217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'the phone
-
-'
+  m_text: aerograjgepoiajgoiajspgi
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5574,9 +5592,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -300, y: -20}
+  m_AnchoredPosition: {x: 320, y: -20}
   m_SizeDelta: {x: 1240, y: 300}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1977201037
 MonoBehaviour:
   m_ObjectHideFlags: 0
