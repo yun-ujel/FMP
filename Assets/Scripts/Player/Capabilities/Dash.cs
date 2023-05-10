@@ -45,7 +45,7 @@ public class Dash : Capability
     {
         CalculateDashDirection();
 
-        if (inputController.GetAttackPressed())
+        if (inputController.GetInteractPressed())
         {
             desiredDash = true;
         }

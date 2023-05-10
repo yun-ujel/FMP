@@ -25,7 +25,7 @@ namespace PlayerInput
         [SerializeField] private Joe[] attackBindings;
 
 
-        public override bool GetAttackHeld()
+        public override bool GetInteractHeld()
         {
             for (int i = 0; i < attackBindings.Length; i++)
             {
@@ -48,7 +48,7 @@ namespace PlayerInput
             return false;
         }
 
-        public override bool GetAttackPressed()
+        public override bool GetInteractPressed()
         {
             for (int i = 0; i < attackBindings.Length; i++)
             {
@@ -131,6 +131,16 @@ namespace PlayerInput
         {
             Vector2 squared = new Vector2(GetHorizontalInput(), GetVerticalInput());
             return squared.normalized;
+        }
+
+        public override bool GetBackPressed()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override bool GetBackHeld()
+        {
+            throw new System.NotImplementedException();
         }
     }
 

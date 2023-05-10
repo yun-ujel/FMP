@@ -51,9 +51,9 @@ public class GrabObject : Capability
 
     private void Update()
     {
-        if (!inputController.GetAttackHeld()) { isGrabbing = false; }
+        if (!inputController.GetInteractHeld()) { isGrabbing = false; }
 
-        if (inputController.GetAttackPressed() && !IsHolding)
+        if (inputController.GetInteractPressed() && !IsHolding)
         {
             GetObjectToHold()?.transform.parent.TryGetComponent(out objectBeingHeld);
             if (objectBeingHeld != null)
@@ -71,7 +71,7 @@ public class GrabObject : Capability
 
             if (!isGrabbing)
             {
-                if (inputController.GetAttackPressed())
+                if (inputController.GetInteractPressed())
                 {
                     throwDelayCounter = throwDelay;
                     isThrowing = true;
@@ -81,7 +81,7 @@ public class GrabObject : Capability
                     throwDelayCounter -= Time.deltaTime;
                 }
 
-                if (throwDelayCounter > 0f || inputController.GetAttackHeld())
+                if (throwDelayCounter > 0f || inputController.GetInteractHeld())
                 {
                     body.constraints = RigidbodyConstraints2D.FreezeAll;
                 }

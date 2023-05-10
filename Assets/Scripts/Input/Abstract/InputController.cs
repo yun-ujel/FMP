@@ -12,9 +12,13 @@ public abstract class InputController : ScriptableObject
 
     public abstract float GetVerticalInput();
 
-    public abstract bool GetAttackPressed();
+    public abstract bool GetInteractPressed();
 
-    public abstract bool GetAttackHeld();
+    public abstract bool GetInteractHeld();
+
+    public abstract bool GetBackPressed();
+
+    public abstract bool GetBackHeld();
 
     public abstract Vector2 GetInputAxes();
 }

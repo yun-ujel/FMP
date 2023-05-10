@@ -4,6 +4,8 @@ namespace PlayerInput
 {
     public class InputManager : MonoBehaviour
     {
+        public static InputManager Instance { get; private set; }
+
         [SerializeField] private InputController mindController;
         [SerializeField] private InputController worldController;
 
@@ -13,6 +15,15 @@ namespace PlayerInput
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+
             DisableAllControllers();
         }
 

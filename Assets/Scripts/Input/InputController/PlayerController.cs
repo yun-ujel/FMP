@@ -18,7 +18,7 @@ namespace PlayerInput
             return Enabled ? Input.GetAxisRaw("Horizontal") : 0f;
         }
 
-        public override bool GetAttackPressed()
+        public override bool GetInteractPressed()
         {
             return (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.J)) && Enabled;
         }
@@ -28,7 +28,7 @@ namespace PlayerInput
             return Enabled ? Input.GetAxisRaw("Vertical") : 0f;
         }
 
-        public override bool GetAttackHeld()
+        public override bool GetInteractHeld()
         {
             return (Input.GetButton("Fire1") || Input.GetKey(KeyCode.J)) && Enabled;
         }
@@ -41,6 +41,16 @@ namespace PlayerInput
                 return squared.normalized;
             }
             return Vector2.zero;
+        }
+
+        public override bool GetBackPressed()
+        {
+            return Input.GetButtonDown("Fire2") && Enabled;
+        }
+
+        public override bool GetBackHeld()
+        {
+            return Input.GetButton("Fire2") && Enabled;
         }
     }
 

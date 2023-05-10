@@ -32,7 +32,7 @@ namespace UI.Options
 
         private void Update()
         {
-            if (input.GetAttackPressed() || input.GetJumpPressed())
+            if (input.GetInteractPressed() || input.GetJumpPressed())
             {
 
             }

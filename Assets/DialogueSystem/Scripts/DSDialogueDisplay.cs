@@ -30,7 +30,7 @@ namespace DS
         }
         private void Update()
         {
-            if (input.GetAttackPressed() || input.GetJumpPressed())
+            if (input.GetInteractPressed() || input.GetJumpPressed())
             {
                 DSDialogueSO dialogue = currentDialogue.GetChoice(optionsNav.CurrentSelected, out _);
                 if (dialogue != null)
@@ -48,12 +48,16 @@ namespace DS
             {
                 portrait.color = Color.clear;
                 portraitBox.enabled = false;
+
+                uGUI.rectTransform.offsetMin = new Vector2(10f, 10f);
             }
             else
             {
                 portraitBox.enabled = true;
                 portrait.color = Color.white;
                 portrait.texture = dialogue.Texture;
+
+                uGUI.rectTransform.offsetMin = new Vector2(300f, 10f);
             }
 
             if (dialogue.DialogueType == Enumerations.DSDialogueType.SingleChoice)
