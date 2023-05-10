@@ -34,6 +34,11 @@ namespace UI.Options
             SetColours();
         }
 
+        private void Update()
+        {
+
+        }
+
         public void SetColours(Color? defaultColour = null, Color? selectedColour = null, Color? textDefaultColour = null, Color? textSelectedColour = null)
         {
             if (defaultColour == null)

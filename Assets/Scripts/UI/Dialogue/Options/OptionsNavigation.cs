@@ -25,11 +25,6 @@ namespace UI.Options
         [SerializeField] private Transform optionsParent;
         [SerializeField] private List<Option> options;
 
-        private void Start()
-        {
-            
-        }
-
         private void Update()
         {
             if (input.GetInteractPressed() || input.GetJumpPressed())
