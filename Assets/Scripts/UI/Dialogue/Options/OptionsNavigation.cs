@@ -23,7 +23,7 @@ namespace UI.Options
         [Space]
 
         [SerializeField] private Transform optionsParent;
-        [SerializeField] private List<Option> options;
+        private List<Option> options;
 
         private void Update()
         {
@@ -57,6 +57,7 @@ namespace UI.Options
         }
 
         #region Options Methods
+        #region Creation
         public void CreateOptions(params string[] names)
         {
             /* Clear Existing Options */
@@ -88,7 +89,8 @@ namespace UI.Options
             options[options.Count - 1].Initialize(name);
             SetOptionSelect(CurrentSelected);
         }
-
+        #endregion
+        #region Selection
         private void SetOptionSelect(int selection)
         {
             if (selection > options.Count - 1)
@@ -111,6 +113,7 @@ namespace UI.Options
                 options[i].SetSelected(false);
             }
         }
+        #endregion
         #endregion
 
         #region Utility Methods

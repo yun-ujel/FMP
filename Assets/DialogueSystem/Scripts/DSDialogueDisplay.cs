@@ -10,11 +10,6 @@ namespace DS
     {
         public static DSDialogueDisplay Instance { get; private set; }
 
-        [Header("Display Portrait")]
-        [SerializeField] private RawImage portrait;
-        [SerializeField] private Image portraitBox;
-        private Color defaultPortraitBoxColour;
-
         [Header("Display Text")]
         [SerializeField] private TextMeshProUGUI uGUI;
         public DSDialogueSO CurrentDialogue { get; private set; }
@@ -66,7 +61,7 @@ namespace DS
                         {
                             for (int i = 0; i < CurrentDialogue.Choices.Count; i++)
                             {
-                                Instantiate(thoughtPrefab, new Vector3(Random.Range(-13f, 0.5f), Random.Range(-5.5f, -3.5f)), Quaternion.identity);
+                                Instantiate(thoughtPrefab, new Vector3(Random.Range(-13f, 0.5f), Random.Range(-3.5f, -1.5f)), Quaternion.identity);
                             }
                         }
                     }
@@ -78,21 +73,7 @@ namespace DS
             CurrentDialogue = dialogue;
             uGUI.text = CurrentDialogue.Text;
 
-            if (dialogue.Texture == null)
-            {
-                portrait.color = Color.clear;
-                portraitBox.enabled = false;
-
-                uGUI.rectTransform.offsetMin = new Vector2(10f, 10f);
-            }
-            else
-            {
-                portraitBox.enabled = true;
-                portrait.color = Color.white;
-                portrait.texture = dialogue.Texture;
-
-                uGUI.rectTransform.offsetMin = new Vector2(300f, 10f);
-            }
+            uGUI.rectTransform.offsetMin = dialogue.Texture == null ? new Vector2(10f, 10f) : new Vector2(300f, 10f);
 
             optionsNav.CreateOptions();
 
@@ -101,7 +82,7 @@ namespace DS
 
         public void SetOptions(bool setting)
         {
-            boxAnimator.SetBool("IsOpen", setting);
+            boxAnimator.SetBool("Open", setting);
         }
 
         public void AddOptionFromIndex(int index)

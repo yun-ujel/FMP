@@ -24,32 +24,21 @@ namespace UI.Options
             }
         }
 
-        public void Initialize(string displayText = "Option")
+        public void Initialize(string displayText = "Option", bool setColoursOnInitialize = true)
         {
             buttonGraphic = GetComponent<Graphic>();
             text = GetComponentInChildren<TextMeshProUGUI>();
             text.text = displayText;
 
             SetSelected(false);
-            SetColours();
+            if (setColoursOnInitialize)
+            {
+                SetColours();
+            }
         }
 
-        private void Update()
+        public void SetColours(Color? selectedColour = null, Color? defaultColour = null, Color? textDefaultColour = null, Color? textSelectedColour = null)
         {
-
-        }
-
-        public void SetColours(Color? defaultColour = null, Color? selectedColour = null, Color? textDefaultColour = null, Color? textSelectedColour = null)
-        {
-            if (defaultColour == null)
-            {
-                this.defaultColour = Color.white;
-            }
-            else
-            {
-                this.defaultColour = (Color)defaultColour;
-            }
-
             if (selectedColour == null)
             {
                 this.selectedColour = Color.black;
@@ -57,6 +46,15 @@ namespace UI.Options
             else
             {
                 this.selectedColour = (Color)selectedColour;
+            }
+
+            if (defaultColour == null)
+            {
+                this.defaultColour = Color.white;
+            }
+            else
+            {
+                this.defaultColour = (Color)defaultColour;
             }
 
             if (textDefaultColour == null)
