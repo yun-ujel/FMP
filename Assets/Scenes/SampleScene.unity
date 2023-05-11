@@ -6240,6 +6240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119164162}
+  - component: {fileID: 2119164163}
   m_Layer: 0
   m_Name: Mind
   m_TagString: Untagged
@@ -6264,6 +6265,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2119164163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119164161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a90e58faeedc2a4fbf3fefc9ff646c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContainer: {fileID: 11400000, guid: 452f7b018c7f8b748ba51711c59da22a, type: 2}
+  dialogueGroup: {fileID: 11400000, guid: 217274989b49e6148a1d65d940d61d8f, type: 2}
+  startDialogue: {fileID: 11400000, guid: b3a923eb705535c49b69d64683079819, type: 2}
+  groupedDialogues: 1
+  startingDialoguesOnly: 0
+  selectedDialogueGroupIndex: 1
+  selectedDialogueIndex: 5
 --- !u!1 &142285580386519263
 GameObject:
   m_ObjectHideFlags: 0

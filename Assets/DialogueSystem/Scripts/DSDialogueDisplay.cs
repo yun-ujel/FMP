@@ -31,11 +31,26 @@ namespace DS
         [Header("Box")]
         [SerializeField] private Animator boxAnimator;
 
-        private void Start()
+        public override void SetDSDialogue(DSDialogueContainerSO dialogueContainerSO, DSDialogueGroupSO dialogueGroupSO, DSDialogueSO startDialogueSO, bool groupedDialogues, bool startingDialoguesOnly, int selectedDialogueGroupIndex, int selectedDialogueIndex)
         {
-            Instance = this;
+            base.SetDSDialogue(dialogueContainerSO, dialogueGroupSO, startDialogueSO, groupedDialogues, startingDialoguesOnly, selectedDialogueGroupIndex, selectedDialogueIndex);
             UpdateDialogue(startDialogue);
         }
+
+        private void Start()
+        {
+            if (Instance != null)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+
+            UpdateDialogue(startDialogue);
+        }
+
         private void Update()
         {
             if (input.GetInteractPressed() || input.GetJumpPressed())
