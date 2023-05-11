@@ -20,7 +20,5 @@ MonoBehaviour:
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 8f05a8dfc3b0dd94bb9bda478b9ed059, type: 2}
   - <Text>k__BackingField: Maybe if I just ignore it...
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 8f05a8dfc3b0dd94bb9bda478b9ed059, type: 2}
-  - <Text>k__BackingField: Come on, you have to make that call.
-    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 32730a67ff48c02478c2f5a625f8432b, type: 2}
   <DialogueType>k__BackingField: 1
   <IsStartingDialogue>k__BackingField: 0
