@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e145471024d6745a2f518e25a1f741, type: 3}
+  m_Name: MumLine5
+  m_EditorClassIdentifier: 
+  <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+  <DialogueName>k__BackingField: MumLine5
+  <Text>k__BackingField: You know, I can understand how difficult it is for you to
+    talk about yourself in general, let alone your medical history.
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: ...
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: ea4d4ac1e646ec44ba30003e080d176b, type: 2}
+  - <Text>k__BackingField: No.
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: bcfb702e7b80fcf4b81617b087d8de94, type: 2}
+  - <Text>k__BackingField: I need to do it on my own.
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 28bb00d6663a50d4fad53dae184bc3af, type: 2}
+  <DialogueType>k__BackingField: 1
+  <IsStartingDialogue>k__BackingField: 0

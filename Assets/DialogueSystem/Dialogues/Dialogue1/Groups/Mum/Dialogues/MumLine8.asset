@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e145471024d6745a2f518e25a1f741, type: 3}
+  m_Name: MumLine8
+  m_EditorClassIdentifier: 
+  <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+  <DialogueName>k__BackingField: MumLine8
+  <Text>k__BackingField: You don't HAVE to do this.
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: I'm more than old enough to do this.
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 5f2805c9cd9abcb42a2b6ddb09def6c2, type: 2}
+  - <Text>k__BackingField: I've dealt with stressful situations before.
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: f26dad1f7d6959a4cb50ed91188d85d3, type: 2}
+  <DialogueType>k__BackingField: 1
+  <IsStartingDialogue>k__BackingField: 0

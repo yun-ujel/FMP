@@ -1,0 +1,408 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a45880a6fc5a488fcd566e8b7ea92, type: 3}
+  m_Name: Dialogue1Graph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Dialogue1
+  <Groups>k__BackingField:
+  - <GUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <Name>k__BackingField: Milkshake
+    <Position>k__BackingField: {x: 316, y: 133}
+  - <GUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <Name>k__BackingField: Mum
+    <Position>k__BackingField: {x: -58, y: -642}
+  <Nodes>k__BackingField:
+  - <GUID>k__BackingField: 17df5922-a533-48e0-b3e3-e573f7ca6f6a
+    <Name>k__BackingField: MilkshakeLine0
+    <Text>k__BackingField: Ah, Yes! Yes, I'm here.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: b87278e0-5bbb-47ab-bf5c-a3a17e2679a8
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 4e252270507560e43ac922c67a2c764e, type: 3}
+    <Position>k__BackingField: {x: 341, y: 192}
+  - <GUID>k__BackingField: cfd7fcd1-053f-4eaf-9710-1d1c26cca3dc
+    <Name>k__BackingField: MilkshakeLine1v1
+    <Text>k__BackingField: I've been doing my lectures at home, but I don't mind
+      it. It's not too stressful.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 48b797c1-2ade-4bf7-9b15-e0b0b46384a2
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 1387, y: 405}
+  - <GUID>k__BackingField: 9e13b420-d4a5-48b5-bfd2-be0e1e3fe42e
+    <Name>k__BackingField: MilkshakeLine1
+    <Text>k__BackingField: N-No, I'm alright.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 48b797c1-2ade-4bf7-9b15-e0b0b46384a2
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 1387, y: 192}
+  - <GUID>k__BackingField: 1aca4d98-0c59-48c9-82fb-6ab7d8b2f689
+    <Name>k__BackingField: MumLine5
+    <Text>k__BackingField: You know, I can understand how difficult it is for you
+      to talk about yourself in general, let alone your medical history.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: ...
+      <TargetGUID>k__BackingField: 5642e10c-3735-47c4-b33b-7f22ba0c53f4
+    - <Text>k__BackingField: No.
+      <TargetGUID>k__BackingField: 6df82fd1-c574-40fa-ab56-7baed7650f1d
+    - <Text>k__BackingField: I need to do it on my own.
+      <TargetGUID>k__BackingField: 877be569-1453-45b7-8cb6-97b1126ddcaf
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: 3159, y: -205}
+  - <GUID>k__BackingField: 48b797c1-2ade-4bf7-9b15-e0b0b46384a2
+    <Name>k__BackingField: MumLine2
+    <Text>k__BackingField: If you can get your work done in peace, then I have no
+      complaints.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 86d87370-fd60-4b0d-8c40-439367d060da
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: 1919, y: -132}
+  - <GUID>k__BackingField: f4f586c0-3aaf-4fc7-917b-fe406fceb8f3
+    <Name>k__BackingField: MumLine4
+    <Text>k__BackingField: "Are you sure you don\u2019t want me to call the doctor\u2019s?"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 1aca4d98-0c59-48c9-82fb-6ab7d8b2f689
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: 2741, y: -132}
+  - <GUID>k__BackingField: 86d87370-fd60-4b0d-8c40-439367d060da
+    <Name>k__BackingField: MumLine3
+    <Text>k__BackingField: ...
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: f4f586c0-3aaf-4fc7-917b-fe406fceb8f3
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: ae08c6fdbbffdbb46bbeecaf46bb952a, type: 3}
+    <Position>k__BackingField: {x: 2412, y: -132}
+  - <GUID>k__BackingField: b87278e0-5bbb-47ab-bf5c-a3a17e2679a8
+    <Name>k__BackingField: MumLine1
+    <Text>k__BackingField: Haha, OK ... well, How have you been? How's school? It's
+      not too stressful, is it?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: I-I'm alright.
+      <TargetGUID>k__BackingField: 9e13b420-d4a5-48b5-bfd2-be0e1e3fe42e
+    - <Text>k__BackingField: I've been doing my lectures at home.
+      <TargetGUID>k__BackingField: cfd7fcd1-053f-4eaf-9710-1d1c26cca3dc
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: 772, y: -181}
+  - <GUID>k__BackingField: f3c61158-bd06-48f5-ae29-f8c1bb00cc22
+    <Name>k__BackingField: Entry
+    <Text>k__BackingField: Hello? ... Shake, you there?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 17df5922-a533-48e0-b3e3-e573f7ca6f6a
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: -33, y: -132}
+  - <GUID>k__BackingField: 5642e10c-3735-47c4-b33b-7f22ba0c53f4
+    <Name>k__BackingField: MilkshakeLine2
+    <Text>k__BackingField: ...
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: de359a56-347a-4132-906d-1686697e8255
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: fd9866b72e753264080fe76d3e5fdd06, type: 3}
+    <Position>k__BackingField: {x: 3946, y: 192}
+  - <GUID>k__BackingField: 6df82fd1-c574-40fa-ab56-7baed7650f1d
+    <Name>k__BackingField: MilkshakeLine2v1
+    <Text>k__BackingField: No.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: d64d5d0a-9000-4a53-ba03-8feefae0b795
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 3946, y: 405}
+  - <GUID>k__BackingField: 877be569-1453-45b7-8cb6-97b1126ddcaf
+    <Name>k__BackingField: MilkshakeLine2v2
+    <Text>k__BackingField: '*sigh* ... I can''t keep doing this.'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: a47259fd-a28a-4d29-bc4b-8f7769522fc0
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 2bdfd84f5d139ac488461fe3223f5d48, type: 3}
+    <Position>k__BackingField: {x: 3944, y: 618}
+  - <GUID>k__BackingField: d64d5d0a-9000-4a53-ba03-8feefae0b795
+    <Name>k__BackingField: MumLine6v1
+    <Text>k__BackingField: ...Why?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: ...
+      <TargetGUID>k__BackingField: 922f4974-b4a5-4f88-984d-430544b922c9
+    - <Text>k__BackingField: I need to learn how to do things on my own.
+      <TargetGUID>k__BackingField: b44e0cf9-ef60-4007-9ea3-386853fcda59
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: 4396, y: -370}
+  - <GUID>k__BackingField: a47259fd-a28a-4d29-bc4b-8f7769522fc0
+    <Name>k__BackingField: MumLine6v2
+    <Text>k__BackingField: Doing what?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: c784ae4a-cd0c-44dd-9117-7c1b246fd62f
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 4fb3871cb77d9fb44b3162d5bf6be332, type: 3}
+    <Position>k__BackingField: {x: 4396, y: -108}
+  - <GUID>k__BackingField: de359a56-347a-4132-906d-1686697e8255
+    <Name>k__BackingField: MumLine6
+    <Text>k__BackingField: Look sweetheart, I'm offering you an out here. I know
+      you aren't comfortable with this type of thing...
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: deded77c-9878-4da5-939a-c3e775695ac9
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: ae08c6fdbbffdbb46bbeecaf46bb952a, type: 3}
+    <Position>k__BackingField: {x: 4396, y: -583}
+  - <GUID>k__BackingField: 922f4974-b4a5-4f88-984d-430544b922c9
+    <Name>k__BackingField: MilkshakeLine3
+    <Text>k__BackingField: ...
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: c748d0da-4563-4724-817e-8fc884f02c19
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 2bdfd84f5d139ac488461fe3223f5d48, type: 3}
+    <Position>k__BackingField: {x: 5160, y: 192}
+  - <GUID>k__BackingField: c784ae4a-cd0c-44dd-9117-7c1b246fd62f
+    <Name>k__BackingField: MilkshakeLine3v2
+    <Text>k__BackingField: "I can\u2019t keep letting you do everything for me. I
+      need to learn how to do things on my own eventually\u2026"
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: c748d0da-4563-4724-817e-8fc884f02c19
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 4873, y: 618}
+  - <GUID>k__BackingField: c748d0da-4563-4724-817e-8fc884f02c19
+    <Name>k__BackingField: MumLine7v1
+    <Text>k__BackingField: Look, I'm offering you an out here. I know you aren't
+      comfortable with this type of thing.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 6106d59a-1691-46f3-bc12-88d3fc49cadc
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: ae08c6fdbbffdbb46bbeecaf46bb952a, type: 3}
+    <Position>k__BackingField: {x: 5602, y: -108}
+  - <GUID>k__BackingField: 6106d59a-1691-46f3-bc12-88d3fc49cadc
+    <Name>k__BackingField: MumLine8
+    <Text>k__BackingField: You don't HAVE to do this.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: I'm more than old enough to do this.
+      <TargetGUID>k__BackingField: ffca657c-9afd-4ac4-be7c-c236d61d7f9c
+    - <Text>k__BackingField: I've dealt with stressful situations before.
+      <TargetGUID>k__BackingField: 03eb100c-3d32-43fc-9324-fe18585ff104
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: 6197, y: -157}
+  - <GUID>k__BackingField: deded77c-9878-4da5-939a-c3e775695ac9
+    <Name>k__BackingField: MumLine7
+    <Text>k__BackingField: You don't have to do this.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: I'm more than old enough to do this.
+      <TargetGUID>k__BackingField: ffca657c-9afd-4ac4-be7c-c236d61d7f9c
+    - <Text>k__BackingField: I've dealt with stressful situations before.
+      <TargetGUID>k__BackingField: 03eb100c-3d32-43fc-9324-fe18585ff104
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: 6197, y: -583}
+  - <GUID>k__BackingField: ffca657c-9afd-4ac4-be7c-c236d61d7f9c
+    <Name>k__BackingField: MilkshakeLine4
+    <Text>k__BackingField: Mum, I'm 19 now. I'm more than old enough to do this.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 90fb753d-02e1-4f66-91c1-9f6878b7673b
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 6862, y: 192}
+  - <GUID>k__BackingField: 03eb100c-3d32-43fc-9324-fe18585ff104
+    <Name>k__BackingField: MilkshakeLine4v1
+    <Text>k__BackingField: Mum, I'm more than capable of doing this. I've dealt with
+      stressful situations before.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 02ef6711-9613-4cae-ac66-c44b22770494
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 6750, y: 405}
+  - <GUID>k__BackingField: 90fb753d-02e1-4f66-91c1-9f6878b7673b
+    <Name>k__BackingField: MilkshakeLine5
+    <Text>k__BackingField: I've dealt with stress before and I can deal with this.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 02ef6711-9613-4cae-ac66-c44b22770494
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 7439, y: 405}
+  - <GUID>k__BackingField: 02ef6711-9613-4cae-ac66-c44b22770494
+    <Name>k__BackingField: MumLine9
+    <Text>k__BackingField: Dealt with stress before? How? By running back to me?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 587b46f4-6605-4418-ba49-369c66f0302e
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 4fb3871cb77d9fb44b3162d5bf6be332, type: 3}
+    <Position>k__BackingField: {x: 7902, y: -108}
+  - <GUID>k__BackingField: b44e0cf9-ef60-4007-9ea3-386853fcda59
+    <Name>k__BackingField: MilkshakeLine3v1
+    <Text>k__BackingField: "I can\u2019t keep letting you do everything for me. I
+      need to learn how to do things on my own."
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: c748d0da-4563-4724-817e-8fc884f02c19
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 2bdfd84f5d139ac488461fe3223f5d48, type: 3}
+    <Position>k__BackingField: {x: 4935, y: 405}
+  - <GUID>k__BackingField: 587b46f4-6605-4418-ba49-369c66f0302e
+    <Name>k__BackingField: MilkshakeLine6
+    <Text>k__BackingField: MUM! I- I don't need you to do everything for me!
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 95f4902d-1d2b-4467-927f-5eff6b9c7482
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 2bdfd84f5d139ac488461fe3223f5d48, type: 3}
+    <Position>k__BackingField: {x: 8391, y: 192}
+  - <GUID>k__BackingField: 95f4902d-1d2b-4467-927f-5eff6b9c7482
+    <Name>k__BackingField: MumLine10
+    <Text>k__BackingField: Well if you are so grown up, don't ask me to do all of
+      these things for you.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: f80c4c68-d7ae-49e4-b828-d0c097343e40
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: ae08c6fdbbffdbb46bbeecaf46bb952a, type: 3}
+    <Position>k__BackingField: {x: 8832, y: -108}
+  - <GUID>k__BackingField: f80c4c68-d7ae-49e4-b828-d0c097343e40
+    <Name>k__BackingField: MilkshakeLine7
+    <Text>k__BackingField: B-but I d-don't...
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Hang up
+      <TargetGUID>k__BackingField: 5b3465c8-3de8-4542-b847-4ffa749b9cd0
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: 5505b97863d46664f86b0c04cb96e141, type: 3}
+    <Position>k__BackingField: {x: 9390, y: 192}
+  - <GUID>k__BackingField: 5b3465c8-3de8-4542-b847-4ffa749b9cd0
+    <Name>k__BackingField: HangUp
+    <Text>k__BackingField: '*MILKSHAKE HANGS UP*'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 23cc9b3b-b227-4a93-9673-21478021d56a
+    <GroupGUID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 0}
+    <Position>k__BackingField: {x: 9809, y: -108}
+  - <GUID>k__BackingField: 23cc9b3b-b227-4a93-9673-21478021d56a
+    <Name>k__BackingField: MilkshakeLine8
+    <Text>k__BackingField: '*sigh* ... I guess I should''ve expected that was going
+      to happen...'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 8f61b2c5-ca6c-4441-b290-9e6664385e22
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 2bdfd84f5d139ac488461fe3223f5d48, type: 3}
+    <Position>k__BackingField: {x: 10179, y: 192}
+  - <GUID>k__BackingField: 8f61b2c5-ca6c-4441-b290-9e6664385e22
+    <Name>k__BackingField: MilkshakeLine9
+    <Text>k__BackingField: ...
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: d5f7db45-ceba-441f-8094-0e519acd67e2
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
+    <Position>k__BackingField: {x: 10662, y: 192}
+  - <GUID>k__BackingField: d5f7db45-ceba-441f-8094-0e519acd67e2
+    <Name>k__BackingField: MilkshakeLine10
+    <Text>k__BackingField: ... When's the call again?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 
+    <GroupGUID>k__BackingField: 43da61aa-3d22-4646-9c77-3e82520cc045
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: fd9866b72e753264080fe76d3e5fdd06, type: 3}
+    <Position>k__BackingField: {x: 11032, y: 192}
+  <OldGroupNames>k__BackingField:
+  - Milkshake
+  - Mum
+  <OldUngroupedNodeNames>k__BackingField:
+  - HangUp
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Milkshake
+      Value:
+      - MilkshakeLine0
+      - MilkshakeLine1v1
+      - MilkshakeLine1
+      - MilkshakeLine2
+      - MilkshakeLine2v1
+      - MilkshakeLine2v2
+      - MilkshakeLine3
+      - MilkshakeLine3v2
+      - MilkshakeLine4
+      - MilkshakeLine4v1
+      - MilkshakeLine5
+      - MilkshakeLine3v1
+      - MilkshakeLine6
+      - MilkshakeLine7
+      - MilkshakeLine8
+      - MilkshakeLine9
+      - MilkshakeLine10
+    - Key: Mum
+      Value:
+      - MumLine5
+      - MumLine2
+      - MumLine4
+      - MumLine3
+      - MumLine1
+      - Entry
+      - MumLine6v1
+      - MumLine6v2
+      - MumLine6
+      - MumLine7v1
+      - MumLine8
+      - MumLine7
+      - MumLine9
+      - MumLine10

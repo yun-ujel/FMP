@@ -1607,13 +1607,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075d1106aa152ce4eb6ed6eb347d045f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 11400000, guid: 3994b244a5efddf44b21614db6c9936d, type: 2}
-  dialogueGroup: {fileID: 11400000, guid: 784e9656f0578c34aad431f7e230f726, type: 2}
-  startDialogue: {fileID: 11400000, guid: 1c7a1f2d1e40a9c43b939a306920c994, type: 2}
+  dialogueContainer: {fileID: 11400000, guid: c2b2027af32951e47869db4999f317fe, type: 2}
+  dialogueGroup: {fileID: 11400000, guid: 08e86ed9900654c4a8b2664fe48be4d2, type: 2}
+  startDialogue: {fileID: 11400000, guid: 7d441432aa05e304096c92f82822f783, type: 2}
   groupedDialogues: 1
   startingDialoguesOnly: 0
   selectedDialogueGroupIndex: 0
-  selectedDialogueIndex: 7
+  selectedDialogueIndex: 0
   portrait: {fileID: 943056783}
   portraitBox: {fileID: 1225917691}
   uGUI: {fileID: 1570992248}
@@ -5068,8 +5068,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805159611}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.6666665, y: 0, z: 10}
-  m_LocalScale: {x: 13.333333, y: 15, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: 10}
+  m_LocalScale: {x: 10, y: 15, z: 0}
   m_Children:
   - {fileID: 662867050}
   m_Father: {fileID: 685417910}
