@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9e145471024d6745a2f518e25a1f741, type: 3}
-  m_Name: MumLine5
+  m_Name: ungrouped
   m_EditorClassIdentifier: 
-  <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
-  <DialogueName>k__BackingField: MumLine5
-  <Text>k__BackingField: You know, I can understand how difficult it is for you to
-    talk about yourself in general...
+  <Texture>k__BackingField: {fileID: 0}
+  <DialogueName>k__BackingField: ungrouped
+  <Text>k__BackingField: Dialogue Text
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
-    <NextDialogue>k__BackingField: {fileID: 11400000, guid: a55814c2d59111e44afea6a9961a1a17, type: 2}
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: d08f4c365abe8a443bf529fe95670384, type: 2}
   <DialogueType>k__BackingField: 0
-  <IsStartingDialogue>k__BackingField: 0
+  <IsStartingDialogue>k__BackingField: 1

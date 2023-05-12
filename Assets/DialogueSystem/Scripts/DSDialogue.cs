@@ -6,9 +6,13 @@ namespace DS
     public class DSDialogue : MonoBehaviour
     {
         /* Dialogue Scriptable Objects */
-        [SerializeField, HideInInspector] protected DSDialogueContainerSO dialogueContainer;
-        [SerializeField, HideInInspector] protected DSDialogueGroupSO dialogueGroup;
-        [SerializeField, HideInInspector] protected DSDialogueSO startDialogue;
+        [HideInInspector] public DSDialogueContainerSO dialogueContainer;
+        
+        [SerializeField,
+        HideInInspector]
+        protected DSDialogueGroupSO dialogueGroup;
+
+        [HideInInspector] public DSDialogueSO dialogue;
 
         /* Filters */
         [SerializeField, HideInInspector] protected bool groupedDialogues;
@@ -22,7 +26,7 @@ namespace DS
         (
             DSDialogueContainerSO dialogueContainerSO,
             DSDialogueGroupSO dialogueGroupSO,
-            DSDialogueSO startDialogueSO,
+            DSDialogueSO dialogueSO,
             bool groupedDialogues,
             bool startingDialoguesOnly,
             int selectedDialogueGroupIndex,
@@ -31,7 +35,7 @@ namespace DS
         {
             dialogueContainer = dialogueContainerSO;
             dialogueGroup = dialogueGroupSO;
-            startDialogue = startDialogueSO;
+            dialogue = dialogueSO;
 
             this.groupedDialogues = groupedDialogues;
             this.startingDialoguesOnly = startingDialoguesOnly;

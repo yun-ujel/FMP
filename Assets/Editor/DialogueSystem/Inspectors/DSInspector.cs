@@ -28,7 +28,7 @@ namespace DS.Inspectors
         {
             dialogueContainerProperty = serializedObject.FindProperty("dialogueContainer");
             dialogueGroupProperty = serializedObject.FindProperty("dialogueGroup");
-            dialogueProperty = serializedObject.FindProperty("startDialogue");
+            dialogueProperty = serializedObject.FindProperty("dialogue");
 
             groupedDialoguesProperty = serializedObject.FindProperty("groupedDialogues");
             startingDialogueOnlyProperty = serializedObject.FindProperty("startingDialoguesOnly");
@@ -193,12 +193,14 @@ namespace DS.Inspectors
 
         private void DrawBaseInspector()
         {
-            if (target.GetType() == typeof(DSDialogueDisplay))
+            // Removed because DSDialogueDisplayLinked has been deleted
+
+            /*if (target.GetType() == typeof(DSDialogueDisplayLinked))
             {
                 EditorGUILayout.Space(6);
                 DSInspectorUtility.DrawHeader("Display");
                 base.OnInspectorGUI();
-            }
+            }*/
         }
         #endregion
 

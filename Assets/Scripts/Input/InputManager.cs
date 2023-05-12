@@ -1,4 +1,5 @@
 using UnityEngine;
+using DS;
 
 namespace PlayerInput
 {
@@ -11,7 +12,6 @@ namespace PlayerInput
 
         [Header("UI")]
         [SerializeField] private InputController uIController;
-        [SerializeField] private DS.DSDialogueDisplay dialogueDisplay;
 
         private void Awake()
         {
@@ -32,7 +32,7 @@ namespace PlayerInput
             mindController.Enabled = false;
             uIController.Enabled = false;
             worldController.Enabled = false;
-            dialogueDisplay.SetOptions(false);
+            DSDialogueDisplay.Instance.SetOptionsOpened(false);
         }
 
         private void Update()
@@ -50,7 +50,7 @@ namespace PlayerInput
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 DisableAllControllers();
-                dialogueDisplay.SetOptions(true);
+                DSDialogueDisplay.Instance.SetOptionsOpened(true);
                 uIController.Enabled = true;
             }
         }

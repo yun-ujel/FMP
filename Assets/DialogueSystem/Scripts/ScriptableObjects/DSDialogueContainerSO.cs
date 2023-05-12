@@ -60,13 +60,13 @@ namespace DS.ScriptableObjects
             return ungroupedDialogueNodeNames;
         }
 
-        public string GetNodeGroupName(DSDialogueSO dialogue)
+        public string GetNodeGroupName(DSDialogueSO nodeSO)
         {
             foreach (KeyValuePair<DSDialogueGroupSO, List<DSDialogueSO>> dialogueGroup in DialogueGroups)
             {
                 foreach(DSDialogueSO checkDialogue in dialogueGroup.Value)
                 {
-                    if (checkDialogue == dialogue)
+                    if (checkDialogue == nodeSO)
                     {
                         return dialogueGroup.Key.GroupName;
                     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Texture>k__BackingField: {fileID: 2800000, guid: fd9866b72e753264080fe76d3e5fdd06, type: 3}
   <DialogueName>k__BackingField: MilkshakeLine10
-  <Text>k__BackingField: ... When's the call again?
+  <Text>k__BackingField: ... When's that doctor's call again?
   <Choices>k__BackingField:
   - <Text>k__BackingField: Next Dialogue
     <NextDialogue>k__BackingField: {fileID: 0}
