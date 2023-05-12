@@ -501,7 +501,6 @@ MonoBehaviour:
   mindController: {fileID: 11400000, guid: 0418a8f23cc182642b6c289b6a6a062b, type: 2}
   worldController: {fileID: 11400000, guid: bd57eec98138b0048aef73cf3055364e, type: 2}
   uIController: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
-  dialogueDisplay: {fileID: 475097068}
 --- !u!1 &257128936
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475097067}
   - component: {fileID: 475097068}
+  - component: {fileID: 475097069}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -918,21 +918,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 475097066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075d1106aa152ce4eb6ed6eb347d045f, type: 3}
+  m_Script: {fileID: 11500000, guid: 743376d9a9c78cd4ab0b895562adc16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 11400000, guid: c2b2027af32951e47869db4999f317fe, type: 2}
-  dialogueGroup: {fileID: 11400000, guid: 08e86ed9900654c4a8b2664fe48be4d2, type: 2}
-  startDialogue: {fileID: 11400000, guid: 7d441432aa05e304096c92f82822f783, type: 2}
-  groupedDialogues: 1
-  startingDialoguesOnly: 0
-  selectedDialogueGroupIndex: 0
-  selectedDialogueIndex: 0
+  selectedDSDialogue: {fileID: 475097069}
+  portrait1:
+    <PortraitImage>k__BackingField: {fileID: 7334685146131868454}
+    <PortraitBox>k__BackingField: {fileID: 7334685147478869363}
+  portrait2:
+    <PortraitImage>k__BackingField: {fileID: 7334685146621486227}
+    <PortraitBox>k__BackingField: {fileID: 7334685145828514249}
   uGUI: {fileID: 7334685146785857161}
   input: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
   optionsNav: {fileID: 7334685147246068535}
   thoughtPrefab: {fileID: 2211854771210493731, guid: 56c8b886f7661f5439e63fc4cd3a7aca, type: 3}
   boxAnimator: {fileID: 7334685147246068533}
+--- !u!114 &475097069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475097066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb51ed20db01204fb3d1b853cbaeb3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContainer: {fileID: 11400000, guid: c2b2027af32951e47869db4999f317fe, type: 2}
+  dialogueGroup: {fileID: 11400000, guid: 08e86ed9900654c4a8b2664fe48be4d2, type: 2}
+  dialogue: {fileID: 11400000, guid: 7d441432aa05e304096c92f82822f783, type: 2}
+  groupedDialogues: 1
+  startingDialoguesOnly: 0
+  selectedDialogueGroupIndex: 0
+  selectedDialogueIndex: 0
 --- !u!1 &646087188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2918,7 +2937,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119164162}
-  - component: {fileID: 2119164163}
   m_Layer: 0
   m_Name: Mind
   m_TagString: Untagged
@@ -2943,25 +2961,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2119164163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119164161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a90e58faeedc2a4fbf3fefc9ff646c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 11400000, guid: 452f7b018c7f8b748ba51711c59da22a, type: 2}
-  dialogueGroup: {fileID: 11400000, guid: 217274989b49e6148a1d65d940d61d8f, type: 2}
-  startDialogue: {fileID: 11400000, guid: b3a923eb705535c49b69d64683079819, type: 2}
-  groupedDialogues: 1
-  startingDialoguesOnly: 0
-  selectedDialogueGroupIndex: 1
-  selectedDialogueIndex: 5
 --- !u!1 &142285580386519263
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,7 +3392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8431373, g: 0.86274517, b: 0.909804, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3441,6 +3440,7 @@ GameObject:
   - component: {fileID: 7334685146131868453}
   - component: {fileID: 7334685146131868455}
   - component: {fileID: 7334685146131868454}
+  - component: {fileID: 7334685146131868456}
   m_Layer: 5
   m_Name: Portrait
   m_TagString: Untagged
@@ -3502,6 +3502,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7334685146131868452}
   m_CullTransparentMesh: 1
+--- !u!114 &7334685146131868456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334685146131868452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7334685146621486225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,6 +3528,7 @@ GameObject:
   - component: {fileID: 7334685146621486226}
   - component: {fileID: 7334685146621486228}
   - component: {fileID: 7334685146621486227}
+  - component: {fileID: 7334685146621486229}
   m_Layer: 5
   m_Name: Portrait
   m_TagString: Untagged
@@ -3574,6 +3590,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7334685146621486225}
   m_CullTransparentMesh: 1
+--- !u!114 &7334685146621486229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334685146621486225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7334685146688798795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,7 +3898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.84313726, g: 0.8627451, b: 0.9098039, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -3972,7 +4003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
-  selectionSwitchCooldown: 0.1
+  selectionSwitchCooldown: 0.2
   optionPrefab: {fileID: 4376998373735351932, guid: e71abf37f90e6a24baa33950610cd76f, type: 3}
   optionsParent: {fileID: 7334685147394266975}
 --- !u!1 &7334685147394266974
@@ -4158,7 +4189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.84313726, g: 0.8627451, b: 0.9098039, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

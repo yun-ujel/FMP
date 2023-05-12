@@ -107,6 +107,7 @@ namespace DS
         public void SetOptionsOpened(bool setting)
         {
             boxAnimator.SetBool("Open", setting);
+            optionsNav.SetOptionsOpened(setting);
         }
 
         public void AddOptionFromIndex(int index)

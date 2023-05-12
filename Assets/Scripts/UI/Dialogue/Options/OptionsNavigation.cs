@@ -57,6 +57,7 @@ namespace UI.Options
         }
 
         #region Options Methods
+
         #region Creation
         public void CreateOptions(params string[] names)
         {
@@ -90,6 +91,7 @@ namespace UI.Options
             SetOptionSelect(CurrentSelected);
         }
         #endregion
+
         #region Selection
         private void SetOptionSelect(int selection)
         {
@@ -113,7 +115,17 @@ namespace UI.Options
                 options[i].SetSelected(false);
             }
         }
+
+        public void SetOptionsOpened(bool setting)
+        {
+            for (int i = 0; i < options.Count; i++)
+            {
+                options[i].SetOptionsOpened(setting);
+            }
+        }
+
         #endregion
+
         #endregion
 
         #region Utility Methods

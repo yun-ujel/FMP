@@ -120,10 +120,10 @@ MonoBehaviour:
     <Name>k__BackingField: MumLine8
     <Text>k__BackingField: You don't HAVE to do this.
     <Choices>k__BackingField:
+    - <Text>k__BackingField: I've dealt with stress before.
+      <TargetGUID>k__BackingField: 03eb100c-3d32-43fc-9324-fe18585ff104
     - <Text>k__BackingField: I'm more than old enough to do this.
       <TargetGUID>k__BackingField: ffca657c-9afd-4ac4-be7c-c236d61d7f9c
-    - <Text>k__BackingField: I've dealt with stressful situations before.
-      <TargetGUID>k__BackingField: 03eb100c-3d32-43fc-9324-fe18585ff104
     <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
     <DialogueType>k__BackingField: 1
     <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
@@ -132,10 +132,10 @@ MonoBehaviour:
     <Name>k__BackingField: MumLine7
     <Text>k__BackingField: You don't have to do this.
     <Choices>k__BackingField:
+    - <Text>k__BackingField: I've dealt with stress before.
+      <TargetGUID>k__BackingField: 03eb100c-3d32-43fc-9324-fe18585ff104
     - <Text>k__BackingField: I'm more than old enough to do this.
       <TargetGUID>k__BackingField: ffca657c-9afd-4ac4-be7c-c236d61d7f9c
-    - <Text>k__BackingField: I've dealt with stressful situations before.
-      <TargetGUID>k__BackingField: 03eb100c-3d32-43fc-9324-fe18585ff104
     <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
     <DialogueType>k__BackingField: 1
     <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
@@ -264,28 +264,6 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 2800000, guid: 920fb9ac60c4c664b83f4e78d127259f, type: 3}
     <Position>k__BackingField: {x: 9766, y: -108}
-  - <GUID>k__BackingField: f3c61158-bd06-48f5-ae29-f8c1bb00cc22
-    <Name>k__BackingField: Entry
-    <Text>k__BackingField: Hello? ... Shake, you there?
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: 17df5922-a533-48e0-b3e3-e573f7ca6f6a
-    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
-    <Position>k__BackingField: {x: -983, y: -132}
-  - <GUID>k__BackingField: b87278e0-5bbb-47ab-bf5c-a3a17e2679a8
-    <Name>k__BackingField: MumLine1
-    <Text>k__BackingField: It's not too stressful, is it?
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: I-I'm alright.
-      <TargetGUID>k__BackingField: 9e13b420-d4a5-48b5-bfd2-be0e1e3fe42e
-    - <Text>k__BackingField: I've been doing my lectures at home.
-      <TargetGUID>k__BackingField: cfd7fcd1-053f-4eaf-9710-1d1c26cca3dc
-    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
-    <DialogueType>k__BackingField: 1
-    <Texture>k__BackingField: {fileID: 2800000, guid: 4fb3871cb77d9fb44b3162d5bf6be332, type: 3}
-    <Position>k__BackingField: {x: 422, y: -181}
   - <GUID>k__BackingField: fdde383b-7d0a-43b3-8f2b-cc3e8f82c304
     <Name>k__BackingField: MumLine0
     <Text>k__BackingField: Haha, OK ... well, How have you been? How's school?
@@ -383,6 +361,28 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
     <Position>k__BackingField: {x: 2791, y: -132}
+  - <GUID>k__BackingField: f3c61158-bd06-48f5-ae29-f8c1bb00cc22
+    <Name>k__BackingField: Entry
+    <Text>k__BackingField: Hello? ... Shake, you there?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: 17df5922-a533-48e0-b3e3-e573f7ca6f6a
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 0fce655eccf1ad6408350a9ec32649cf, type: 3}
+    <Position>k__BackingField: {x: -983, y: -132}
+  - <GUID>k__BackingField: b87278e0-5bbb-47ab-bf5c-a3a17e2679a8
+    <Name>k__BackingField: MumLine1
+    <Text>k__BackingField: It's not too stressful, is it?
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: I-I'm alright.
+      <TargetGUID>k__BackingField: 9e13b420-d4a5-48b5-bfd2-be0e1e3fe42e
+    - <Text>k__BackingField: I've been doing my lectures at home.
+      <TargetGUID>k__BackingField: cfd7fcd1-053f-4eaf-9710-1d1c26cca3dc
+    <GroupGUID>k__BackingField: d011db78-1e26-41e4-a36d-b6b0e0d77a84
+    <DialogueType>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: ae08c6fdbbffdbb46bbeecaf46bb952a, type: 3}
+    <Position>k__BackingField: {x: 422, y: -181}
   <OldGroupNames>k__BackingField:
   - Milkshake
   - Mum
@@ -419,11 +419,11 @@ MonoBehaviour:
       - MumLine9
       - MumLine10
       - HangUp
-      - Entry
-      - MumLine1
       - MumLine0
       - MumLine4
       - MumLine3
       - MumLine2
       - MumLine5ext
       - MumLine5
+      - Entry
+      - MumLine1

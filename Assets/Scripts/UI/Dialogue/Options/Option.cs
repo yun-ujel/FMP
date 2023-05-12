@@ -8,6 +8,7 @@ namespace UI.Options
     {
         private Graphic buttonGraphic;
         private TextMeshProUGUI text;
+        private Animator animator;
 
         private Color defaultColour;
         private Color selectedColour;
@@ -26,7 +27,9 @@ namespace UI.Options
 
         public void Initialize(string displayText = "Option", bool setColoursOnInitialize = true)
         {
+            animator = GetComponent<Animator>();
             buttonGraphic = GetComponent<Graphic>();
+
             text = GetComponentInChildren<TextMeshProUGUI>();
             text.text = displayText;
 
@@ -89,6 +92,11 @@ namespace UI.Options
 
             buttonGraphic.color = defaultColour;
             text.color = textDefaultColour;
+        }
+
+        public void SetOptionsOpened(bool setting)
+        {
+            animator.SetBool("Open", setting);
         }
     }
 }

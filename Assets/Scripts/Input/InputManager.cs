@@ -13,7 +13,7 @@ namespace PlayerInput
         [Header("UI")]
         [SerializeField] private InputController uIController;
 
-        private void Awake()
+        private void Start()
         {
             if (Instance != null)
             {
