@@ -7067,11 +7067,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f897c5058a980147b641ed5dc378b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character:
-    gameObject: {fileID: 1864057608}
-    rigidbody2D: {fileID: 1864057610}
-    move: {fileID: 1864057612}
+  character: {fileID: 1864057608}
   animator: {fileID: 1147080138}
+  directions:
+  - name: FwdRight
+    xVelocityIsAbove: 0
+    xVelocityIsBelow: 0.8
+    yVelocityIsBelow: 0
+    yVelocityIsAbove: -Infinity
+  - name: BackRight
+    xVelocityIsAbove: 0
+    xVelocityIsBelow: 0.8
+    yVelocityIsBelow: Infinity
+    yVelocityIsAbove: 0
+  - name: Right
+    xVelocityIsAbove: 0
+    xVelocityIsBelow: Infinity
+    yVelocityIsBelow: 0.1
+    yVelocityIsAbove: -0.1
+  - name: Back
+    xVelocityIsAbove: -0.1
+    xVelocityIsBelow: 0.1
+    yVelocityIsBelow: Infinity
+    yVelocityIsAbove: 0
+  - name: Fwd
+    xVelocityIsAbove: -0.1
+    xVelocityIsBelow: 0.1
+    yVelocityIsBelow: 0
+    yVelocityIsAbove: -Infinity
 --- !u!95 &1147080138
 Animator:
   serializedVersion: 3

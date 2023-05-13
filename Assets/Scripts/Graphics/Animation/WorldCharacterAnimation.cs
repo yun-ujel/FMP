@@ -5,63 +5,81 @@ namespace Graphics.Animation
     public class WorldCharacterAnimation : MonoBehaviour
     {
         [System.Serializable]
-        private class CharacterReferences
+        private class WorldAnimationHandler
         {
-            [SerializeField] private GameObject gameObject;
-            [SerializeField] private Rigidbody2D rigidbody2D;
-            [SerializeField] private IsometricMovement move;
+            public string name;
 
-            public Vector2 Direction => move.Direction;
-            public float SqrVelocity => rigidbody2D.velocity.sqrMagnitude;
+            [Space]
 
-            public void Start()
+            [SerializeField] private float xVelocityIsAbove = Mathf.NegativeInfinity;
+            [SerializeField] private float xVelocityIsBelow = Mathf.Infinity;
+
+            [Space]
+
+            [SerializeField] private float yVelocityIsBelow = Mathf.Infinity;
+            [SerializeField] private float yVelocityIsAbove = Mathf.NegativeInfinity;
+
+            public bool IsAnimationValid(Vector2 velocity)
             {
-                if (rigidbody2D == null)
-                {
-                    rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-                }
-
-                if (move == null)
-                {
-                    Debug.Log(Capability.TryGetCapability(out Capability capability, typeof(IsometricMovement), gameObject));
-                    move = (IsometricMovement)capability;
-                }
+                return velocity.y < yVelocityIsBelow && velocity.y > yVelocityIsAbove
+                    && Mathf.Abs(velocity.x) > xVelocityIsAbove && Mathf.Abs(velocity.x) < xVelocityIsBelow;
             }
         }
 
-        [SerializeField] private CharacterReferences character;
+        [Header("References")]
+        [SerializeField] private GameObject character;
         [SerializeField] private Animator animator;
+        private Rigidbody2D body;
+        private IsometricMovement movement;
 
-        private float facing = 1f;
+        [Space]
+
+        [SerializeField] private WorldAnimationHandler[] directions;
+
+        private float lastSqrMagnitude;
+        private float direction = 1f;
+
+        private string lastAnimationPlayed = "Fwd";
 
         private void Start()
         {
-            if (animator == null) { animator = GetComponent<Animator>(); }
-            character.Start();
+            movement = character.GetComponent<IsometricMovement>();
+            body = character.GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
         }
 
         private void Update()
         {
-            animator.SetFloat("DirectionX", Mathf.Abs(character.Direction.x));
-            animator.SetFloat("DirectionY", character.Direction.y);
-            animator.SetFloat("SqrVelocity", character.SqrVelocity);
-
             FlipTowardsMovement();
+
+            if (body.velocity.sqrMagnitude > 0f)
+            {
+                for (int i = 0; i < directions.Length; i++)
+                {
+                    if (directions[i].IsAnimationValid(body.velocity / movement.maxSpeed))
+                    {
+                        animator.Play("Walk_" + directions[i].name);
+                        lastAnimationPlayed = directions[i].name;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                animator.Play("Idle_" + lastAnimationPlayed);
+            }
         }
 
         private void FlipTowardsMovement()
         {
-            if (Mathf.Abs(character.Direction.x) > 0f)
+            if (body.velocity.sqrMagnitude >= lastSqrMagnitude && body.velocity.sqrMagnitude > 0f)
             {
-                facing = character.Direction.x > 0 ? 1f : -1f;
+                direction = body.velocity.x > 0f ? 1f : -1f;
             }
 
-            transform.localScale = new Vector3
-            (
-                facing * Mathf.Abs(transform.localScale.x),
-                transform.localScale.y,
-                transform.localScale.z
-            );
+            transform.localScale = new Vector3(direction * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+            lastSqrMagnitude = body.velocity.sqrMagnitude;
         }
     }
 
