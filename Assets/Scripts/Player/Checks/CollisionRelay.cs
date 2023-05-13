@@ -73,4 +73,19 @@ public class CollisionRelay : MonoBehaviour
             Debug.DrawRay(collision.GetContact(i).point, -dir, Color.cyan);
         }
     }
+
+    public bool TryGetCheck(out CollisionCheck check, System.Type type)
+    {
+        for (int i = 0; i < CollisionChecks.Length; i++)
+        {
+            if (CollisionChecks[i].GetType() == type)
+            {
+                check = CollisionChecks[i];
+                return true;
+            }
+        }
+
+        check = null;
+        return false;
+    }
 }
