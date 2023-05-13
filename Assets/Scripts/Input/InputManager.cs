@@ -32,7 +32,7 @@ namespace PlayerInput
             mindController.Enabled = false;
             uIController.Enabled = false;
             worldController.Enabled = false;
-            DSDialogueDisplay.Instance.SetOptionsOpened(false);
+            SetOptionsOpened(false);
         }
 
         private void Update()
@@ -50,9 +50,27 @@ namespace PlayerInput
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 DisableAllControllers();
-                DSDialogueDisplay.Instance.SetOptionsOpened(true);
+                SetOptionsOpened(true);
                 uIController.Enabled = true;
             }
         }
+
+        private void OnDisable()
+        {
+            mindController.Enabled = true;
+            uIController.Enabled = true;
+            worldController.Enabled = true;
+        }
+
+        #region Utility Methods
+        private void SetOptionsOpened(bool setting)
+        {
+            if (DSDialogueDisplay.Instance == null)
+            {
+                return;
+            }
+            DSDialogueDisplay.Instance.SetOptionsOpened(setting);
+        }
+        #endregion
     }
 }
