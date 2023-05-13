@@ -6,8 +6,13 @@ public abstract class Capability : MonoBehaviour
     protected bool IsActive { get; set; }
 
     [SerializeField] protected InputController inputController = null;
-    public virtual Capability[] GetCapabilitiesWithException(Capability[] exceptions)
+    public virtual Capability[] GetCapabilitiesWithException(params Capability[] exceptions)
     {
+        if (exceptions == null || exceptions.Length == 0)
+        {
+            return gameObject.GetComponents<Capability>();
+        }
+
         List<Capability> capabilities = new List<Capability>();
         capabilities.AddRange(gameObject.GetComponents<Capability>());
         for (int i = 0; i < exceptions.Length; i++)
@@ -21,7 +26,7 @@ public abstract class Capability : MonoBehaviour
     public virtual void DisableOtherCapabilities()
     {
         //Debug.Log(this + " Has Disabled other Capabilities");
-        Capability[] otherCapabilities = GetCapabilitiesWithException(new Capability[] { this });
+        Capability[] otherCapabilities = GetCapabilitiesWithException(this);
         for (int i = 0; i < otherCapabilities.Length; i++)
         {
             otherCapabilities[i].IsActive = false;
@@ -31,7 +36,7 @@ public abstract class Capability : MonoBehaviour
     public virtual void EnableOtherCapabilities()
     {
         //Debug.Log(this + " Has Enabled other Capabilities");
-        Capability[] otherCapabilities = GetCapabilitiesWithException(new Capability[] { this });
+        Capability[] otherCapabilities = GetCapabilitiesWithException(this);
         for (int i = 0; i < otherCapabilities.Length; i++)
         {
             otherCapabilities[i].enabled = true;
@@ -39,7 +44,7 @@ public abstract class Capability : MonoBehaviour
         }
     }
 
-    public virtual void DisableOtherCapabilitiesExcept(Capability[] exceptions)
+    public virtual void DisableOtherCapabilitiesExcept(params Capability[] exceptions)
     {
         List<Capability> listExceptions = new List<Capability>() { this };
         listExceptions.AddRange(exceptions);
@@ -64,5 +69,19 @@ public abstract class Capability : MonoBehaviour
         IsActive = true;
     }
 
-    public virtual void TriggerMainEffect() { }
+    public static bool TryGetCapability(out Capability capability, System.Type type, GameObject target)
+    {
+        Capability[] capabilities = target.GetComponents<Capability>();
+        for (int i = 0; i < capabilities.Length; i++)
+        {
+            if (capabilities[i].GetType() == type)
+            {
+                capability = capabilities[i];
+                return true;
+            }
+        }
+
+        capability = null;
+        return false;
+    }
 }
