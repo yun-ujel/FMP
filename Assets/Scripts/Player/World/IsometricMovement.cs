@@ -1,4 +1,5 @@
 using UnityEngine;
+using Platforming.Capabilities;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class IsometricMovement : Capability

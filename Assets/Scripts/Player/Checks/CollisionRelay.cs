@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CollisionRelay : MonoBehaviour
 {
-    private Collision2D collision;
     [SerializeField] private CollisionCheck[] collisionChecks;
 
     public bool AnyCollision
@@ -41,7 +40,7 @@ public class CollisionRelay : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        DrawRays(collision);
+        //DrawRays(collision);
 
         for (int i = 0; i < collisionChecks.Length; i++)
         {

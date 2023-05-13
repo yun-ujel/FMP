@@ -6,17 +6,14 @@ public class SlopeCheck : CollisionCheck
     [SerializeField, Range(0f, 1f)] private float minSlopeNormalY = 0.1f;
     [SerializeField, Range(0f, 1f)] private float maxSlopeNormalY = 0.9f;
 
+    [SerializeField] private LayerMask layerMask;
+
     public bool OnSlope { get; private set; } = false;
     public float SlopeFacing { get; private set; } = 0f;
     // The Direction the slope is facing. Between -1f, 0f and 1f
 
-    private Vector2 slopeNormal;
+    private Vector3 slopeNormal;
     // The normal of the first contact that is sloped.
-    // May be worth changing the calculation to a raycast,
-    // so that circle/capsule colliders won't see sharp corners as slopes due to their own curved edges
-
-
-    private ContactPoint2D evaluateContact;
 
     public override void CollisionEnter(Collision2D collision)
     {
@@ -42,12 +39,10 @@ public class SlopeCheck : CollisionCheck
     {
         for (int i = 0; i < collision.contactCount; i++)
         {
-            evaluateContact = collision.GetContact(i);
+            OnSlope = EvaluateContact(collision, i, out slopeNormal);
 
-            OnSlope = evaluateContact.normal.y < maxSlopeNormalY && evaluateContact.normal.y >= minSlopeNormalY;
             if (OnSlope)
             {
-                slopeNormal = evaluateContact.normal;
                 SlopeFacing = slopeNormal.x > 0f ? 1f : -1f;
                 break;
             }
@@ -66,5 +61,21 @@ public class SlopeCheck : CollisionCheck
     {
         OnSlope = false;
         SlopeFacing = 0f;
+    }
+
+    private bool EvaluateContact(Collision2D collision, int index, out Vector3 normal)
+    {
+        Vector3 direction = collision.GetContact(index).point - (Vector2)collision.otherCollider.transform.position;
+        normal = Vector3.up;
+
+        RaycastHit2D hit = Physics2D.Raycast
+        (
+            collision.otherCollider.transform.position,
+            direction,
+            6f,
+            layerMask
+        );
+
+        return hit.normal.y < maxSlopeNormalY && hit.normal.y >= minSlopeNormalY;
     }
 }

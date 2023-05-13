@@ -1,149 +1,153 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrabObject : Capability
+namespace Platforming.Capabilities
 {
-    private Rigidbody2D body;
-    private HoldableObject objectBeingHeld;
-
-    [Header("Grabbing")]
-    private List<GameObject> objectsToHoldList = new List<GameObject>();
-    private GameObject[] objectsToHold;
-    private bool isGrabbing;
-
-    [Header("Holding")]
-    private Vector3 lastHoldOffset = new Vector3(0f, 1f, 0f);
-    public bool IsHolding { get; private set; }
-
-    [Header("Throwing")]
-    [SerializeField] private float throwForce = 10f;
-    [SerializeField] private float throwDelay = 0.2f;
-    private float throwDelayCounter;
-    private bool isThrowing;
-
-    [Space]
-
-    [SerializeField] private float throwRecoil = 10f;
-
-    private void Awake()
+    public class GrabObject : Capability
     {
-        body = GetComponent<Rigidbody2D>();
-    }
+        private Rigidbody2D body;
+        private HoldableObject objectBeingHeld;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Holdable"))
+        [Header("Grabbing")]
+        private List<GameObject> objectsToHoldList = new List<GameObject>();
+        private GameObject[] objectsToHold;
+        private bool isGrabbing;
+
+        [Header("Holding")]
+        private Vector3 lastHoldOffset = new Vector3(0f, 1f, 0f);
+        public bool IsHolding { get; private set; }
+
+        [Header("Throwing")]
+        [SerializeField] private float throwForce = 10f;
+        [SerializeField] private float throwDelay = 0.2f;
+        private float throwDelayCounter;
+        private bool isThrowing;
+
+        [Space]
+
+        [SerializeField] private float throwRecoil = 10f;
+
+        private void Awake()
         {
-            if (!objectsToHoldList.Contains(collision.gameObject))
-            {
-                objectsToHoldList.Add(collision.gameObject);
-            }
+            body = GetComponent<Rigidbody2D>();
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Holdable"))
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            objectsToHoldList.Remove(collision.gameObject);
-        }
-    }
-
-    private void Update()
-    {
-        if (!inputController.GetInteractHeld()) { isGrabbing = false; }
-
-        if (inputController.GetInteractPressed() && !IsHolding)
-        {
-            GetObjectToHold()?.transform.parent.TryGetComponent(out objectBeingHeld);
-            if (objectBeingHeld != null)
+            if (collision.gameObject.CompareTag("Holdable"))
             {
-                objectBeingHeld.Grab(transform.position + GetHoldOffset());
-
-                isGrabbing = true;
-                IsHolding = true;
+                if (!objectsToHoldList.Contains(collision.gameObject))
+                {
+                    objectsToHoldList.Add(collision.gameObject);
+                }
             }
         }
 
-        if (IsHolding)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            objectBeingHeld.Hold(transform.position + GetHoldOffset());
-
-            if (!isGrabbing)
+            if (collision.gameObject.CompareTag("Holdable"))
             {
-                if (inputController.GetInteractPressed())
+                objectsToHoldList.Remove(collision.gameObject);
+            }
+        }
+
+        private void Update()
+        {
+            if (!inputController.GetInteractHeld()) { isGrabbing = false; }
+
+            if (inputController.GetInteractPressed() && !IsHolding)
+            {
+                GetObjectToHold()?.transform.parent.TryGetComponent(out objectBeingHeld);
+                if (objectBeingHeld != null)
                 {
-                    throwDelayCounter = throwDelay;
-                    isThrowing = true;
+                    objectBeingHeld.Grab(transform.position + GetHoldOffset());
+
+                    isGrabbing = true;
+                    IsHolding = true;
                 }
-                else
+            }
+
+            if (IsHolding)
+            {
+                objectBeingHeld.Hold(transform.position + GetHoldOffset());
+
+                if (!isGrabbing)
                 {
-                    throwDelayCounter -= Time.deltaTime;
-                }
+                    if (inputController.GetInteractPressed())
+                    {
+                        throwDelayCounter = throwDelay;
+                        isThrowing = true;
+                    }
+                    else
+                    {
+                        throwDelayCounter -= Time.deltaTime;
+                    }
 
-                if (throwDelayCounter > 0f || inputController.GetInteractHeld())
-                {
-                    body.constraints = RigidbodyConstraints2D.FreezeAll;
-                }
-                else if (isThrowing)
-                {
-                    body.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    body.velocity = GetHoldOffset() * -throwRecoil;
+                    if (throwDelayCounter > 0f || inputController.GetInteractHeld())
+                    {
+                        body.constraints = RigidbodyConstraints2D.FreezeAll;
+                    }
+                    else if (isThrowing)
+                    {
+                        body.constraints = RigidbodyConstraints2D.FreezeRotation;
+                        body.velocity = GetHoldOffset() * -throwRecoil;
 
-                    objectBeingHeld.QueueThrow(GetHoldOffset() * throwForce);
-                    IsHolding = false;
+                        objectBeingHeld.QueueThrow(GetHoldOffset() * throwForce);
+                        IsHolding = false;
 
-                    isThrowing = false;
+                        isThrowing = false;
 
-                    objectsToHoldList.Remove(objectBeingHeld.gameObject);
-                    objectBeingHeld = null;
+                        objectsToHoldList.Remove(objectBeingHeld.gameObject);
+                        objectBeingHeld = null;
+                    }
                 }
             }
         }
-    }
 
-    private Vector3 GetHoldOffset()
-    {
-        Vector3 holdOffset = inputController.GetInputAxes();
-
-        if (holdOffset.sqrMagnitude > 0f)
+        private Vector3 GetHoldOffset()
         {
-            lastHoldOffset = holdOffset;
+            Vector3 holdOffset = inputController.GetInputAxes();
+
+            if (holdOffset.sqrMagnitude > 0f)
+            {
+                lastHoldOffset = holdOffset;
+            }
+
+            return lastHoldOffset;
         }
 
-        return lastHoldOffset;
-    }
 
-
-    private GameObject testObjectToHold;
-    private float lowestDistanceFromObject; // Used for SetObjectToHold calculation.
-                                            // If there's more than one holdable object in range,
-                                            // we iterate through each holdable object and find the closest one.
-    private GameObject GetObjectToHold()
-    {
-        if (objectsToHoldList.Count > 1)
+        private GameObject testObjectToHold;
+        private float lowestDistanceFromObject; // Used for SetObjectToHold calculation.
+                                                // If there's more than one holdable object in range,
+                                                // we iterate through each holdable object and find the closest one.
+        private GameObject GetObjectToHold()
         {
-            objectsToHold = objectsToHoldList.ToArray();
-
-            for (int i = 0; i < objectsToHold.Length; i++)
+            if (objectsToHoldList.Count > 1)
             {
-                if (lowestDistanceFromObject < Vector2.SqrMagnitude(objectsToHold[i].transform.position - transform.position))
+                objectsToHold = objectsToHoldList.ToArray();
+
+                for (int i = 0; i < objectsToHold.Length; i++)
                 {
-                    lowestDistanceFromObject = Vector2.SqrMagnitude(objectsToHold[i].transform.position - transform.position);
-                    testObjectToHold = objectsToHold[i];
+                    if (lowestDistanceFromObject < Vector2.SqrMagnitude(objectsToHold[i].transform.position - transform.position))
+                    {
+                        lowestDistanceFromObject = Vector2.SqrMagnitude(objectsToHold[i].transform.position - transform.position);
+                        testObjectToHold = objectsToHold[i];
+                    }
                 }
             }
-        }
-        else if (objectsToHoldList.Count == 1)
-        {
-            testObjectToHold = objectsToHoldList[0];
-        }
-        else
-        {
-            testObjectToHold = null;
+            else if (objectsToHoldList.Count == 1)
+            {
+                testObjectToHold = objectsToHoldList[0];
+            }
+            else
+            {
+                testObjectToHold = null;
+            }
+
+            return testObjectToHold;
         }
 
-        return testObjectToHold;
     }
 
 }

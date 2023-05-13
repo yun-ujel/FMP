@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSlopeNormalY: 0.1
   maxSlopeNormalY: 0.9
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
