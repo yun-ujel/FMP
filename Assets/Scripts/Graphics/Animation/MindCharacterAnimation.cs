@@ -1,5 +1,6 @@
 using UnityEngine;
 using Platforming.Capabilities;
+using Platforming.Collision;
 
 namespace Graphics.Animation
 {

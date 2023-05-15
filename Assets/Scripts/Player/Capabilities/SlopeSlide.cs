@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace Platforming.Capabilities
 {
+    using Collision;
+
     public class SlopeSlide : Capability
     {
         [SerializeField] private SlopeCheck slopeCheck;

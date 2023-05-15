@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace Platforming.Capabilities
 {
+    using Collision;
+
     [RequireComponent(typeof(Rigidbody2D))]
     public class Jump : Capability
     {

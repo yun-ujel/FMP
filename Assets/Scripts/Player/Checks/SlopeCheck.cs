@@ -1,81 +1,86 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Slope Check", menuName = "Scriptable Object/Collision Check/Slope Check")]
-public class SlopeCheck : CollisionCheck
+namespace Platforming.Collision
 {
-    [SerializeField, Range(0f, 1f)] private float minSlopeNormalY = 0.1f;
-    [SerializeField, Range(0f, 1f)] private float maxSlopeNormalY = 0.9f;
-
-    [SerializeField] private LayerMask layerMask;
-
-    public bool OnSlope { get; private set; } = false;
-    public float SlopeFacing { get; private set; } = 0f;
-    // The Direction the slope is facing. Between -1f, 0f and 1f
-
-    private Vector3 slopeNormal;
-    // The normal of the first contact that is sloped.
-
-    public override void CollisionEnter(Collision2D collision)
+    [CreateAssetMenu(fileName = "Slope Check", menuName = "Scriptable Object/Collision Check/Slope Check")]
+    public class SlopeCheck : CollisionCheck
     {
-        base.CollisionEnter(collision);
-        EvaluateCollision(collision);
-    }
+        [SerializeField, Range(0f, 1f)] private float minSlopeNormalY = 0.1f;
+        [SerializeField, Range(0f, 1f)] private float maxSlopeNormalY = 0.9f;
 
-    public override void CollisionStay(Collision2D collision)
-    {
-        base.CollisionStay(collision);
-        EvaluateCollision(collision);
-    }
+        [Space]
 
-    public override void CollisionExit(Collision2D collision)
-    {
-        base.CollisionExit(collision);
+        [SerializeField] private LayerMask groundLayer;
 
-        OnSlope = false;
-        SlopeFacing = 0f;
-    }
+        public bool OnSlope { get; private set; } = false;
+        public float SlopeFacing { get; private set; } = 0f;
+        // The Direction the slope is facing. Between -1f, 0f and 1f
 
-    public override void EvaluateCollision(Collision2D collision)
-    {
-        for (int i = 0; i < collision.contactCount; i++)
+        private Vector3 slopeNormal;
+        // The normal of the first contact that is sloped.
+
+        public override void CollisionEnter(Collision2D collision)
         {
-            OnSlope = EvaluateContact(collision, i, out slopeNormal);
+            base.CollisionEnter(collision);
+            EvaluateCollision(collision);
+        }
 
-            if (OnSlope)
+        public override void CollisionStay(Collision2D collision)
+        {
+            base.CollisionStay(collision);
+            EvaluateCollision(collision);
+        }
+
+        public override void CollisionExit(Collision2D collision)
+        {
+            base.CollisionExit(collision);
+
+            OnSlope = false;
+            SlopeFacing = 0f;
+        }
+
+        public override void EvaluateCollision(Collision2D collision)
+        {
+            for (int i = 0; i < collision.contactCount; i++)
             {
-                SlopeFacing = slopeNormal.x > 0f ? 1f : -1f;
-                break;
+                OnSlope = EvaluateContact(collision, i, out slopeNormal);
+
+                if (OnSlope)
+                {
+                    SlopeFacing = slopeNormal.x > 0f ? 1f : -1f;
+                    break;
+                }
             }
         }
-    }
 
-    public Vector2 GetSlopeDirection()
-    {
-        return !OnSlope ? // If On Slope
-            new Vector2(1f, 0f)
-            : // Else
-            (Vector2)(Vector3.ProjectOnPlane(Vector3.down, slopeNormal).normalized * SlopeFacing);
-    }
+        public Vector2 GetSlopeDirection()
+        {
+            return !OnSlope ? // If On Slope
+                new Vector2(1f, 0f)
+                : // Else
+                (Vector2)(Vector3.ProjectOnPlane(Vector3.down, slopeNormal).normalized * SlopeFacing);
+        }
 
-    public override void Initialize()
-    {
-        OnSlope = false;
-        SlopeFacing = 0f;
-    }
+        public override void Initialize()
+        {
+            OnSlope = false;
+            SlopeFacing = 0f;
+        }
 
-    private bool EvaluateContact(Collision2D collision, int index, out Vector3 normal)
-    {
-        Vector3 direction = collision.GetContact(index).point - (Vector2)collision.otherCollider.transform.position;
-        normal = Vector3.up;
+        private bool EvaluateContact(Collision2D collision, int index, out Vector3 normal)
+        {
+            Vector3 direction = collision.GetContact(index).point - (Vector2)collision.otherCollider.transform.position;
+            normal = Vector3.up;
 
-        RaycastHit2D hit = Physics2D.Raycast
-        (
-            collision.otherCollider.transform.position,
-            direction,
-            6f,
-            layerMask
-        );
+            RaycastHit2D hit = Physics2D.Raycast
+            (
+                collision.otherCollider.transform.position,
+                direction,
+                6f,
+                groundLayer
+            );
 
-        return hit.normal.y < maxSlopeNormalY && hit.normal.y >= minSlopeNormalY;
+            return hit.normal.y < maxSlopeNormalY && hit.normal.y >= minSlopeNormalY;
+        }
     }
 }

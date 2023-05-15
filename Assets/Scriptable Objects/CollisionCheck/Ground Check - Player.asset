@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Ground Check - Player
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.9
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
