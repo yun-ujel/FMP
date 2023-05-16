@@ -36,12 +36,11 @@ namespace DS
         [SerializeField] private OptionsNavigation optionsNav;
         private int numberOfAddedChoices;
 
-        [Space]
-
-        [SerializeField] private GameObject thoughtPrefab;
-
         [Header("Box")]
         [SerializeField] private Animator boxAnimator;
+
+        [Header("Gameplay")]
+        [SerializeField] private MindLevelLoader levelLoader;
 
         private void Awake()
         {
@@ -73,8 +72,6 @@ namespace DS
                     {
                         SetCurrentDialogue(dialogue);
                         UpdatePortraitImages();
-
-                        SpawnThoughtCollectibles(dialogue);
                     }
                 }
             }
@@ -90,16 +87,14 @@ namespace DS
             optionsNav.CreateOptions();
 
             numberOfAddedChoices = 0;
-        }
 
-        private void SpawnThoughtCollectibles(DSDialogueSO dialogue)
-        {
             if (dialogue.DialogueType == DSDialogueType.MultipleChoice)
             {
-                for (int i = 0; i < CurrentDialogue.Choices.Count; i++)
-                {
-                    Instantiate(thoughtPrefab, new Vector3(Random.Range(-13f, 0.5f), Random.Range(-3.5f, -1.5f)), Quaternion.identity);
-                }
+                levelLoader.ProceedToNextLevel();
+            }
+            else if (dialogue.DialogueType == DSDialogueType.SingleChoice)
+            {
+                levelLoader.UnloadCurrentLevel();
             }
         }
 
@@ -121,6 +116,7 @@ namespace DS
             if (numberOfAddedChoices < CurrentDialogue.Choices.Count)
             {
                 AddOptionFromIndex(numberOfAddedChoices);
+                Debug.Log($"Added Option {numberOfAddedChoices} to Dialogue");
                 numberOfAddedChoices += 1;
             }
         }

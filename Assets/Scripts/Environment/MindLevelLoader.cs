@@ -108,7 +108,8 @@ public class MindLevelLoader : MonoBehaviour
     private int currentLevelIndex = 5;
     private float counter;
 
-    [SerializeField] private float animationSpeedMultiplier = 1f;
+    [SerializeField] private float loadAnimationSpeed = 1f;
+    [SerializeField] private float unloadAnimationSpeed = 1f;
 
     private void Start()
     {
@@ -120,17 +121,12 @@ public class MindLevelLoader : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            ProceedToNextLevel();
-        }
-
         if (levelLoadState == LevelLoadState.loading)
         {
             if (counter <= 1f)
             {
                 levels[currentLevelIndex].Load(curve.Evaluate(counter));
-                counter += Time.unscaledDeltaTime * animationSpeedMultiplier;
+                counter += Time.unscaledDeltaTime * loadAnimationSpeed;
             }
             else if (counter > 1f)
             {
@@ -143,7 +139,7 @@ public class MindLevelLoader : MonoBehaviour
             if (counter <= 1f)
             {
                 levels[currentLevelIndex].Unload(curve.Evaluate(counter));
-                counter += Time.unscaledDeltaTime * animationSpeedMultiplier;
+                counter += Time.unscaledDeltaTime * unloadAnimationSpeed;
             }
             else if (counter > 1f)
             {
@@ -162,8 +158,6 @@ public class MindLevelLoader : MonoBehaviour
     {
         UnloadCurrentLevel();
         levelLoadQueued = true;
-
-        //ShakeCamera.Instance.StopTime(2f / animationSpeedMultiplier);
     }
 
 
@@ -191,9 +185,12 @@ public class MindLevelLoader : MonoBehaviour
         }
     }
 
-    private void UnloadCurrentLevel()
+    public void UnloadCurrentLevel()
     {
-        counter = 0f;
-        levelLoadState = LevelLoadState.unloading;
+        if (levelLoadState != LevelLoadState.unloading)
+        {
+            counter = 0f;
+            levelLoadState = LevelLoadState.unloading;
+        }
     }
 }
