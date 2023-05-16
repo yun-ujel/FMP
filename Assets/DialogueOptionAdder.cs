@@ -7,7 +7,10 @@ public class DialogueOptionAdder : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            DSDialogueDisplay.Instance.AddNextOption();
+            if (DSDialogueDisplay.Instance != null)
+            {
+                DSDialogueDisplay.Instance.AddNextOption();
+            }
             Destroy(gameObject);
         }
     }
