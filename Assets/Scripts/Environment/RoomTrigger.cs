@@ -31,9 +31,12 @@ public class RoomTrigger : MonoBehaviour
     [SerializeField] private Checkpoint[] checkpoints;
     public void RoomReset()
     {
-        for (int i = 0; i < checkpoints.Length; i++)
+        if (checkpoints.Length > 0 && checkpoints != null)
         {
-            checkpoints[i].Reset();
+            for (int i = 0; i < checkpoints.Length; i++)
+            {
+                checkpoints[i].Reset();
+            }
         }
     }
 
@@ -43,9 +46,12 @@ public class RoomTrigger : MonoBehaviour
     {
         playerStartPosition.DrawBox(0.5f);
 
-        for (int i = 0; i < checkpoints.Length; i++)
+        if (checkpoints.Length > 0 && checkpoints != null)
         {
-            checkpoints[i].startingPosition.DrawBox(0.25f, checkpointPreviewColour);
+            for (int i = 0; i < checkpoints.Length; i++)
+            {
+                checkpoints[i].startingPosition.DrawBox(0.25f, checkpointPreviewColour);
+            }
         }
     }
 

@@ -13,12 +13,11 @@ public class Room
 
 public class RoomCameraManager : MonoBehaviour
 {
-    [SerializeField] private Room[] rooms;
+    [field: SerializeField] public Room[] Rooms { get; private set; }
     [SerializeField] private int focusedRoomOnStart;
 
     private bool hasFocusedRoomOnThisUpdate;
 
-    public Room[] Rooms => rooms;
     public int CurrentRoomIndex { get; private set; }
 
     private Rigidbody2D playerRigidbody;
@@ -26,16 +25,16 @@ public class RoomCameraManager : MonoBehaviour
     [Space]
     [SerializeField] private CinemachineBrain cinemachineBrain;
 
-    private void Start()
+    private void Awake()
     {
         playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 
-        for (int i = 0; i < rooms.Length; i++)
+        for (int i = 0; i < Rooms.Length; i++)
         {
-            if (rooms[i].trigger != null && rooms[i].virtualCam != null)
+            if (Rooms[i].trigger != null && Rooms[i].virtualCam != null)
             {
-                rooms[i].trigger.SetRoomCameraManager(this, i);
-                rooms[i].virtualCam.gameObject.SetActive(false);
+                Rooms[i].trigger.SetRoomCameraManager(this, i);
+                Rooms[i].virtualCam.gameObject.SetActive(false);
 
                 continue;
             }
@@ -59,20 +58,20 @@ public class RoomCameraManager : MonoBehaviour
 
     public void OnRoomEnter(int index)
     {
-        rooms[index].IsEntered = true;
+        Rooms[index].IsEntered = true;
     }
     public void OnRoomExit(int index)
     {
-        rooms[index].IsEntered = false;
+        Rooms[index].IsEntered = false;
     }
 
     
 
     private bool IsInFocusedRoom()
     {
-        for (int i = 0; i < rooms.Length; i++)
+        for (int i = 0; i < Rooms.Length; i++)
         {
-            if (rooms[i].IsFocused && rooms[i].IsEntered)
+            if (Rooms[i].IsFocused && Rooms[i].IsEntered)
             {
                 // If player hasn't fully moved out of a room,
                 // don't change anything
@@ -87,9 +86,9 @@ public class RoomCameraManager : MonoBehaviour
     {
         hasFocusedRoomOnThisUpdate = false;
 
-        for (int i = 0; i < rooms.Length; i++)
+        for (int i = 0; i < Rooms.Length; i++)
         {
-            if (!rooms[i].IsEntered) // De-Focus un-entered rooms
+            if (!Rooms[i].IsEntered) // De-Focus un-entered rooms
             {
                 SetRoomFocus(i, false);
             }
@@ -109,8 +108,8 @@ public class RoomCameraManager : MonoBehaviour
     {
         if (focus)
         {
-            rooms[i].virtualCam.gameObject.SetActive(true);
-            rooms[i].IsFocused = true;
+            Rooms[i].virtualCam.gameObject.SetActive(true);
+            Rooms[i].IsFocused = true;
 
             CurrentRoomIndex = i;
             hasFocusedRoomOnThisUpdate = true;
@@ -119,22 +118,22 @@ public class RoomCameraManager : MonoBehaviour
         }
         else
         {
-            rooms[i].virtualCam.gameObject.SetActive(false);
-            rooms[i].IsFocused = false;
+            Rooms[i].virtualCam.gameObject.SetActive(false);
+            Rooms[i].IsFocused = false;
         }
     }
 
     private void RespawnPlayerInRoom(int index)
     {
-        rooms[index].trigger.RoomReset();
+        Rooms[index].trigger.RoomReset();
 
         playerRigidbody.velocity = Vector2.zero;
-        playerRigidbody.transform.position = rooms[CurrentRoomIndex].trigger.StartPosition;
+        playerRigidbody.transform.position = Rooms[CurrentRoomIndex].trigger.StartPosition;
     }
 
     public void LoadRoom(int index)
     {
-        for (int i = 0; i < rooms.Length; i++)
+        for (int i = 0; i < Rooms.Length; i++)
         {
             if (index != i)
             {
