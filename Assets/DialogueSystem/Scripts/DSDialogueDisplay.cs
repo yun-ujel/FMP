@@ -37,10 +37,17 @@ namespace DS
         private int numberOfAddedChoices;
 
         [Header("Box")]
+        [SerializeField] private CanvasGroup boxCanvasGroup;
         [SerializeField] private Animator boxAnimator;
 
         [Header("Gameplay")]
+        [SerializeField] private Transform playerTransform;
         [SerializeField] private MindLevelLoader levelLoader;
+
+        [Space]
+
+        [SerializeField] private DSDialogue callPhoneWhenDialogueReached;
+        [SerializeField] private Phone phoneEvent;
 
         private void Awake()
         {
@@ -58,7 +65,7 @@ namespace DS
 
         private void Update()
         {
-            if (input.GetInteractPressed() || input.GetJumpPressed())
+            if (input.GetJumpPressed())
             { /* Get Selected Dialogue Choice */
                 if 
                     (
@@ -72,8 +79,22 @@ namespace DS
                     {
                         SetCurrentDialogue(dialogue);
                         UpdatePortraitImages();
+
+                        if (callPhoneWhenDialogueReached.dialogue == dialogue)
+                        {
+                            phoneEvent.enabled = true;
+                        }
                     }
                 }
+            }
+
+            if (playerTransform.position.y > 2.5f)
+            {
+                boxCanvasGroup.alpha = 0.1f;
+            }
+            else
+            {
+                boxCanvasGroup.alpha = 1f;
             }
         }
 
@@ -90,6 +111,7 @@ namespace DS
 
             if (dialogue.DialogueType == DSDialogueType.MultipleChoice)
             {
+                Debug.Log("Load Next Level");
                 levelLoader.ProceedToNextLevel();
             }
             else if (dialogue.DialogueType == DSDialogueType.SingleChoice)
@@ -199,6 +221,7 @@ namespace DS
         #region Dialogue Selection Methods
         public void QueueDialogue(DSDialogue dsDialogue)
         {
+            selectedDSDialogue = dsDialogue;
             SetCurrentDialogue(dsDialogue.dialogue);
 
             UpdatePortraitSettings();

@@ -3,15 +3,20 @@ using UnityEngine;
 
 public class DialogueOptionAdder : MonoBehaviour
 {
+    private bool addingOption;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (!addingOption)
         {
-            if (DSDialogueDisplay.Instance != null)
+            if (collision.CompareTag("Player"))
             {
-                DSDialogueDisplay.Instance.AddNextOption();
+                addingOption = true;
+                if (DSDialogueDisplay.Instance != null)
+                {
+                    DSDialogueDisplay.Instance.AddNextOption();
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 }

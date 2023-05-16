@@ -16,7 +16,7 @@ MonoBehaviour:
   <Groups>k__BackingField:
   - <GUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
     <Name>k__BackingField: Milkshake
-    <Position>k__BackingField: {x: 52, y: -1}
+    <Position>k__BackingField: {x: 51.999878, y: -1}
   <Nodes>k__BackingField:
   - <GUID>k__BackingField: b77f6e3b-8b2f-436f-ade6-bce9030652e0
     <Name>k__BackingField: Entry
@@ -71,16 +71,6 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
     <Position>k__BackingField: {x: 1680, y: 59}
-  - <GUID>k__BackingField: f5772e34-ba3b-4df0-a46d-6b4e7fcc07ba
-    <Name>k__BackingField: PhoneRing
-    <Text>k__BackingField: '*PHONE RINGING*'
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <TargetGUID>k__BackingField: e06b9ad4-9868-4b53-b369-7c33cc10bac0
-    <GroupGUID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Texture>k__BackingField: {fileID: 2800000, guid: 920fb9ac60c4c664b83f4e78d127259f, type: 3}
-    <Position>k__BackingField: {x: 3056, y: 390}
   - <GUID>k__BackingField: d5d5dab5-9623-46b1-b720-73764e699c5a
     <Name>k__BackingField: MilkshakeLine4
     <Text>k__BackingField: "I mean, that doctor has hundreds of cases they need to
@@ -102,10 +92,19 @@ MonoBehaviour:
     <DialogueType>k__BackingField: 0
     <Texture>k__BackingField: {fileID: 2800000, guid: 28d5245fd73790e4b9ba8e584d5b7023, type: 3}
     <Position>k__BackingField: {x: 3496, y: 283}
+  - <GUID>k__BackingField: f5772e34-ba3b-4df0-a46d-6b4e7fcc07ba
+    <Name>k__BackingField: PhoneRing
+    <Text>k__BackingField: '*PHONE RINGING*'
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <TargetGUID>k__BackingField: e06b9ad4-9868-4b53-b369-7c33cc10bac0
+    <GroupGUID>k__BackingField: 1780f353-bcec-45c4-a865-71238c648df4
+    <DialogueType>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 920fb9ac60c4c664b83f4e78d127259f, type: 3}
+    <Position>k__BackingField: {x: 3051, y: 355}
   <OldGroupNames>k__BackingField:
   - Milkshake
-  <OldUngroupedNodeNames>k__BackingField:
-  - PhoneRing
+  <OldUngroupedNodeNames>k__BackingField: []
   <OldGroupedNodeNames>k__BackingField:
     list:
     - Key: Milkshake
@@ -117,3 +116,4 @@ MonoBehaviour:
       - MilkshakeLine3
       - MilkshakeLine4
       - MilkshakeLine5
+      - PhoneRing

@@ -11,6 +11,8 @@ public class MindLevelLoader : MonoBehaviour
     [System.Serializable]
     private class Level
     {
+        public bool Enabled { get; private set; } = true;
+
         [SerializeField] private GameObject[] levelTilemaps;
 
         [Space]
@@ -31,6 +33,8 @@ public class MindLevelLoader : MonoBehaviour
                 levelObjectPositions.Add(levelObjects[i].transform.position);
                 levelObjects[i].SetActive(false);
             }
+
+            Enabled = false;
         }
         public void Load(float time)
         {
@@ -98,6 +102,8 @@ public class MindLevelLoader : MonoBehaviour
                     levelObjects[i].SetActive(false);
                 }
             }
+
+            Enabled = false;
         }
     }
 

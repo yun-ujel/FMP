@@ -7,13 +7,24 @@ namespace PlayerInput
     {
         public static InputManager Instance { get; private set; }
 
-        [SerializeField] private InputController mindController;
+        public enum ControlMode
+        {
+            mind, world, UI, none
+        }
+
+        private ControlMode queuedControlChange;
+
+        [Header("Mind")]
+        [SerializeField] private GameObject player;
+        [Space, SerializeField] private InputController mindController;
+
+        [Header("World")]
         [SerializeField] private InputController worldController;
 
         [Header("UI")]
         [SerializeField] private InputController uIController;
 
-        private void Start()
+        private void Awake()
         {
             if (Instance != null)
             {
@@ -23,8 +34,34 @@ namespace PlayerInput
             {
                 Instance = this;
             }
+        }
 
-            DisableAllControllers();
+        private void Start()
+        {
+            EnableControls(ControlMode.mind);
+        }
+
+        private void Update()
+        {
+            if (queuedControlChange != ControlMode.none)
+            {
+                if (queuedControlChange == ControlMode.mind && !mindController.GetInteractPressed())
+                {
+                    mindController.Enabled = true;
+                    queuedControlChange = ControlMode.none;
+                }
+                else if (queuedControlChange == ControlMode.world && !mindController.GetInteractPressed())
+                {
+                    worldController.Enabled = true;
+                    queuedControlChange = ControlMode.none;
+                }
+                else if (queuedControlChange == ControlMode.UI && !mindController.GetInteractPressed())
+                {
+                    SetOptionsOpened(true);
+                    uIController.Enabled = true;
+                    queuedControlChange = ControlMode.none;
+                }
+            }
         }
 
         private void DisableAllControllers()
@@ -35,31 +72,34 @@ namespace PlayerInput
             SetOptionsOpened(false);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                DisableAllControllers();
-                mindController.Enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                DisableAllControllers();
-                worldController.Enabled = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                DisableAllControllers();
-                SetOptionsOpened(true);
-                uIController.Enabled = true;
-            }
-        }
-
         private void OnDisable()
         {
             mindController.Enabled = true;
             uIController.Enabled = true;
             worldController.Enabled = true;
+        }
+
+        public void EnableControls(ControlMode mode)
+        {
+            DisableAllControllers();
+
+            queuedControlChange = mode;
+        }
+
+        public InputController GetControls(ControlMode mode)
+        {
+            if (mode == ControlMode.mind)
+            {
+                return mindController;
+            }
+            else if (mode == ControlMode.world)
+            {
+                return worldController;
+            }
+            else
+            {
+                return uIController;
+            }
         }
 
         #region Utility Methods

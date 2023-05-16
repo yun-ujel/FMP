@@ -51,6 +51,6 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 8ad78d0127df4df438453dcce01d62f8, type: 2}
       - {fileID: 11400000, guid: a55814c2d59111e44afea6a9961a1a17, type: 2}
       - {fileID: 11400000, guid: eb3251068a4328341ad9076e34f8ca0c, type: 2}
-      - {fileID: 11400000, guid: b3a923eb705535c49b69d64683079819, type: 2}
       - {fileID: 11400000, guid: fd69314e13d68d6408f6ec899b9713a6, type: 2}
+      - {fileID: 11400000, guid: b3a923eb705535c49b69d64683079819, type: 2}
   <UngroupedDialogues>k__BackingField: []

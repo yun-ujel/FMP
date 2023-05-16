@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Holdable
+  - WorldPlayer
   layers:
   - Default
   - TransparentFX
