@@ -17971,11 +17971,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedDSDialogue: {fileID: 475097069}
   portrait1:
-    <GroupNames>k__BackingField: []
     <PortraitImage>k__BackingField: {fileID: 7334685146131868454}
     <PortraitBox>k__BackingField: {fileID: 7334685147478869363}
   portrait2:
-    <GroupNames>k__BackingField: []
     <PortraitImage>k__BackingField: {fileID: 7334685146621486227}
     <PortraitBox>k__BackingField: {fileID: 7334685145828514249}
   uGUI: {fileID: 7334685146785857161}
@@ -64501,7 +64499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 11400000, guid: 0418a8f23cc182642b6c289b6a6a062b, type: 2}
   groundCheck: {fileID: 11400000, guid: 6ba408ab511b8d44fa79f9c949437d36, type: 2}
-  jumpHeight: 4
+  jumpHeight: 4.2
   jumpReleaseMultiplier: 0.6
   jumpBuffer: 0.2
   coyoteTime: 0.1

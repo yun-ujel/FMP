@@ -78,7 +78,8 @@ namespace UI.Options
             for (int i = 0; i < names.Length; i++)
             {
                 options.Add(Instantiate(optionPrefab, optionsParent).GetComponent<Option>());
-                options[i].Initialize(names[i]);
+                options[i].Initialize(names[i], false);
+                options[i].SetColours(new Color(137f / 255f, 81f / 255f, 255f / 255f));
             }
 
             SetOptionSelect(0);
@@ -88,6 +89,8 @@ namespace UI.Options
         {
             options.Add(Instantiate(optionPrefab, optionsParent).GetComponent<Option>());
             options[options.Count - 1].Initialize(name);
+            options[options.Count - 1].SetColours(new Color(137f / 255f, 81f / 255f, 255f / 255f));
+
             SetOptionSelect(CurrentSelected);
         }
         #endregion
