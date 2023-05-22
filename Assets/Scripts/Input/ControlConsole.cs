@@ -11,9 +11,11 @@ namespace PlayerInput
         private InputController inputController;
 
         private bool playerNearby;
+        private bool isControlling;
+
         private SpriteRenderer rend;
 
-        private readonly Color fadedColour = new Color(1f, 1f, 1f, 0.8f);
+        private readonly Color fadedColour = new Color(1f, 1f, 1f, 0.6f);
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -40,17 +42,19 @@ namespace PlayerInput
         }
         private void Update()
         {
-            if (playerNearby)
+            if (playerNearby && !isControlling)
             {
                 rend.color = fadedColour;
                 if (mindController.GetInteractPressed())
                 {
                     InputManager.Instance.EnableControls(controlMode);
+                    isControlling = true;
                 }
-                else if (inputController.GetBackPressed())
-                {
-                    InputManager.Instance.EnableControls(InputManager.ControlMode.mind);
-                }
+            }
+            else if (inputController.GetBackPressed() && isControlling)
+            {
+                InputManager.Instance.EnableControls(InputManager.ControlMode.mind);
+                isControlling = false;
             }
             else
             {
