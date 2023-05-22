@@ -8650,7 +8650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193103995}
   - component: {fileID: 193103996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Screen (White)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18634,7 +18634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -18727,6 +18727,7 @@ MonoBehaviour:
     IsEntered: 0
     IsFocused: 0
   focusedRoomOnStart: 0
+  playerRigidbody: {fileID: 142285580505340710}
   cinemachineBrain: {fileID: 685417913}
 --- !u!1 &733138005
 GameObject:
@@ -28214,7 +28215,7 @@ GameObject:
   - component: {fileID: 972676579}
   - component: {fileID: 972676578}
   - component: {fileID: 972676580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Start Room Vcam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28294,7 +28295,7 @@ GameObject:
   - component: {fileID: 985283699}
   - component: {fileID: 985283701}
   - component: {fileID: 985283700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28331,7 +28332,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: -21.366943, y: -969.8353, z: 136.91342}
 --- !u!114 &985283701
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -33218,7 +33219,7 @@ GameObject:
   - component: {fileID: 1020995924}
   - component: {fileID: 1020995923}
   - component: {fileID: 1020995927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ActionConsole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49545,7 +49546,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: 824.79236, y: -28.545044, z: -398.91638}
 --- !u!114 &1296201623
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -52855,7 +52856,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690919619}
   - component: {fileID: 1690919618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ActionConsole - White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53102,7 +53103,7 @@ GameObject:
   - component: {fileID: 1770632280}
   - component: {fileID: 1770632279}
   - component: {fileID: 1770632281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64021,7 +64022,7 @@ GameObject:
   - component: {fileID: 2103448697}
   - component: {fileID: 2103448698}
   - component: {fileID: 2103448699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Start Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

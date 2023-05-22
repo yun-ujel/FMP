@@ -1,18 +1,18 @@
 using UnityEngine;
 using Cinemachine;
 
-[System.Serializable]
-public class Room 
-{
-    public RoomTrigger trigger;
-    public CinemachineVirtualCamera virtualCam;
-
-    public bool IsEntered;
-    public bool IsFocused;
-}
-
 public class RoomCameraManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class Room
+    {
+        public RoomTrigger trigger;
+        public CinemachineVirtualCamera virtualCam;
+
+        public bool IsEntered;
+        public bool IsFocused;
+    }
+
     [field: SerializeField] public Room[] Rooms { get; private set; }
     [SerializeField] private int focusedRoomOnStart;
 
@@ -20,15 +20,13 @@ public class RoomCameraManager : MonoBehaviour
 
     public int CurrentRoomIndex { get; private set; }
 
-    private Rigidbody2D playerRigidbody;
+    [SerializeField] private Rigidbody2D playerRigidbody;
 
     [Space]
     [SerializeField] private CinemachineBrain cinemachineBrain;
 
     private void Awake()
     {
-        playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-
         for (int i = 0; i < Rooms.Length; i++)
         {
             if (Rooms[i].trigger != null && Rooms[i].virtualCam != null)
@@ -40,9 +38,13 @@ public class RoomCameraManager : MonoBehaviour
             }
             Debug.LogError("Room " + i + " Is missing a component!");
         }
+    }
 
+    private void Start()
+    {
         LoadRoom(focusedRoomOnStart);
     }
+
     private void Update()
     {
         if (!IsInFocusedRoom())
