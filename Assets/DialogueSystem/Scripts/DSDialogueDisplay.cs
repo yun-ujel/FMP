@@ -7,6 +7,7 @@ namespace DS
 {
     using ScriptableObjects;
     using Enumerations;
+    using PlayerInput;
 
     public class DSDialogueDisplay : MonoBehaviour
     {
@@ -65,7 +66,7 @@ namespace DS
 
         private void Update()
         {
-            if (input.GetJumpPressed())
+            if ((input.GetJumpPressed() || input.GetInteractPressed()) && InputManager.Instance.ControlSwitchCooldown <= 0f)
             { /* Get Selected Dialogue Choice */
                 if 
                     (

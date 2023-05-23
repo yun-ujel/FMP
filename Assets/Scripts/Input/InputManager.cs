@@ -8,11 +8,17 @@ namespace PlayerInput
         #region Variables
         public static InputManager Instance { get; private set; }
 
+        #region Control Modes
         public enum ControlMode
         {
             mind, world, UI, none
         }
         private ControlMode queuedControlChange;
+
+        [Header("Control Switching")]
+        [SerializeField, Range(0f, 1f)] private float controlSwitchCooldown;
+        public float ControlSwitchCooldown { get; private set; }
+        #endregion
 
         #region Controllers
         [System.Serializable]
@@ -50,7 +56,7 @@ namespace PlayerInput
             public bool IsDarkened { get; set; }
         }
 
-        [Header("Darkeners")]
+        [Header("Display")]
         [SerializeField] private Darkener mindDarkener;
         [SerializeField] private Darkener worldDarkener;
         private float maxDelta;
@@ -77,9 +83,17 @@ namespace PlayerInput
 
         private void Update()
         {
-            if (queuedControlChange != ControlMode.none)
+            if (queuedControlChange != ControlMode.none && ControlSwitchCooldown <= 0f)
             {
                 PlayQueuedControlChanges();
+            }
+            else if (ControlSwitchCooldown > 0f)
+            {
+                ControlSwitchCooldown -= Time.deltaTime;
+            }
+            else if (ControlSwitchCooldown <= 0f)
+            {
+                ControlSwitchCooldown = 0f;
             }
             UpdateDarkeners();
         }
@@ -88,21 +102,17 @@ namespace PlayerInput
         {
             if (queuedControlChange == ControlMode.mind && !controllers.Mind.GetInteractPressed())
             {
-                SetDarkenerMode(ControlMode.mind);
-                controllers.Mind.Enabled = true;
+                SetControlMode(ControlMode.mind);
                 queuedControlChange = ControlMode.none;
             }
             else if (queuedControlChange == ControlMode.world && !controllers.Mind.GetInteractPressed())
             {
-                SetDarkenerMode(ControlMode.world);
-                controllers.World.Enabled = true;
+                SetControlMode(ControlMode.world);
                 queuedControlChange = ControlMode.none;
             }
             else if (queuedControlChange == ControlMode.UI && !controllers.Mind.GetInteractPressed())
             {
-                SetDarkenerMode(ControlMode.UI);
-                SetOptionsOpened(true);
-                controllers.UI.Enabled = true;
+                SetControlMode(ControlMode.UI);
                 queuedControlChange = ControlMode.none;
             }
         }
@@ -148,21 +158,28 @@ namespace PlayerInput
         #endregion
 
         #region Display Methods
-        private void SetDarkenerMode(ControlMode controlMode)
+        private void SetControlMode(ControlMode controlMode)
         {
             switch (controlMode)
             {
                 case ControlMode.mind:
+                    controllers.Mind.Enabled = true;
+
                     mindDarkener.IsDarkened = false;
                     worldDarkener.IsDarkened = true;
                     break;
 
                 case ControlMode.world:
+                    controllers.World.Enabled = true;
+
                     mindDarkener.IsDarkened = true;
                     worldDarkener.IsDarkened = false;
                     break;
 
                 case ControlMode.UI:
+                    SetOptionsOpened(true);
+                    controllers.UI.Enabled = true;
+
                     mindDarkener.IsDarkened = true;
                     worldDarkener.IsDarkened = true;
                     break;
@@ -172,6 +189,7 @@ namespace PlayerInput
                     worldDarkener.IsDarkened = false;
                     break;
             }
+            ControlSwitchCooldown = controlSwitchCooldown;
         }
 
         private void UpdateDarkeners()
