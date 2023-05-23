@@ -27,11 +27,33 @@ namespace PlayerInput
         #endregion
 
         #region Display
-        [Header("Darkeners")]
-        [SerializeField] private SpriteRenderer mindDarkener;
-        [SerializeField] private SpriteRenderer worldDarkener;
+        [System.Serializable]
+        private class Darkener
+        {
+            [SerializeField] private SpriteRenderer spriteRenderer;
 
-        private Color faded = new Color(0f, 0f, 0f, 0.70588235f);
+            public float Alpha
+            {
+                get
+                {
+                    return alpha;
+                }
+
+                set
+                {
+                    spriteRenderer.color = new Color(0f, 0f, 0f, value);
+                    alpha = value;
+                }
+            }
+            private float alpha;
+
+            public bool IsDarkened { get; set; }
+        }
+
+        [Header("Darkeners")]
+        [SerializeField] private Darkener mindDarkener;
+        [SerializeField] private Darkener worldDarkener;
+        private float maxDelta;
         #endregion
 
         #endregion
@@ -59,6 +81,7 @@ namespace PlayerInput
             {
                 PlayQueuedControlChanges();
             }
+            UpdateDarkeners();
         }
 
         private void PlayQueuedControlChanges()
@@ -130,24 +153,47 @@ namespace PlayerInput
             switch (controlMode)
             {
                 case ControlMode.mind:
-                    mindDarkener.color = Color.clear;
-                    worldDarkener.color = faded;
+                    mindDarkener.IsDarkened = false;
+                    worldDarkener.IsDarkened = true;
                     break;
 
                 case ControlMode.world:
-                    mindDarkener.color = faded;
-                    worldDarkener.color = Color.clear;
+                    mindDarkener.IsDarkened = true;
+                    worldDarkener.IsDarkened = false;
                     break;
 
                 case ControlMode.UI:
-                    mindDarkener.color = faded;
-                    worldDarkener.color = faded;
+                    mindDarkener.IsDarkened = true;
+                    worldDarkener.IsDarkened = true;
                     break;
 
                 default:
-                    mindDarkener.color = Color.clear;
-                    worldDarkener.color = Color.clear;
+                    mindDarkener.IsDarkened = false;
+                    worldDarkener.IsDarkened = false;
                     break;
+            }
+        }
+
+        private void UpdateDarkeners()
+        {
+            maxDelta = Time.deltaTime * 3f;
+            if (mindDarkener.IsDarkened && mindDarkener.Alpha != 0.8f)
+            {
+                mindDarkener.Alpha = Mathf.MoveTowards(mindDarkener.Alpha, 0.8f, maxDelta);
+            }
+            else if (!mindDarkener.IsDarkened && mindDarkener.Alpha != 0f)
+            {
+                mindDarkener.Alpha = Mathf.MoveTowards(mindDarkener.Alpha, 0f, maxDelta);
+            }
+
+
+            if (worldDarkener.IsDarkened && worldDarkener.Alpha != 0.8f)
+            {
+                worldDarkener.Alpha = Mathf.MoveTowards(worldDarkener.Alpha, 0.8f, maxDelta);
+            }
+            else if (!worldDarkener.IsDarkened && worldDarkener.Alpha != 0f)
+            {
+                worldDarkener.Alpha = Mathf.MoveTowards(worldDarkener.Alpha, 0f, maxDelta);
             }
         }
         #endregion

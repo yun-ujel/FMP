@@ -8911,8 +8911,10 @@ MonoBehaviour:
     <Mind>k__BackingField: {fileID: 11400000, guid: 0418a8f23cc182642b6c289b6a6a062b, type: 2}
     <World>k__BackingField: {fileID: 11400000, guid: bd57eec98138b0048aef73cf3055364e, type: 2}
     <UI>k__BackingField: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
-  mindDarkener: {fileID: 309820042}
-  worldDarkener: {fileID: 1576459282}
+  mindDarkener:
+    spriteRenderer: {fileID: 309820042}
+  worldDarkener:
+    spriteRenderer: {fileID: 1576459282}
 --- !u!1 &257128936
 GameObject:
   m_ObjectHideFlags: 0
@@ -65167,7 +65169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11770202, g: 0.14456579, b: 0.21698111, a: 1}
+  m_Color: {r: 0.15873088, g: 0.22327656, b: 0.38679248, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -65389,7 +65391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.1137255, g: 0.14117648, b: 0.21176472, a: 1}
+  m_EffectColor: {r: 0.15686275, g: 0.22352943, b: 0.38823533, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 1
 --- !u!114 &7334685147123258295
