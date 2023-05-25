@@ -6,9 +6,13 @@ namespace UI.Options
 {
     public class Option : MonoBehaviour
     {
-        private Graphic buttonGraphic;
+        [SerializeField] private Graphic buttonGraphic;
+        [SerializeField] private Outline buttonOutline;
         private TextMeshProUGUI text;
-        private Animator animator;
+        [Space, SerializeField] private Animator animator;
+        [SerializeField] private Animator noiseAnimator;
+
+        public bool Noisy { get; set; }
 
         private Color defaultColour;
         private Color selectedColour;
@@ -25,11 +29,15 @@ namespace UI.Options
             }
         }
 
+        private void Awake()
+        {
+            if (animator == null) { animator = GetComponent<Animator>(); }
+            buttonGraphic = GetComponent<Graphic>();
+            buttonOutline = GetComponent<Outline>();
+        }
+
         public void Initialize(string displayText = "Option", bool setColoursOnInitialize = true)
         {
-            animator = GetComponent<Animator>();
-            buttonGraphic = GetComponent<Graphic>();
-
             text = GetComponentInChildren<TextMeshProUGUI>();
             text.text = displayText;
 
@@ -87,16 +95,25 @@ namespace UI.Options
             {
                 buttonGraphic.color = selectedColour;
                 text.color = textSelectedColour;
+
+                buttonOutline.effectColor = selectedColour;
                 return;
             }
 
             buttonGraphic.color = defaultColour;
             text.color = textDefaultColour;
+
+            buttonOutline.effectColor = Color.black;
         }
 
         public void SetOptionsOpened(bool setting)
         {
             animator.SetBool("Open", setting);
+        }
+
+        private void Update()
+        {
+            noiseAnimator.SetBool("Noise", Noisy);
         }
     }
 }

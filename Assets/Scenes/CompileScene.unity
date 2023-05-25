@@ -8907,6 +8907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7cad0fcb617ea49927ec35334bc5c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlSwitchCooldown: 0
   controllers:
     <Mind>k__BackingField: {fileID: 11400000, guid: 0418a8f23cc182642b6c289b6a6a062b, type: 2}
     <World>k__BackingField: {fileID: 11400000, guid: bd57eec98138b0048aef73cf3055364e, type: 2}
@@ -64278,7 +64279,7 @@ Transform:
   - {fileID: 1020995925}
   - {fileID: 1770632278}
   m_Father: {fileID: 2119164162}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2103448698
 MonoBehaviour:
@@ -64351,8 +64352,8 @@ Transform:
   m_Children:
   - {fileID: 1583703468}
   - {fileID: 733138007}
-  - {fileID: 142285580505340707}
   - {fileID: 2103448697}
+  - {fileID: 142285580505340707}
   - {fileID: 1448953720}
   - {fileID: 949878627}
   m_Father: {fileID: 0}
@@ -64659,7 +64660,7 @@ Transform:
   m_Children:
   - {fileID: 142285580386519264}
   m_Father: {fileID: 2119164162}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &142285580505340708
 CapsuleCollider2D:
@@ -65527,7 +65528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
   selectionSwitchCooldown: 0.2
-  optionPrefab: {fileID: 4376998373735351932, guid: e71abf37f90e6a24baa33950610cd76f, type: 3}
+  optionPrefab: {fileID: 7106964321886366628, guid: 6bd4c7a3a7c1eab44939c2f11a1b834d, type: 3}
   optionsParent: {fileID: 7334685147394266975}
 --- !u!1 &7334685147394266974
 GameObject:

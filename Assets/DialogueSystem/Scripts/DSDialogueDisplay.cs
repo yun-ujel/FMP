@@ -70,12 +70,12 @@ namespace DS
             { /* Get Selected Dialogue Choice */
                 if 
                     (
-                        (numberOfAddedChoices > 0 && CurrentDialogue.DialogueType == DSDialogueType.MultipleChoice)
+                        (optionsNav.IsCurrentSelectedOptionValid() && CurrentDialogue.DialogueType == DSDialogueType.MultipleChoice)
                         ||
                         CurrentDialogue.DialogueType == DSDialogueType.SingleChoice
                     )
                 {
-                    DSDialogueSO dialogue = CurrentDialogue.GetChoice(optionsNav.CurrentSelected, out _);
+                    DSDialogueSO dialogue = CurrentDialogue.GetChoice(optionsNav.CurrentSelected);
                     if (dialogue != null)
                     {
                         SetCurrentDialogue(dialogue);
@@ -106,17 +106,17 @@ namespace DS
 
             uGUI.rectTransform.offsetMin = dialogue.Texture == null ? new Vector2(10f, 10f) : new Vector2(300f, 10f);
 
-            optionsNav.CreateOptions();
-
             numberOfAddedChoices = 0;
 
             if (dialogue.DialogueType == DSDialogueType.MultipleChoice)
             {
+                optionsNav.CreateOptions(CurrentDialogue.GetChoicesAsStringArray());
                 Debug.Log("Load Next Level");
                 levelLoader.ProceedToNextLevel();
             }
             else if (dialogue.DialogueType == DSDialogueType.SingleChoice)
             {
+                optionsNav.CreateOptions();
                 levelLoader.UnloadCurrentLevel();
             }
         }
@@ -130,8 +130,7 @@ namespace DS
 
         public void AddOptionFromIndex(int index)
         {
-            CurrentDialogue.GetChoice(index, out string choice);
-            optionsNav.AddOption(choice);
+            optionsNav.SetOptionNoise(index, false);
         }
 
         public void AddNextOption()
@@ -139,7 +138,7 @@ namespace DS
             if (numberOfAddedChoices < CurrentDialogue.Choices.Count)
             {
                 AddOptionFromIndex(numberOfAddedChoices);
-                Debug.Log($"Added Option {numberOfAddedChoices} to Dialogue");
+                //Debug.Log($"Added Option {numberOfAddedChoices} to Dialogue");
                 numberOfAddedChoices += 1;
             }
         }
