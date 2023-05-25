@@ -32,6 +32,11 @@ namespace DS.ScriptableObjects
             return selectedChoice.NextDialogue;
         }
 
+        public DSDialogueSO GetChoice(int index)
+        {
+            return GetChoice(index, out _);
+        }
+
         public string[] GetChoicesAsStringArray()
         {
             string[] choices = new string[Choices.Count];

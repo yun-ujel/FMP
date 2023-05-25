@@ -12,7 +12,7 @@ namespace UI.Options
         [Space, SerializeField] private Animator animator;
         [SerializeField] private Animator noiseAnimator;
 
-        [Space, SerializeField] private bool noise;
+        public bool Noisy { get; set; }
 
         private Color defaultColour;
         private Color selectedColour;
@@ -113,7 +113,7 @@ namespace UI.Options
 
         private void Update()
         {
-            noiseAnimator.SetBool("Noise", noise);
+            noiseAnimator.SetBool("Noise", Noisy);
         }
     }
 }

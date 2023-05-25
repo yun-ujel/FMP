@@ -25,6 +25,8 @@ namespace UI.Options
         [SerializeField] private Transform optionsParent;
         private List<Option> options;
 
+        private bool opened;
+
         private void Update()
         {
             if (input.GetInteractPressed() || input.GetJumpPressed())
@@ -58,6 +60,16 @@ namespace UI.Options
 
         #region Options Methods
 
+        public bool IsCurrentSelectedOptionValid()
+        {
+            if (options == null || options.Count <= 0)
+            {
+                return false;
+            }
+
+            return !options[CurrentSelected].Noisy;
+        }
+
         #region Creation
         public void CreateOptions(params string[] names)
         {
@@ -79,19 +91,19 @@ namespace UI.Options
             {
                 options.Add(Instantiate(optionPrefab, optionsParent).GetComponent<Option>());
                 options[i].Initialize(names[i], false);
+                
                 options[i].SetColours(new Color(137f / 255f, 81f / 255f, 255f / 255f));
+                
+                options[i].Noisy = true;
+                options[i].SetOptionsOpened(opened);
             }
 
             SetOptionSelect(0);
         }
 
-        public void AddOption(string name)
+        public void SetOptionNoise(int index, bool noisy)
         {
-            options.Add(Instantiate(optionPrefab, optionsParent).GetComponent<Option>());
-            options[options.Count - 1].Initialize(name);
-            options[options.Count - 1].SetColours(new Color(137f / 255f, 81f / 255f, 255f / 255f));
-
-            SetOptionSelect(CurrentSelected);
+            options[index].Noisy = noisy;
         }
         #endregion
 
@@ -121,6 +133,7 @@ namespace UI.Options
 
         public void SetOptionsOpened(bool setting)
         {
+            opened = setting;
             for (int i = 0; i < options.Count; i++)
             {
                 options[i].SetOptionsOpened(setting);
