@@ -29,6 +29,7 @@ namespace DS
         [SerializeField] private Portrait portrait2;
 
         [Header("Display Text")]
+        [SerializeField] private TextMeshProUGUI nameUGUI;
         [SerializeField] private TextMeshProUGUI uGUI;
         public DSDialogueSO CurrentDialogue { get; private set; }
 
@@ -186,7 +187,8 @@ namespace DS
         private void UpdatePortraitImages()
         {
             string nodeGroupName = selectedDSDialogue.dialogueContainer.GetNodeGroupName(CurrentDialogue);
-            
+            nameUGUI.text = nodeGroupName;
+
             if (portrait2.GroupNames[0] != "")
             {
                 portrait2.PortraitImage.color = Color.white;
