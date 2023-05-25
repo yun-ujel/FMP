@@ -33,6 +33,14 @@ namespace DS
         [SerializeField] private TextMeshProUGUI uGUI;
         public DSDialogueSO CurrentDialogue { get; private set; }
 
+        private char[] textCharArray;
+        private string displayText;
+        private int displayTextProgress;
+
+        [Space]
+        [SerializeField, Range(1f, 100f)] private float lettersPerSecond;
+        private float timeSinceLastLetterAdded;
+
         [Header("Options")]
         [SerializeField] private InputController input;
         [SerializeField] private OptionsNavigation optionsNav;
@@ -67,24 +75,37 @@ namespace DS
 
         private void Update()
         {
-            if ((input.GetJumpPressed() || input.GetInteractPressed()) && InputManager.Instance.ControlSwitchCooldown <= 0f)
-            { /* Get Selected Dialogue Choice */
-                if 
-                    (
-                        (optionsNav.IsCurrentSelectedOptionValid() && CurrentDialogue.DialogueType == DSDialogueType.MultipleChoice)
-                        ||
-                        CurrentDialogue.DialogueType == DSDialogueType.SingleChoice
-                    )
-                {
-                    DSDialogueSO dialogue = CurrentDialogue.GetChoice(optionsNav.CurrentSelected);
-                    if (dialogue != null)
-                    {
-                        SetCurrentDialogue(dialogue);
-                        UpdatePortraitImages();
+            if (displayTextProgress < textCharArray.Length)
+            {
+                UpdateDialogueText();
 
-                        if (callPhoneWhenDialogueReached.dialogue == dialogue)
+                if ((input.GetJumpPressed() || input.GetInteractPressed()) && InputManager.Instance.ControlSwitchCooldown <= 0f)
+                {
+                    uGUI.text = CurrentDialogue.Text;
+                    displayTextProgress = textCharArray.Length;
+                }
+            }
+            else
+            {
+                if ((input.GetJumpPressed() || input.GetInteractPressed()) && InputManager.Instance.ControlSwitchCooldown <= 0f)
+                { /* Get Selected Dialogue Choice */
+                    if
+                        (
+                            (optionsNav.IsCurrentSelectedOptionValid() && CurrentDialogue.DialogueType == DSDialogueType.MultipleChoice)
+                            ||
+                            CurrentDialogue.DialogueType == DSDialogueType.SingleChoice
+                        )
+                    {
+                        DSDialogueSO dialogue = CurrentDialogue.GetChoice(optionsNav.CurrentSelected);
+                        if (dialogue != null)
                         {
-                            phoneEvent.enabled = true;
+                            SetCurrentDialogue(dialogue);
+                            UpdatePortraitImages();
+
+                            if (callPhoneWhenDialogueReached.dialogue == dialogue)
+                            {
+                                phoneEvent.enabled = true;
+                            }
                         }
                     }
                 }
@@ -100,10 +121,30 @@ namespace DS
             }
         }
 
+        private void UpdateDialogueText()
+        {
+            if (timeSinceLastLetterAdded >= (1f / lettersPerSecond))
+            {
+                displayText += textCharArray[displayTextProgress];
+                displayTextProgress++;
+
+                uGUI.text = displayText;
+
+                timeSinceLastLetterAdded = 0f;
+            }
+            else
+            {
+                timeSinceLastLetterAdded += Time.deltaTime;
+            }
+        }
+
         private void SetCurrentDialogue(DSDialogueSO dialogue)
         {
             CurrentDialogue = dialogue;
-            uGUI.text = CurrentDialogue.Text;
+            //uGUI.text = CurrentDialogue.Text;
+            textCharArray = CurrentDialogue.Text.ToCharArray();
+            displayText = "";
+            displayTextProgress = 0;
 
             uGUI.rectTransform.offsetMin = dialogue.Texture == null ? new Vector2(10f, 10f) : new Vector2(300f, 10f);
 
