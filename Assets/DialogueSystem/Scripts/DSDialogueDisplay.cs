@@ -81,8 +81,7 @@ namespace DS
 
                 if ((input.GetJumpPressed() || input.GetInteractPressed()) && InputManager.Instance.ControlSwitchCooldown <= 0f)
                 {
-                    uGUI.text = CurrentDialogue.Text;
-                    displayTextProgress = textCharArray.Length;
+                    FinishDialogueText();
                 }
             }
             else
@@ -121,23 +120,6 @@ namespace DS
             }
         }
 
-        private void UpdateDialogueText()
-        {
-            if (timeSinceLastLetterAdded >= (1f / lettersPerSecond))
-            {
-                displayText += textCharArray[displayTextProgress];
-                displayTextProgress++;
-
-                uGUI.text = displayText;
-
-                timeSinceLastLetterAdded = 0f;
-            }
-            else
-            {
-                timeSinceLastLetterAdded += Time.deltaTime;
-            }
-        }
-
         private void SetCurrentDialogue(DSDialogueSO dialogue)
         {
             CurrentDialogue = dialogue;
@@ -150,18 +132,47 @@ namespace DS
 
             numberOfAddedChoices = 0;
 
-            if (dialogue.DialogueType == DSDialogueType.MultipleChoice)
+            optionsNav.CreateOptions();
+            levelLoader.UnloadCurrentLevel();
+        }
+
+        #region Dialogue Text Display Methods
+        private void FinishDialogueText()
+        {
+            uGUI.text = CurrentDialogue.Text;
+            displayTextProgress = textCharArray.Length;
+
+
+            if (CurrentDialogue.DialogueType == DSDialogueType.MultipleChoice)
             {
                 optionsNav.CreateOptions(CurrentDialogue.GetChoicesAsStringArray());
                 Debug.Log("Load Next Level");
                 levelLoader.ProceedToNextLevel();
             }
-            else if (dialogue.DialogueType == DSDialogueType.SingleChoice)
+        }
+
+        private void UpdateDialogueText()
+        {
+            if (timeSinceLastLetterAdded >= (1f / lettersPerSecond))
             {
-                optionsNav.CreateOptions();
-                levelLoader.UnloadCurrentLevel();
+                displayText += textCharArray[displayTextProgress];
+                displayTextProgress++;
+
+                uGUI.text = displayText;
+
+                timeSinceLastLetterAdded = 0f;
+
+                if (displayTextProgress >= textCharArray.Length)
+                {
+                    FinishDialogueText();
+                }
+            }
+            else
+            {
+                timeSinceLastLetterAdded += Time.deltaTime;
             }
         }
+        #endregion
 
         #region Options Methods
         public void SetOptionsOpened(bool setting)

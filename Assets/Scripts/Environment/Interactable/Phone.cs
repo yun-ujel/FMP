@@ -12,6 +12,8 @@ public class Phone : MonoBehaviour
 
     private void OnEnable()
     {
+        GetComponent<SpriteRenderer>().sortingOrder = 200;
+
         animator.SetBool("Calling", true);
     }
 

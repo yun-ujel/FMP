@@ -20,7 +20,7 @@ namespace PlayerInput
 
         public override bool GetInteractPressed()
         {
-            return (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.J)) && Enabled;
+            return (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Z)) && Enabled;
         }
 
         public override float GetVerticalInput()
@@ -30,7 +30,7 @@ namespace PlayerInput
 
         public override bool GetInteractHeld()
         {
-            return (Input.GetButton("Fire1") || Input.GetKey(KeyCode.J)) && Enabled;
+            return (Input.GetButton("Fire1") || Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.C) || Input.GetKey(KeyCode.Z)) && Enabled;
         }
 
         public override Vector2 GetInputAxes()
@@ -45,12 +45,12 @@ namespace PlayerInput
 
         public override bool GetBackPressed()
         {
-            return Input.GetButtonDown("Fire2") && Enabled;
+            return (Input.GetButtonDown("Fire2") || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.X)) && Enabled;
         }
 
         public override bool GetBackHeld()
         {
-            return Input.GetButton("Fire2") && Enabled;
+            return (Input.GetButton("Fire2") || Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.X)) && Enabled;
         }
     }
 

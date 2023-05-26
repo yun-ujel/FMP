@@ -64877,7 +64877,6 @@ GameObject:
   - component: {fileID: 142285580505340715}
   - component: {fileID: 142285580505340717}
   - component: {fileID: 142285580505340712}
-  - component: {fileID: 142285580505340713}
   - component: {fileID: 142285580505340711}
   - component: {fileID: 142285580505340710}
   - component: {fileID: 142285580505340708}
@@ -64936,8 +64935,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: -0.5}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.1, y: 0}
-  - {x: 0.1, y: 0}
+  - {x: -0.24, y: 0}
+  - {x: 0.24, y: 0}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -64977,11 +64976,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 11400000, guid: 0418a8f23cc182642b6c289b6a6a062b, type: 2}
   groundCheck: {fileID: 11400000, guid: 6ba408ab511b8d44fa79f9c949437d36, type: 2}
-  jumpHeight: 4.2
+  jumpHeight: 4.4
   jumpReleaseMultiplier: 0.6
   jumpBuffer: 0.2
   coyoteTime: 0.1
-  numberOfMidairJumps: 2
+  numberOfMidairJumps: 0
 --- !u!114 &142285580505340712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65001,23 +65000,6 @@ MonoBehaviour:
   maxGroundDeceleration: 80
   maxAirAcceleration: 60
   maxAirDeceleration: 80
---- !u!114 &142285580505340713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142285580505340706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e69bf419cb6b764f97a2a98c1e9b3de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputController: {fileID: 11400000, guid: 0418a8f23cc182642b6c289b6a6a062b, type: 2}
-  slopeCheck: {fileID: 11400000, guid: e755f6d4c9992184eb338b8d32985aec, type: 2}
-  abilitiesDuringSlide:
-  - {fileID: 142285580505340713}
-  - {fileID: 142285580505340711}
 --- !u!114 &142285580505340715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65415,7 +65397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 0.095185116, g: 0.1270025, b: 0.2924528, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
