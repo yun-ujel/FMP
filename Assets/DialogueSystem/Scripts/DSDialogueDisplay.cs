@@ -59,6 +59,11 @@ namespace DS
         [SerializeField] private DSDialogue callPhoneWhenDialogueReached;
         [SerializeField] private Phone phoneEvent;
 
+        [Space]
+
+        [SerializeField] private DSDialogue endGameWhenDialogueReached;
+        [SerializeField] private FadeOut fadeOut;
+
         private void Awake()
         {
             if (Instance != null)
@@ -148,6 +153,11 @@ namespace DS
                 optionsNav.CreateOptions(CurrentDialogue.GetChoicesAsStringArray());
                 Debug.Log("Load Next Level");
                 levelLoader.ProceedToNextLevel();
+            }
+
+            if (CurrentDialogue == endGameWhenDialogueReached.dialogue)
+            {
+                fadeOut.enabled = true;
             }
         }
 

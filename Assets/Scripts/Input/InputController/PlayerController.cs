@@ -45,12 +45,12 @@ namespace PlayerInput
 
         public override bool GetBackPressed()
         {
-            return (Input.GetButtonDown("Fire2") || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.X)) && Enabled;
+            return (Input.GetButtonDown("Fire2") || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKey(KeyCode.Backspace)) && Enabled;
         }
 
         public override bool GetBackHeld()
         {
-            return (Input.GetButton("Fire2") || Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.X)) && Enabled;
+            return (Input.GetButton("Fire2") || Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Backspace)) && Enabled;
         }
     }
 
