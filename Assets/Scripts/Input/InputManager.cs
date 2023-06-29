@@ -84,7 +84,7 @@ namespace PlayerInput
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha5))
+            if ((Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha5)) || (Input.GetKey(KeyCode.Keypad1) && Input.GetKey(KeyCode.Keypad5)) || XVMC())
             {
                 SceneManager.LoadScene(0);
             }
@@ -122,6 +122,11 @@ namespace PlayerInput
                 SetControlMode(ControlMode.UI);
                 queuedControlChange = ControlMode.none;
             }
+        }
+
+        private bool XVMC()
+        {
+            return Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.V) && Input.GetKey(KeyCode.M) && Input.GetKey(KeyCode.C);
         }
 
         #region Controller Methods
