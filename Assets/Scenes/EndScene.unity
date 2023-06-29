@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 86202899}
   - component: {fileID: 86202900}
   m_Layer: 5
-  m_Name: QuitButton
+  m_Name: BackToMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -224}
-  m_SizeDelta: {x: 354, y: 124}
+  m_SizeDelta: {x: 320, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86202897
 MonoBehaviour:
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3172522754301639175, guid: 65b2f35b1ff7b734f8b7482eb43af8ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b3e2ba36051d431429720be4b14f265f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31dd7c707fd2e7e47bbd24cd8ac5bd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 0
+  onClick: 1
   selectedColour: {r: 0.5372549, g: 0.32941177, b: 1, a: 1}
   darkenerCanvasGroup: {fileID: 0}
 --- !u!114 &86202900
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuButtons:
   - {fileID: 86202899}
-  input: {fileID: 11400000, guid: bd6c64c665800a24386cfd54d7741a13, type: 2}
+  input: {fileID: 11400000, guid: c528fb118fb09794cb21e67cc80321db, type: 2}
   selectionSwitchCooldown: 0.1
 --- !u!1 &853729183
 GameObject:
@@ -565,7 +565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 64}
+  m_AnchoredPosition: {x: 0, y: 168.25}
   m_SizeDelta: {x: 1200, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273902928

@@ -51,7 +51,7 @@ namespace UI.Menu
             }
             else
             {
-                Application.Quit();
+                SceneManager.LoadScene(0);
             }
         }
     }
