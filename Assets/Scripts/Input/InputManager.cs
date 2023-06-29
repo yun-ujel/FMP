@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DS;
 
 namespace PlayerInput
@@ -83,6 +84,12 @@ namespace PlayerInput
 
         private void Update()
         {
+            if (Input.GetKey(KeyCode.Alpha1) && Input.GetKey(KeyCode.Alpha5))
+            {
+                SceneManager.LoadScene(0);
+            }
+
+
             if (queuedControlChange != ControlMode.none && ControlSwitchCooldown <= 0f)
             {
                 PlayQueuedControlChanges();
