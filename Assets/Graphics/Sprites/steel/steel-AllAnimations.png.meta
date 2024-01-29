@@ -171,7 +171,7 @@ TextureImporter:
       213: 1235404843756089811
     second: steel-JumpToWalk_5
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -188,10 +188,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -230,6 +232,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -241,6 +245,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -253,6 +258,46 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1423,9 +1468,64 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      steel-Idle_0: -6680432281419419085
+      steel-JumpEntry_0: -8459850214359275687
+      steel-JumpEntry_1: -7060927606343431539
+      steel-JumpEntry_2: -3896559142082139120
+      steel-JumpFall_0: -7323952174600104236
+      steel-JumpFall_1: 3779692256945523907
+      steel-JumpLand_0: 9114681718682116653
+      steel-JumpPeak_0: 5629739676996296684
+      steel-JumpRiseB_0: 8075673935785955771
+      steel-JumpRiseF_0: 1209726718626380275
+      steel-JumpRise_0: -3319441785043140198
+      steel-JumpToIdle_0: 3460831024031804963
+      steel-JumpToIdle_1: -4764486490348490480
+      steel-JumpToWalk_0: -7199229885267451591
+      steel-JumpToWalk_1: -9104493501987184592
+      steel-JumpToWalk_2: 6545295345456230440
+      steel-JumpToWalk_3: 603299026052516365
+      steel-JumpToWalk_4: 2761972908319372831
+      steel-JumpToWalk_5: 1235404843756089811
+      steel-Roll_0: -4787734388879866473
+      steel-Roll_1: -903931741813637539
+      steel-Roll_2: -663302119889577967
+      steel-Roll_3: -8481548211487010047
+      steel-Roll_4: -5318070940572000208
+      steel-Roll_5: -7425184669056174407
+      steel-Roll_6: 6493359888471060832
+      steel-Roll_7: 6807995737480096150
+      steel-SlideDownShallow_0: -8398266769734763163
+      steel-SlideDownSteep_0: 6118055912076388396
+      steel-SlideDown_0: 8138784521357506605
+      steel-SlideFast_0: -6599333882307779397
+      steel-SlideTransition0_0: 8092183975001437641
+      steel-SlideTransition1_0: -5417242036594210810
+      steel-SlideTransition2_0: -6500298834932862259
+      steel-SlideTransition2_1: 5055575973708313906
+      steel-SlideTransition3_1: -7710489423070742483
+      steel-SlideUpShallow_0: 8927791679274603650
+      steel-SlideUp_0: 8119422504647981512
+      steel-WalkEntry_0: 2941126850549873313
+      steel-WalkEntry_1: 3322966592832545194
+      steel-WalkExit_0: -237902911832306034
+      steel-WalkExit_1: 830900672001128156
+      steel-Walk_0: -8379535895093067181
+      steel-Walk_1: -3004525512620189325
+      steel-Walk_10: -1298624169232834744
+      steel-Walk_11: -7914671835203083796
+      steel-Walk_12: 4080266458360556890
+      steel-Walk_2: -355000513803574607
+      steel-Walk_3: 7724285126850865144
+      steel-Walk_4: 4265719631881370025
+      steel-Walk_5: 5726281759117806280
+      steel-Walk_6: -9139999414031599090
+      steel-Walk_7: -5188145732421733978
+      steel-Walk_8: -2505313824531026350
+      steel-Walk_9: -5518709030189054859
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

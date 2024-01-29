@@ -77,7 +77,7 @@ public class DrawingSystemParticle : MonoBehaviour
             shape = particleSystem.shape;
             shape.position = particleSystem.transform.position;
 
-            return particleSystem.transform.position;
+            return shape.position;
         }
     }
     private void Start()
@@ -94,11 +94,9 @@ public class DrawingSystemParticle : MonoBehaviour
                 if (!drawers[i].DrawLines)
                 {
                     Draw(drawers[i].GetParticles(), drawers[i].ColourIndex, drawers[i].SecondaryColourIndex);
+                    continue;
                 }
-                else
-                {
-                    DrawLinesToParticles(drawers[i].GetParticles(), drawers[i].ColourIndex, drawers[i].SecondaryColourIndex, drawers[i].LineStrength, drawers[i].GetPosition());
-                }
+                DrawLinesToParticles(drawers[i].GetParticles(), drawers[i].ColourIndex, drawers[i].SecondaryColourIndex, drawers[i].LineStrength, drawers[i].GetPosition());
             }
         }
     }
@@ -119,6 +117,8 @@ public class DrawingSystemParticle : MonoBehaviour
         for (int i = 1; i < particles.Length; i++)
         {
             Debug.DrawLine(startPosition, particles[i].position, Color.red, 0.1f);
+
+            if (particles[i].position == Vector3.zero) { continue; }
 
             for (int t = 0; t < lineStrength; t++)
             {
